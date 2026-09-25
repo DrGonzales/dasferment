@@ -1,0 +1,1167 @@
+[
+  {
+    "titel": "Klassische Salzgurken (Milchsäuregärung)",
+    "tags": [
+      "gemuese",
+      "Gurke"
+    ],
+    "zutaten": [
+      "1 kg kleine Einlegegurken",
+      "1 Liter Wasser",
+      "30–35 g Meersalz (ohne Jod und Trennmittel)",
+      "3 Zehen Knoblauch",
+      "1 Bund Dill mit Blüten",
+      "1 TL Senfkörner",
+      "1 TL schwarze Pfefferkörner",
+      "2–3 Eichen- oder Weinblätter (für den Knack)"
+    ],
+    "zubereitung": [
+      "Wasser und Salz aufkochen, bis sich das Salz komplett auflöst. Die Salzlake vollständig abkühlen lassen.",
+      "Gurken gründlich waschen und etwa 1 Stunde in eiskaltes Wasser legen. Die Blütenansätze vorsichtig entfernen.",
+      "Gewürze, Knoblauch und Kräuter auf den Boden eines sterilen Fermentationsglases geben. Die Gurken möglichst dicht stehend darauf schichten.",
+      "Die kalte Salzlake eingießen, sodass alle Gurken vollständig bedeckt sind. Ein Fermentiergewicht auflegen.",
+      "Das Glas verschließen und 3 bis 5 Tage bei Raumtemperatur fermentieren lassen, danach kühl stellen (z. B. im Kühlschrank oder Keller), um die Gärung zu verlangsamen."
+    ],
+    "picture": "1.png",
+    "codex_titel": "Von den gesalzenen Gürkchen und ihrer milden Gärung",
+    "codex_einleitung": "Hier sei verzeichnet, wie Connie die kleinen Gürkchen mit Salzlake bedecket und der stillen Gärung überlässt.",
+    "ratgeber": {
+      "sprecher": "Connie",
+      "text": "Nimm dich der Gürkchen an, doch vergiss nicht: Die kleinen grünen Gesellen sind geduldig – und die Gärung noch geduldiger."
+    }
+  },
+  {
+    "titel": "Würzige Knoblauch-Chili-Gurken",
+    "tags": [
+      "gemuese",
+      "Gurke"
+    ],
+    "zutaten": [
+      "1 kg kleine Einlegegurken",
+      "1 Liter Wasser",
+      "35 g Meersalz",
+      "5 Zehen Knoblauch (leicht zerdrückt)",
+      "2 frische rote Chilischoten (halbiert)",
+      "1 TL Koriandersamen",
+      "1 TL schwarze Pfefferkörner",
+      "2 Eichenblätter"
+    ],
+    "zubereitung": [
+      "Wasser und Salz aufkochen, bis sich das Salz vollständig aufgelöst hat. Die Salzlake vollständig abkühlen lassen.",
+      "Gurken waschen, 1 Stunde eiskalt wässern und die Blütenansätze abschneiden.",
+      "Knoblauch, Chilischoten, Koriander und Pfeffer im Fermentationsglas verteilen. Gurken stramm darüber einschichten.",
+      "Mit der abgekühlten Salzlake auffüllen, bis alles bedeckt ist. Mit Eichenblättern und einem Gewicht beschweren.",
+      "Das Glas verschließen und 5 bis 7 Tage bei Raumtemperatur reifen lassen, bevor es zur Lagerung kühl gestellt wird."
+    ],
+    "picture": "2.png",
+    "codex_titel": "Von scharfem Knoblauch und feurigen Gürkchen",
+    "codex_einleitung": "Hier beginnt das feurige Werk: Knoblauch und rote Schoten ziehen gemeinsam in die salzige Lake.",
+    "ratgeber": {
+      "sprecher": "Katze",
+      "text": "Hier walten Knoblauch und Chili gemeinsam. Wer der Schärfe nicht gewachsen ist, der halte den Löffel fern vom Munde."
+    }
+  },
+  {
+    "titel": "Russische Gurken mit Meerrettich und Johannisbeerblättern",
+    "tags": [
+      "gemuese",
+      "Gurke"
+    ],
+    "zutaten": [
+      "1 kg kleine Einlegegurken",
+      "1 Liter Wasser",
+      "30 g Meersalz",
+      "3 cm frischer Meerrettich (in Scheiben)",
+      "4 Schwarze Johannisbeerblätter",
+      "3 Kirschblätter",
+      "3 Zehen Knoblauch",
+      "1 Bund Dill"
+    ],
+    "zubereitung": [
+      "Wasser und Salz aufkochen, bis sich das Salz vollständig aufgelöst hat. Die Salzlake vollständig abkühlen lassen.",
+      "Gurken gründlich reinigen, 1 Stunde in kaltem Wasser wässern und die Blütenansätze entfernen.",
+      "Die Hälfte der Blätter, Meerrettich, Knoblauch und Dill auf den Glasboden legen. Die Gurken dicht einschichten und mit den restlichen Blättern abdecken.",
+      "Mit der kalten Salzlake gänzlich übergießen und ein Fermentiergewicht aufsetzen.",
+      "Verschlossen 4 bis 6 Tage bei Raumtemperatur anfermentieren und anschließend kühl lagern."
+    ],
+    "picture": "3.png",
+    "codex_titel": "Russische Gürkchen mit Meerrettich und Blättern der Schwarzen Johannisbeere",
+    "codex_einleitung": "Aus dem Lande im Osten stammt diese Art, da Meerrettich und Blätter der Beere den Gürkchen Kraft verleihen.",
+    "ratgeber": {
+      "sprecher": "Connie",
+      "text": "Meerrettich ist ein listiger Geselle. Gib ihm Raum, doch wundere dich nicht, wenn er kräftiger erscheint als gedacht."
+    }
+  },
+  {
+    "titel": "Asiatisch inspirierte Sesam-Ingwer-Gurken",
+    "tags": [
+      "gemuese",
+      "Gurke"
+    ],
+    "zutaten": [
+      "1 kg kleine Einlegegurken (oder Mini-Salatgurken)",
+      "1 Liter Wasser",
+      "30 g Meersalz",
+      "3 cm frischer Ingwer (in feine Scheiben geschnitten)",
+      "3 Zehen Knoblauch (in Scheiben)",
+      "1 TL Sesam-Samen (geröstet)",
+      "1 TL Szechuan-Pfefferkörner (oder schwarze Pfefferkörner)",
+      "1 kleine rote Chilischote"
+    ],
+    "zubereitung": [
+      "Wasser und Salz aufkochen, bis sich das Salz vollständig aufgelöst hat. Die Salzlake vollständig abkühlen lassen.",
+      "Gurken waschen, 1 Stunde in eiskaltem Wasser wässern und die Blütenansätze abschneiden.",
+      "Ingwer, Knoblauch, Sesamsamen, Pfefferkörner und Chili im Fermentationsglas verteilen.",
+      "Gurken eng im Glas anordnen und mit der abgekühlten Salzlake übergießen.",
+      "Mit einem Fermentiergewicht beschweren, verschließen und 3 bis 5 Tage bei Raumtemperatur gären lassen, danach kühl aufbewahren."
+    ],
+    "picture": "4.png",
+    "codex_titel": "Von Gürkchen mit Ingwer, Sesam und fernöstlicher Würze",
+    "codex_einleitung": "Eine Würze aus fernen Landen: Ingwer, Sesam und Pfeffer finden sich im Gärgefäß zusammen.",
+    "ratgeber": {
+      "sprecher": "Connie",
+      "text": "Sesam und Ingwer mögen fremd erscheinen, doch im Gärtopf finden auch weit gereiste Gewürze ein Zuhause."
+    }
+  },
+  {
+    "titel": "Gurken-Pickles nach New-York-Deli-Art (Half Sour)",
+    "tags": [
+      "gemuese",
+      "Gurke"
+    ],
+    "zutaten": [
+      "1 kg feste Einlegegurken",
+      "1 Liter Wasser",
+      "35 g Meersalz",
+      "1 EL Pickling-Gewürzmischung (Senfkörner, Koriander, Piment, Lorbeerblatt)",
+      "4 Zehen Knoblauch (zerdrückt)",
+      "1 Bund frischer Dill",
+      "2 Weinblätter"
+    ],
+    "zubereitung": [
+      "Das Salz in kochendem Wasser auflösen und die Lake vollständig erkalten lassen.",
+      "Gurken gründlich säubern, 1 Stunde in Eiswasser legen und die Blütenenden entfernen.",
+      "Pickling-Gewürze, Knoblauch und Dill auf dem Boden des Glases auslegen und die Gurken dicht daraufstapeln.",
+      "Die Salzlake über die Gurken gießen, bis alles vollständig bedeckt ist, und die Weinblätter obenauf legen.",
+      "Gewicht aufsetzen, Glas verschließen und für eine sanfte Fermentation („Half Sour) nur 2 bis 3 Tage bei Raumtemperatur stehen lassen, dann sofort in den Kühlschrank stellen."
+    ],
+    "picture": "5.png",
+    "codex_titel": "Die halbsauren Gürkchen nach Art der Schenken am Hudson",
+    "codex_einleitung": "Nur kurz verweilen diese Gürkchen bei Wärme, auf dass sie mild und halbsauer geraten.",
+    "ratgeber": {
+      "sprecher": "Katze",
+      "text": "Halbsauer heißt nicht halb fertig. Diese Gürkchen verlangen nur nach kürzerer Zeit und kühler Rast."
+    }
+  },
+  {
+    "titel": "Klassisches Baechu-Kimchi (Chinakohl-Kimchi)",
+    "tags": [
+      "gemuese",
+      "Kohl",
+      "Kimchi"
+    ],
+    "zutaten": [
+      "1 großer Chinakohl (ca. 1,5 kg)",
+      "75 g Meersalz (ohne Jod und Trennmittel)",
+      "1 Liter Wasser",
+      "100 g Rettich (in feine Stifte geschnitten)",
+      "1 Bund Frühlingszwiebeln (in Ringe geschnitten)",
+      "3 EL Gochugaru (koreanische Chiliflocken)",
+      "4 Zehen Knoblauch (fein gehackt)",
+      "2 cm frischer Ingwer (fein gerieben)",
+      "2 EL Sojasauce (oder Fischsauce)",
+      "1 TL Zucker"
+    ],
+    "zubereitung": [
+      "Chinakohl längs vierteln, gründlich waschen und mit dem Salz zwischen den Blättern bestreuen. Mit dem Wasser bedecken und 2 bis 3 Stunden ziehen lassen, dabei gelegentlich wenden.",
+      "Kohl gründlich unter kaltem Wasser abspülen, um überschüssiges Salz zu entfernen, und gut ausdrücken.",
+      "Gochugaru, Knoblauch, Ingwer, Sojasauce und Zucker zu einer geschmeidigen Paste verrühren.",
+      "Rettichstifte und Frühlingszwiebeln unter die Chilipaste mischen und die Masse gleichmäßig zwischen den Blättern des Chinakohls verteilen.",
+      "Den Kohl dicht in ein Fermentationsglas drücken, sodass keine Luftblasen entstehen, mit einem Gewicht beschweren und 3 bis 5 Tage bei Raumtemperatur reifen lassen, danach kühl stellen."
+    ],
+    "picture": "6.png",
+    "codex_titel": "Das große Baechu-Kimchi vom Chinakohl",
+    "codex_einleitung": "Ein Werk von Kohl, Chili und Gewürzen, wie es aus den Küchen Koreas zu uns gelangte.",
+    "ratgeber": {
+      "sprecher": "Connie",
+      "text": "Vor dem Gochugaru sei Respekt. Die rote Würze sieht freundlich aus, doch sie hat Feuer im Herzen."
+    }
+  },
+  {
+    "titel": "Kakkdugi (Rettich-Kimchi)",
+    "tags": [
+      "gemuese",
+      "Rettich",
+      "Kimchi"
+    ],
+    "zutaten": [
+      "1 kg weißer Rettich (z. B. Mu oder Daikon)",
+      "2 EL Meersalz",
+      "1 EL Zucker",
+      "3 EL Gochugaru (koreanische Chiliflocken)",
+      "3 Zehen Knoblauch (fein gehackt)",
+      "1 cm frischer Ingwer (fein gerieben)",
+      "3 Stängel Frühlingszwiebeln (in 2 cm lange Stücke geschnitten)",
+      "1 EL Sojasauce"
+    ],
+    "zubereitung": [
+      "Rettich schälen und in ca. 2 cm große Würfel schneiden.",
+      "Die Rettichwürfel mit Salz und Zucker vermengen und 30 bis 45 Minuten ziehen lassen, bis Saft austritt. Den ausgetretenen Saft auffangen und beiseitestellen.",
+      "Gochugaru, Knoblauch, Ingwer und Sojasauce zum Rettich geben und gründlich einmassieren, bis alle Würfel rot gefärbt sind.",
+      "Frühlingszwiebeln unterheben und die Mischung stramm in ein Fermentationsglas füllen.",
+      "Falls nötig, etwas des aufgefangenen Rettichsafts dazugeben, mit einem Gewicht beschweren und 2 bis 4 Tage bei Raumtemperatur fermentieren lassen, bevor es in den Kühlschrank wandert."
+    ],
+    "picture": "7.png",
+    "codex_titel": "Kakkdugi – die würzigen Würfel vom weißen Rettich",
+    "codex_einleitung": "Rettich wird in Würfel geschnitten und mit roter Würze zum kräftigen Kimchi bereitet.",
+    "ratgeber": {
+      "sprecher": "Katze",
+      "text": "Rettichwürfel sind leicht zu zählen. Wie viele Chiliflocken hineingehören, darüber streiten wir besser nicht."
+    }
+  },
+  {
+    "titel": "Oi-Sobagi (Gefülltes Gurken-Kimchi)",
+    "tags": [
+      "gemuese",
+      "Gurke",
+      "Kimchi"
+    ],
+    "zutaten": [
+      "1 kg kleine Gurken (oder Mini-Salatgurken)",
+      "2 EL Meersalz",
+      "1 Bund Schnittknoblauch (oder Frühlingszwiebeln, feingehackt)",
+      "1 kleine Karotte (in sehr feine Stifte geschnitten)",
+      "3 EL Gochugaru (koreanische Chiliflocken)",
+      "3 Zehen Knoblauch (gepresst)",
+      "1 cm frischer Ingwer (gerieben)",
+      "1 EL Sojasauce",
+      "1 TL Zucker"
+    ],
+    "zubereitung": [
+      "Gurken waschen, die Enden abschneiden und der Länge nach kreuzweise einschneiden (dabei an einem Ende ca. 1,5 cm zusammenhängen lassen).",
+      "Gurken innen und außen mit dem Salz einreiben und 30 Minuten ziehen lassen, danach kurz abspülen und trocken tupfen.",
+      "Schnittknoblauch, Karotte, Gochugaru, Knoblauch, Ingwer, Sojasauce und Zucker zu einer Füllung vermengen.",
+      "Die Gewürzmischung vorsichtig in die Einschnitte der Gurken füllen.",
+      "Die gefüllten Gurken dicht an dicht in ein Fermentationsglas schichten, 1 bis 2 Tage bei Raumtemperatur anfermentieren lassen und anschließend kühl genießen."
+    ],
+    "picture": "8.png",
+    "codex_titel": "Oi-Sobagi – gefüllte Gürkchen nach fernem Brauch",
+    "codex_einleitung": "Die Gürkchen werden eingeschnitten und mit würziger Füllung versehen – ein kunstreiches Werk.",
+    "ratgeber": {
+      "sprecher": "Connie",
+      "text": "Fülle die Gürkchen mit Bedacht, sonst fällt beim ersten Biss mehr heraus als vorgesehen."
+    }
+  },
+  {
+    "titel": "Nabak-Kimchi (Mildes Wasser-Kimchi)",
+    "tags": [
+      "gemuese",
+      "Kohl",
+      "Rettich",
+      "Kimchi"
+    ],
+    "zutaten": [
+      "300 g Chinakohl (in mundgerechte Quadrate geschnitten)",
+      "300 g weißer Rettich (in dünne Quadrate geschnitten)",
+      "1,5 Liter Wasser",
+      "2 EL Meersalz",
+      "1 EL Zucker",
+      "1 TL Gochugaru (oder milde Chiliflocken)",
+      "2 Zehen Knoblauch (in dünne Scheiben)",
+      "1 cm Ingwer (in dünne Stifte)",
+      "2 Stängel Frühlingszwiebeln (in Ringe)"
+    ],
+    "zubereitung": [
+      "Chinakohl und Rettich mit 1 EL Salz und dem Zucker vermischen und 15 Minuten ziehen lassen.",
+      "Das restliche Salz im Wasser auflösen, um eine milde Fermentationslake herzustellen.",
+      "Gochugaru in ein feines Sieb oder Passtuch geben und im Wasser auswringen, um der Lake eine leicht rötliche Farbe und ein mildes Aroma zu verleihen.",
+      "Gemüse samt ausgetretenem Saft, Knoblauch, Ingwer und Frühlingszwiebeln in ein Glas geben und mit der zubereiteten Lake auffüllen.",
+      "Verschlossen 1 bis 2 Tage bei Raumtemperatur gären lassen und gekühlt als erfrischende Beilage servieren."
+    ],
+    "picture": "9.png",
+    "codex_titel": "Nabak-Kimchi – die milde rote Wasser-Gärung",
+    "codex_einleitung": "Eine milde, rötliche Lake, in welcher Kohl und Rettich zu erfrischender Säure gelangen.",
+    "ratgeber": {
+      "sprecher": "Katze",
+      "text": "Mildes Kimchi ist eine gute Sache. Besonders für jene, die nach dem scharfen Kimchi noch Zunge haben wollen."
+    }
+  },
+  {
+    "titel": "Aromatisches Fenchel-Orangen-Kimchi",
+    "tags": [
+      "gemuese",
+      "Fenchel",
+      "Kimchi"
+    ],
+    "zutaten": [
+      "800 g Fenchelknollen (in feine Streifen geschnitten, Fenchelgrün beiseitegelegt)",
+      "200 g Möhren (in dünne Stifte geschnitten)",
+      "25 g Meersalz",
+      "1 Bio-Orange (Abrieb und Saft)",
+      "3 EL Gochugaru (koreanische Chiliflocken)",
+      "3 Zehen Knoblauch (fein gehackt)",
+      "2 cm frischer Ingwer (fein gerieben)",
+      "1 EL Sojasauce"
+    ],
+    "zubereitung": [
+      "Fenchelstreifen und Möhren mit dem Meersalz vermengen und 45 Minuten ziehen lassen, bis reichlich Pflanzensaft austritt.",
+      "Gochugaru, Knoblauch, Ingwer, Sojasauce sowie Orangenabrieb und -saft zu einer Würzpaste verrühren.",
+      "Das Fenchelgrün grob hacken und zusammen mit der Paste kräftig unter das gesalzene Gemüse kneten.",
+      "Das Gemüse fest in ein Fermentationsglas pressen, sodass es vollständig vom eigenen Saft bedeckt ist.",
+      "Mit einem Gewicht beschweren, verschließen und 4 bis 6 Tage bei Raumtemperatur fermentieren lassen, danach kühl aufbewahren."
+    ],
+    "picture": "10.png",
+    "codex_titel": "Fenchel-Orangen-Kimchi mit Würze aus fernen Landen",
+    "codex_einleitung": "Fenchel und Orange verbinden sich mit Gochugaru zu einem ungewöhnlichen, doch wohlriechenden Ferment.",
+    "ratgeber": {
+      "sprecher": "Connie",
+      "text": "Orange und Fenchel scheinen aus zwei Welten zu stammen. Im Gärtopf werden sie zu einem erstaunlich guten Bund."
+    }
+  },
+  {
+    "titel": "Herbstliches Kürbis-Apfel-Kimchi",
+    "tags": [
+      "gemuese",
+      "Kürbis",
+      "Kimchi"
+    ],
+    "zutaten": [
+      "800 g Hokkaido-Kürbis (mit Schale, in feine Spalten oder Stifte geschnitten)",
+      "1 fester Apfel (in feine Stifte geschnitten)",
+      "2 EL Meersalz",
+      "3 Stängel Frühlingszwiebeln (in Ringe)",
+      "3 EL Gochugaru (koreanische Chiliflocken)",
+      "4 Zehen Knoblauch (gepresst)",
+      "2 cm frischer Ingwer (gerieben)",
+      "1 EL Sojasauce",
+      "1 TL Ahornsirup"
+    ],
+    "zubereitung": [
+      "Kürbisstifte mit dem Meersalz bestreuen und 60 Minuten ziehen lassen, um sie leicht zu erweichen, danach leicht ausdrücken.",
+      "Gochugaru, Knoblauch, Ingwer, Sojasauce und Ahornsirup zu einer dickflüssigen Paste vermischen.",
+      "Apfelstifte, Frühlingszwiebeln und Kürbis gründlich mit der Gewürzpaste vermengen.",
+      "Mischung stramm in ein Fermentationsglas schichten und festdrücken, bis Flüssigkeit aufsteigt.",
+      "Mit einem Fermentiergewicht beschweren und 3 bis 5 Tage bei Raumtemperatur gären lassen, anschließend kalt stellen."
+    ],
+    "picture": "11.png",
+    "codex_titel": "Herbstliches Kürbis-Apfel-Kimchi",
+    "codex_einleitung": "Kürbis und Apfel tragen die Farben des Herbstes und werden mit roter Würze in den Gärtopf gebracht.",
+    "ratgeber": {
+      "sprecher": "Katze",
+      "text": "Der Herbst bringt Kürbis und Apfel. Ob beide in den Gärtopf gehören? Ich habe es geprüft. Ja."
+    }
+  },
+  {
+    "titel": "Knackiges Blumenkohl-Brokkoli-Kimchi",
+    "tags": [
+      "gemuese",
+      "Blumenkohl",
+      "Brokkoli",
+      "Kimchi"
+    ],
+    "zutaten": [
+      "500 g Blumenkohl (in sehr kleine Röschen getrennt)",
+      "500 g Brokkoli (in sehr kleine Röschen getrennt)",
+      "1 Liter Wasser",
+      "40 g Meersalz",
+      "3 EL Gochugaru (koreanische Chiliflocken)",
+      "4 Zehen Knoblauch (fein gehackt)",
+      "2 cm frischer Ingwer (fein gerieben)",
+      "2 EL Sojasauce",
+      "1 Bund Schnittlauch (in 2 cm lange Stücke geschnitten)"
+    ],
+    "zubereitung": [
+      "Wasser und Salz verrühren, bis sich das Salz aufgelöst hat. Blumenkohl- und Brokkoliröschen darin 2 Stunden einlegen, danach abgießen und trocken tupfen.",
+      "Gochugaru, Knoblauch, Ingwer und Sojasauce miteinander zu einer Paste vermengen.",
+      "Die Gemüseröschen und den Schnittlauch vorsichtig mit der Paste massieren, bis alle Teile gleichmäßig bedeckt sind.",
+      "Das gewürzte Gemüse dicht in ein Fermentationsglas füllen und gut festdrücken.",
+      "Ein Gewicht auflegen, das Glas verschließen und 4 bis 6 Tage bei Raumtemperatur fermentieren lassen, bevor es kühl gelagert wird."
+    ],
+    "picture": "12.png",
+    "codex_titel": "Knackiges Kimchi von Blumenkohl und Brokkoli",
+    "codex_einleitung": "Zwei grüne Gesellen, Blumenkohl und Brokkoli, werden mit Chili und Ingwer zur Gärung bereitet.",
+    "ratgeber": {
+      "sprecher": "Connie",
+      "text": "Blumenkohl und Brokkoli mögen es knackig. Stampfe sie fest, aber behandle die Röschen nicht wie einen Rammbock."
+    }
+  },
+  {
+    "titel": "Möhren-Ingwer-Kimchi",
+    "tags": [
+      "gemuese",
+      "Möhre",
+      "Kimchi"
+    ],
+    "zutaten": [
+      "1 kg Möhren (in feine Stifte geraspelt oder geschnitten)",
+      "25 g Meersalz",
+      "3 EL Gochugaru (koreanische Chiliflocken)",
+      "4 Zehen Knoblauch (fein gehackt)",
+      "3 cm frischer Ingwer (fein gerieben)",
+      "2 Stängel Frühlingszwiebeln (in dünne Ringe geschnitten)",
+      "1 EL Helle Sojasauce",
+      "1 TL Ahornsirup oder Zucker"
+    ],
+    "zubereitung": [
+      "Geraspelte Möhren mit dem Meersalz in einer Schüssel kräftig durchkneten, bis spürbar Pflanzensaft austritt.",
+      "Gochugaru, Knoblauch, Ingwer, Frühlingszwiebeln, Sojasauce und Ahornsirup zugeben.",
+      "Alle Zutaten gründlich miteinander vermengen und die Masse fest in ein Fermentationsglas stampfen, sodass das Gemüse komplett von eigenem Saft bedeckt ist.",
+      "Mit einem Fermentiergewicht beschweren und das Glas verschließen.",
+      "4 bis 6 Tage bei Raumtemperatur fermentieren lassen, bis der gewünschte Säuregrad erreicht ist, danach im Kühlschrank lagern."
+    ],
+    "picture": "13.png",
+    "codex_titel": "Möhren-Kimchi mit Ingwer",
+    "codex_einleitung": "Möhren, Ingwer und Gochugaru ergeben ein kräftiges, doch gänzlich pflanzliches Ferment.",
+    "ratgeber": {
+      "sprecher": "Katze",
+      "text": "Vegan ist dieses Ferment ohnehin. Die Möhren werden dadurch nicht weniger würzig."
+    }
+  },
+  {
+    "titel": "Klassisches Sauerkraut mit Kümmel",
+    "tags": [
+      "gemuese",
+      "Kohl",
+      "Sauerkraut"
+    ],
+    "zutaten": [
+      "1 kg Weißkohl",
+      "20 g Meersalz",
+      "1 TL Kümmelsamen",
+      "1 TL Wacholderbeeren (leicht angedrückt)"
+    ],
+    "zubereitung": [
+      "Weißkohl äußere Blätter entfernen, vierteln, Strunk entfernen und fein hobeln.",
+      "Kohl mit dem Meersalz vermengen und kräftig kneten, bis reichlich Pflanzensaft austritt.",
+      "Kümmel und Wacholderbeeren unterheben.",
+      "Das Kraut portionsweise in ein Fermentationsglas geben und fest andrücken, bis der Kohl vollständig vom eigenen Saft bedeckt ist.",
+      "Mit einem Fermentiergewicht beschweren, verschließen und 7 bis 14 Tage bei Raumtemperatur fermentieren lassen. Anschließend kühl lagern."
+    ],
+    "picture": "14.png",
+    "codex_titel": "Das klassische Sauerkraut mit Kümmel und Wacholder",
+    "codex_einleitung": "Weißkohl wird geknetet, bis sein eigener Saft hervortritt; Kümmel und Wacholder geben ihm Würde.",
+    "ratgeber": {
+      "sprecher": "Connie",
+      "text": "Kohl will geknetet werden. Spare nicht an der Handarbeit, denn der Saft ist der Schatz dieses Krautes."
+    }
+  },
+  {
+    "titel": "Rotes Sauerkraut mit Apfel",
+    "tags": [
+      "gemuese",
+      "Kohl",
+      "Rotkohl"
+    ],
+    "zutaten": [
+      "1 kg Rotkohl",
+      "1 säuerlicher Apfel",
+      "20 g Meersalz",
+      "1 TL Kümmelsamen",
+      "5 Wacholderbeeren (leicht angedrückt)"
+    ],
+    "zubereitung": [
+      "Rotkohl vierteln, Strunk entfernen und fein hobeln. Apfel grob raspeln.",
+      "Rotkohl und Apfel mit dem Meersalz vermengen und kräftig kneten, bis reichlich Saft austritt.",
+      "Kümmel und Wacholderbeeren unterheben.",
+      "Die Mischung fest in ein Fermentationsglas drücken, bis sie vollständig von Flüssigkeit bedeckt ist.",
+      "Mit einem Fermentiergewicht beschweren und 7 bis 14 Tage bei Raumtemperatur fermentieren lassen. Anschließend kühl lagern."
+    ],
+    "picture": "15.png",
+    "codex_titel": "Rotes Kraut mit Apfel und würziger Gärung",
+    "codex_einleitung": "Roter Kohl und saurer Apfel geben ein farbenprächtiges Kraut, würdig für den Wintervorrat.",
+    "ratgeber": {
+      "sprecher": "Katze",
+      "text": "Das rote Kraut färbt alles, was ihm zu nahe kommt. Auch Pfoten. Ich spreche aus Erfahrung."
+    }
+  },
+  {
+    "titel": "Sauerkraut mit Karotte und Ingwer",
+    "tags": [
+      "gemuese",
+      "Kohl",
+      "Karotte",
+      "Sauerkraut"
+    ],
+    "zutaten": [
+      "800 g Weißkohl",
+      "200 g Möhren",
+      "20 g Meersalz",
+      "3 cm frischer Ingwer (fein gerieben)",
+      "1 TL Koriandersamen"
+    ],
+    "zubereitung": [
+      "Weißkohl fein hobeln und Möhren grob raspeln.",
+      "Kohl und Möhren mit dem Meersalz vermengen und kräftig kneten, bis reichlich Pflanzensaft austritt.",
+      "Ingwer und Koriandersamen unterheben.",
+      "Das Gemüse fest in ein Fermentationsglas drücken, bis es vollständig von eigenem Saft bedeckt ist.",
+      "Mit einem Fermentiergewicht beschweren und 5 bis 10 Tage bei Raumtemperatur fermentieren lassen. Anschließend kühl lagern."
+    ],
+    "picture": "16.png",
+    "codex_titel": "Sauerkraut von Weißkohl, Karotte und Ingwer",
+    "codex_einleitung": "Kohl und Karotte werden mit Ingwer und Koriander zu einem frischen Sauerkraut verbunden.",
+    "ratgeber": {
+      "sprecher": "Connie",
+      "text": "Ingwer gibt dem Kraut einen frischen Schlag. Doch übertreibe es nicht, sonst wird aus dem Sauerkraut ein Gewürzbrei."
+    }
+  },
+  {
+    "titel": "Mildes Weißkohl-Pfeffer-Ferment",
+    "tags": [
+      "gemuese",
+      "Kohl"
+    ],
+    "zutaten": [
+      "1 kg Weißkohl",
+      "20 g Meersalz",
+      "1 TL schwarze Pfefferkörner",
+      "1 TL Senfkörner",
+      "2 Lorbeerblätter"
+    ],
+    "zubereitung": [
+      "Weißkohl fein hobeln und mit dem Meersalz vermengen.",
+      "Den Kohl kräftig kneten, bis reichlich Pflanzensaft austritt.",
+      "Pfeffer- und Senfkörner sowie Lorbeerblätter unterheben.",
+      "Das Kraut fest in ein Fermentationsglas drücken und mit dem eigenen Saft bedecken.",
+      "Mit einem Fermentiergewicht beschweren und 7 bis 14 Tage bei Raumtemperatur fermentieren lassen. Anschließend kühl lagern."
+    ],
+    "picture": "17.png",
+    "codex_titel": "Mildes Weißkraut mit Pfeffer und Senfkorn",
+    "codex_einleitung": "Ein schlichtes Kraut mit Pfeffer, Senf und Lorbeer – mild im Wesen, doch nicht ohne Würze.",
+    "ratgeber": {
+      "sprecher": "Katze",
+      "text": "Mild heißt: angenehm. Nicht: langweilig."
+    }
+  },
+  {
+    "titel": "Fermentierte Möhren mit Ingwer",
+    "tags": [
+      "gemuese",
+      "Möhre"
+    ],
+    "zutaten": [
+      "1 kg Möhren",
+      "1 Liter Wasser",
+      "30 g Meersalz",
+      "4 cm frischer Ingwer (in dünne Scheiben geschnitten)",
+      "3 Zehen Knoblauch (leicht zerdrückt)",
+      "1 TL Koriandersamen"
+    ],
+    "zubereitung": [
+      "Wasser und Salz aufkochen, bis sich das Salz vollständig aufgelöst hat. Die Salzlake vollständig abkühlen lassen.",
+      "Möhren schälen und in Stifte oder dünne Scheiben schneiden.",
+      "Ingwer, Knoblauch und Koriandersamen in das Fermentationsglas geben und die Möhren dicht einschichten.",
+      "Mit der abgekühlten Salzlake auffüllen, bis alles vollständig bedeckt ist. Ein Fermentiergewicht auflegen.",
+      "Verschließen und 5 bis 10 Tage bei Raumtemperatur fermentieren lassen. Anschließend kühl lagern."
+    ],
+    "picture": "18.png",
+    "codex_titel": "Möhrenferment mit Ingwer und Knoblauch",
+    "codex_einleitung": "Möhren werden in Lake gebettet und mit Ingwer und Knoblauch auf ihren säuerlichen Wandel geschickt.",
+    "ratgeber": {
+      "sprecher": "Connie",
+      "text": "Möhren lieben Ingwer. Und Ingwer liebt den Gärtopf. So einfach ist die Alchemie."
+    }
+  },
+  {
+    "titel": "Möhren mit Kreuzkümmel und Orange",
+    "tags": [
+      "gemuese",
+      "Möhre"
+    ],
+    "zutaten": [
+      "1 kg Möhren",
+      "1 Liter Wasser",
+      "30 g Meersalz",
+      "1 TL Kreuzkümmelsamen",
+      "Schale von 1 Bio-Orange",
+      "2 Zehen Knoblauch"
+    ],
+    "zubereitung": [
+      "Wasser und Salz aufkochen, bis sich das Salz vollständig aufgelöst hat. Die Salzlake vollständig abkühlen lassen.",
+      "Möhren in dünne Stifte oder Scheiben schneiden.",
+      "Kreuzkümmel, Orangenschale und Knoblauch im Fermentationsglas verteilen und die Möhren dicht einschichten.",
+      "Mit der kalten Salzlake auffüllen, bis das Gemüse vollständig bedeckt ist. Mit einem Fermentiergewicht beschweren.",
+      "5 bis 8 Tage bei Raumtemperatur fermentieren lassen und anschließend kühl lagern."
+    ],
+    "picture": "19.png",
+    "codex_titel": "Möhren mit Kreuzkümmel und Schale der Orange",
+    "codex_einleitung": "Orange und Kreuzkümmel geben den Möhren ein warmes und duftendes Gepräge.",
+    "ratgeber": {
+      "sprecher": "Katze",
+      "text": "Die Orange soll duften, nicht den ganzen Gärtopf beherrschen."
+    }
+  },
+  {
+    "titel": "Fermentierte Radieschen mit Dill",
+    "tags": [
+      "gemuese",
+      "Radieschen"
+    ],
+    "zutaten": [
+      "1 kg Radieschen",
+      "1 Liter Wasser",
+      "30 g Meersalz",
+      "1 Bund Dill",
+      "3 Zehen Knoblauch",
+      "1 TL Senfkörner",
+      "5 schwarze Pfefferkörner"
+    ],
+    "zubereitung": [
+      "Wasser und Salz aufkochen, bis sich das Salz vollständig aufgelöst hat. Die Salzlake vollständig abkühlen lassen.",
+      "Radieschen gründlich waschen und nach Belieben halbieren oder vierteln.",
+      "Dill, Knoblauch, Senfkörner und Pfefferkörner im Glas verteilen. Radieschen dicht einschichten.",
+      "Mit der abgekühlten Salzlake auffüllen, bis alles vollständig bedeckt ist, und ein Fermentiergewicht auflegen.",
+      "3 bis 6 Tage bei Raumtemperatur fermentieren lassen. Anschließend kühl lagern."
+    ],
+    "picture": "20.png",
+    "codex_titel": "Rote Radieschen mit Dill aus dem Kräutergarten",
+    "codex_einleitung": "Radieschen, Dill und Knoblauch werden in salziger Lake zu einem knackigen Ferment.",
+    "ratgeber": {
+      "sprecher": "Connie",
+      "text": "Radieschen verlieren etwas von ihrer Schärfe und gewinnen dafür eine feine Säure."
+    }
+  },
+  {
+    "titel": "Fermentierter Rettich mit Chili",
+    "tags": [
+      "gemuese",
+      "Rettich"
+    ],
+    "zutaten": [
+      "1 kg weißer Rettich",
+      "1 Liter Wasser",
+      "30 g Meersalz",
+      "2 frische rote Chilischoten",
+      "3 Zehen Knoblauch",
+      "2 cm frischer Ingwer",
+      "1 TL Koriandersamen"
+    ],
+    "zubereitung": [
+      "Wasser und Salz aufkochen, bis sich das Salz vollständig aufgelöst hat. Die Salzlake vollständig abkühlen lassen.",
+      "Rettich schälen und in Stifte oder dünne Scheiben schneiden.",
+      "Chili, Knoblauch, Ingwer und Koriandersamen im Glas verteilen und den Rettich dicht einschichten.",
+      "Mit der kalten Salzlake auffüllen, bis der Rettich vollständig bedeckt ist. Mit einem Fermentiergewicht beschweren.",
+      "4 bis 7 Tage bei Raumtemperatur fermentieren lassen und anschließend kühl lagern."
+    ],
+    "picture": "21.png",
+    "codex_titel": "Weißer Rettich mit roter Schärfe",
+    "codex_einleitung": "Weißer Rettich nimmt Chili, Ingwer und Knoblauch auf und wird dadurch zum feurigen Vorrat.",
+    "ratgeber": {
+      "sprecher": "Katze",
+      "text": "Rettich und Chili sind alte Bekannte. Halte Wasser bereit."
+    }
+  },
+  {
+    "titel": "Fermentierte Rote Bete mit Meerrettich",
+    "tags": [
+      "gemuese",
+      "Rote Bete"
+    ],
+    "zutaten": [
+      "1 kg Rote Bete",
+      "1 Liter Wasser",
+      "30 g Meersalz",
+      "3 cm frischer Meerrettich",
+      "2 Zehen Knoblauch",
+      "1 TL Kümmelsamen"
+    ],
+    "zubereitung": [
+      "Wasser und Salz aufkochen, bis sich das Salz vollständig aufgelöst hat. Die Salzlake vollständig abkühlen lassen.",
+      "Rote Bete schälen und in dünne Scheiben oder Stifte schneiden.",
+      "Meerrettich, Knoblauch und Kümmel im Glas verteilen und die Rote Bete dicht einschichten.",
+      "Mit der kalten Salzlake auffüllen, bis das Gemüse vollständig bedeckt ist. Mit einem Fermentiergewicht beschweren.",
+      "5 bis 10 Tage bei Raumtemperatur fermentieren lassen und anschließend kühl lagern."
+    ],
+    "picture": "22.png",
+    "codex_titel": "Die rote Bete mit Meerrettich und Kümmel",
+    "codex_einleitung": "Die rote Bete erhält mit Meerrettich und Kümmel eine erdige, kräftige Würze.",
+    "ratgeber": {
+      "sprecher": "Connie",
+      "text": "Die rote Bete färbt die Lake wie Tinte. Das ist kein Zauber – sieht aber danach aus."
+    }
+  },
+  {
+    "titel": "Rote Bete mit Apfel und Ingwer",
+    "tags": [
+      "gemuese",
+      "Rote Bete",
+      "Apfel"
+    ],
+    "zutaten": [
+      "700 g Rote Bete",
+      "300 g säuerlicher Apfel",
+      "20 g Meersalz",
+      "3 cm frischer Ingwer (fein gerieben)",
+      "1 TL Koriandersamen"
+    ],
+    "zubereitung": [
+      "Rote Bete schälen und fein raspeln. Apfel grob raspeln.",
+      "Rote Bete und Apfel mit dem Meersalz vermengen und kräftig kneten, bis Saft austritt.",
+      "Ingwer und Koriandersamen unterheben.",
+      "Die Mischung fest in ein Fermentationsglas drücken, bis sie vollständig von eigenem Saft bedeckt ist.",
+      "Mit einem Fermentiergewicht beschweren und 5 bis 8 Tage bei Raumtemperatur fermentieren lassen. Anschließend kühl lagern."
+    ],
+    "picture": "23.png",
+    "codex_titel": "Rote Bete mit Apfel und Ingwer",
+    "codex_einleitung": "Apfel und Rote Bete werden vereint und mit Ingwer zu einem farbstarken Ferment bereitet.",
+    "ratgeber": {
+      "sprecher": "Katze",
+      "text": "Apfel und Rote Bete vertragen sich besser, als man beim ersten Blick vermuten könnte."
+    }
+  },
+  {
+    "titel": "Fermentierte grüne Bohnen mit Knoblauch",
+    "tags": [
+      "gemuese",
+      "Bohnen"
+    ],
+    "zutaten": [
+      "1 kg grüne Bohnen",
+      "1 Liter Wasser",
+      "30 g Meersalz",
+      "4 Zehen Knoblauch",
+      "1 Bund Dill",
+      "1 TL schwarze Pfefferkörner",
+      "2 Weinblätter"
+    ],
+    "zubereitung": [
+      "Wasser und Salz aufkochen, bis sich das Salz vollständig aufgelöst hat. Die Salzlake vollständig abkühlen lassen.",
+      "Bohnen waschen und die Enden entfernen.",
+      "Knoblauch, Dill und Pfefferkörner im Glas verteilen. Bohnen dicht einschichten und mit den Weinblättern abdecken.",
+      "Mit der kalten Salzlake auffüllen, bis alle Bohnen bedeckt sind. Mit einem Fermentiergewicht beschweren.",
+      "5 bis 8 Tage bei Raumtemperatur fermentieren lassen. Anschließend kühl lagern."
+    ],
+    "picture": "24.png",
+    "codex_titel": "Grüne Bohnen mit Knoblauch und Dill",
+    "codex_einleitung": "Grüne Bohnen werden mit Dill und Knoblauch unter der Lake bewahrt.",
+    "ratgeber": {
+      "sprecher": "Connie",
+      "text": "Bohnen sollen unter der Lake bleiben. Was aus der Lake herausragt, macht gern Unfug."
+    }
+  },
+  {
+    "titel": "Fermentierte Paprika mit Knoblauch",
+    "tags": [
+      "gemuese",
+      "Paprika"
+    ],
+    "zutaten": [
+      "1 kg rote Paprika",
+      "1 Liter Wasser",
+      "30 g Meersalz",
+      "4 Zehen Knoblauch",
+      "1 TL Koriandersamen",
+      "1 kleine rote Chilischote"
+    ],
+    "zubereitung": [
+      "Wasser und Salz aufkochen, bis sich das Salz vollständig aufgelöst hat. Die Salzlake vollständig abkühlen lassen.",
+      "Paprika waschen, entkernen und in breite Streifen schneiden.",
+      "Knoblauch, Koriandersamen und Chili im Glas verteilen. Paprikastreifen dicht einschichten.",
+      "Mit der kalten Salzlake auffüllen, bis die Paprika vollständig bedeckt ist. Mit einem Fermentiergewicht beschweren.",
+      "3 bis 6 Tage bei Raumtemperatur fermentieren lassen und anschließend kühl lagern."
+    ],
+    "codex_titel": "Rote Paprika mit Knoblauch und Koriander",
+    "codex_einleitung": "Rote Paprika wird mit Knoblauch und Koriander in der Lake zur Säure geführt.",
+    "ratgeber": {
+      "sprecher": "Katze",
+      "text": "Paprika ist mild. Die kleine rote Chili im Glas hat allerdings andere Pläne."
+    }
+  },
+  {
+    "titel": "Paprika-Chili-Ferment",
+    "tags": [
+      "gemuese",
+      "Paprika",
+      "Chili"
+    ],
+    "zutaten": [
+      "700 g rote Paprika",
+      "300 g milde rote Chilischoten",
+      "1 Liter Wasser",
+      "30 g Meersalz",
+      "4 Zehen Knoblauch",
+      "2 cm frischer Ingwer"
+    ],
+    "zubereitung": [
+      "Wasser und Salz aufkochen, bis sich das Salz vollständig aufgelöst hat. Die Salzlake vollständig abkühlen lassen.",
+      "Paprika und Chilischoten waschen, entkernen und grob zerkleinern.",
+      "Knoblauch und Ingwer im Glas verteilen und das Gemüse dicht einschichten.",
+      "Mit der kalten Salzlake auffüllen, bis alles vollständig bedeckt ist. Mit einem Fermentiergewicht beschweren.",
+      "4 bis 7 Tage bei Raumtemperatur fermentieren lassen. Anschließend kühl lagern oder zu einer Würzpaste verarbeiten."
+    ],
+    "codex_titel": "Das feurige Paprika-Chili-Ferment",
+    "codex_einleitung": "Paprika und Chili werden vereint; dieses Ferment ist nichts für zaghaft gewürzte Zungen.",
+    "ratgeber": {
+      "sprecher": "Connie",
+      "text": "Bei diesem Ferment entscheidet die Menge der Chili, ob du speisest oder eine Mutprobe ablegst."
+    }
+  },
+  {
+    "titel": "Fermentierte rote Zwiebeln",
+    "tags": [
+      "gemuese",
+      "Zwiebel"
+    ],
+    "zutaten": [
+      "500 g rote Zwiebeln",
+      "500 ml Wasser",
+      "15 g Meersalz",
+      "1 TL schwarze Pfefferkörner",
+      "1 TL Senfkörner",
+      "1 Lorbeerblatt"
+    ],
+    "zubereitung": [
+      "Wasser und Salz aufkochen, bis sich das Salz vollständig aufgelöst hat. Die Salzlake vollständig abkühlen lassen.",
+      "Zwiebeln schälen und in feine Ringe schneiden.",
+      "Pfeffer, Senfkörner und Lorbeerblatt im Glas verteilen und die Zwiebeln locker einschichten.",
+      "Mit der kalten Salzlake auffüllen, bis die Zwiebeln vollständig bedeckt sind. Mit einem Fermentiergewicht beschweren.",
+      "3 bis 6 Tage bei Raumtemperatur fermentieren lassen und anschließend kühl lagern."
+    ],
+    "codex_titel": "Rote Zwiebeln in der salzigen Gärlake",
+    "codex_einleitung": "Rote Zwiebeln werden in feine Ringe geschnitten und in einer einfachen Lake vergoren.",
+    "ratgeber": {
+      "sprecher": "Katze",
+      "text": "Zwiebeln können beim Schneiden weinen. Nach der Gärung weinen sie nicht mehr – dafür vielleicht du."
+    }
+  },
+  {
+    "titel": "Fermentierte Perlzwiebeln mit Thymian",
+    "tags": [
+      "gemuese",
+      "Zwiebel"
+    ],
+    "zutaten": [
+      "700 g Perlzwiebeln",
+      "1 Liter Wasser",
+      "30 g Meersalz",
+      "4 Zweige Thymian",
+      "2 Zehen Knoblauch",
+      "1 TL schwarze Pfefferkörner"
+    ],
+    "zubereitung": [
+      "Wasser und Salz aufkochen, bis sich das Salz vollständig aufgelöst hat. Die Salzlake vollständig abkühlen lassen.",
+      "Perlzwiebeln schälen und unzerteilt lassen.",
+      "Thymian, Knoblauch und Pfefferkörner im Glas verteilen und die Zwiebeln dicht einschichten.",
+      "Mit der kalten Salzlake auffüllen, bis alle Zwiebeln bedeckt sind. Mit einem Fermentiergewicht beschweren.",
+      "5 bis 8 Tage bei Raumtemperatur fermentieren lassen und anschließend kühl lagern."
+    ],
+    "codex_titel": "Perlzwiebeln mit Thymian und Knoblauch",
+    "codex_einleitung": "Die kleinen Perlzwiebeln werden mit Thymian und Knoblauch zum würzigen Vorrat.",
+    "ratgeber": {
+      "sprecher": "Connie",
+      "text": "Perlzwiebeln sind klein, aber zahlreich. Geduld beim Schälen ist eine Tugend."
+    }
+  },
+  {
+    "titel": "Fermentierter Knoblauch mit Chili",
+    "tags": [
+      "gemuese",
+      "Knoblauch"
+    ],
+    "zutaten": [
+      "500 g Knoblauchzehen",
+      "1 Liter Wasser",
+      "30 g Meersalz",
+      "2 frische rote Chilischoten",
+      "2 Lorbeerblätter",
+      "1 TL schwarze Pfefferkörner"
+    ],
+    "zubereitung": [
+      "Wasser und Salz aufkochen, bis sich das Salz vollständig aufgelöst hat. Die Salzlake vollständig abkühlen lassen.",
+      "Knoblauchzehen schälen und unzerteilt lassen.",
+      "Chili, Lorbeerblätter und Pfefferkörner im Glas verteilen und die Knoblauchzehen einschichten.",
+      "Mit der kalten Salzlake auffüllen, bis der Knoblauch vollständig bedeckt ist. Mit einem Fermentiergewicht beschweren.",
+      "7 bis 14 Tage bei Raumtemperatur fermentieren lassen und anschließend kühl lagern."
+    ],
+    "codex_titel": "Knoblauchzehen mit Chili – das feurige Ferment",
+    "codex_einleitung": "Knoblauch und rote Chili ziehen gemeinsam in die Lake und ergeben ein kräftiges Ferment.",
+    "ratgeber": {
+      "sprecher": "Katze",
+      "text": "Knoblauch ist ein treuer Begleiter. Gib ihm Chili und er wird noch treuer – und deutlich lauter im Aroma."
+    }
+  },
+  {
+    "titel": "Fermentierter Blumenkohl mit Curry",
+    "tags": [
+      "gemuese",
+      "Blumenkohl"
+    ],
+    "zutaten": [
+      "1 kg Blumenkohl",
+      "1 Liter Wasser",
+      "30 g Meersalz",
+      "1 TL Currypulver",
+      "1 TL Senfkörner",
+      "2 Zehen Knoblauch",
+      "1 kleine rote Chilischote"
+    ],
+    "zubereitung": [
+      "Wasser und Salz aufkochen, bis sich das Salz vollständig aufgelöst hat. Die Salzlake vollständig abkühlen lassen.",
+      "Blumenkohl in kleine Röschen teilen und gründlich waschen.",
+      "Currypulver, Senfkörner, Knoblauch und Chili im Glas verteilen. Blumenkohl dicht einschichten.",
+      "Mit der kalten Salzlake auffüllen, bis alles vollständig bedeckt ist. Mit einem Fermentiergewicht beschweren.",
+      "4 bis 7 Tage bei Raumtemperatur fermentieren lassen und anschließend kühl lagern."
+    ],
+    "codex_titel": "Blumenkohl mit Curry, Senf und rotem Feuer",
+    "codex_einleitung": "Blumenkohl, Curry, Senf und Chili werden zu einem goldenen und feurigen Gärwerk.",
+    "ratgeber": {
+      "sprecher": "Connie",
+      "text": "Curry und Chili sind keine schüchternen Gewürze. Beginne lieber mit Ehrfurcht."
+    }
+  },
+  {
+    "titel": "Fermentierter Brokkoli mit Zitrone",
+    "tags": [
+      "gemuese",
+      "Brokkoli"
+    ],
+    "zutaten": [
+      "1 kg Brokkoli",
+      "1 Liter Wasser",
+      "30 g Meersalz",
+      "Schale von 1 Bio-Zitrone",
+      "2 Zehen Knoblauch",
+      "1 TL Koriandersamen"
+    ],
+    "zubereitung": [
+      "Wasser und Salz aufkochen, bis sich das Salz vollständig aufgelöst hat. Die Salzlake vollständig abkühlen lassen.",
+      "Brokkoli in kleine Röschen teilen. Dicke Stiele schälen und in dünne Scheiben schneiden.",
+      "Zitronenschale, Knoblauch und Koriandersamen im Glas verteilen und den Brokkoli einschichten.",
+      "Mit der kalten Salzlake auffüllen, bis alles vollständig bedeckt ist. Mit einem Fermentiergewicht beschweren.",
+      "3 bis 6 Tage bei Raumtemperatur fermentieren lassen und anschließend kühl lagern."
+    ],
+    "codex_titel": "Brokkoli mit Zitrone und Koriandersamen",
+    "codex_einleitung": "Brokkoli erhält Zitrone, Knoblauch und Koriander und wird zu einem frischen Ferment.",
+    "ratgeber": {
+      "sprecher": "Katze",
+      "text": "Zitrone bringt Frische in den Gärtopf. Die Schale nur fein verwenden, sonst wird es bitter."
+    }
+  },
+  {
+    "titel": "Fermentierter Fenchel mit Zitrone und Dill",
+    "tags": [
+      "gemuese",
+      "Fenchel"
+    ],
+    "zutaten": [
+      "1 kg Fenchelknollen",
+      "1 Liter Wasser",
+      "30 g Meersalz",
+      "Schale von 1 Bio-Zitrone",
+      "1 Bund Dill",
+      "2 Zehen Knoblauch"
+    ],
+    "zubereitung": [
+      "Wasser und Salz aufkochen, bis sich das Salz vollständig aufgelöst hat. Die Salzlake vollständig abkühlen lassen.",
+      "Fenchel putzen und in feine Spalten schneiden.",
+      "Zitronenschale, Dill und Knoblauch im Glas verteilen und den Fenchel dicht einschichten.",
+      "Mit der kalten Salzlake auffüllen, bis der Fenchel vollständig bedeckt ist. Mit einem Fermentiergewicht beschweren.",
+      "4 bis 7 Tage bei Raumtemperatur fermentieren lassen und anschließend kühl lagern."
+    ],
+    "codex_titel": "Fenchel mit Zitrone, Dill und Knoblauch",
+    "codex_einleitung": "Fenchel wird mit Zitrone, Dill und Knoblauch unter der Lake zur Reife gebracht.",
+    "ratgeber": {
+      "sprecher": "Connie",
+      "text": "Fenchel, Dill und Zitrone: ein Bund, der selbst im tiefsten Gärkeller nach Sommer riecht."
+    }
+  },
+  {
+    "titel": "Fermentierter Sellerie mit Wacholder",
+    "tags": [
+      "gemuese",
+      "Sellerie"
+    ],
+    "zutaten": [
+      "1 kg Knollensellerie",
+      "1 Liter Wasser",
+      "30 g Meersalz",
+      "6 Wacholderbeeren (leicht angedrückt)",
+      "1 TL Kümmelsamen",
+      "2 Lorbeerblätter"
+    ],
+    "zubereitung": [
+      "Wasser und Salz aufkochen, bis sich das Salz vollständig aufgelöst hat. Die Salzlake vollständig abkühlen lassen.",
+      "Sellerie schälen und in dünne Stifte oder Scheiben schneiden.",
+      "Wacholderbeeren, Kümmel und Lorbeerblätter im Glas verteilen und den Sellerie dicht einschichten.",
+      "Mit der kalten Salzlake auffüllen, bis der Sellerie vollständig bedeckt ist. Mit einem Fermentiergewicht beschweren.",
+      "5 bis 10 Tage bei Raumtemperatur fermentieren lassen und anschließend kühl lagern."
+    ],
+    "codex_titel": "Sellerie mit Wacholder und Kümmel",
+    "codex_einleitung": "Knollensellerie, Wacholder und Kümmel geben diesem Ferment ein kräftiges Waldaroma.",
+    "ratgeber": {
+      "sprecher": "Katze",
+      "text": "Wacholder erinnert an den Wald. Sellerie erinnert daran, dass der Wald nicht im Gärglas wohnt."
+    }
+  },
+  {
+    "titel": "Fermentierte Kohlrabi mit Dill",
+    "tags": [
+      "gemuese",
+      "Kohlrabi"
+    ],
+    "zutaten": [
+      "1 kg Kohlrabi",
+      "1 Liter Wasser",
+      "30 g Meersalz",
+      "1 Bund Dill",
+      "2 Zehen Knoblauch",
+      "1 TL Senfkörner"
+    ],
+    "zubereitung": [
+      "Wasser und Salz aufkochen, bis sich das Salz vollständig aufgelöst hat. Die Salzlake vollständig abkühlen lassen.",
+      "Kohlrabi schälen und in Stifte schneiden.",
+      "Dill, Knoblauch und Senfkörner im Glas verteilen und den Kohlrabi dicht einschichten.",
+      "Mit der kalten Salzlake auffüllen, bis alles vollständig bedeckt ist. Mit einem Fermentiergewicht beschweren.",
+      "4 bis 7 Tage bei Raumtemperatur fermentieren lassen und anschließend kühl lagern."
+    ],
+    "codex_titel": "Kohlrabi mit Dill und Senfkorn",
+    "codex_einleitung": "Kohlrabi wird mit Dill, Knoblauch und Senfkorn zu knackigem Vorrat bereitet.",
+    "ratgeber": {
+      "sprecher": "Connie",
+      "text": "Kohlrabi wird knackig, wenn du ihm die rechte Lake und etwas Zeit gönnst."
+    }
+  },
+  {
+    "titel": "Fermentierte Zucchini mit Knoblauch und Kräutern",
+    "tags": [
+      "gemuese",
+      "Zucchini"
+    ],
+    "zutaten": [
+      "1 kg feste Zucchini",
+      "1 Liter Wasser",
+      "30 g Meersalz",
+      "3 Zehen Knoblauch",
+      "1 Bund Dill",
+      "2 Zweige Thymian",
+      "1 TL schwarze Pfefferkörner"
+    ],
+    "zubereitung": [
+      "Wasser und Salz aufkochen, bis sich das Salz vollständig aufgelöst hat. Die Salzlake vollständig abkühlen lassen.",
+      "Zucchini waschen und in dicke Stifte oder Scheiben schneiden.",
+      "Knoblauch, Dill, Thymian und Pfefferkörner im Glas verteilen. Zucchini dicht einschichten.",
+      "Mit der kalten Salzlake auffüllen, bis die Zucchini vollständig bedeckt ist. Mit einem Fermentiergewicht beschweren.",
+      "3 bis 5 Tage bei Raumtemperatur fermentieren lassen und anschließend kühl lagern."
+    ],
+    "codex_titel": "Zucchini mit Knoblauch, Dill und Thymian",
+    "codex_einleitung": "Zucchini werden mit Kräutern und Knoblauch in die salzige Lake gelegt.",
+    "ratgeber": {
+      "sprecher": "Katze",
+      "text": "Zucchini sind weichere Gesellen. Beobachte sie gut und lass sie nicht unnötig lange gären."
+    }
+  },
+  {
+    "titel": "Fermentierter Kürbis mit Chili und Ingwer",
+    "tags": [
+      "gemuese",
+      "Kürbis"
+    ],
+    "zutaten": [
+      "1 kg Hokkaido-Kürbis",
+      "1 Liter Wasser",
+      "30 g Meersalz",
+      "3 cm frischer Ingwer",
+      "1 kleine rote Chilischote",
+      "2 Zehen Knoblauch",
+      "1 TL Koriandersamen"
+    ],
+    "zubereitung": [
+      "Wasser und Salz aufkochen, bis sich das Salz vollständig aufgelöst hat. Die Salzlake vollständig abkühlen lassen.",
+      "Kürbis mit Schale in dünne Spalten oder Stifte schneiden.",
+      "Ingwer, Chili, Knoblauch und Koriandersamen im Glas verteilen und den Kürbis einschichten.",
+      "Mit der kalten Salzlake auffüllen, bis der Kürbis vollständig bedeckt ist. Mit einem Fermentiergewicht beschweren.",
+      "3 bis 5 Tage bei Raumtemperatur fermentieren lassen und anschließend kühl lagern."
+    ],
+    "codex_titel": "Kürbis mit Ingwer, Chili und Koriander",
+    "codex_einleitung": "Hokkaido-Kürbis erhält Ingwer, Chili und Koriander und wird zu einem würzigen Winterferment.",
+    "ratgeber": {
+      "sprecher": "Connie",
+      "text": "Kürbis, Ingwer und Chili: ein Trio, das selbst im Winter für Feuer sorgt."
+    }
+  },
+  {
+    "titel": "Gemischtes Bauernferment",
+    "tags": [
+      "gemuese",
+      "Gemüsemix"
+    ],
+    "zutaten": [
+      "300 g Weißkohl",
+      "200 g Möhren",
+      "200 g Blumenkohl",
+      "150 g Paprika",
+      "150 g Kohlrabi",
+      "20 g Meersalz"
+    ],
+    "zubereitung": [
+      "Gemüse putzen und in feine Streifen oder kleine Stücke schneiden.",
+      "Das Gemüse mit dem Meersalz vermengen und kräftig kneten, bis reichlich Pflanzensaft austritt.",
+      "Die Mischung portionsweise in ein Fermentationsglas geben und fest andrücken.",
+      "Mit einem Fermentiergewicht beschweren, sodass das Gemüse vollständig von Flüssigkeit bedeckt ist.",
+      "5 bis 10 Tage bei Raumtemperatur fermentieren lassen. Anschließend kühl lagern."
+    ],
+    "codex_titel": "Das gemischte Bauernferment",
+    "codex_einleitung": "Was der Bauernhof hergibt, wird vereint und mit Salz zur gemeinsamen Gärung gebracht.",
+    "ratgeber": {
+      "sprecher": "Katze",
+      "text": "Das Bauernferment nimmt, was der Garten hergibt. Genau darin liegt sein Charme."
+    }
+  },
+  {
+    "titel": "Winterliches Wurzelgemüse-Ferment",
+    "tags": [
+      "gemuese",
+      "Wurzelgemüse"
+    ],
+    "zutaten": [
+      "300 g Möhren",
+      "250 g Pastinaken",
+      "250 g Knollensellerie",
+      "200 g Rote Bete",
+      "20 g Meersalz",
+      "1 TL Kümmelsamen",
+      "2 Lorbeerblätter"
+    ],
+    "zubereitung": [
+      "Wurzelgemüse schälen und in feine Stifte schneiden.",
+      "Das Gemüse mit dem Meersalz vermengen und kräftig kneten, bis Saft austritt.",
+      "Kümmel und Lorbeerblätter unterheben.",
+      "Das Gemüse fest in ein Fermentationsglas drücken, bis es vollständig vom eigenen Saft bedeckt ist.",
+      "Mit einem Fermentiergewicht beschweren und 5 bis 10 Tage bei Raumtemperatur fermentieren lassen. Anschließend kühl lagern."
+    ],
+    "codex_titel": "Winterliches Wurzelwerk aus dem Gärtopf",
+    "codex_einleitung": "Möhren, Pastinaken, Sellerie und Rote Bete werden zum winterlichen Wurzelvorrat vereint.",
+    "ratgeber": {
+      "sprecher": "Connie",
+      "text": "Wenn der Winter naht, wandert das Wurzelwerk in den Gärtopf. Kümmel und Lorbeer weisen ihm den Weg."
+    }
+  },
+  {
+    "titel": "Karotten-Rettich-Ferment mit Sesam",
+    "tags": [
+      "gemuese",
+      "Möhre",
+      "Rettich"
+    ],
+    "zutaten": [
+      "600 g Möhren",
+      "400 g weißer Rettich",
+      "20 g Meersalz",
+      "1 TL geröstete Sesamsamen",
+      "2 cm frischer Ingwer",
+      "2 Zehen Knoblauch"
+    ],
+    "zubereitung": [
+      "Möhren und Rettich in feine Stifte schneiden.",
+      "Das Gemüse mit dem Meersalz vermengen und kräftig kneten, bis reichlich Saft austritt.",
+      "Ingwer, Knoblauch und Sesamsamen unterheben.",
+      "Die Mischung fest in ein Fermentationsglas drücken, bis sie vollständig von eigenem Saft bedeckt ist.",
+      "4 bis 7 Tage bei Raumtemperatur fermentieren lassen und anschließend kühl lagern."
+    ],
+    "codex_titel": "Möhren und Rettich mit geröstetem Sesam",
+    "codex_einleitung": "Möhren und Rettich treffen auf Ingwer, Knoblauch und gerösteten Sesam.",
+    "ratgeber": {
+      "sprecher": "Katze",
+      "text": "Sesam wird geröstet, bevor er ins Ferment kommt. Kleine Mühe, großer Duft."
+    }
+  }
+]

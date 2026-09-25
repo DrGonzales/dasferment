@@ -1,0 +1,76 @@
+---
+import recipeData from '../../data/das_ferment.json';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import { type Recipe } from '../../lib/recipes';
+import '../../styles/global.css';
+
+const recipes = recipeData as Recipe[];
+const illustratedCount = recipes.filter((recipe) => recipe.picture).length;
+const categoryCount = new Set(recipes.flatMap((recipe) => recipe.tags)).size;
+const canonicalPath = '/ueber-diese-seite/';
+const canonicalUrl = Astro.site ? new URL(canonicalPath, Astro.site).toString() : canonicalPath;
+const description = `Lerne das statische Rezeptbuch Das Ferment und seine ${recipes.length} Rezepte im Codex kennen.`;
+---
+
+<!doctype html>
+<html lang="de">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		<meta name="theme-color" content="#2b2118" />
+		<link rel="canonical" href={canonicalUrl} />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<title>Über diese Seite | Das Ferment</title>
+	</head>
+	<body>
+		<div class="site-shell">
+			<Header />
+
+			<main class="recipe-main prose-page">
+				<nav class="breadcrumbs" aria-label="Brotkrümelnavigation">
+					<a href="/">Startseite</a>
+					<span aria-hidden="true">/</span>
+					<span aria-current="page">Über diese Seite</span>
+				</nav>
+
+				<article class="prose-article">
+					<header class="prose-intro">
+						<p class="section-heading__kicker">Ein Wort zum Haus</p>
+						<h1>Über diese Seite</h1>
+						<p class="prose-intro__lead">Ein statisches Rezeptbuch für die kleinen, langsamen Arbeiten in Küche und Keller.</p>
+					</header>
+
+					<section class="prose-section" aria-labelledby="buch-title">
+						<p class="section-heading__kicker">Das Anliegen</p>
+						<h2 id="buch-title">Ein Buch vom Warten</h2>
+						<p>
+							Das Ferment sammelt Rezepte, bei denen Zeit, Salz und Geduld zusammenarbeiten. Jeder Eintrag führt vom tatsächlichen Rezept zu einer kurzen Codex-Ansprache: So bleiben die klare Anleitung und die Atmosphäre des alten Buches verbunden.
+						</p>
+					</section>
+
+					<section class="prose-section" aria-labelledby="aufbau-title">
+						<p class="section-heading__kicker">Der Aufbau</p>
+						<h2 id="aufbau-title">Ein Codex aus Daten und Blättern</h2>
+						<p>
+							Die Rezepte stammen aus einer zentralen JSON-Quelle und werden beim Build als vollständige HTML-Seiten erzeugt. So bleiben Zutaten, Zubereitung und die {recipes.length} verschiedenen Rezepte auch ohne JavaScript direkt im Dokument sichtbar.
+						</p>
+						<p>
+							{illustratedCount} der {recipes.length} Rezepte sind mit einer Buchmalerei versehen. Die {categoryCount} Kategorien geben einen weiteren Weg durch das Repertoire.
+						</p>
+					</section>
+
+					<aside class="prose-note">
+						<span aria-hidden="true">❦</span>
+						<p>Geduld ist das eigentliche Gewürz.</p>
+					</aside>
+				</article>
+			</main>
+
+			<Footer />
+		</div>
+	</body>
+</html>

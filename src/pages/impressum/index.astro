@@ -1,0 +1,71 @@
+---
+import recipeData from '../../data/das_ferment.json';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import { type Recipe } from '../../lib/recipes';
+import '../../styles/global.css';
+
+const recipes = recipeData as Recipe[];
+const canonicalPath = '/impressum/';
+const canonicalUrl = Astro.site ? new URL(canonicalPath, Astro.site).toString() : canonicalPath;
+const description = 'Impressum und Anbieterinformationen für das Rezeptbuch Das Ferment.';
+---
+
+<!doctype html>
+<html lang="de">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		<meta name="theme-color" content="#2b2118" />
+		<link rel="canonical" href={canonicalUrl} />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<title>Impressum | Das Ferment</title>
+	</head>
+	<body>
+		<div class="site-shell">
+			<Header />
+
+			<main class="recipe-main prose-page">
+				<nav class="breadcrumbs" aria-label="Brotkrümelnavigation">
+					<a href="/">Startseite</a>
+					<span aria-hidden="true">/</span>
+					<span aria-current="page">Impressum</span>
+				</nav>
+
+				<article class="prose-article legal-page">
+					<header class="prose-intro">
+						<p class="section-heading__kicker">Angaben zum Haus</p>
+						<h1>Impressum</h1>
+						<p class="prose-intro__lead">Informationen zu Anbieter, Kontakt und Verantwortlichkeit.</p>
+					</header>
+
+					<section class="prose-section" aria-labelledby="anbieter-title">
+						<p class="section-heading__kicker">Anbieter</p>
+						<h2 id="anbieter-title">Das Ferment</h2>
+						<p>
+							Die vollständigen Anbieterangaben, eine Kontaktmöglichkeit und die nach den geltenden Anforderungen zuständige Person werden vor dem Livegang dieser Website ergänzt.
+						</p>
+					</section>
+
+					<section class="prose-section" aria-labelledby="hinweis-title">
+						<p class="section-heading__kicker">Hinweis</p>
+						<h2 id="hinweis-title">Transparenz vor dem ersten Brot</h2>
+						<p>
+							Diese Seite enthält bewusst keine erfundenen Kontaktdaten oder rechtlichen Angaben. Die zuständigen Informationen müssen vor der Veröffentlichung durch die Betreiber ergänzt werden.
+						</p>
+					</section>
+
+					<aside class="prose-note">
+						<span aria-hidden="true">❦</span>
+						<p>Die {recipes.length} Rezepte warten geduldig auf ihre Ergänzung.</p>
+					</aside>
+				</article>
+			</main>
+
+			<Footer />
+		</div>
+	</body>
+</html>

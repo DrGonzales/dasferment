@@ -1,0 +1,123 @@
+---
+import { Image } from 'astro:assets';
+import recipeData from '../data/das_ferment.json';
+import RecipeCard from '../components/RecipeCard.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { imageForRecipe } from '../lib/pageImages';
+import { recipeImageAlt, type Recipe } from '../lib/recipes';
+import '../styles/global.css';
+
+const recipes = recipeData as Recipe[];
+
+function getRecipeImage(recipe: Recipe) {
+	return imageForRecipe(recipe);
+}
+
+const illustratedRecipes = recipes.flatMap((recipe) => {
+	const image = getRecipeImage(recipe);
+	return image ? [{ recipe, image }] : [];
+});
+const featuredFolios = illustratedRecipes.slice(0, 3);
+const recipeCount = recipes.length;
+const illustratedCount = illustratedRecipes.length;
+const canonicalPath = '/';
+const canonicalUrl = Astro.site ? new URL(canonicalPath, Astro.site).toString() : canonicalPath;
+const description = `Im mittelalterlich inspirierten Codex von Das Ferment: ${recipeCount} Rezepte für Kimchi, Sauerkraut, Gurken und weitere lebendige Fermente.`;
+---
+
+<!doctype html>
+<html lang="de">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		<meta name="theme-color" content="#2b2118" />
+		<link rel="canonical" href={canonicalUrl} />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<title>Das Ferment | Rezepte aus dem Codex</title>
+	</head>
+	<body>
+		<div class="site-shell">
+			<Header />
+
+			<main>
+				<section class="hero" aria-labelledby="hero-title">
+					<div class="hero__copy">
+						<p class="eyebrow">Ein lebendiges Rezeptbuch</p>
+						<h1 id="hero-title">Ein Buch vom <em>Warten.</em></h1>
+						<p class="hero__lead">
+							Öffne den Codex und finde eingelegte, gesäuerte und langsam gereifte Speisen – von würzigen Gürkchen bis zu
+							farbstarken Wintervorräten.
+						</p>
+						<div class="hero__actions">
+							<a class="button" href="#rezepte">Codex öffnen</a>
+							<a class="text-link" href="#ueber-den-codex">Einleitung lesen</a>
+						</div>
+						<p class="hero__footnote">{recipeCount} Rezepte, aufgeschrieben in {illustratedCount} illustrierten Blättern.</p>
+					</div>
+
+					<div class="hero__gallery" aria-label="Ausgewählte Buchmalereien">
+						{featuredFolios.map(({ recipe, image }, index) => (
+							<figure
+								class:list={[
+									'hero__folio',
+									index === 0 ? 'hero__folio--main' : index === 1 ? 'hero__folio--second' : 'hero__folio--third',
+								]}
+							>
+								<Image
+									src={image}
+									alt={recipeImageAlt(recipe)}
+									widths={[320, 640, 1024]}
+									sizes={index === 0 ? '(max-width: 560px) 61vw, 420px' : '(max-width: 560px) 40vw, 260px'}
+									format="webp"
+									quality={84}
+									loading="eager"
+									decoding="async"
+								/>
+							</figure>
+						))}
+						<span class="hero__gallery-label">Blätter 01–{String(featuredFolios.length).padStart(2, '0')}</span>
+					</div>
+				</section>
+
+				<section class="repertoire" id="rezepte" aria-labelledby="rezepte-title">
+					<header class="section-heading">
+						<div>
+							<p class="section-heading__kicker">Das Repertoire</p>
+							<h2 id="rezepte-title">Im Codex verzeichnet</h2>
+						</div>
+						<p class="section-heading__count">
+							{recipeCount} Einträge, nach den Namen ihrer Blätter geordnet. Wähle ein Rezept und folge seinem Gärweg.
+						</p>
+					</header>
+
+					<div class="recipe-grid">
+						{recipes.map((recipe, index) => (
+							<RecipeCard
+								recipe={recipe}
+								image={getRecipeImage(recipe)}
+								index={index}
+								total={recipeCount}
+							/>
+						))}
+					</div>
+				</section>
+
+				<aside class="codex-note" id="ueber-den-codex" aria-label="Hinweis zum Codex">
+					<span class="codex-note__mark" aria-hidden="true">
+						<svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+							<path d="M14 24V5m0 13c-4.4 0-6.8-2.4-7.6-6.2 4.4-.4 7.1 1.4 7.6 6.2Zm0-4.1c0-4.3 2.5-6.8 7-7 .1 4.2-2.2 6.7-7 7Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+						</svg>
+					</span>
+					<p>Jeder Codex-Titel führt zu einem vollständigen Rezept. So bleiben die alte Buchsprache und die klare Anleitung miteinander verbunden.</p>
+					<span class="codex-note__source">Aus der Sammlung</span>
+				</aside>
+			</main>
+
+			<Footer />
+		</div>
+	</body>
+</html>

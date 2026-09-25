@@ -1,0 +1,83 @@
+---
+import recipeData from '../../data/das_ferment.json';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import { categoryLabel, categorySlug, type Recipe } from '../../lib/recipes';
+import '../../styles/global.css';
+
+interface Category {
+	label: string;
+	slug: string;
+	count: number;
+}
+
+const recipes = recipeData as Recipe[];
+const categoryMap = new Map<string, Category>();
+
+for (const recipe of recipes) {
+	for (const tag of recipe.tags) {
+		const slug = categorySlug(tag);
+		const current = categoryMap.get(slug);
+		categoryMap.set(slug, {
+			label: categoryLabel(tag),
+			slug,
+			count: (current?.count ?? 0) + 1,
+		});
+	}
+}
+
+const categories = [...categoryMap.values()].sort((a, b) => b.count - a.count || a.label.localeCompare(b.label, 'de'));
+const canonicalPath = '/kategorien/';
+const canonicalUrl = Astro.site ? new URL(canonicalPath, Astro.site).toString() : canonicalPath;
+const description = `Entdecke die ${categories.length} Kategorien im Rezeptbuch von Das Ferment.`;
+---
+
+<!doctype html>
+<html lang="de">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		<meta name="theme-color" content="#2b2118" />
+		<link rel="canonical" href={canonicalUrl} />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<title>Kategorien | Das Ferment</title>
+	</head>
+	<body>
+		<div class="site-shell">
+			<Header />
+
+			<main class="repertoire category-index">
+				<nav class="breadcrumbs" aria-label="Brotkrümelnavigation">
+					<a href="/">Startseite</a>
+					<span aria-hidden="true">/</span>
+					<span aria-current="page">Kategorien</span>
+				</nav>
+
+				<header class="section-heading">
+					<div>
+						<p class="section-heading__kicker">Nach Zutaten und Rezeptwelt</p>
+						<h1 id="category-title">Welche Blätter gehören zusammen?</h1>
+					</div>
+					<p class="section-heading__count">
+						{categories.length} Kategorien führen durch das Repertoire.
+					</p>
+				</header>
+
+				<div class="category-grid" aria-labelledby="category-title">
+					{categories.map((category) => (
+						<a class="category-card" href={`/kategorien/${category.slug}/`}>
+							<span class="category-card__label">{category.label}</span>
+							<span class="category-card__count">{category.count} {category.count === 1 ? 'Rezept' : 'Rezepte'}</span>
+							<span class="category-card__arrow" aria-hidden="true">↗</span>
+						</a>
+					))}
+				</div>
+			</main>
+
+			<Footer />
+		</div>
+	</body>
+</html>

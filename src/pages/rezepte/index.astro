@@ -1,0 +1,66 @@
+---
+import recipeData from '../../data/das_ferment.json';
+import RecipeCard from '../../components/RecipeCard.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import { imageForRecipe } from '../../lib/pageImages';
+import { type Recipe } from '../../lib/recipes';
+import '../../styles/global.css';
+
+const recipes = recipeData as Recipe[];
+const illustratedCount = recipes.filter((recipe) => imageForRecipe(recipe)).length;
+const description = `Alle ${recipes.length} Rezepte aus dem Codex von Das Ferment – mit Zutaten, Zubereitung und ${illustratedCount} Buchmalereien.`;
+const canonicalPath = '/rezepte/';
+const canonicalUrl = Astro.site ? new URL(canonicalPath, Astro.site).toString() : canonicalPath;
+---
+
+<!doctype html>
+<html lang="de">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		<meta name="theme-color" content="#2b2118" />
+		<link rel="canonical" href={canonicalUrl} />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<title>Rezepte | Das Ferment</title>
+	</head>
+	<body>
+		<div class="site-shell">
+			<Header />
+
+			<main class="repertoire recipes-index">
+				<nav class="breadcrumbs" aria-label="Brotkrümelnavigation">
+					<a href="/">Startseite</a>
+					<span aria-hidden="true">/</span>
+					<span aria-current="page">Rezepte</span>
+				</nav>
+
+				<header class="section-heading">
+					<div>
+						<p class="section-heading__kicker">Das Repertoire</p>
+						<h1 id="rezepte-title">Im Codex verzeichnet</h1>
+					</div>
+					<p class="section-heading__count">
+						{recipes.length} Rezepte, nach den Namen ihrer Blätter geordnet. Wähle ein Rezept und folge seinem Gärweg.
+					</p>
+				</header>
+
+				<div class="recipe-grid" aria-labelledby="rezepte-title">
+					{recipes.map((recipe, index) => (
+						<RecipeCard
+							recipe={recipe}
+							image={imageForRecipe(recipe)}
+							index={index}
+							total={recipes.length}
+						/>
+					))}
+				</div>
+			</main>
+
+			<Footer />
+		</div>
+	</body>
+</html>

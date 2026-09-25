@@ -1,0 +1,53 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { recipeImageAlt, slugify, type Recipe } from '../lib/recipes';
+
+interface Props {
+	recipe: Recipe;
+	image?: ImageMetadata;
+	index: number;
+	total: number;
+}
+
+const { recipe, image, index, total } = Astro.props;
+const slug = slugify(recipe.titel);
+const folio = String(index + 1).padStart(2, '0');
+const totalFolios = String(total).padStart(2, '0');
+const visibleTags = recipe.tags.filter((tag) => tag.toLowerCase() !== 'gemuese').slice(0, 2);
+---
+
+<article class="recipe-card">
+	<a class="recipe-card__link" href={`/rezepte/${slug}/`} aria-label={`${recipe.codex_titel} – ${recipe.titel}`}>
+		<div class="recipe-card__visual">
+			{image ? (
+				<Image
+					src={image}
+					alt={recipeImageAlt(recipe)}
+					widths={[280, 480, 720]}
+					sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 900px) 46vw, (max-width: 1280px) 30vw, 260px"
+					quality={82}
+					loading={index < 4 ? 'eager' : 'lazy'}
+					decoding="async"
+				/>
+			) : (
+				<div class="recipe-card__placeholder" aria-hidden="true">
+					<span class="recipe-card__placeholder-mark">{folio}</span>
+					<span class="recipe-card__placeholder-rule"></span>
+				</div>
+			)}
+			<span class="recipe-card__folio">Blatt {folio} / {totalFolios}</span>
+		</div>
+		<div class="recipe-card__body">
+			<div class="recipe-card__meta" aria-label="Rezeptkategorien">
+				{visibleTags.length > 0 ? visibleTags.map((tag) => <span>{tag}</span>) : <span>Ferment</span>}
+			</div>
+			<h2>{recipe.codex_titel}</h2>
+			<p class="recipe-card__recipe-title">{recipe.titel}</p>
+			<span class="recipe-card__cta">
+				Rezept öffnen
+				<span class="recipe-card__arrow" aria-hidden="true">↗</span>
+			</span>
+		</div>
+	</a>
+</article>

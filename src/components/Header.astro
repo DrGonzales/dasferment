@@ -1,0 +1,30 @@
+---
+const pathname = Astro.url.pathname;
+const navigation = [
+	{ href: '/rezepte/', label: 'Rezepte' },
+	{ href: '/kategorien/', label: 'Kategorien' },
+	{ href: '/ueber-diese-seite/', label: 'Über diese Seite' },
+];
+
+function isCurrent(href: string) {
+	if (href === '/') return pathname === '/';
+	return pathname === href || pathname.startsWith(`${href}`);
+}
+---
+
+<header class="site-header">
+	<a class="brand" href="/" aria-label="Das Ferment – zur Startseite">
+		<span class="brand__mark" aria-hidden="true">
+			<svg viewBox="0 0 32 32" fill="none">
+				<path d="M16 27V9M16 19c-5.8 0-9-3.1-10-8 5.7-.6 9.2 1.8 10 8Zm0-5c0-5.5 3.2-8.7 9-9 .1 5.4-2.8 8.6-9 9Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+			</svg>
+		</span>
+		<span>Das Ferment</span>
+	</a>
+	<nav class="site-nav" aria-label="Hauptnavigation">
+		{navigation.map(({ href, label }) => (
+			<a href={href} aria-current={isCurrent(href) ? 'page' : undefined}>{label}</a>
+		))}
+	</nav>
+	<span class="header-note">Aus der Küche der Geduld</span>
+</header>

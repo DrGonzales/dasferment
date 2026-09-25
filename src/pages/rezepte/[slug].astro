@@ -1,0 +1,156 @@
+---
+import { getImage, Image } from 'astro:assets';
+import recipeData from '../../data/das_ferment.json';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import { imageForRecipe } from '../../lib/pageImages';
+import { recipeImageAlt, slugify, type Recipe } from '../../lib/recipes';
+import '../../styles/global.css';
+
+export function getStaticPaths() {
+	const pathRecipes = recipeData as Recipe[];
+
+	return pathRecipes.map((recipe) => ({
+		params: { slug: slugify(recipe.titel) },
+		props: { recipe },
+	}));
+}
+
+interface Props {
+	recipe: Recipe;
+}
+
+const { recipe } = Astro.props;
+const slug = slugify(recipe.titel);
+const canonicalPath = `/rezepte/${slug}/`;
+const canonicalUrl = Astro.site ? new URL(canonicalPath, Astro.site).toString() : canonicalPath;
+const description = recipe.codex_einleitung ?? recipe.titel;
+const image = imageForRecipe(recipe);
+const jsonLdImage = image
+	? await getImage({ src: image, width: 800, format: 'webp', quality: 80 })
+	: undefined;
+const jsonLdImageUrl = jsonLdImage
+	? Astro.site
+		? new URL(jsonLdImage.src, Astro.site).toString()
+		: jsonLdImage.src
+	: undefined;
+const recipeJsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'Recipe',
+	name: recipe.titel,
+	description: recipe.codex_einleitung,
+	image: jsonLdImageUrl,
+	recipeIngredient: recipe.zutaten,
+	recipeInstructions: recipe.zubereitung.map((step) => ({
+		'@type': 'HowToStep',
+		text: step,
+	})),
+	keywords: recipe.tags.join(', '),
+};
+---
+
+<!doctype html>
+<html lang="de">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		<meta name="theme-color" content="#2b2118" />
+		<link rel="canonical" href={canonicalUrl} />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<title>{recipe.titel} | Das Ferment</title>
+		<script type="application/ld+json" set:html={JSON.stringify(recipeJsonLd)}></script>
+	</head>
+	<body>
+		<div class="site-shell">
+			<Header />
+
+			<main class="recipe-main">
+				<nav class="breadcrumbs" aria-label="Brotkrümelnavigation">
+					<a href="/">Startseite</a>
+					<span aria-hidden="true">/</span>
+					<a href="/rezepte/">Rezepte</a>
+					<span aria-hidden="true">/</span>
+					<span aria-current="page">{recipe.titel}</span>
+				</nav>
+
+				<article class="recipe-article">
+					<header class="recipe-intro">
+						<div class="recipe-intro__copy">
+							<div class="codex-kicker">
+								<span aria-hidden="true">Codex</span>
+								<span aria-hidden="true">·</span>
+								<span>Blatt aus dem Rezeptbuch</span>
+							</div>
+							<p class="recipe-intro__codex-title">{recipe.codex_titel}</p>
+							<h1>{recipe.titel}</h1>
+							{recipe.codex_einleitung && <p class="recipe-intro__lead">{recipe.codex_einleitung}</p>}
+							<div class="recipe-intro__tags" aria-label="Rezeptkategorien">
+								{recipe.tags.map((tag) => <span>{tag}</span>)}
+							</div>
+						</div>
+
+						<div class="recipe-intro__image">
+							{image ? (
+								<figure>
+									<Image
+										src={image}
+										alt={recipeImageAlt(recipe)}
+										widths={[320, 640, 1024]}
+										sizes="(max-width: 780px) calc(100vw - 40px), 30rem"
+										quality={86}
+										loading="eager"
+										decoding="async"
+									/>
+									<figcaption>Eine Buchmalerei zu diesem Blatt</figcaption>
+								</figure>
+							) : (
+								<div class="recipe-image-placeholder" aria-hidden="true">
+									<span>Codex</span>
+									<i></i>
+								</div>
+							)}
+						</div>
+					</header>
+
+					<div class="recipe-sections">
+						<section class="recipe-section recipe-section--ingredients" aria-labelledby="zutaten-title">
+							<header class="recipe-section__header">
+								<p class="section-heading__kicker">Was hinein gehört</p>
+								<h2 id="zutaten-title">Zutaten</h2>
+							</header>
+							<ul class="ingredient-list">
+								{recipe.zutaten.map((ingredient) => <li>{ingredient}</li>)}
+							</ul>
+						</section>
+
+						<section class="recipe-section recipe-section--instructions" aria-labelledby="zubereitung-title">
+							<header class="recipe-section__header">
+								<p class="section-heading__kicker">Der Gang der Gärung</p>
+								<h2 id="zubereitung-title">Zubereitung</h2>
+							</header>
+							<ol class="instruction-list">
+								{recipe.zubereitung.map((step) => <li>{step}</li>)}
+							</ol>
+						</section>
+					</div>
+
+					{recipe.ratgeber && (
+						<aside class="recipe-advisor" aria-label={`Ratschlag von ${recipe.ratgeber.sprecher}`}>
+							<div class="recipe-advisor__heading">
+								<span class="recipe-advisor__ornament" aria-hidden="true">✦</span>
+								<h2>{recipe.ratgeber.sprecher}s Ratschlag</h2>
+								<span class="recipe-advisor__ornament" aria-hidden="true">✦</span>
+							</div>
+							<blockquote>„{recipe.ratgeber.text}“</blockquote>
+						</aside>
+					)}
+				</article>
+			</main>
+
+			<Footer />
+		</div>
+	</body>
+</html>
