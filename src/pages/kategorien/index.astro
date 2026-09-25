@@ -12,6 +12,8 @@ interface Category {
 }
 
 const recipes = recipeData as Recipe[];
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const withBase = (path: string) => `${base}${path}`;
 const categoryMap = new Map<string, Category>();
 
 for (const recipe of recipes) {
@@ -28,7 +30,7 @@ for (const recipe of recipes) {
 
 const categories = [...categoryMap.values()].sort((a, b) => b.count - a.count || a.label.localeCompare(b.label, 'de'));
 const canonicalPath = '/kategorien/';
-const canonicalUrl = Astro.site ? new URL(canonicalPath, Astro.site).toString() : canonicalPath;
+const canonicalUrl = Astro.site ? new URL(withBase(canonicalPath), Astro.site).toString() : withBase(canonicalPath);
 const description = `Entdecke die ${categories.length} Kategorien im Rezeptbuch von Das Ferment.`;
 ---
 
@@ -41,8 +43,8 @@ const description = `Entdecke die ${categories.length} Kategorien im Rezeptbuch 
 		<meta name="description" content={description} />
 		<meta name="theme-color" content="#2b2118" />
 		<link rel="canonical" href={canonicalUrl} />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
+		<link rel="icon" href={withBase('/favicon.ico')} />
 		<title>Kategorien | Das Ferment</title>
 	</head>
 	<body>
@@ -51,7 +53,7 @@ const description = `Entdecke die ${categories.length} Kategorien im Rezeptbuch 
 
 			<main class="repertoire category-index">
 				<nav class="breadcrumbs" aria-label="Brotkrümelnavigation">
-					<a href="/">Startseite</a>
+					<a href={withBase('/')}>Startseite</a>
 					<span aria-hidden="true">/</span>
 					<span aria-current="page">Kategorien</span>
 				</nav>
@@ -68,7 +70,7 @@ const description = `Entdecke die ${categories.length} Kategorien im Rezeptbuch 
 
 				<div class="category-grid" aria-labelledby="category-title">
 					{categories.map((category) => (
-						<a class="category-card" href={`/kategorien/${category.slug}/`}>
+						<a class="category-card" href={withBase(`/kategorien/${category.slug}/`)}>
 							<span class="category-card__label">{category.label}</span>
 							<span class="category-card__count">{category.count} {category.count === 1 ? 'Rezept' : 'Rezepte'}</span>
 							<span class="category-card__arrow" aria-hidden="true">↗</span>

@@ -25,6 +25,9 @@ jobs:
 
       - name: Install, build, and upload site
         uses: withastro/action@v6
+        env:
+          PUBLIC_SITE_URL: ${{ vars.PUBLIC_SITE_URL || 'https://drgonzales.github.io' }}
+          PUBLIC_BASE_PATH: ${{ vars.PUBLIC_BASE_PATH || '/dasferment' }}
         with:
           path: .
           node-version: 22

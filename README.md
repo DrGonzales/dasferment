@@ -162,15 +162,20 @@ Jede Rezeptseite enthält:
 
 `src/pages/sitemap.xml.ts` und `src/pages/robots.txt.ts` erzeugen die technischen SEO-Dateien. Die Website wird vollständig in statisches HTML und optimierte Assets übersetzt; es gibt keine nachträgliche Rezeptdarstellung im Browser.
 
-## Produktions-URL konfigurieren
+## Produktions-URL und Basispfad konfigurieren
 
-Für Canonicals sowie absolute URLs in Sitemap und `robots.txt` kann beim Build eine echte Domain gesetzt werden:
+Für Canonicals sowie absolute URLs in Sitemap und `robots.txt` können beim Build eine echte Domain und ein abweichender Basispfad gesetzt werden:
 
 ```sh
-PUBLIC_SITE_URL=https://www.deine-domain.de npm run build
+PUBLIC_SITE_URL=https://www.deine-domain.de PUBLIC_BASE_PATH=/ npm run build
 ```
 
-Die Konfiguration befindet sich in `astro.config.mjs`. Ohne `PUBLIC_SITE_URL` bleiben Canonicals relativ; die Sitemap und `robots.txt` verwenden in der lokalen Entwicklung `http://localhost:4321` als Fallback.
+Ohne Umgebungsvariablen verwendet die Konfiguration die Standardwerte für GitHub Pages:
+
+- `PUBLIC_SITE_URL=https://drgonzales.github.io`
+- `PUBLIC_BASE_PATH=/dasferment`
+
+Damit liegt die lokale bzw. veröffentlichte Website unter `https://drgonzales.github.io/dasferment/`. Für eine eigene Domain im Hauptverzeichnis kann der Basispfad mit `PUBLIC_BASE_PATH=/` überschrieben werden. Die Konfiguration befindet sich in `astro.config.mjs`.
 
 ## Deployment
 
@@ -180,15 +185,15 @@ Die Konfiguration befindet sich in `astro.config.mjs`. Ohne `PUBLIC_SITE_URL` bl
    npm ci
    ```
 
-2. Build mit der tatsächlichen Domain erzeugen:
+2. Den statischen Build erzeugen:
 
    ```sh
-   PUBLIC_SITE_URL=https://www.deine-domain.de npm run build
+   npm run build
    ```
 
-3. Den Inhalt von `dist/` auf einen beliebigen statischen Hosting-Anbieter hochladen oder die von Astro unterstützte Plattformintegration verwenden.
+3. Den Inhalt von `dist/` auf einen statischen Hosting-Anbieter hochladen oder die von Astro unterstützte Plattformintegration verwenden.
 
-Die Anwendung ist für eine Auslieferung im Hauptverzeichnis einer Domain vorbereitet. Wenn eine Veröffentlichung in einem Unterverzeichnis erforderlich ist, muss zusätzlich die Astro-`base`-Option konfiguriert werden.
+Ein Push auf `main` wird durch `.github/workflows/deploy.yml` automatisch als GitHub-Pages-Deployment unter `https://drgonzales.github.io/dasferment/` veröffentlicht. Bei einer eigenen Domain werden `PUBLIC_SITE_URL` und gegebenenfalls `PUBLIC_BASE_PATH` im Deployment-Build gesetzt.
 
 ## Rezeptdaten ändern
 

@@ -1,8 +1,10 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 
-// PUBLIC_SITE_URL enables absolute canonical URLs and sitemap URLs in production.
-const site = process.env.PUBLIC_SITE_URL;
+// GitHub Pages serves this repository at https://drgonzales.github.io/dasferment/.
+// The environment variables keep local and hosted builds configurable.
+const site = process.env.PUBLIC_SITE_URL ?? 'https://drgonzales.github.io';
+const base = process.env.PUBLIC_BASE_PATH ?? '/dasferment';
 
 // https://astro.build/config
-export default defineConfig({ site });
+export default defineConfig({ site, base });

@@ -6,10 +6,12 @@ import { type Recipe } from '../../lib/recipes';
 import '../../styles/global.css';
 
 const recipes = recipeData as Recipe[];
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const withBase = (path: string) => `${base}${path}`;
 const illustratedCount = recipes.filter((recipe) => recipe.picture).length;
 const categoryCount = new Set(recipes.flatMap((recipe) => recipe.tags)).size;
 const canonicalPath = '/ueber-diese-seite/';
-const canonicalUrl = Astro.site ? new URL(canonicalPath, Astro.site).toString() : canonicalPath;
+const canonicalUrl = Astro.site ? new URL(withBase(canonicalPath), Astro.site).toString() : withBase(canonicalPath);
 const description = `Lerne das statische Rezeptbuch Das Ferment und seine ${recipes.length} Rezepte im Codex kennen.`;
 ---
 
@@ -22,8 +24,8 @@ const description = `Lerne das statische Rezeptbuch Das Ferment und seine ${reci
 		<meta name="description" content={description} />
 		<meta name="theme-color" content="#2b2118" />
 		<link rel="canonical" href={canonicalUrl} />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
+		<link rel="icon" href={withBase('/favicon.ico')} />
 		<title>Über diese Seite | Das Ferment</title>
 	</head>
 	<body>
@@ -32,7 +34,7 @@ const description = `Lerne das statische Rezeptbuch Das Ferment und seine ${reci
 
 			<main class="recipe-main prose-page">
 				<nav class="breadcrumbs" aria-label="Brotkrümelnavigation">
-					<a href="/">Startseite</a>
+					<a href={withBase('/')}>Startseite</a>
 					<span aria-hidden="true">/</span>
 					<span aria-current="page">Über diese Seite</span>
 				</nav>

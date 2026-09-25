@@ -8,10 +8,12 @@ import { type Recipe } from '../../lib/recipes';
 import '../../styles/global.css';
 
 const recipes = recipeData as Recipe[];
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const withBase = (path: string) => `${base}${path}`;
 const illustratedCount = recipes.filter((recipe) => imageForRecipe(recipe)).length;
 const description = `Alle ${recipes.length} Rezepte aus dem Codex von Das Ferment – mit Zutaten, Zubereitung und ${illustratedCount} Buchmalereien.`;
 const canonicalPath = '/rezepte/';
-const canonicalUrl = Astro.site ? new URL(canonicalPath, Astro.site).toString() : canonicalPath;
+const canonicalUrl = Astro.site ? new URL(withBase(canonicalPath), Astro.site).toString() : withBase(canonicalPath);
 ---
 
 <!doctype html>
@@ -23,8 +25,8 @@ const canonicalUrl = Astro.site ? new URL(canonicalPath, Astro.site).toString() 
 		<meta name="description" content={description} />
 		<meta name="theme-color" content="#2b2118" />
 		<link rel="canonical" href={canonicalUrl} />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
+		<link rel="icon" href={withBase('/favicon.ico')} />
 		<title>Rezepte | Das Ferment</title>
 	</head>
 	<body>
@@ -33,7 +35,7 @@ const canonicalUrl = Astro.site ? new URL(canonicalPath, Astro.site).toString() 
 
 			<main class="repertoire recipes-index">
 				<nav class="breadcrumbs" aria-label="Brotkrümelnavigation">
-					<a href="/">Startseite</a>
+					<a href={withBase('/')}>Startseite</a>
 					<span aria-hidden="true">/</span>
 					<span aria-current="page">Rezepte</span>
 				</nav>

@@ -11,6 +11,8 @@ interface Props {
 }
 
 const { recipe, image, index, total } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const withBase = (path: string) => `${base}${path}`;
 const slug = slugify(recipe.titel);
 const folio = String(index + 1).padStart(2, '0');
 const totalFolios = String(total).padStart(2, '0');
@@ -18,7 +20,7 @@ const visibleTags = recipe.tags.filter((tag) => tag.toLowerCase() !== 'gemuese')
 ---
 
 <article class="recipe-card">
-	<a class="recipe-card__link" href={`/rezepte/${slug}/`} aria-label={`${recipe.codex_titel} – ${recipe.titel}`}>
+	<a class="recipe-card__link" href={withBase(`/rezepte/${slug}/`)} aria-label={`${recipe.codex_titel} – ${recipe.titel}`}>
 		<div class="recipe-card__visual">
 			{image ? (
 				<Image

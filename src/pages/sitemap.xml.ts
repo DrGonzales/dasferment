@@ -3,6 +3,7 @@ import recipeData from '../data/das_ferment.json';
 import { categorySlug, slugify, type Recipe } from '../lib/recipes';
 
 const recipes = recipeData as Recipe[];
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const recipePaths = recipes.map((recipe) => `/rezepte/${slugify(recipe.titel)}/`);
 const categoryPaths = [...new Set(recipes.flatMap((recipe) => recipe.tags.map((tag) => `/kategorien/${categorySlug(tag)}/`)))];
@@ -34,7 +35,7 @@ export const prerender = true;
 export const GET: APIRoute = ({ site, url }) => {
 	const baseUrl = site ?? new URL(url.origin);
 	const entries = sitemapPaths
-		.map((path) => `  <url><loc>${escapeXml(new URL(path, baseUrl).toString())}</loc></url>`)
+		.map((path) => `  <url><loc>${escapeXml(new URL(`${base}${path}`, baseUrl).toString())}</loc></url>`)
 		.join('\n');
 
 	return new Response(

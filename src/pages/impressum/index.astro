@@ -6,8 +6,10 @@ import { type Recipe } from '../../lib/recipes';
 import '../../styles/global.css';
 
 const recipes = recipeData as Recipe[];
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const withBase = (path: string) => `${base}${path}`;
 const canonicalPath = '/impressum/';
-const canonicalUrl = Astro.site ? new URL(canonicalPath, Astro.site).toString() : canonicalPath;
+const canonicalUrl = Astro.site ? new URL(withBase(canonicalPath), Astro.site).toString() : withBase(canonicalPath);
 const description = 'Impressum und Anbieterinformationen für das Rezeptbuch Das Ferment.';
 ---
 
@@ -20,8 +22,8 @@ const description = 'Impressum und Anbieterinformationen für das Rezeptbuch Das
 		<meta name="description" content={description} />
 		<meta name="theme-color" content="#2b2118" />
 		<link rel="canonical" href={canonicalUrl} />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
+		<link rel="icon" href={withBase('/favicon.ico')} />
 		<title>Impressum | Das Ferment</title>
 	</head>
 	<body>
@@ -30,7 +32,7 @@ const description = 'Impressum und Anbieterinformationen für das Rezeptbuch Das
 
 			<main class="recipe-main prose-page">
 				<nav class="breadcrumbs" aria-label="Brotkrümelnavigation">
-					<a href="/">Startseite</a>
+					<a href={withBase('/')}>Startseite</a>
 					<span aria-hidden="true">/</span>
 					<span aria-current="page">Impressum</span>
 				</nav>
