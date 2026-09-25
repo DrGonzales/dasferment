@@ -1,0 +1,413 @@
+{
+    "infos": [
+        {
+            "id": "grundlagen-fermentation",
+            "titel": "Was passiert bei der Fermentation?",
+            "codex_titel": "Von der wundersamen Verwandlung des Gemüses",
+            "kategorie": "grundlagen",
+            "intro": "Bei der Milchsäuregärung verwandeln Mikroorganismen die natürlichen Zucker des Gemüses unter geeigneten Bedingungen in Säuren. Dadurch verändern sich Geschmack, Geruch, Konsistenz und Haltbarkeit.",
+            "codex_intro": "Wenn frisches Gemüse in rechter Weise mit Salz und Zeit versehen wird, so beginnen die kleinen unsichtbaren Helfer ihr Werk. Sie zehren von den natürlichen Säften und Zuckern und wandeln dieselben in Säure, wodurch sich Wohlgeschmack und Haltbarkeit mehren.",
+            "abschnitte": [
+                {
+                    "titel": "Die Milchsäurebakterien",
+                    "codex_titel": "Von den kleinen unsichtbaren Helfern",
+                    "text": "Bei einer erfolgreichen Gemüsefermentation setzen sich Milchsäurebakterien gegenüber vielen unerwünschten Mikroorganismen durch. Sie bilden Milchsäure und senken dadurch den pH-Wert des Ferments.",
+                    "codex_text": "Es sind gar kleine und dem Auge verborgene Wesen, welche im Gemüse ihr Werk verrichten. Die guten unter ihnen mehren sich und schaffen aus dem süßen Saft des Gemüses eine wohlige Säure."
+                },
+                {
+                    "titel": "Salz, Zeit und Temperatur",
+                    "codex_titel": "Vom rechten Maß von Salz, Wärme und Zeit",
+                    "text": "Salzkonzentration, Temperatur und Fermentationsdauer beeinflussen gemeinsam den Verlauf der Fermentation.",
+                    "codex_text": "Drei Dinge sind es, die über das Gelingen wachen: das rechte Maß des Salzes, eine angemessene Wärme und die Geduld, welche der Gärung ihre Zeit lässt."
+                }
+            ]
+        },
+        {
+            "id": "salz-in-der-fermentation",
+            "titel": "Die Bedeutung von Salz",
+            "codex_titel": "Von der Kraft des Salzes",
+            "kategorie": "salz",
+            "intro": "Salz beeinflusst Geschmack, Textur und den Verlauf der Fermentation. Es begünstigt die gewünschten Mikroorganismen und hemmt viele unerwünschte Mikroorganismen.",
+            "codex_intro": "Das Salz ist ein mächtiger Hüter des Fermentes. Es wahret die Speise, gibt ihr Wohlgeschmack und hilft den guten kleinen Gärwesen, über die unerwünschten die Oberhand zu gewinnen.",
+            "abschnitte": [
+                {
+                    "titel": "Nicht einfach weniger Salz verwenden",
+                    "codex_titel": "Warum man am Salze nicht leichtfertig sparen soll",
+                    "text": "Bei fermentiertem Gemüse sollte die im Rezept vorgesehene Salzmenge nicht eigenmächtig reduziert werden. Salz beeinflusst nicht nur den Geschmack, sondern auch die Sicherheit und Qualität des Ferments.",
+                    "codex_text": "Man hüte sich davor, das Salz nach eigenem Gutdünken zu mindern. Denn es dienet nicht allein dem Geschmack, sondern auch dem guten Fortgang der Gärung und der Bewahrung des Gemüses."
+                }
+            ]
+        },
+        {
+            "id": "salzlaken",
+            "titel": "Salzlake für Gemüse",
+            "codex_titel": "Tafel von den rechten Maßen der Salzlauge",
+            "kategorie": "salz",
+            "intro": "Für Gemüse, das vollständig in einer Salzlake fermentiert wird, werden je nach Gemüseart und Stückgröße unterschiedliche Salzkonzentrationen verwendet. Als Orientierung gelten häufig etwa 3 % für zerkleinertes Gemüse und etwa 5 % für größere oder ganze Stücke.",
+            "codex_intro": "Je nachdem, ob das Gemüse fein geschnitten oder in ganzen Stücken in der Lauge lieget, bedarf es eines anderen Maßes. Nachfolgende Tafel gebe dem Fermentierer eine gute Richtschnur.",
+            "tabelle": {
+                "titel": "Orientierung für Salzlake",
+                "codex_titel": "Tafel der Salzmaße",
+                "hinweis": "Die angegebenen Werte sind Orientierungswerte. Für konkrete Rezepte sollte die dort angegebene Salzkonzentration verwendet werden.",
+                "codex_hinweis": "Diese Maße seien als Richtschnur verstanden. Wo ein bewährtes Rezept ein bestimmtes Maß vorgibt, halte man sich an dasselbe.",
+                "spalten": [
+                    "Konzentration",
+                    "Salz pro Liter Wasser",
+                    "Typische Verwendung"
+                ],
+                "zeilen": [
+                    [
+                        "2 %",
+                        "20 g",
+                        "leichtere Salzlake"
+                    ],
+                    [
+                        "2,5 %",
+                        "25 g",
+                        "leichtere Gemüsefermente"
+                    ],
+                    [
+                        "3 %",
+                        "30 g",
+                        "zerkleinertes oder fein geschnittenes Gemüse"
+                    ],
+                    [
+                        "4 %",
+                        "40 g",
+                        "mittlere Salzlake"
+                    ],
+                    [
+                        "5 %",
+                        "50 g",
+                        "ganze oder größere Gemüsestücke"
+                    ],
+                    [
+                        "6 %",
+                        "60 g",
+                        "stärkere Salzlake"
+                    ]
+                ]
+            }
+        },
+        {
+            "id": "trocken-salzen",
+            "titel": "Trocken salzen",
+            "codex_titel": "Vom Salzen ohne hinzugegossene Lauge",
+            "kategorie": "salz",
+            "intro": "Beim Trocken-Salzen wird das Salz direkt mit dem geschnittenen Gemüse vermischt. Das Salz entzieht dem Gemüse Wasser, sodass nach kurzer Zeit eine eigene Lake entsteht.",
+            "codex_intro": "Hier wird das Salz nicht mit Wasser zur Lauge bereitet, sondern unmittelbar unter das geschnittene Gemüse gemengt. Alsbald ziehet das Salz den Saft aus dem Gemüse, und eine eigene Lauge entstehet.",
+            "abschnitte": [
+                {
+                    "titel": "Typisches Beispiel: Kohl",
+                    "codex_titel": "Vom Kraut und seinem eigenen Safte",
+                    "text": "Sauerkraut ist ein typisches Beispiel für Trocken-Salzen. Das Salz wird mit dem geschnittenen Kohl vermischt und durch Kneten oder Stampfen wird Saft freigesetzt.",
+                    "codex_text": "Beim Kraute vermische man das geschnittene Gewächs mit dem rechten Salzmaß und bearbeite es mit Händen oder Stampfer, bis reichlich eigener Saft hervorgetreten ist."
+                }
+            ]
+        },
+        {
+            "id": "gemuese-unter-lake",
+            "titel": "Gemüse muss unter der Lake bleiben",
+            "codex_titel": "Dass kein Gemüse über der Lauge schwimme",
+            "kategorie": "grundlagen",
+            "intro": "Das Gemüse sollte während der Fermentation vollständig unter der Lake bleiben. Ein Gewicht verhindert, dass Stücke an die Oberfläche steigen und mit Sauerstoff in Kontakt kommen.",
+            "codex_intro": "Das Gemüse soll gänzlich unter der Lauge ruhen und nicht über deren Spiegel schwimmen. Ein wohlgesetztes Gewicht halte die Stücke sicher darunter.",
+            "abschnitte": [
+                {
+                    "titel": "Warum das wichtig ist",
+                    "codex_titel": "Warum das Gemüse unter der Lauge bleiben soll",
+                    "text": "Sauerstoff an der Oberfläche kann das Wachstum von Hefen und Schimmel begünstigen. Das Untertauchen des Gemüses ist deshalb eine der wichtigsten Maßnahmen während der Fermentation.",
+                    "codex_text": "Wo Luft an das Gemüse gelanget, können unerwünschte Hefen und Schimmel ihr Wesen treiben. Darum halte man jedes Stück unter der schützenden Lauge."
+                }
+            ]
+        },
+        {
+            "id": "temperatur",
+            "titel": "Die richtige Temperatur",
+            "codex_titel": "Von der rechten Wärme",
+            "kategorie": "grundlagen",
+            "intro": "Die Temperatur beeinflusst die Geschwindigkeit der Fermentation. Viele Gemüsefermente entwickeln sich bei moderaten Raumtemperaturen gut; wärmere Bedingungen beschleunigen den Prozess.",
+            "codex_intro": "Auch die Wärme hat ihren Anteil am Gelingen. Ist es gar kalt, so gehet die Gärung nur langsam voran; ist es aber allzu warm, so eile sie zu sehr und mag dem Gemüse seine Festigkeit nehmen.",
+            "tabelle": {
+                "titel": "Orientierung",
+                "codex_titel": "Tafel von der Wärme",
+                "spalten": [
+                    "Temperatur",
+                    "Wirkung"
+                ],
+                "zeilen": [
+                    [
+                        "unter 15 °C",
+                        "sehr langsame Fermentation"
+                    ],
+                    [
+                        "15–18 °C",
+                        "langsame Fermentation"
+                    ],
+                    [
+                        "18–22 °C",
+                        "moderater Bereich für viele Gemüsefermente"
+                    ],
+                    [
+                        "22–25 °C",
+                        "schnellere Fermentation"
+                    ],
+                    [
+                        "über 25 °C",
+                        "Fermentation läuft deutlich schneller; Textur kann leiden"
+                    ]
+                ]
+            }
+        },
+        {
+            "id": "fermentation-erkennen",
+            "titel": "Woran erkenne ich eine erfolgreiche Fermentation?",
+            "codex_titel": "Woran man erkennet, dass die Gärung wohl geraten ist",
+            "kategorie": "kontrolle",
+            "intro": "Während der Fermentation verändern sich Aussehen, Geruch, Geschmack und Konsistenz. Viele dieser Veränderungen sind völlig normal und zeigen, dass die Fermentation aktiv ist.",
+            "codex_intro": "Nicht jedes Bläschen und jede Trübung sei ein Grund zur Sorge. Vielmehr zeigen gewisse Zeichen dem kundigen Fermentierer, dass die Gärung ihren rechten Gang nimmt.",
+            "abschnitte": [
+                {
+                    "titel": "Typische Anzeichen",
+                    "codex_titel": "Die guten Zeichen",
+                    "liste": [
+                        "Bläschen oder leichte Gasbildung",
+                        "leicht trübe Lake",
+                        "zunehmend säuerlicher Geruch",
+                        "zunehmend säuerlicher Geschmack",
+                        "Veränderung der Farbe",
+                        "leichte Veränderung der Konsistenz"
+                    ],
+                    "codex_liste": [
+                        "feine Bläschen steigen empor",
+                        "die Lauge wird bisweilen trübe",
+                        "ein frischer, säuerlicher Geruch tritt hervor",
+                        "die Speise gewinnt an Säure",
+                        "Farbe und Aussehen wandeln sich",
+                        "die Festigkeit mag sich leicht verändern"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "kahmhefe",
+            "titel": "Kahmhefe und weißer Belag",
+            "codex_titel": "Vom weißen Schleier auf der Lauge",
+            "kategorie": "probleme",
+            "intro": "Ein dünner, glatter weißlicher Film auf der Oberfläche kann Kahmhefe sein. Kahmhefe ist nicht dasselbe wie pelziger Schimmel. Bei Unsicherheit sollte das Ferment jedoch nicht verzehrt werden.",
+            "codex_intro": "Bisweilen mag sich auf der Lauge ein weißlicher Schleier bilden. Nicht jeder solcher Belag ist Schimmel; doch wo Zweifel bestehen, sei Vorsicht des Fermentierers bester Rat.",
+            "abschnitte": [
+                {
+                    "titel": "Kahmhefe erkennen",
+                    "codex_titel": "Wie man den weißen Schleier erkennet",
+                    "text": "Kahmhefe erscheint typischerweise als dünner, glatter weißlicher Film und nicht als pelziger, farbiger Belag.",
+                    "codex_text": "Der Kahmschleier erscheinet gemeinhin dünn und glatt und nicht wie ein pelziger Bewuchs."
+                },
+                {
+                    "titel": "Nicht mit Schimmel verwechseln",
+                    "codex_titel": "Vom Unterschied zwischen Schleier und Schimmel",
+                    "text": "Pelzige oder deutlich gefärbte Beläge sollten nicht als harmlose Kahmhefe eingeordnet werden.",
+                    "codex_text": "Was pelzig wächst oder sich deutlich grün, blau, schwarz oder anders auffällig färbet, soll nicht leichtfertig als harmloser Schleier angesehen werden."
+                }
+            ]
+        },
+        {
+            "id": "verdorbenes-ferment",
+            "titel": "Wann sollte ein Ferment entsorgt werden?",
+            "codex_titel": "Wann die Speise zu verwerfen sei",
+            "kategorie": "probleme",
+            "intro": "Bei eindeutigem Verderb sollte ein Ferment nicht probiert oder weiterverwendet werden. Im Zweifel gilt: lieber entsorgen.",
+            "codex_intro": "Wo die Speise gar übel geraten ist, soll man nicht kosten, um sich vom Verderb zu überzeugen. Wo Zweifel herrschet, sei das Verwerfen der bessere Weg.",
+            "abschnitte": [
+                {
+                    "titel": "Warnzeichen",
+                    "codex_titel": "Die Zeichen des Verderbens",
+                    "liste": [
+                        "fauliger oder stark unangenehmer Geruch",
+                        "stark schleimige Konsistenz",
+                        "deutlicher pelziger Schimmel",
+                        "auffällige ungewöhnliche Verfärbungen",
+                        "andere eindeutige Anzeichen von Verderb"
+                    ],
+                    "codex_liste": [
+                        "übel faulender oder widernatürlicher Geruch",
+                        "gar schleimige Beschaffenheit",
+                        "pelziger Schimmelbewuchs",
+                        "sonderbare und verdächtige Verfärbung",
+                        "jedwedes andere eindeutige Zeichen des Verderbens"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "knackigkeit",
+            "titel": "Wie bleibt fermentiertes Gemüse knackig?",
+            "codex_titel": "Wie das Gemüse seine Festigkeit bewahret",
+            "kategorie": "textur",
+            "intro": "Frisches, festes Gemüse, die richtige Salzkonzentration, moderate Temperaturen und das Vermeiden unnötig langer Fermentation tragen dazu bei, die Textur zu erhalten.",
+            "codex_intro": "Will man, dass das Gemüse seinen festen Biss behalte, so wähle man frische und feste Stücke, gebe das rechte Salzmaß und hüte sich vor allzu großer Wärme und unnötig langem Gären.",
+            "abschnitte": [
+                {
+                    "titel": "Frisches Gemüse verwenden",
+                    "codex_titel": "Von frischem und festem Gemüse",
+                    "text": "Verwende möglichst frisches, festes und unbeschädigtes Gemüse.",
+                    "codex_text": "Man nehme möglichst frische, feste und ohne Fäulnis oder Beschädigung befindliche Früchte des Gartens."
+                },
+                {
+                    "titel": "Temperatur beachten",
+                    "codex_titel": "Von der rechten Wärme",
+                    "text": "Zu warme Bedingungen können die Fermentation beschleunigen und die gewünschte Textur beeinträchtigen.",
+                    "codex_text": "Gar große Wärme beschleuniget die Gärung und mag dem Gemüse seine feste Beschaffenheit nehmen."
+                }
+            ]
+        },
+        {
+            "id": "eichenlaub-textur",
+            "titel": "Eichenlaub und andere tanninhaltige Blätter",
+            "codex_titel": "Von Eichenlaub und anderen Blättern zur Festigkeit",
+            "kategorie": "textur",
+            "intro": "Traditionell werden bei bestimmten Gemüsefermenten tanninhaltige Blätter verwendet, um die Festigkeit des Gemüses zu unterstützen. Besonders bekannt sind Eichen- und Weinblätter.",
+            "codex_intro": "Seit alters her gibt man manchem Fermente Blätter bei, deren Gerbstoffe helfen mögen, dem Gemüse seinen festen Biss zu bewahren. Eichen- und Weinblätter sind hierfür wohlbekannt.",
+            "abschnitte": [
+                {
+                    "titel": "Traditionelle Verwendung",
+                    "codex_titel": "Von der alten Sitte",
+                    "text": "Eichen- oder Weinblätter werden traditionell insbesondere bei Gurkenfermenten eingesetzt. Sie ersetzen weder frisches Gemüse noch die richtige Salzkonzentration und sind kein notwendiger Bestandteil jedes Ferments.",
+                    "codex_text": "Bei Gurken und ähnlichen Speisen findet man diese Sitte seit langer Zeit. Doch kein Blatt vermag schlechtes Gemüse oder ein falsches Salzmaß zu ersetzen."
+                }
+            ]
+        },
+        {
+            "id": "wasser-und-salz",
+            "titel": "Wasser und Salz auswählen",
+            "codex_titel": "Von gutem Wasser und rechtem Salz",
+            "kategorie": "zutaten",
+            "intro": "Für reproduzierbare Fermentationen sollte das Salz möglichst genau abgewogen werden. Salz ohne Zusätze und mit gleichmäßiger Körnung erleichtert die Berechnung.",
+            "codex_intro": "Wer ein stets wohlgeratenes Ferment wünschet, der wäge sein Salz mit Bedacht und nehme ein Salz von gleichmäßiger Beschaffenheit und ohne unnötige Zusätze.",
+            "abschnitte": [
+                {
+                    "titel": "Salz abwiegen",
+                    "codex_titel": "Das Salz soll gewogen werden",
+                    "text": "Das Abwiegen ist zuverlässiger als die Messung mit Löffeln, da unterschiedliche Salzarten und Körnungen unterschiedlich viel wiegen.",
+                    "codex_text": "Man verlasse sich lieber auf die Waage als auf den Löffel, denn nicht jedes Salz hat dieselbe Schwere und Körnung."
+                }
+            ]
+        },
+        {
+            "id": "hygiene",
+            "titel": "Sauberkeit und Hygiene",
+            "codex_titel": "Von der Reinlichkeit beim Fermentieren",
+            "kategorie": "hygiene",
+            "intro": "Saubere Hände, Gefäße, Gewichte und Arbeitsflächen helfen dabei, unerwünschte Verunreinigungen zu vermeiden.",
+            "codex_intro": "Ein sauber Gefäß und reinliches Werkzeug sind dem Fermentierer gute Gefährten. Denn was sauber begonnen wird, hat bessere Aussicht auf ein wohlgeratenes Ende.",
+            "abschnitte": [
+                {
+                    "titel": "Gefäße reinigen",
+                    "codex_titel": "Von wohl gereinigten Gefäßen",
+                    "text": "Gefäße, Deckel und Gewichte sollten vor der Verwendung gründlich gereinigt werden.",
+                    "codex_text": "Gefäß, Deckel und Gewicht soll man vor dem Gebrauch gründlich reinigen und von allerlei Schmutz befreien."
+                },
+                {
+                    "titel": "Nur geeignete Materialien verwenden",
+                    "codex_titel": "Welche Gefäße tauglich sind",
+                    "text": "Für die Fermentation sollten geeignete lebensmittelechte Gefäße verwendet werden. Glas und geeignete lebensmittelechte Kunststoffe sind gängige Materialien.",
+                    "codex_text": "Man verwende Gefäße, die für Speisen gemacht und frei von schädlichen Stoffen sind. Glas und bewährte lebensmittelechte Gefäße haben sich hierfür wohl bewährt."
+                }
+            ]
+        },
+        {
+            "id": "fermentationsgewicht",
+            "titel": "Gewichte und Beschwerung",
+            "codex_titel": "Von den Gewichten, welche das Gemüse niederhalten",
+            "kategorie": "ausruestung",
+            "intro": "Fermentationsgewichte halten das Gemüse unter der Lake und verringern dadurch den Kontakt mit Sauerstoff.",
+            "codex_intro": "Ein wohlgesetztes Gewicht halte die Gemüsefrüchte sicher unter der Lauge, auf dass sie nicht an die Luft steigen.",
+            "abschnitte": [
+                {
+                    "titel": "Geeignete Gewichte",
+                    "codex_titel": "Von guten Beschwerungen",
+                    "text": "Geeignet sind speziell dafür vorgesehene Glas- oder Keramikgewichte sowie andere lebensmittelechte Lösungen.",
+                    "codex_text": "Man nehme eigens für diesen Zweck gefertigte Gewichte aus Glas oder Keramik oder eine andere geeignete und lebensmittelechte Beschwerung."
+                }
+            ]
+        },
+        {
+            "id": "gasbildung",
+            "titel": "Bläschen und Gasbildung",
+            "codex_titel": "Von den Bläschen, die aus der Gärung steigen",
+            "kategorie": "kontrolle",
+            "intro": "Während einer aktiven Fermentation entsteht unter anderem Kohlendioxid. Bläschen in der Lake sind daher häufig ein Zeichen dafür, dass die Fermentation aktiv ist.",
+            "codex_intro": "Steigen kleine Bläschen aus der Lauge empor, so ist dies häufig ein Zeichen, dass die Gärung lebhaft voranschreitet und ihre unsichtbaren Helfer tätig sind.",
+            "abschnitte": [
+                {
+                    "titel": "Gefäße nicht völlig druckdicht verschließen",
+                    "codex_titel": "Vom Entweichen der Gärgase",
+                    "text": "Bei verschlossenen Gefäßen muss berücksichtigt werden, dass während der Fermentation Gas entsteht. Gäraufsätze lassen Gas entweichen und halten gleichzeitig die Umgebung weitgehend vom Sauerstoff fern.",
+                    "codex_text": "Wo das Gefäß fest verschlossen wird, sammeln sich die Gärgase. Ein geeigneter Gäraufsatz lasse dieselben entweichen und halte doch die Luft weitgehend fern."
+                }
+            ]
+        },
+        {
+            "id": "lagerung",
+            "titel": "Nach der Fermentation",
+            "codex_titel": "Von der Aufbewahrung des wohlgeratenen Ferments",
+            "kategorie": "lagerung",
+            "intro": "Wenn das gewünschte Säurearoma erreicht ist, kann das Ferment zur weiteren Aufbewahrung kühl gelagert werden. Die Kühlung verlangsamt die weitere Fermentation.",
+            "codex_intro": "Hat das Ferment den gewünschten Geschmack und die rechte Säure erlanget, so bringe man es an einen kühlen Ort, auf dass die weitere Gärung sich verlangsame.",
+            "abschnitte": [
+                {
+                    "titel": "Kühl lagern",
+                    "codex_titel": "Von kühler Lagerstatt",
+                    "text": "Ein Kühlschrank oder ein anderer geeigneter kalter Lagerort verlangsamt die mikrobielle Aktivität und hilft, das erreichte Ergebnis zu erhalten.",
+                    "codex_text": "In kühler Lagerstatt wird das Werk der kleinen Gärwesen langsamer, und das Ferment bewahret länger seinen erreichten Zustand."
+                }
+            ]
+        },
+        {
+            "id": "fermentationsdauer",
+            "titel": "Wie lange muss Gemüse fermentieren?",
+            "codex_titel": "Wie lange das Ferment in der Lauge ruhen soll",
+            "kategorie": "grundlagen",
+            "intro": "Eine feste Fermentationsdauer gibt es nicht für jedes Gemüse. Temperatur, Salzgehalt, Gemüseart, Stückgröße und gewünschter Geschmack beeinflussen die Dauer.",
+            "codex_intro": "Es gibt keine eine Zahl, die für alle Gemüse gleichermaßen gelte. Art und Größe des Gemüses, Salzmaß, Wärme und der gewünschte Wohlgeschmack bestimmen, wie lange die Speise in ihrer Lauge ruhen soll.",
+            "abschnitte": [
+                {
+                    "titel": "Nach Geschmack und Verlauf beurteilen",
+                    "codex_titel": "Vom rechten Zeitpunkt",
+                    "text": "Die Fermentation kann regelmäßig kontrolliert werden. Sobald Säure und Geschmack den gewünschten Stand erreicht haben, kann das Ferment gekühlt werden.",
+                    "codex_text": "Man koste und prüfe mit Bedacht und erkenne daran, wann Säure und Wohlgeschmack den gewünschten Stand erreicht haben. Alsdann mag das Ferment in die kühle Lagerstatt gebracht werden."
+                }
+            ]
+        },
+        {
+            "id": "fermentation-beobachten",
+            "titel": "Das Ferment regelmäßig kontrollieren",
+            "codex_titel": "Von der täglichen Wacht über das Ferment",
+            "kategorie": "kontrolle",
+            "intro": "Während der aktiven Fermentation lohnt sich eine regelmäßige Kontrolle von Flüssigkeitsstand, Gemüseoberfläche, Geruch und Gasbildung.",
+            "codex_intro": "Ein gutes Ferment soll nicht sich selbst überlassen werden. Der kundige Fermentierer hält von Zeit zu Zeit Wacht über Lauge, Gemüse, Geruch und die Zeichen der Gärung.",
+            "abschnitte": [
+                {
+                    "titel": "Was sollte kontrolliert werden?",
+                    "codex_titel": "Was der Fermentierer beschauen soll",
+                    "liste": [
+                        "Ist das Gemüse noch vollständig unter der Lake?",
+                        "Gibt es normale Bläschenbildung?",
+                        "Verändert sich der Geruch in Richtung säuerlich?",
+                        "Gibt es ungewöhnlichen oder fauligen Geruch?",
+                        "Hat sich ein auffälliger Belag gebildet?",
+                        "Ist das Gemüse noch in einer erwartbaren Konsistenz?"
+                    ],
+                    "codex_liste": [
+                        "Lieget alles Gemüse noch wohl unter der Lauge?",
+                        "Steigen die gewöhnlichen Bläschen empor?",
+                        "Wird der Geruch angenehm säuerlich?",
+                        "Zeigt sich ein fauler oder widernatürlicher Geruch?",
+                        "Hat sich ein verdächtiger Belag gebildet?",
+                        "Bewahret das Gemüse noch seine zu erwartende Festigkeit?"
+                    ]
+                }
+            ]
+        }
+    ]
+}
