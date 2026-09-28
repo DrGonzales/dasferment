@@ -847,6 +847,7 @@
       "Mit der kalten Salzlake auffüllen, bis alle Zwiebeln bedeckt sind. Mit einem Fermentiergewicht beschweren.",
       "5 bis 8 Tage bei Raumtemperatur fermentieren lassen und anschließend kühl lagern."
     ],
+    "picture": "28.png",
     "codex_titel": "Perlzwiebeln mit Thymian und Knoblauch",
     "codex_einleitung": "Die kleinen Perlzwiebeln werden mit Thymian und Knoblauch zum würzigen Vorrat.",
     "ratgeber": {
@@ -875,6 +876,7 @@
       "Mit der kalten Salzlake auffüllen, bis der Knoblauch vollständig bedeckt ist. Mit einem Fermentiergewicht beschweren.",
       "7 bis 14 Tage bei Raumtemperatur fermentieren lassen und anschließend kühl lagern."
     ],
+    "picture": "29.png",
     "codex_titel": "Knoblauchzehen mit Chili – das feurige Ferment",
     "codex_einleitung": "Knoblauch und rote Chili ziehen gemeinsam in die Lake und ergeben ein kräftiges Ferment.",
     "ratgeber": {
@@ -904,6 +906,7 @@
       "Mit der kalten Salzlake auffüllen, bis alles vollständig bedeckt ist. Mit einem Fermentiergewicht beschweren.",
       "4 bis 7 Tage bei Raumtemperatur fermentieren lassen und anschließend kühl lagern."
     ],
+    "picture": "30.png",
     "codex_titel": "Blumenkohl mit Curry, Senf und rotem Feuer",
     "codex_einleitung": "Blumenkohl, Curry, Senf und Chili werden zu einem goldenen und feurigen Gärwerk.",
     "ratgeber": {
@@ -932,6 +935,7 @@
       "Mit der kalten Salzlake auffüllen, bis alles vollständig bedeckt ist. Mit einem Fermentiergewicht beschweren.",
       "3 bis 6 Tage bei Raumtemperatur fermentieren lassen und anschließend kühl lagern."
     ],
+    "picture": "31.png",
     "codex_titel": "Brokkoli mit Zitrone und Koriandersamen",
     "codex_einleitung": "Brokkoli erhält Zitrone, Knoblauch und Koriander und wird zu einem frischen Ferment.",
     "ratgeber": {
@@ -960,6 +964,7 @@
       "Mit der kalten Salzlake auffüllen, bis der Fenchel vollständig bedeckt ist. Mit einem Fermentiergewicht beschweren.",
       "4 bis 7 Tage bei Raumtemperatur fermentieren lassen und anschließend kühl lagern."
     ],
+    "picture": "32.png",
     "codex_titel": "Fenchel mit Zitrone, Dill und Knoblauch",
     "codex_einleitung": "Fenchel wird mit Zitrone, Dill und Knoblauch unter der Lake zur Reife gebracht.",
     "ratgeber": {
@@ -988,6 +993,7 @@
       "Mit der kalten Salzlake auffüllen, bis der Sellerie vollständig bedeckt ist. Mit einem Fermentiergewicht beschweren.",
       "5 bis 10 Tage bei Raumtemperatur fermentieren lassen und anschließend kühl lagern."
     ],
+    "picture": "33.png",
     "codex_titel": "Sellerie mit Wacholder und Kümmel",
     "codex_einleitung": "Knollensellerie, Wacholder und Kümmel geben diesem Ferment ein kräftiges Waldaroma.",
     "ratgeber": {
@@ -1016,6 +1022,7 @@
       "Mit der kalten Salzlake auffüllen, bis alles vollständig bedeckt ist. Mit einem Fermentiergewicht beschweren.",
       "4 bis 7 Tage bei Raumtemperatur fermentieren lassen und anschließend kühl lagern."
     ],
+    "picture": "34.png",
     "codex_titel": "Kohlrabi mit Dill und Senfkorn",
     "codex_einleitung": "Kohlrabi wird mit Dill, Knoblauch und Senfkorn zu knackigem Vorrat bereitet.",
     "ratgeber": {
@@ -1045,6 +1052,7 @@
       "Mit der kalten Salzlake auffüllen, bis die Zucchini vollständig bedeckt ist. Mit einem Fermentiergewicht beschweren.",
       "3 bis 5 Tage bei Raumtemperatur fermentieren lassen und anschließend kühl lagern."
     ],
+    "picture": "35.png",
     "codex_titel": "Zucchini mit Knoblauch, Dill und Thymian",
     "codex_einleitung": "Zucchini werden mit Kräutern und Knoblauch in die salzige Lake gelegt.",
     "ratgeber": {
@@ -1074,6 +1082,7 @@
       "Mit der kalten Salzlake auffüllen, bis der Kürbis vollständig bedeckt ist. Mit einem Fermentiergewicht beschweren.",
       "3 bis 5 Tage bei Raumtemperatur fermentieren lassen und anschließend kühl lagern."
     ],
+    "picture": "36.png",
     "codex_titel": "Kürbis mit Ingwer, Chili und Koriander",
     "codex_einleitung": "Hokkaido-Kürbis erhält Ingwer, Chili und Koriander und wird zu einem würzigen Winterferment.",
     "ratgeber": {
@@ -1102,6 +1111,7 @@
       "Mit einem Fermentiergewicht beschweren, sodass das Gemüse vollständig von Flüssigkeit bedeckt ist.",
       "5 bis 10 Tage bei Raumtemperatur fermentieren lassen. Anschließend kühl lagern."
     ],
+    "picture": "37.png",
     "codex_titel": "Das gemischte Bauernferment",
     "codex_einleitung": "Was der Bauernhof hergibt, wird vereint und mit Salz zur gemeinsamen Gärung gebracht.",
     "ratgeber": {
@@ -1131,6 +1141,7 @@
       "Das Gemüse fest in ein Fermentationsglas drücken, bis es vollständig vom eigenen Saft bedeckt ist.",
       "Mit einem Fermentiergewicht beschweren und 5 bis 10 Tage bei Raumtemperatur fermentieren lassen. Anschließend kühl lagern."
     ],
+    "picture": "38.png",
     "codex_titel": "Winterliches Wurzelwerk aus dem Gärtopf",
     "codex_einleitung": "Möhren, Pastinaken, Sellerie und Rote Bete werden zum winterlichen Wurzelvorrat vereint.",
     "ratgeber": {
@@ -1160,11 +1171,13 @@
       "Die Mischung fest in ein Fermentationsglas drücken, bis sie vollständig von eigenem Saft bedeckt ist.",
       "4 bis 7 Tage bei Raumtemperatur fermentieren lassen und anschließend kühl lagern."
     ],
+    "picture": "39.png",
     "codex_titel": "Möhren und Rettich mit geröstetem Sesam",
     "codex_einleitung": "Möhren und Rettich treffen auf Ingwer, Knoblauch und gerösteten Sesam.",
     "ratgeber": {
       "sprecher": "Katze",
       "text": "Sesam wird geröstet, bevor er ins Ferment kommt. Kleine Mühe, großer Duft."
     }
+ 1
   }
 ]
