@@ -11,6 +11,7 @@ const sitemapPaths = [
 	'/',
 	'/rezepte/',
 	'/kategorien/',
+	'/wissen/',
 	'/ueber-diese-seite/',
 	'/impressum/',
 	...recipePaths,

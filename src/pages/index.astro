@@ -1,10 +1,12 @@
 ---
-import { Image } from 'astro:assets';
+import { getImage, Image } from 'astro:assets';
 import recipeData from '../data/das_ferment.json';
 import RecipeCard from '../components/RecipeCard.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import SeoHead from '../components/SeoHead.astro';
 import { imageForRecipe } from '../lib/pageImages';
+import { socialCard } from '../lib/social';
 import { recipeImageAlt, type Recipe } from '../lib/recipes';
 import '../styles/global.css';
 
@@ -26,20 +28,31 @@ const illustratedCount = illustratedRecipes.length;
 const canonicalPath = '/';
 const canonicalUrl = Astro.site ? new URL(withBase(canonicalPath), Astro.site).toString() : withBase(canonicalPath);
 const description = `Im mittelalterlich inspirierten Codex von Das Ferment: ${recipeCount} Rezepte für Kimchi, Sauerkraut, Gurken und weitere lebendige Fermente.`;
+const absoluteUrl = (path: string) => Astro.site ? new URL(path, Astro.site).toString() : path;
+const cover = illustratedRecipes[0];
+const cardImage = await socialCard(
+	(options) => getImage({ ...options, src: cover.image }),
+	cover
+		? {
+				width: cover.image.width,
+				height: cover.image.height,
+				alt: recipeImageAlt(cover.recipe),
+			}
+		: undefined,
+	absoluteUrl,
+);
 ---
 
 <!doctype html>
 <html lang="de">
 	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content={description} />
-		<meta name="theme-color" content="#2b2118" />
-		<link rel="canonical" href={canonicalUrl} />
-		<link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
-		<link rel="icon" href={withBase('/favicon.ico')} />
-		<title>Das Ferment | Rezepte aus dem Codex</title>
+		<SeoHead
+			title="Das Ferment | Rezepte aus dem Codex"
+			description={description}
+			canonicalUrl={canonicalUrl}
+			base={base}
+			image={cardImage}
+		/>
 	</head>
 	<body>
 		<div class="site-shell">

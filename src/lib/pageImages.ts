@@ -14,3 +14,11 @@ export const pageImages: Record<string, ImageMetadata> = Object.fromEntries(
 export function imageForRecipe(recipe: Recipe): ImageMetadata | undefined {
 	return recipe.picture ? pageImages[recipe.picture] : undefined;
 }
+
+export function coverImageFor(recipes: Recipe[]): ImageMetadata | undefined {
+	for (const recipe of recipes) {
+		const image = imageForRecipe(recipe);
+		if (image) return image;
+	}
+	return undefined;
+}

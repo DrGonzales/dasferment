@@ -1,10 +1,14 @@
 ---
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import recipeData from '../../data/das_ferment.json';
 import RecipeCard from '../../components/RecipeCard.astro';
 import Footer from '../../components/Footer.astro';
 import Header from '../../components/Header.astro';
-import { imageForRecipe } from '../../lib/pageImages';
-import { type Recipe } from '../../lib/recipes';
+import SeoHead from '../../components/SeoHead.astro';
+import { coverImageFor, imageForRecipe } from '../../lib/pageImages';
+import { socialCard } from '../../lib/social';
+import { recipeImageAlt, type Recipe } from '../../lib/recipes';
 import '../../styles/global.css';
 
 const recipes = recipeData as Recipe[];
@@ -14,20 +18,31 @@ const illustratedCount = recipes.filter((recipe) => imageForRecipe(recipe)).leng
 const description = `Alle ${recipes.length} Rezepte aus dem Codex von Das Ferment – mit Zutaten, Zubereitung und ${illustratedCount} Buchmalereien.`;
 const canonicalPath = '/rezepte/';
 const canonicalUrl = Astro.site ? new URL(withBase(canonicalPath), Astro.site).toString() : withBase(canonicalPath);
+const absoluteUrl = (path: string) => Astro.site ? new URL(path, Astro.site).toString() : path;
+const cover = coverImageFor(recipes);
+const cardImage = await socialCard(
+	(options) => getImage({ ...options, src: cover as ImageMetadata }),
+	cover
+		? {
+				width: cover.width,
+				height: cover.height,
+				alt: 'Buchmalerei aus dem Codex von Das Ferment',
+			}
+		: undefined,
+	absoluteUrl,
+);
 ---
 
 <!doctype html>
 <html lang="de">
 	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content={description} />
-		<meta name="theme-color" content="#2b2118" />
-		<link rel="canonical" href={canonicalUrl} />
-		<link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
-		<link rel="icon" href={withBase('/favicon.ico')} />
-		<title>Rezepte | Das Ferment</title>
+		<SeoHead
+			title="Rezepte | Das Ferment"
+			description={description}
+			canonicalUrl={canonicalUrl}
+			base={base}
+			image={cardImage}
+		/>
 	</head>
 	<body>
 		<div class="site-shell">

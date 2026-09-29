@@ -1,0 +1,168 @@
+---
+import { Image } from 'astro:assets';
+import infoData from '../../data/das_ferment_infos.json';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import SeoHead from '../../components/SeoHead.astro';
+import { codexListe, codexText, gruppiereInfos, type Info } from '../../lib/infos';
+import { slugify } from '../../lib/recipes';
+import { assignPortraits, SMALL_ACTOR_SIZE } from '../../lib/smallActors';
+import '../../styles/global.css';
+
+const infos = infoData.infos as Info[];
+const gruppen = gruppiereInfos(infos);
+const portraits = assignPortraits(infos);
+const portraitById = new Map(infos.map((info, index) => [info.id, portraits[index]]));const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const withBase = (path: string) => `${base}${path}`;
+const canonicalPath = '/wissen/';
+const canonicalUrl = Astro.site
+	? new URL(withBase(canonicalPath), Astro.site).toString()
+	: withBase(canonicalPath);
+const description = `${infos.length} Tips, Hinweise und Grundlagen rund um die Fermentation, im Codex formuliert.`;
+---
+
+<!doctype html>
+<html lang="de">
+	<head>
+		<SeoHead
+			title="Wissen | Das Ferment"
+			description={description}
+			canonicalUrl={canonicalUrl}
+			base={base}
+		/>
+	</head>
+	<body>
+		<div class="site-shell">
+			<Header />
+
+			<main class="repertoire knowledge-page">
+				<nav class="breadcrumbs" aria-label="Brotkrümelnavigation">
+					<a href={withBase('/')}>Startseite</a>
+					<span aria-hidden="true">/</span>
+					<span aria-current="page">Wissen</span>
+				</nav>
+
+				<header class="section-heading">
+					<div>
+						<p class="section-heading__kicker">Tips, Hinweise und Grundlagen</p>
+						<h1 id="knowledge-title">Was die Geduld lehrt</h1>
+					</div>
+					<p class="section-heading__count">
+						{infos.length} Einträge in {gruppen.length} Gruppen.
+					</p>
+				</header>
+
+				<nav class="knowledge-index" aria-label="Sprungmarken zu den Gruppen">
+					<p class="knowledge-index__label">
+						<span aria-hidden="true">❦</span>
+						Die Gruppen
+					</p>
+					<ul>
+						{
+							gruppen.map((gruppe) => (
+								<li>
+									<a href={`#gruppe-${gruppe.slug}`}>
+										{gruppe.label}
+										<span>{gruppe.infos.length}</span>
+									</a>
+								</li>
+							))
+						}
+					</ul>
+				</nav>
+
+				{
+					gruppen.map((gruppe) => (
+						<section
+							class="knowledge-group"
+							id={`gruppe-${gruppe.slug}`}
+							aria-labelledby={`gruppe-${gruppe.slug}-group`}
+						>
+							<header class="knowledge-group__head">
+								<h2 id={`gruppe-${gruppe.slug}-group`}>{gruppe.label}</h2>
+								<p>{gruppe.infos.length} {gruppe.infos.length === 1 ? 'Eintrag' : 'Einträge'}</p>
+							</header>
+
+							{gruppe.infos.map((info) => {
+								const portrait = portraitById.get(info.id);
+								return (
+									<article class="knowledge-entry" id={info.id} aria-labelledby={`${info.id}-title`}>
+										{portrait && (
+											<Image
+												class="knowledge-portrait"
+												src={portrait}
+												alt=""
+												aria-hidden="true"
+												width={SMALL_ACTOR_SIZE}
+												height={SMALL_ACTOR_SIZE}
+												quality={80}
+												loading="lazy"
+												decoding="async"
+											/>
+										)}
+										<div class="codex-kicker">
+											<span>{info.titel}</span>
+										</div>
+										<h3 id={`${info.id}-title`}>{codexText(info.codex_titel, info.titel)}</h3>
+										<p class="knowledge-entry__intro">{codexText(info.codex_intro, info.intro)}</p>
+
+										{info.abschnitte?.map((abschnitt) => (
+											<section class="knowledge-entry__section" aria-labelledby={`${info.id}-${slugify(abschnitt.titel)}`}>
+												<h4 id={`${info.id}-${slugify(abschnitt.titel)}`}>
+													{codexText(abschnitt.codex_titel, abschnitt.titel)}
+												</h4>
+												{abschnitt.text || abschnitt.codex_text ? (
+													<p>{codexText(abschnitt.codex_text, abschnitt.text)}</p>
+												) : null}
+												{codexListe(abschnitt.codex_liste, abschnitt.liste).length > 0 ? (
+													<ul>
+														{codexListe(abschnitt.codex_liste, abschnitt.liste).map((punkt) => (
+															<li>{punkt}</li>
+														))}
+													</ul>
+												) : null}
+											</section>
+										))}
+
+										{info.tabelle ? (
+											<figure class="knowledge-table">
+												<table>
+													<caption>{codexText(info.tabelle.codex_titel, info.tabelle.titel)}</caption>
+													<thead>
+														<tr>
+															{info.tabelle.spalten.map((spalte) => (
+																<th scope="col">{spalte}</th>
+															))}
+														</tr>
+													</thead>
+													<tbody>
+														{info.tabelle.zeilen.map((zeile) => (
+															<tr>
+																{zeile.map((zelle, index) =>
+																	index === 0 ? (
+																		<th scope="row">{zelle}</th>
+																	) : (
+																		<td>{zelle}</td>
+																	),
+																)}
+															</tr>
+														))}
+													</tbody>
+												</table>
+												{info.tabelle.hinweis || info.tabelle.codex_hinweis ? (
+													<figcaption>{codexText(info.tabelle.codex_hinweis, info.tabelle.hinweis)}</figcaption>
+												) : null}
+											</figure>
+										) : null}
+								</article>
+							);
+						})}
+						</section>
+					))
+				}
+			</main>
+
+			<Footer />
+		</div>
+	</body>
+</html>

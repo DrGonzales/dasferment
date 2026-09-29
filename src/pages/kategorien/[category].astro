@@ -1,10 +1,14 @@
 ---
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import recipeData from '../../data/das_ferment.json';
 import RecipeCard from '../../components/RecipeCard.astro';
 import Footer from '../../components/Footer.astro';
 import Header from '../../components/Header.astro';
-import { imageForRecipe } from '../../lib/pageImages';
-import { categoryLabel, categorySlug, type Recipe } from '../../lib/recipes';
+import SeoHead from '../../components/SeoHead.astro';
+import { coverImageFor, imageForRecipe } from '../../lib/pageImages';
+import { socialCard } from '../../lib/social';
+import { categoryLabel, categorySlug, recipeImageAlt, type Recipe } from '../../lib/recipes';
 import '../../styles/global.css';
 
 interface Props {
@@ -42,20 +46,32 @@ const withBase = (path: string) => `${base}${path}`;
 const canonicalPath = `/kategorien/${category}/`;
 const canonicalUrl = Astro.site ? new URL(withBase(canonicalPath), Astro.site).toString() : withBase(canonicalPath);
 const description = `${recipes.length} ${recipes.length === 1 ? 'Rezept' : 'Rezepte'} mit dem Thema ${categoryTitle} im Codex von Das Ferment.`;
+const absoluteUrl = (path: string) => Astro.site ? new URL(path, Astro.site).toString() : path;
+const coverRecipe = recipes.find((recipe) => imageForRecipe(recipe));
+const cover = coverImageFor(recipes);
+const cardImage = await socialCard(
+	(options) => getImage({ ...options, src: cover as ImageMetadata }),
+	cover && coverRecipe
+		? {
+				width: cover.width,
+				height: cover.height,
+				alt: recipeImageAlt(coverRecipe),
+			}
+		: undefined,
+	absoluteUrl,
+);
 ---
 
 <!doctype html>
 <html lang="de">
 	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content={description} />
-		<meta name="theme-color" content="#2b2118" />
-		<link rel="canonical" href={canonicalUrl} />
-		<link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
-		<link rel="icon" href={withBase('/favicon.ico')} />
-		<title>{categoryTitle} | Rezepte | Das Ferment</title>
+		<SeoHead
+			title={`${categoryTitle} | Rezepte | Das Ferment`}
+			description={description}
+			canonicalUrl={canonicalUrl}
+			base={base}
+			image={cardImage}
+		/>
 	</head>
 	<body>
 		<div class="site-shell">

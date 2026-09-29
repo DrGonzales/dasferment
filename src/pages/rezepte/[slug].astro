@@ -1,11 +1,15 @@
 ---
-import { getImage, Image } from 'astro:assets';
-import recipeData from '../../data/das_ferment.json';
-import Footer from '../../components/Footer.astro';
-import Header from '../../components/Header.astro';
-import { imageForRecipe } from '../../lib/pageImages';
-import { recipeImageAlt, slugify, type Recipe } from '../../lib/recipes';
-import '../../styles/global.css';
+import type { ImageMetadata } from "astro";
+import { getImage, Image } from "astro:assets";
+import recipeData from "../../data/das_ferment.json";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import SeoHead from "../../components/SeoHead.astro";
+import { imageForRecipe } from "../../lib/pageImages";
+import { actorImageFor } from "../../lib/actorImages";
+import { socialCard } from "../../lib/social";
+import { recipeImageAlt, slugify, totalTimeIso, categoryLabel, type Recipe } from "../../lib/recipes";
+import "../../styles/global.css";
 
 export function getStaticPaths() {
 	const pathRecipes = recipeData as Recipe[];
@@ -21,49 +25,108 @@ interface Props {
 }
 
 const { recipe } = Astro.props;
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const withBase = (path: string) => `${base}${path}`;
 const slug = slugify(recipe.titel);
 const canonicalPath = `/rezepte/${slug}/`;
-const canonicalUrl = Astro.site ? new URL(withBase(canonicalPath), Astro.site).toString() : withBase(canonicalPath);
+const canonicalUrl = Astro.site
+	? new URL(withBase(canonicalPath), Astro.site).toString()
+	: withBase(canonicalPath);
 const description = recipe.codex_einleitung ?? recipe.titel;
 const image = imageForRecipe(recipe);
-const jsonLdImage = image
-	? await getImage({ src: image, width: 800, format: 'webp', quality: 80 })
+const advisorImage = recipe.ratgeber
+	? actorImageFor(recipe.ratgeber.sprecher)
 	: undefined;
-const jsonLdImageUrl = jsonLdImage
-	? Astro.site
-		? new URL(jsonLdImage.src, Astro.site).toString()
-		: jsonLdImage.src
+const absoluteUrl = (path: string) =>
+	Astro.site ? new URL(path, Astro.site).toString() : path;
+const homeUrl = absoluteUrl(withBase("/"));
+const cardImage = await socialCard(
+	(options) => getImage({ ...options, src: image as ImageMetadata }),
+	image
+		? { width: image.width, height: image.height, alt: recipeImageAlt(recipe) }
+		: undefined,
+	absoluteUrl,
+);
+const jsonLdImages = image
+	? await Promise.all(
+			[800, 1200].map(async (width) => {
+				const rendered = await getImage({
+					src: image,
+					width,
+					format: "webp",
+					quality: 80,
+				});
+				return {
+					"@type": "ImageObject",
+					url: absoluteUrl(rendered.src),
+					width,
+					height: Math.round((width * image.height) / image.width),
+				};
+			}),
+		)
 	: undefined;
+const siteOrganization = {
+	"@type": "Organization",
+	name: "Das Ferment",
+	url: homeUrl,
+};
 const recipeJsonLd = {
-	'@context': 'https://schema.org',
-	'@type': 'Recipe',
+	"@context": "https://schema.org",
+	"@type": "Recipe",
 	name: recipe.titel,
-	description: recipe.codex_einleitung,
-	image: jsonLdImageUrl,
+	description,
+	image: jsonLdImages,
+	inLanguage: "de",
+	url: canonicalUrl,
+	mainEntityOfPage: { "@type": "WebPage", "@id": canonicalUrl },
+	author: siteOrganization,
+	publisher: siteOrganization,
+	totalTime: totalTimeIso(recipe),
+	recipeCategory: recipe.tags.includes("gemuese")
+		? categoryLabel("gemuese")
+		: undefined,
+	keywords: recipe.tags.join(", "),
 	recipeIngredient: recipe.zutaten,
 	recipeInstructions: recipe.zubereitung.map((step) => ({
-		'@type': 'HowToStep',
+		"@type": "HowToStep",
 		text: step,
 	})),
-	keywords: recipe.tags.join(', '),
+};
+const breadcrumbJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "BreadcrumbList",
+	itemListElement: [
+		{ "@type": "ListItem", position: 1, name: "Startseite", item: homeUrl },
+		{
+			"@type": "ListItem",
+			position: 2,
+			name: "Rezepte",
+			item: absoluteUrl(withBase("/rezepte/")),
+		},
+		{ "@type": "ListItem", position: 3, name: recipe.titel, item: canonicalUrl },
+	],
 };
 ---
 
 <!doctype html>
 <html lang="de">
 	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content={description} />
-		<meta name="theme-color" content="#2b2118" />
-		<link rel="canonical" href={canonicalUrl} />
-		<link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
-		<link rel="icon" href={withBase('/favicon.ico')} />
-		<title>{recipe.titel} | Das Ferment</title>
-		<script type="application/ld+json" set:html={JSON.stringify(recipeJsonLd)}></script>
+		<SeoHead
+			title={`${recipe.titel} | Das Ferment`}
+			description={description}
+			canonicalUrl={canonicalUrl}
+			base={base}
+			image={cardImage}
+			type="article"
+		/>
+		<script
+			type="application/ld+json"
+			set:html={JSON.stringify(recipeJsonLd)}
+		/>
+		<script
+			type="application/ld+json"
+			set:html={JSON.stringify(breadcrumbJsonLd)}
+		/>
 	</head>
 	<body>
 		<div class="site-shell">
@@ -71,9 +134,9 @@ const recipeJsonLd = {
 
 			<main class="recipe-main">
 				<nav class="breadcrumbs" aria-label="Brotkrümelnavigation">
-					<a href={withBase('/')}>Startseite</a>
+					<a href={withBase("/")}>Startseite</a>
 					<span aria-hidden="true">/</span>
-					<a href={withBase('/rezepte/')}>Rezepte</a>
+					<a href={withBase("/rezepte/")}>Rezepte</a>
 					<span aria-hidden="true">/</span>
 					<span aria-current="page">{recipe.titel}</span>
 				</nav>
@@ -86,69 +149,143 @@ const recipeJsonLd = {
 								<span aria-hidden="true">·</span>
 								<span>Blatt aus dem Rezeptbuch</span>
 							</div>
-							<p class="recipe-intro__codex-title">{recipe.codex_titel}</p>
-							<h1>{recipe.titel}</h1>
-							{recipe.codex_einleitung && <p class="recipe-intro__lead">{recipe.codex_einleitung}</p>}
-							<div class="recipe-intro__tags" aria-label="Rezeptkategorien">
+
+							<h1>
+								{recipe.codex_titel}
+							</h1>
+							{
+								recipe.codex_einleitung && (
+									<p class="recipe-intro__lead">
+										{recipe.codex_einleitung}
+									</p>
+								)
+							}
+							<div
+								class="recipe-intro__tags"
+								aria-label="Rezeptkategorien"
+							>
 								{recipe.tags.map((tag) => <span>{tag}</span>)}
 							</div>
 						</div>
 
 						<div class="recipe-intro__image">
-							{image ? (
-								<figure>
-									<Image
-										src={image}
-										alt={recipeImageAlt(recipe)}
-										widths={[320, 640, 1024]}
-										sizes="(max-width: 780px) calc(100vw - 40px), 30rem"
-										quality={86}
-										loading="eager"
-										decoding="async"
-									/>
-									<figcaption>Eine Buchmalerei zu diesem Blatt</figcaption>
-								</figure>
-							) : (
-								<div class="recipe-image-placeholder" aria-hidden="true">
-									<span>Codex</span>
-									<i></i>
-								</div>
-							)}
+							{
+								image ? (
+									<figure>
+										<Image
+											src={image}
+											alt={recipeImageAlt(recipe)}
+											widths={[320, 640, 1024]}
+											sizes="(max-width: 780px) calc(100vw - 40px), 30rem"
+											quality={86}
+											loading="eager"
+											decoding="async"
+										/>
+										<figcaption>
+											Eine Buchmalerei zu diesem Blatt
+										</figcaption>
+									</figure>
+								) : (
+									<div
+										class="recipe-image-placeholder"
+										aria-hidden="true"
+									>
+										<span>Codex</span>
+										<i />
+									</div>
+								)
+							}
 						</div>
 					</header>
 
 					<div class="recipe-sections">
-						<section class="recipe-section recipe-section--ingredients" aria-labelledby="zutaten-title">
+						<section
+							class="recipe-section recipe-section--ingredients"
+							aria-labelledby="zutaten-title"
+						>
 							<header class="recipe-section__header">
-								<p class="section-heading__kicker">Was hinein gehört</p>
+								<p class="section-heading__kicker">
+									Was hinein gehört
+								</p>
 								<h2 id="zutaten-title">Zutaten</h2>
 							</header>
 							<ul class="ingredient-list">
-								{recipe.zutaten.map((ingredient) => <li>{ingredient}</li>)}
+								{
+									recipe.zutaten.map((ingredient) => (
+										<li>{ingredient}</li>
+									))
+								}
 							</ul>
 						</section>
 
-						<section class="recipe-section recipe-section--instructions" aria-labelledby="zubereitung-title">
+						<section
+							class="recipe-section recipe-section--instructions"
+							aria-labelledby="zubereitung-title"
+						>
 							<header class="recipe-section__header">
-								<p class="section-heading__kicker">Der Gang der Gärung</p>
+								<p class="section-heading__kicker">
+									Der Gang der Gärung
+								</p>
 								<h2 id="zubereitung-title">Zubereitung</h2>
 							</header>
 							<ol class="instruction-list">
-								{recipe.zubereitung.map((step) => <li>{step}</li>)}
+								{
+									recipe.zubereitung.map((step) => (
+										<li>{step}</li>
+									))
+								}
 							</ol>
 						</section>
 					</div>
 
-					{recipe.ratgeber && (
-						<aside class="recipe-advisor" aria-label={`Ratschlag von ${recipe.ratgeber.sprecher}`}>
-							<div class="recipe-advisor__heading">
-								<span class="recipe-advisor__ornament" aria-hidden="true">✦</span>
-								<h2>{recipe.ratgeber.sprecher}s Ratschlag</h2>
-								<span class="recipe-advisor__ornament" aria-hidden="true">✦</span>
-							</div>
-							<blockquote>„{recipe.ratgeber.text}“</blockquote>
-						</aside>
-					)}
+					{
+						recipe.ratgeber && (
+							<aside
+								class="recipe-advisor"
+								aria-label={`Ratschlag von ${recipe.ratgeber.sprecher}`}
+							>
+								<div class="recipe-advisor__content">
+									{
+										advisorImage && (
+											<figure class="recipe-advisor__portrait">
+												<Image
+													src={advisorImage}
+													alt={`${recipe.ratgeber.sprecher} in der Schreibkammer`}
+													widths={[160, 320, 480]}
+													sizes="(max-width: 780px) 5.5rem, 8rem"
+													quality={80}
+													loading="lazy"
+													decoding="async"
+												/>
+											</figure>
+										)
+									}
+									<div class="recipe-advisor__text">
+										<div class="recipe-advisor__heading">
+											<span
+												class="recipe-advisor__ornament"
+												aria-hidden="true"
+											>
+												✦
+											</span>
+											<h2>
+												{recipe.ratgeber.sprecher}s Ratschlag
+											</h2>
+											<span
+												class="recipe-advisor__ornament"
+												aria-hidden="true"
+											>
+												✦
+											</span>
+										</div>
+										<blockquote>
+											„{recipe.ratgeber.text}“
+										</blockquote>
+									</div>
+								</div>
+							</aside>
+						)
+					}
 				</article>
 			</main>
 

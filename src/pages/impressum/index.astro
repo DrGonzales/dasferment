@@ -1,30 +1,33 @@
 ---
-import recipeData from '../../data/das_ferment.json';
-import Footer from '../../components/Footer.astro';
-import Header from '../../components/Header.astro';
-import { type Recipe } from '../../lib/recipes';
-import '../../styles/global.css';
+import recipeData from "../../data/das_ferment.json";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import SeoHead from "../../components/SeoHead.astro";
+import { type Recipe } from "../../lib/recipes";
+import "../../styles/global.css";
 
 const recipes = recipeData as Recipe[];
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const withBase = (path: string) => `${base}${path}`;
-const canonicalPath = '/impressum/';
-const canonicalUrl = Astro.site ? new URL(withBase(canonicalPath), Astro.site).toString() : withBase(canonicalPath);
-const description = 'Impressum und Anbieterinformationen für das Rezeptbuch Das Ferment.';
+const canonicalPath = "/impressum/";
+const canonicalUrl = Astro.site
+	? new URL(withBase(canonicalPath), Astro.site).toString()
+	: withBase(canonicalPath);
+const description =
+	"Impressum und Anbieterinformationen für das Rezeptbuch Das Ferment.";
+const impressumUrl = "https://am-kalten-polar.blogspot.com/p/impressum.html";
+const contactMail = "amkaltenpolar71@gmail.com";
 ---
 
 <!doctype html>
 <html lang="de">
 	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content={description} />
-		<meta name="theme-color" content="#2b2118" />
-		<link rel="canonical" href={canonicalUrl} />
-		<link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
-		<link rel="icon" href={withBase('/favicon.ico')} />
-		<title>Impressum | Das Ferment</title>
+		<SeoHead
+			title="Impressum | Das Ferment"
+			description={description}
+			canonicalUrl={canonicalUrl}
+			base={base}
+		/>
 	</head>
 	<body>
 		<div class="site-shell">
@@ -32,7 +35,7 @@ const description = 'Impressum und Anbieterinformationen für das Rezeptbuch Das
 
 			<main class="recipe-main prose-page">
 				<nav class="breadcrumbs" aria-label="Brotkrümelnavigation">
-					<a href={withBase('/')}>Startseite</a>
+					<a href={withBase("/")}>Startseite</a>
 					<span aria-hidden="true">/</span>
 					<span aria-current="page">Impressum</span>
 				</nav>
@@ -41,28 +44,106 @@ const description = 'Impressum und Anbieterinformationen für das Rezeptbuch Das
 					<header class="prose-intro">
 						<p class="section-heading__kicker">Angaben zum Haus</p>
 						<h1>Impressum</h1>
-						<p class="prose-intro__lead">Informationen zu Anbieter, Kontakt und Verantwortlichkeit.</p>
+						<p class="prose-intro__lead">
+							Informationen zu Anbieter, Kontakt und
+							Verantwortlichkeit.
+						</p>
 					</header>
 
-					<section class="prose-section" aria-labelledby="anbieter-title">
+					<section
+						class="prose-section"
+						aria-labelledby="anbieter-title"
+					>
 						<p class="section-heading__kicker">Anbieter</p>
-						<h2 id="anbieter-title">Das Ferment</h2>
+						<h2 id="anbieter-title">Hans Anthes</h2>
+						<address class="impressum-address">
+							<span>Friedrichstr. 45</span>
+							<span>67678 Mehlignen</span>
+							<a href={`mailto:${contactMail}`}
+								>amkaltenpolar71(at)gmail.com</a
+							>
+						</address>
+					</section>
+
+					<section
+						class="prose-section"
+						aria-labelledby="rechte-title"
+					>
+						<p class="section-heading__kicker">Bildrechte</p>
+						<h2 id="rechte-title">Bildrechte und Nutzung</h2>
+						<p>Alle Bildrechte liegen bei Hans Anthes.</p>
 						<p>
-							Die vollständigen Anbieterangaben, eine Kontaktmöglichkeit und die nach den geltenden Anforderungen zuständige Person werden vor dem Livegang dieser Website ergänzt.
+							Die kommerzielle Nutzung durch Veröffentlichungen,
+							Verbreitungen und/oder Reproduktionen der Bilder
+							(auch in modifizierter Form) in elektronischen,
+							druck- und sonstigen Medien, inklusive
+							elektronischem Download ist nur mit schriftlicher
+							Genehmigung von Hans Anthes gestattet.
 						</p>
 					</section>
 
-					<section class="prose-section" aria-labelledby="hinweis-title">
-						<p class="section-heading__kicker">Hinweis</p>
-						<h2 id="hinweis-title">Transparenz vor dem ersten Brot</h2>
+					<section id="haftungsausschluss">
+						<h2>Haftungsausschluss (Disclaimer)</h2>
+
+						<h3>1. Haftung für Inhalte &amp; Rezepte</h3>
 						<p>
-							Diese Seite enthält bewusst keine erfundenen Kontaktdaten oder rechtlichen Angaben. Die zuständigen Informationen müssen vor der Veröffentlichung durch die Betreiber ergänzt werden.
+							Die Inhalte dieser Website (insbesondere Rezepte,
+							Mengenangaben, Fermentationszeiten und Anleitungen)
+							wurden mit größter Sorgfalt erstellt. Alle Angaben
+							erfolgen jedoch ohne Gewähr für Richtigkeit,
+							Vollständigkeit und Aktualität.
+						</p>
+
+						<h3>
+							2. Wichtiger Hinweis zur Lebensmittelsicherheit
+							&amp; Hygiene
+						</h3>
+						<p>
+							Die Fermentation von Mitteln und Gemüsen unterliegt
+							natürlichen Prozessen. Die Einhaltung grundlegender
+							Hygienebestimmungen (saubere Gefäße, richtiger
+							Salzgehalt, geeignete Lagertemperaturen) liegt in
+							der Verantwortung der durchführenden Person.
+						</p>
+						<p>
+							Bitte verlasse dich stets auf deine eigenen Sinne
+							(Geruch, Geschmack, visuelle Kontrolle). Bei
+							Anzeichen von Fehlgärungen, Schimmelbefall oder
+							ungewöhnlichem Geruch ist das Ferment nicht mehr für
+							den Verzehr geeignet und sollte entsorgt werden. Für
+							gesundheitliche Schäden, die aus einer unsachgemäßen
+							Zubereitung oder Lagerung resultieren, wird keine
+							Haftung übernommen.
+						</p>
+
+						<h3>3. Haftung für Links</h3>
+						<p>
+							Unser Angebot enthält Links zu externen Websites
+							Dritter, auf deren Inhalte wir keinen Einfluss
+							haben. Deshalb können wir für diese fremden Inhalte
+							auch keine Gewähr übernehmen. Für die Inhalte der
+							verlinkten Seiten ist stets der jeweilige Anbieter
+							oder Betreiber der Seiten verantwortlich.
+						</p>
+
+						<h3>4. Urheberrecht</h3>
+						<p>
+							Die durch den Seitenbetreiber erstellten Inhalte,
+							Texte und Illustrationen (Buchmalereien) auf diesen
+							Seiten unterliegen dem deutschen Urheberrecht. Die
+							Vervielfältigung, Bearbeitung, Verbreitung und jede
+							Art der Verwertung außerhalb der Grenzen des
+							Urheberrechtes bedürfen der schriftlichen Zustimmung
+							des jeweiligen Autors bzw. Erstellers.
 						</p>
 					</section>
 
 					<aside class="prose-note">
 						<span aria-hidden="true">❦</span>
-						<p>Die {recipes.length} Rezepte warten geduldig auf ihre Ergänzung.</p>
+						<p>
+							Die {recipes.length} Rezepte warten geduldig auf ihre
+							Ergänzung.
+						</p>
 					</aside>
 				</article>
 			</main>

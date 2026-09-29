@@ -1,0 +1,55 @@
+---
+import { SITE_NAME, type SocialImage } from '../lib/social';
+
+interface Props {
+	title: string;
+	description: string;
+	canonicalUrl: string;
+	base: string;
+	image?: SocialImage;
+	type?: 'website' | 'article';
+}
+
+const { title, description, canonicalUrl, base, image, type = 'website' } = Astro.props;
+const withBase = (path: string) => `${base}${path}`;
+const cardType = image ? 'summary_large_image' : 'summary';
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="generator" content={Astro.generator} />
+<meta name="description" content={description} />
+<meta name="theme-color" content="#2b2118" />
+<link rel="canonical" href={canonicalUrl} />
+<link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
+<link rel="icon" href={withBase('/favicon.ico')} />
+<title>{title}</title>
+
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={SITE_NAME} />
+<meta property="og:locale" content="de_DE" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+{
+	image && (
+		<Fragment>
+			<meta property="og:image" content={image.url} />
+			<meta property="og:image:width" content={String(image.width)} />
+			<meta property="og:image:height" content={String(image.height)} />
+			<meta property="og:image:alt" content={image.alt} />
+		</Fragment>
+	)
+}
+
+<meta name="twitter:card" content={cardType} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+{
+	image && (
+		<Fragment>
+			<meta name="twitter:image" content={image.url} />
+			<meta name="twitter:image:alt" content={image.alt} />
+		</Fragment>
+	)
+}
