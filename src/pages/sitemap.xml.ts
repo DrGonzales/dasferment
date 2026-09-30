@@ -14,6 +14,7 @@ const sitemapPaths = [
 	'/wissen/',
 	'/ueber-diese-seite/',
 	'/impressum/',
+	'/kontakt/',
 	...recipePaths,
 	...categoryPaths,
 ];

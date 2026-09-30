@@ -17,7 +17,7 @@ const connieImage = actorImageFor('Connie');
 const katzeImage = actorImageFor('Katze');
 const canonicalPath = '/ueber-diese-seite/';
 const canonicalUrl = Astro.site ? new URL(withBase(canonicalPath), Astro.site).toString() : withBase(canonicalPath);
-const description = `Lerne das statische Rezeptbuch Das Ferment und seine ${recipes.length} Rezepte im Codex kennen.`;
+const description = `Lerne das statische Rezeptbuch Das Ferment und seine ${recipes.length} Rezepte im Kodex kennen.`;
 ---
 
 <!doctype html>
@@ -105,7 +105,7 @@ const description = `Lerne das statische Rezeptbuch Das Ferment und seine ${reci
 					</section>
 
 					<section class="prose-section" aria-labelledby="werk-title">
-						<p class="section-heading__kicker">Der Codex</p>
+						<p class="section-heading__kicker">Der Kodex</p>
 						<h2 id="werk-title">Das Werk</h2>
 						<p>
 							Das Werk ist ein spielerischer Fermentations-Kodex, der traditionelle und moderne Gemüsefermente in einer mittelalterlich anmutenden Welt präsentiert. Grundlage bildet eine Sammlung von {recipes.length} Rezepten für fermentiertes Gemüse, von klassischen Salzgurken und Sauerkraut über Kimchi bis hin zu Fermenten aus Karotten, Roter Bete, Paprika, Zwiebeln, Fenchel, Sellerie, Kohlrabi, Zucchini und Kürbis.

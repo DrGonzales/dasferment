@@ -1,6 +1,6 @@
 # Das Ferment
 
-Eine statische, mittelalterlich inspirierte Rezept-Website für Fermente, Kimchi, eingelegtes Gemüse und Sauerkraut. Die Website bildet ein ruhig gestaltetes Rezeptbuch auf Pergament ab und trennt die sachlichen Rezeptdaten redaktionell von der Codex-Präsentation.
+Eine statische, mittelalterlich inspirierte Rezept-Website für Fermente, Kimchi, eingelegtes Gemüse und Sauerkraut. Die Website bildet ein ruhig gestaltetes Rezeptbuch auf Pergament ab und trennt die sachlichen Rezeptdaten redaktionell von der Kodex-Präsentation.
 
 ## Projektstatus
 
@@ -65,12 +65,12 @@ npm run preview
 
 | Route | Beschreibung |
 | --- | --- |
-| `/` | Startseite mit Hero, Codex-Einstieg und vollständiger Rezeptübersicht |
+| `/` | Startseite mit Hero, Kodex-Einstieg und vollständiger Rezeptübersicht |
 | `/rezepte/` | Alphabetisch bzw. in der Datenreihenfolge sortierte Rezeptübersicht |
 | `/rezepte/<slug>/` | Statische Detailseite eines Rezepts |
 | `/kategorien/` | Übersicht aller Kategorien |
 | `/kategorien/<category>/` | Statische Detailseite einer Kategorie |
-| `/ueber-diese-seite/` | Informationen zum Codex und zur Website |
+| `/ueber-diese-seite/` | Informationen zum Kodex und zur Website |
 | `/impressum/` | Impressumsseite |
 | `/sitemap.xml` | XML-Sitemap für Suchmaschinen |
 | `/robots.txt` | robots-Datei mit Verweis auf die Sitemap |
@@ -93,10 +93,10 @@ Die JSON-Datei ist die **Single Source of Truth**. Rezeptinformationen werden ni
 - `zubereitung`: geordnete Zubereitungsschritte
 - `picture`: Dateiname einer Illustration, zum Beispiel `1.png`
 - `codex_titel`: redaktionelle, historisch klingende Überschrift
-- `codex_einleitung`: kurze Codex-Einleitung
+- `codex_einleitung`: kurze Kodex-Einleitung
 - `ratgeber`: optionaler persönlicher Ratschlag mit `sprecher` und `text`
 
-Die Codex-Felder sind bewusst eine zweite redaktionelle Ebene. Der normale Rezepttitel bleibt der primäre Name für SEO und Navigation, während `codex_titel` die gestalterische Einleitung auf der Detailseite übernimmt.
+Die Kodex-Felder sind bewusst eine zweite redaktionelle Ebene. Der normale Rezepttitel bleibt der primäre Name für SEO und Navigation, während `codex_titel` die gestalterische Einleitung auf der Detailseite übernimmt.
 
 ## Bilder
 
@@ -108,7 +108,7 @@ src/pic/pages/
 
 Aktuell sind dort die Dateien `1.png` bis `22.png` vorhanden. Die Zuordnung zwischen Rezepten und Bildern erfolgt zentral über `src/lib/pageImages.ts` anhand des `picture`-Feldes.
 
-Die Detail- und Kartenbilder werden mit Astros `Image`-Komponente und passenden `widths`/`sizes` erzeugt. Die Darstellung verwendet proportionale Skalierung mit `object-fit: contain`, sodass die vollständige Illustration sichtbar bleibt und nicht zugeschnitten wird. Für Rezepte ohne Bild gibt es einen gestalteten Codex-Platzhalter.
+Die Detail- und Kartenbilder werden mit Astros `Image`-Komponente und passenden `widths`/`sizes` erzeugt. Die Darstellung verwendet proportionale Skalierung mit `object-fit: contain`, sodass die vollständige Illustration sichtbar bleibt und nicht zugeschnitten wird. Für Rezepte ohne Bild gibt es einen gestalteten Kodex-Platzhalter.
 
 ## Projektstruktur
 
@@ -154,7 +154,7 @@ Die Detail- und Kartenbilder werden mit Astros `Image`-Komponente und passenden 
 Jede Rezeptseite enthält:
 
 - einen eindeutigen HTML-`<title>` mit dem sachlichen Rezeptnamen
-- eine Meta Description aus den vorhandenen Codex-Daten
+- eine Meta Description aus den vorhandenen Kodex-Daten
 - eine Canonical URL
 - semantisches HTML mit Brotkrümelnavigation, Zutaten- und Zubereitungsliste
 - ein `Recipe`-JSON-LD-Objekt mit Name, Beschreibung, Bild, Zutaten und Schritten

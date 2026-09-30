@@ -17,6 +17,10 @@ export const smallActors: { name: string; image: ImageMetadata }[] = Object.entr
 
 export const SMALL_ACTOR_SIZE = 128;
 
+export function smallActorImage(name: string): ImageMetadata | undefined {
+	return smallActors.find((actor) => actor.name === `${name.trim()}.png`)?.image;
+}
+
 function hash(value: string): number {
 	let result = 2166136261;
 	for (let index = 0; index < value.length; index += 1) {

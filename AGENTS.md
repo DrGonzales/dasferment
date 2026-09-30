@@ -31,9 +31,9 @@ Manage the background server with `astro dev stop`, `astro dev status`, and `ast
 src/
 ├── components/        Header.astro, Footer.astro, RecipeCard.astro, SeoHead.astro
 ├── data/              das_ferment.json, das_ferment_infos.json
-├── lib/               recipes.ts, infos.ts, pageImages.ts, actorImages.ts, smallActors.ts, social.ts
-├── pages/             index, rezepte, kategorien, wissen, ueber-diese-seite, impressum, sitemap.xml.ts, robots.txt.ts
-├── pic/               pages/ (Rezeptillustrationen), actors/ (Ratschlag-Portraits), smallactors/ (Wissenseite)
+├── lib/               recipes.ts, infos.ts, pageImages.ts, actorImages.ts, smallActors.ts, categoryImages.ts, social.ts
+├── pages/             index, rezepte, kategorien, wissen, ueber-diese-seite, kontakt, impressum, sitemap.xml.ts, robots.txt.ts
+├── pic/               pages/ (Rezeptillustrationen), actors/ (Ratschlag-Portraits), smallactors/ (Wissenseite), categories/ (Kategorieseite)
 └── styles/            global.css
 ```
 
@@ -79,22 +79,22 @@ Statische Generierung mit `getStaticPaths()`. Jede Seite muss als vollständiges
 
 Kein clientseitiges JavaScript, solange ein konkreter interaktiver Anwendungsfall nicht vorliegt. Vor JavaScript immer prüfen, ob Astro, HTML oder CSS reichen. Svelte, React oder Vue werden nicht eingeführt.
 
-## Codex-Konzept
+## Kodex-Konzept
 
 Die Rezeptdaten enthalten zwei redaktionelle Ebenen, die getrennt behandelt werden.
 
 **Sachliche Ebene** — `titel`, `tags`, `zutaten`, `zubereitung`, `picture`. Wird unverändert übernommen und für SEO, Übersichten, Breadcrumbs und Navigation verwendet.
 
-**Codex-Ebene** — Felder mit dem Präfix `codex_`. Sie gehören zur mittelalterlichen Präsentation und sind ein Gestaltungselement.
+**Kodex-Ebene** — Felder mit dem Präfix `codex_`. Sie gehören zur mittelalterlichen Präsentation und sind ein Gestaltungselement.
 
 `codex_titel` ist bewusst nicht identisch mit `titel`:
 
 ```text
 Rezepttitel: Klassische Salzgurken (Milchsäuregärung)
-Codex-Titel: Von den gesalzenen Gürkchen und ihrer milden Gärung
+Kodex-Titel: Von den gesalzenen Gürkchen und ihrer milden Gärung
 ```
 
-Wenn Codex-Texte erzeugt werden:
+Wenn Kodex-Texte erzeugt werden:
 
 1. Das Rezept selbst bleibt unverändert.
 2. `codex_titel` interpretiert das Rezept atmosphärisch.
@@ -186,9 +186,9 @@ Wenn frisches Gemüse in rechter Weise …                ← info.codex_intro
   Es sind gar kleine und dem Auge verborgene Wesen …   ← codex_text oder codex_liste
 ```
 
-**Codex-Feld zuerst, normales Feld als Fallback.** Die Helfer `codexText()` und `codexListe()` in `src/lib/infos.ts` übernehmen das:
+**Kodex-Feld zuerst, normales Feld als Fallback.** Die Helfer `codexText()` und `codexListe()` in `src/lib/infos.ts` übernehmen das:
 
-| Codex-Feld | Fallback | Verwendung |
+| Kodex-Feld | Fallback | Verwendung |
 | --- | --- | --- |
 | `codex_titel` | `titel` | Überschrift |
 | `codex_intro` | `intro` | Einleitung |
@@ -199,8 +199,8 @@ Wenn frisches Gemüse in rechter Weise …                ← info.codex_intro
 
 Weitere Regeln:
 
-* Der normale `titel` steht immer zusätzlich als kleine Zeile über der Codex-Überschrift (`.codex-kicker`), damit der sachliche Begriff im Dokument steht.
-* Fehlt ein Codex-Feld, entsteht keine Lücke. Fehlt `abschnitte`, wird nur die Einleitung gezeigt.
+* Der normale `titel` steht immer zusätzlich als kleine Zeile über der Kodex-Überschrift (`.codex-kicker`), damit der sachliche Begriff im Dokument steht.
+* Fehlt ein Kodex-Feld, entsteht keine Lücke. Fehlt `abschnitte`, wird nur die Einleitung gezeigt.
 * `tabelle` ist optional. Tabellen werden mit `<caption>` und `scope` ausgegeben.
 * Gruppen werden nach Anzahl der Einträge absteigend sortiert, bei Gleichstand alphabetisch.
 * Jede Sprungmarke im Inhaltsverzeichnis muss auch existieren. Tote Anker und doppelte IDs sind Fehler.
@@ -224,7 +224,7 @@ Mittelalterliches Kochbuch auf Pergament: Pergament, warme Naturfarben, dunkle T
 * Keine festen Pixelbreiten für Layout und Typografie, dafür `clamp()`.
 * Es darf niemals horizontales Scrollen entstehen.
 * Rezeptlayout: auf Desktop Rezeptinformationen links und Rezeptbild rechts, auf kleinen Bildschirmen einspaltig, das Bild darf oberhalb stehen.
-* Codex-Bereich und Rezeptdaten werden visuell getrennt, nicht vermischt.
+* Kodex-Bereich und Rezeptdaten werden visuell getrennt, nicht vermischt.
 * Keine dekorativen Bilder, die Layout oder Lesefluss stören.
 
 ## Bilder
@@ -236,8 +236,19 @@ Alle Bilder werden über `astro:assets` mit `Image` oder `getImage()` ausgeliefe
 | `src/pic/pages/` | 39 Rezeptillustrationen `1.png` … `39.png` | 1024 × 1536 | Rezeptbild, Karten, Social Card |
 | `src/pic/actors/` | `connie.png`, `katze.png` | 1024 × 1536 | Portrait im Ratschlag |
 | `src/pic/smallactors/` | `1.png` … `9.png` | 640 × 640 | Portrait auf der Wissensseite |
+| `src/pic/categories/` | 25 Kategoriebilder, eine Datei je Kategorie-Slug | 1254 × 1254 | Kachel auf `/kategorien/` |
 
 `pageImages.ts` bildet den Dateinamen über den Key der Rezeptdaten zu, die Portrait-Module über `import.meta.glob` in `actorImages.ts` und `smallActors.ts`.
+
+### Kategorieseite
+
+`/kategorien/` zeigt je Kategorie eine Kachel aus Text links und Bild rechts.
+
+* Der Dateiname in `src/pic/categories/` ist der Kategorie-Slug aus `categorySlug(tag)`, also ASCII und kleingeschrieben: `Möhre → mohre.png`, `Rote Bete → rote-bete.png`, `Wurzelgemüse → wurzelgemuse.png`. Kein `ue` statt `u`, keine erfundenen Namen.
+* Die Zuordnung übernimmt `categoryImageFor()` aus `src/lib/categoryImages.ts`.
+* Fehlt für einen Slug ein Bild, wird die Kachel ohne Bild gerendert. Kein kaputtes `<img>`, kein leerer Platzhalter.
+* Die Bilder sind rein illustrativ, der Kategoriename steht als Text daneben. Deshalb `alt="" aria-hidden="true"`.
+* Das Bild steht rechts vom Text, der Pfeil darunter. Breite über `clamp()`, Seitenverhältnis aus der Quelle, `object-fit: contain`, damit nichts beschnitten wird.
 
 ## SEO
 

@@ -45,7 +45,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const withBase = (path: string) => `${base}${path}`;
 const canonicalPath = `/kategorien/${category}/`;
 const canonicalUrl = Astro.site ? new URL(withBase(canonicalPath), Astro.site).toString() : withBase(canonicalPath);
-const description = `${recipes.length} ${recipes.length === 1 ? 'Rezept' : 'Rezepte'} mit dem Thema ${categoryTitle} im Codex von Das Ferment.`;
+const description = `${recipes.length} ${recipes.length === 1 ? 'Rezept' : 'Rezepte'} mit dem Thema ${categoryTitle} im Kodex von Das Ferment.`;
 const absoluteUrl = (path: string) => Astro.site ? new URL(path, Astro.site).toString() : path;
 const coverRecipe = recipes.find((recipe) => imageForRecipe(recipe));
 const cover = coverImageFor(recipes);
@@ -88,7 +88,7 @@ const cardImage = await socialCard(
 
 				<header class="section-heading">
 					<div>
-						<p class="section-heading__kicker">Kategorie im Codex</p>
+						<p class="section-heading__kicker">Kategorie im Kodex</p>
 						<h1 id="category-title">{categoryTitle}</h1>
 					</div>
 					<p class="section-heading__count">

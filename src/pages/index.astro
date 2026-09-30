@@ -27,7 +27,7 @@ const recipeCount = recipes.length;
 const illustratedCount = illustratedRecipes.length;
 const canonicalPath = '/';
 const canonicalUrl = Astro.site ? new URL(withBase(canonicalPath), Astro.site).toString() : withBase(canonicalPath);
-const description = `Im mittelalterlich inspirierten Codex von Das Ferment: ${recipeCount} Rezepte für Kimchi, Sauerkraut, Gurken und weitere lebendige Fermente.`;
+const description = `Im mittelalterlich inspirierten Kodex von Das Ferment: ${recipeCount} Rezepte für Kimchi, Sauerkraut, Gurken und weitere lebendige Fermente.`;
 const absoluteUrl = (path: string) => Astro.site ? new URL(path, Astro.site).toString() : path;
 const cover = illustratedRecipes[0];
 const cardImage = await socialCard(
@@ -47,7 +47,7 @@ const cardImage = await socialCard(
 <html lang="de">
 	<head>
 		<SeoHead
-			title="Das Ferment | Rezepte aus dem Codex"
+			title="Das Ferment | Rezepte aus dem Kodex"
 			description={description}
 			canonicalUrl={canonicalUrl}
 			base={base}
@@ -64,11 +64,11 @@ const cardImage = await socialCard(
 						<p class="eyebrow">Ein lebendiges Rezeptbuch</p>
 						<h1 id="hero-title">Ein Buch vom <em>Warten.</em></h1>
 						<p class="hero__lead">
-							Öffne den Codex und finde eingelegte, gesäuerte und langsam gereifte Speisen – von würzigen Gürkchen bis zu
+							Öffne den Kodex und finde eingelegte, gesäuerte und langsam gereifte Speisen – von würzigen Gürkchen bis zu
 							farbstarken Wintervorräten.
 						</p>
 						<div class="hero__actions">
-							<a class="button" href="#rezepte">Codex öffnen</a>
+							<a class="button" href="#rezepte">Kodex öffnen</a>
 							<a class="text-link" href="#ueber-den-codex">Einleitung lesen</a>
 						</div>
 						<p class="hero__footnote">{recipeCount} Rezepte, aufgeschrieben in {illustratedCount} illustrierten Blättern.</p>
@@ -102,7 +102,7 @@ const cardImage = await socialCard(
 					<header class="section-heading">
 						<div>
 							<p class="section-heading__kicker">Das Repertoire</p>
-							<h2 id="rezepte-title">Im Codex verzeichnet</h2>
+							<h2 id="rezepte-title">Im Kodex verzeichnet</h2>
 						</div>
 						<p class="section-heading__count">
 							{recipeCount} Einträge, nach den Namen ihrer Blätter geordnet. Wähle ein Rezept und folge seinem Gärweg.
@@ -121,13 +121,13 @@ const cardImage = await socialCard(
 					</div>
 				</section>
 
-				<aside class="codex-note" id="ueber-den-codex" aria-label="Hinweis zum Codex">
+				<aside class="codex-note" id="ueber-den-codex" aria-label="Hinweis zum Kodex">
 					<span class="codex-note__mark" aria-hidden="true">
 						<svg width="28" height="28" viewBox="0 0 28 28" fill="none">
 							<path d="M14 24V5m0 13c-4.4 0-6.8-2.4-7.6-6.2 4.4-.4 7.1 1.4 7.6 6.2Zm0-4.1c0-4.3 2.5-6.8 7-7 .1 4.2-2.2 6.7-7 7Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
 						</svg>
 					</span>
-					<p>Jeder Codex-Titel führt zu einem vollständigen Rezept. So bleiben die alte Buchsprache und die klare Anleitung miteinander verbunden.</p>
+					<p>Jeder Kodex-Titel führt zu einem vollständigen Rezept. So bleiben die alte Buchsprache und die klare Anleitung miteinander verbunden.</p>
 					<span class="codex-note__source">Aus der Sammlung</span>
 				</aside>
 			</main>

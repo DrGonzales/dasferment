@@ -15,7 +15,7 @@ const recipes = recipeData as Recipe[];
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const withBase = (path: string) => `${base}${path}`;
 const illustratedCount = recipes.filter((recipe) => imageForRecipe(recipe)).length;
-const description = `Alle ${recipes.length} Rezepte aus dem Codex von Das Ferment – mit Zutaten, Zubereitung und ${illustratedCount} Buchmalereien.`;
+const description = `Alle ${recipes.length} Rezepte aus dem Kodex von Das Ferment – mit Zutaten, Zubereitung und ${illustratedCount} Buchmalereien.`;
 const canonicalPath = '/rezepte/';
 const canonicalUrl = Astro.site ? new URL(withBase(canonicalPath), Astro.site).toString() : withBase(canonicalPath);
 const absoluteUrl = (path: string) => Astro.site ? new URL(path, Astro.site).toString() : path;
@@ -26,7 +26,7 @@ const cardImage = await socialCard(
 		? {
 				width: cover.width,
 				height: cover.height,
-				alt: 'Buchmalerei aus dem Codex von Das Ferment',
+				alt: 'Buchmalerei aus dem Kodex von Das Ferment',
 			}
 		: undefined,
 	absoluteUrl,
@@ -58,7 +58,7 @@ const cardImage = await socialCard(
 				<header class="section-heading">
 					<div>
 						<p class="section-heading__kicker">Das Repertoire</p>
-						<h1 id="rezepte-title">Im Codex verzeichnet</h1>
+						<h1 id="rezepte-title">Im Kodex verzeichnet</h1>
 					</div>
 					<p class="section-heading__count">
 						{recipes.length} Rezepte, nach den Namen ihrer Blätter geordnet. Wähle ein Rezept und folge seinem Gärweg.

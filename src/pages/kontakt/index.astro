@@ -1,0 +1,148 @@
+---
+import { Image } from 'astro:assets';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import SeoHead from '../../components/SeoHead.astro';
+import { SMALL_ACTOR_SIZE, smallActorImage } from '../../lib/smallActors';
+import '../../styles/global.css';
+
+const portrait = smallActorImage('9');
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const withBase = (path: string) => `${base}${path}`;
+const canonicalPath = '/kontakt/';
+const canonicalUrl = Astro.site
+	? new URL(withBase(canonicalPath), Astro.site).toString()
+	: withBase(canonicalPath);
+const description =
+	'Habt Ihr eine Anregung, eine Frage oder einen Wunsch für unsern Kodex? Oder kennt Ihr ein gar köstlich und ungewöhnlich Ferment, das in diesem Buche noch fehlet? So lasset uns wissen, was Euch umtreibet. Sendet uns Eure Gedanken, Geschichten und Vorschläge – auf dass der Kodex stetig wachse und sich mit allerlei wunderlichen, schmackhaften und wohlgeratenen Gärungen fülle.';
+const contactMail = 'amkaltenpolar71@gmail.com';
+---
+
+<!doctype html>
+<html lang="de">
+	<head>
+		<SeoHead
+			title="Kontakt | Das Ferment"
+			description={description}
+			canonicalUrl={canonicalUrl}
+			base={base}
+		/>
+	</head>
+	<body>
+		<div class="site-shell">
+			<Header />
+
+			<main class="recipe-main prose-page">
+				<nav class="breadcrumbs" aria-label="Brotkrümelnavigation">
+					<a href={withBase('/')}>Startseite</a>
+					<span aria-hidden="true">/</span>
+					<span aria-current="page">Kontakt</span>
+				</nav>
+
+				<article class="prose-article contact-page">
+					<header class="prose-intro">
+						{portrait && (
+							<Image
+								class="contact-portrait"
+								src={portrait}
+								alt=""
+								aria-hidden="true"
+								width={SMALL_ACTOR_SIZE}
+								height={SMALL_ACTOR_SIZE}
+								quality={80}
+								loading="lazy"
+								decoding="async"
+							/>
+						)}
+						<p class="section-heading__kicker">Ein Wort an die Küche</p>
+						<h1>Kontakt</h1>
+						<p class="prose-intro__lead">{description}</p>
+					</header>
+
+					<section class="prose-section" aria-labelledby="formular-title">
+						<p class="section-heading__kicker">Nachricht</p>
+						<h2 id="formular-title">Schreibt Connie und Katze</h2>
+						<p>
+							Die Felder Name, E-Mail und Nachricht genügen. Nach dem
+							Absenden landet die Nachricht direkt im Postfach des
+							Kochs, und du erhältst eine Bestätigung von Web3Forms.
+						</p>
+
+						<form
+							class="contact-form"
+							action="https://api.web3forms.com/submit"
+							method="POST"
+						>
+							<input
+								type="hidden"
+								name="access_key"
+								value="e0189723-e309-47ed-be37-bdfe57999f3e"
+							/>
+							<input type="hidden" name="subject" value="Neue Nachricht über das Kontaktformular" />
+							<input type="hidden" name="from_name" value="Kontaktformular Das Ferment" />
+							<p class="contact-form__trap" aria-hidden="true">
+								<label for="botcheck">Nicht ausfüllen</label>
+								<input type="text" id="botcheck" name="botcheck" tabindex="-1" autocomplete="off" />
+							</p>
+
+							<p class="contact-field">
+								<label for="name">Name</label>
+								<input
+									type="text"
+									id="name"
+									name="name"
+									autocomplete="name"
+									required
+								/>
+							</p>
+
+							<p class="contact-field">
+								<label for="email">E-Mail</label>
+								<input
+									type="email"
+									id="email"
+									name="email"
+									autocomplete="email"
+									required
+								/>
+							</p>
+
+							<p class="contact-field">
+								<label for="message">Nachricht</label>
+								<textarea
+									id="message"
+									name="message"
+									rows="7"
+									required
+								></textarea>
+							</p>
+
+							<button class="contact-form__submit" type="submit">
+								Nachricht senden
+							</button>
+						</form>
+					</section>
+
+					<section class="prose-section" aria-labelledby="direkt-title">
+						<p class="section-heading__kicker">Ohne Formular</p>
+						<h2 id="direkt-title">Direkt erreichbar</h2>
+						<p>
+							Wer dem Formular nicht trauen mag, schreibt auch gern
+							per E-Mail an
+							<a class="prose-link" href={`mailto:${contactMail}`}>
+								amkaltenpolar71(at)gmail.com<span class="prose-link__arrow" aria-hidden="true">↗</span>
+							</a>.
+						</p>
+					</section>
+
+					<aside class="prose-note">
+						<span aria-hidden="true">❦</span>
+						<p>Jede gute Fermentation beginnt mit einem guten Wort.</p>
+					</aside>
+				</article>
+			</main>
+
+			<Footer />
+		</div>
+	</body>
+</html>
