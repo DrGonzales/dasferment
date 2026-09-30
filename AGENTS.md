@@ -320,6 +320,14 @@ Diese Properties werden **nicht** erzeugt, weil die Datenquelle sie nicht hergib
 * Keine unnötige Abstraktion. Bestehende Helfer in `src/lib/` zuerst verwenden, bevor neue entstehen.
 * Keine Kommentare, die offensichtlichen Code erklären. Nur Hinweise, warum eine Regel existiert.
 
+## Geplante Arbeit
+
+* Das Buch als druckfähiges PDF mit Paged.js ist geplant, aber **noch nicht umgesetzt**. Der vollständige Plan liegt in `docs/buchdruck-plan.md`.
+* Grundsatzentscheidung: getrennte Ausgabe, gemeinsame Daten. `src/data/` und `src/lib/` bleiben gemeinsam genutzt, Build und Stylesheet sind getrennt.
+* Das Vorhaben ändert **keine** der obigen Regeln. Insbesondere gilt `global.css` als einziges Stylesheet der Website weiter, und `npm run build` bleibt unverändert. Kein `@page`, kein Print-Stylesheet und keine Drucklogik gehören in die Website.
+* Der Plan startet nicht, bevor die sechs offenen Entscheidungen aus Abschnitt 7 des Plans geklärt sind, darunter Zielformat, Schriften und die Erlaubnis für zusätzliche Abhängigkeiten.
+* Die Versionsangaben im Plan veralten. Paged.js hatte zum Erstellungsdatum seit 2023 kein Release. Vor der Umsetzung den aktuellen Stand prüfen.
+
 ## Vor dem Abschluss prüfen
 
 1. `npm run build` läuft fehlerfrei durch, die Seitenzahl stimmt.
