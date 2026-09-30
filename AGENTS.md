@@ -22,6 +22,8 @@ Manage the background server with `astro dev stop`, `astro dev status`, and `ast
 | `npm run build` | statischer Build nach `dist/`, aktuell 71 Seiten |
 | `npm run preview` | Build lokal ansehen |
 | `npx astro build` | Build ohne npm-Skript, wenn `npm` nicht verfügbar ist |
+| `npm run build:book` | Buch-Build nach `dist-book/`, eine Seite, aktuell 102 Seiten |
+| `npm run make:pdf` | Buch-Build plus `dist-book/das-ferment.pdf` |
 
 `npx astro check` funktioniert nicht, solange `@astrojs/check` und `typescript` nicht installiert sind. Nicht eigenmächtig installieren, sondern vorher fragen.
 
@@ -31,13 +33,18 @@ Manage the background server with `astro dev stop`, `astro dev status`, and `ast
 src/
 ├── components/        Header.astro, Footer.astro, RecipeCard.astro, SeoHead.astro
 ├── data/              das_ferment.json, das_ferment_infos.json
-├── lib/               recipes.ts, infos.ts, pageImages.ts, actorImages.ts, smallActors.ts, categoryImages.ts, social.ts
+├── lib/               recipes.ts, infos.ts, pageImages.ts, actorImages.ts, smallActors.ts, categoryImages.ts, social.ts, book.ts
 ├── pages/             index, rezepte, kategorien, wissen, ueber-diese-seite, kontakt, impressum, sitemap.xml.ts, robots.txt.ts
 ├── pic/               pages/ (Rezeptillustrationen), actors/ (Ratschlag-Portraits), smallactors/ (Wissenseite), categories/ (Kategorieseite)
-└── styles/            global.css
+├── styles/            global.css
+└── book/              nur Buchausgabe, siehe Abschnitt Buchdruck
+    ├── fonts/         EB Garamond und Cinzel als TTF, dazu OFL-Lizenzen
+    ├── pages/index.astro
+    ├── styles/book.css
+    └── hyphenate.ts   Silbentrennung zur Build-Zeit
 ```
 
-`src/styles/global.css` ist das einzige Stylesheet. Keine weiteren CSS-Dateien anlegen.
+`src/styles/global.css` ist das einzige Stylesheet der Website. Keine weiteren CSS-Dateien für die Website anlegen. `src/book/styles/book.css` gehört zur Buchausgabe und wird nie von der Website geladen.
 
 ## Architektur
 
@@ -320,13 +327,29 @@ Diese Properties werden **nicht** erzeugt, weil die Datenquelle sie nicht hergib
 * Keine unnötige Abstraktion. Bestehende Helfer in `src/lib/` zuerst verwenden, bevor neue entstehen.
 * Keine Kommentare, die offensichtlichen Code erklären. Nur Hinweise, warum eine Regel existiert.
 
-## Geplante Arbeit
+## Buchdruck
 
-* Das Buch als druckfähiges PDF mit Paged.js ist geplant, aber **noch nicht umgesetzt**. Der vollständige Plan liegt in `docs/buchdruck-plan.md`.
-* Grundsatzentscheidung: getrennte Ausgabe, gemeinsame Daten. `src/data/` und `src/lib/` bleiben gemeinsam genutzt, Build und Stylesheet sind getrennt.
-* Das Vorhaben ändert **keine** der obigen Regeln. Insbesondere gilt `global.css` als einziges Stylesheet der Website weiter, und `npm run build` bleibt unverändert. Kein `@page`, kein Print-Stylesheet und keine Drucklogik gehören in die Website.
-* Der Plan startet nicht, bevor die sechs offenen Entscheidungen aus Abschnitt 7 des Plans geklärt sind, darunter Zielformat, Schriften und die Erlaubnis für zusätzliche Abhängigkeiten.
-* Die Versionsangaben im Plan veralten. Paged.js hatte zum Erstellungsdatum seit 2023 kein Release. Vor der Umsetzung den aktuellen Stand prüfen.
+Das Rezeptbuch existiert als zweite Ausgabe: `astro.book.config.mjs` baut `src/book/` nach `dist-book/`, `scripts/make-pdf.mjs` rendert daraus mit Puppeteer und Paged.js das PDF. Der ausführliche Plan mit allen Entscheidungen, Messwerten und den Stolperfallen von Paged.js 0.4.3 liegt in `docs/buchdruck-plan.md`.
+
+* **Getrennte Ausgabe, gemeinsame Daten.** `src/data/` und `src/lib/` werden von beiden Ausgaben genutzt, `src/lib/book.ts` gehört zu beiden. Build, Layout-Hülle und Stylesheet sind getrennt.
+* Die Buchausgabe ändert **keine** der obigen Regeln. `global.css` bleibt das einzige Stylesheet der Website, `npm run build` bleibt bei 71 Seiten. Kein `@page`, kein Print-Stylesheet und keine Drucklogik gehören in die Website.
+* Das PDF entsteht in einem Durchlauf. `make-pdf.mjs` schreibt Kolumnentitel, Inhaltsverzeichnis und Lesezeichen in das bereits umgebrochene DOM und ruft Paged.js nicht erneut auf.
+* Neue Rezepte oder Wissenseinträge brauchen im Buch nichts außer Daten: Reihenfolge, Anker, Kolumnentitel, Inhaltsverzeichnis und Register entstehen aus `src/lib/book.ts` und dem Template.
+* Geänderte Seitenzahlen sind normal. Nach jedem Umbruch neu bauen und die Seitenzahl im PDF prüfen, nicht im DOM.
+* `pagedjs`, `puppeteer`, `pdf-lib`, `hypher` und `hyphenation.de` sind devDependencies und exakt gepinnt. Vor einem Upgrade Paged.js prüfen: Der Kolumnentitel umgeht `string-set` wegen eines Fehlers in Version 0.4.3.
+
+### Was im Buch gilt und auf der Website nicht
+
+* A5 mit 3 mm Beschnitt, `marks: crop`, Satzspiegel 117 × 180 mm, Seitenzahl außen, Kolumnentitel außen.
+* Ein Rezept je Seite, alphabetisch nach `titel`, Register der Zutatenkategorien am Ende.
+* Jedes Rezept ist eine Doppelseite: Der Rezepttext steht auf der linken Seite (Verso), das Bild auf der rechten (Recto). Der Text beginnt deshalb immer auf einer linken Seite und das Bild immer auf einer rechten. Wird der Text länger als eine Seite, läuft er auf der nächsten Seite weiter; der Umbruch schiebt dann eine Leerseite dazwischen, damit das Bild wieder rechts steht.
+* Überschrift: sachlicher `titel` als Kicker, `codex_titel` groß.
+* Kein Header, Footer, keine Brotkrümelnavigation, keine Site-Shell.
+* Bild und Text getrennt: `break-before: left` auf `.recipe`, `break-before: right` auf `.recipe-plate`. Leerseiten entstehen aus dieser Regel, nicht aus festen Seiten.
+* Typografie in `pt`, keine Media Queries, kein `vw`, keine Container Queries.
+* Bilder mit Transparenz bleiben PNG. Als JPEG verliert sharp den transparenten Grund und füllt ihn schwarz. Das gilt für `smallactors/*`; `pages/*` und `actors/*` sind deckend und laufen als JPEG.
+* Alle Bilder über `astro:assets` mit `getImage` in fester Breite, keine Originale im PDF.
+* Das Rezeptbild steht 113 mm breit und so hoch wie das Seitenverhältnis es zulässt (165 mm), mit der Rezepbenzeichnung als Bildunterschrift. Ohne `height: 100%` und ohne `justify-content: center` klebt es oben, weil Paged.js dem Flexcontainer keine volle Höhe gibt.
 
 ## Vor dem Abschluss prüfen
 
@@ -336,6 +359,7 @@ Diese Properties werden **nicht** erzeugt, weil die Datenquelle sie nicht hergib
 4. Neue Bilder laufen über `astro:assets` und haben Alt-Text beziehungsweise sind als dekorativ markiert.
 5. Neue Seiten: `SeoHead.astro`, Eintrag im Sitemap, Eintrag in der Navigation.
 6. Kein horizontales Scrollen, keine festen Layoutbreiten.
+7. Bei Änderungen an `src/data/` oder `src/lib/book.ts` zusätzlich `npm run make:pdf`: kein Rezept darf auf zwei Seiten laufen, jeder Inhaltsverzeichnis-Eintrag braucht eine Seitenzahl.
 
 ## Documentation
 

@@ -1,0 +1,106 @@
+import { categoryLabel, slugify, type Recipe } from './recipes';
+
+export const BOOK_TITLE = 'Das Ferment';
+export const BOOK_SUBTITLE = 'Aus der Küche der Geduld';
+
+export interface BookChapter {
+	recipe: Recipe;
+	anchor: string;
+	categories: string[];
+}
+
+export interface BookRegisterEntry {
+	titel: string;
+	anchor: string;
+}
+
+export interface BookRegisterGroup {
+	slug: string;
+	label: string;
+	entries: BookRegisterEntry[];
+}
+
+export function recipeAnchor(recipe: Pick<Recipe, 'titel'>): string {
+	return `rezept-${slugify(recipe.titel)}`;
+}
+
+export function infoAnchor(id: string): string {
+	return `wissen-${id}`;
+}
+
+export function groupAnchor(slug: string): string {
+	return `gruppe-${slug}`;
+}
+
+export function registerAnchor(): string {
+	return 'register';
+}
+
+export function prefaceAnchor(): string {
+	return 'vorwort';
+}
+
+export function recipesAnchor(): string {
+	return 'rezepte';
+}
+
+export function contentsAnchor(): string {
+	return 'inhalt';
+}
+
+// Tags, die auf jedem Rezept stehen, bilden keine Kategorie, sondern nur den
+// gemeinsamen Nenner. Das Register würde sonst alle Rezepte unter einem einzigen
+// Eintrag wiederholen.
+export function universalTags(recipes: Recipe[]): Set<string> {
+	if (recipes.length === 0) return new Set();
+
+	const counts = new Map<string, number>();
+
+	for (const recipe of recipes) {
+		for (const tag of recipe.tags) {
+			counts.set(tag, (counts.get(tag) ?? 0) + 1);
+		}
+	}
+
+	return new Set(
+		[...counts].filter(([, count]) => count === recipes.length).map(([tag]) => tag),
+	);
+}
+
+export function bookChapters(recipes: Recipe[]): BookChapter[] {
+	const universal = universalTags(recipes);
+
+	return [...recipes]
+		.sort((a, b) => a.titel.localeCompare(b.titel, 'de'))
+		.map((recipe) => ({
+			recipe,
+			anchor: recipeAnchor(recipe),
+			categories: recipe.tags
+				.filter((tag) => !universal.has(tag))
+				.map(categoryLabel),
+		}));
+}
+
+export function bookRegister(chapters: BookChapter[]): BookRegisterGroup[] {
+	const universal = universalTags(chapters.map((chapter) => chapter.recipe));
+	const groups = new Map<string, BookRegisterGroup>();
+
+	for (const chapter of chapters) {
+		for (const tag of chapter.recipe.tags) {
+			if (universal.has(tag)) continue;
+
+			const group = groups.get(tag) ?? {
+				slug: slugify(tag),
+				label: categoryLabel(tag),
+				entries: [],
+			};
+
+			group.entries.push({ titel: chapter.recipe.titel, anchor: chapter.anchor });
+			groups.set(tag, group);
+		}
+	}
+
+	return [...groups.values()].sort(
+		(a, b) => a.label.localeCompare(b.label, 'de'),
+	);
+}

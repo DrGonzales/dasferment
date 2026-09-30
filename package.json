@@ -9,12 +9,21 @@
     "dev": "astro dev  --host 0.0.0.0",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "build:book": "astro build --config astro.book.config.mjs",
+    "make:pdf": "npm run build:book && node scripts/make-pdf.mjs"
   },
   "dependencies": {
     "astro": "^7.3.5"
   },
   "allowScripts": {
     "esbuild": true
+  },
+  "devDependencies": {
+    "hyphenation.de": "0.2.1",
+    "hypher": "0.2.5",
+    "pagedjs": "0.4.3",
+    "pdf-lib": "1.17.1",
+    "puppeteer": "25.12.0"
   }
 }

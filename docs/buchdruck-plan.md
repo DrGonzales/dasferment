@@ -1,12 +1,15 @@
 # Buchdruck mit Paged.js — Plan
 
-**Status:** offen, nicht begonnen
+**Status:** Phasen 0 bis 6 umgesetzt, Layout als Doppelseite umgesetzt, Phase 7 Workflow angelegt, erster CI-Lauf steht aus
 **Erstellt:** 2026-09-29
-**Recherche-Stand:** 2026-09-29 (Paged.js unverändert gepflegt, siehe Versionsangaben unten)
+**Recherche-Stand:** 2026-09-30 (Paged.js weiterhin ohne Release, siehe Versionsangaben unten)
+**Entscheidungen:** 2026-09-30 getroffen, siehe Abschnitt 7
+**Ergebnis des letzten Laufs:** 102 Seiten, Rezepttext links und Bild rechts, A5 mit 3 mm Beschnitt
+**Stand:** 2026-09-30, PDF `dist-book/das-ferment.pdf`, 12,7 MB, alle Prüfungen grün (siehe Abschnitt 6)
 
-Dieser Plan ist keine Projektregel. Er beschreibt eine geplante, zweite Ausgabe des
-Rezeptbuchs als PDF. Die Website bleibt unverändert und funktionsfähig, auch wenn dieser
-Plan nie umgesetzt wird.
+Dieser Plan ist keine Projektregel. Er beschreibt die zweite Ausgabe des Rezeptbuchs als
+PDF. Die Website bleibt unverändert und funktionsfähig, auch wenn der Buchbau nicht
+weitergepflegt wird.
 
 ---
 
@@ -46,9 +49,14 @@ Verifiziert über die npm-Registry und den Quellcode, nicht über Sekundärquell
 | `pagedjs` `latest` | **0.4.3, veröffentlicht 2023-07-06** |
 | `pagedjs` `beta` | 0.5.0-beta.2, 2024-10-04 |
 | `pagedjs-cli` | 0.4.3, 2023-07-20, Abhängigkeit `puppeteer ^20.9.0` |
+| `puppeteer` | 25.12.0, wird direkt benutzt, nicht die CLI |
 | Repository | von GitLab nach GitHub umgezogen (Jan 2026), Commits bis 2026-09-28, aber **kein Release seit v0.4.3** |
 | Offene Issues | 236 |
 | Lizenz | MIT |
+
+Am 2026-09-30 erneut geprüft: `latest` ist unverändert 0.4.3, es gibt kein neues
+Release. `pagedjs` wird mit exakter Version installiert, `puppeteer` ebenfalls
+pinned, damit die Paginierung zwischen Läufen und Maschinen nicht wandert.
 
 Vor der Umsetzung erneut prüfen, ob ein Release nach 0.4.3 erschienen ist. Die im
 Januar 2026 nach GitHub übernommenen Korrekturen (u. a. Marginalia) liegen bisher nur
@@ -84,6 +92,45 @@ TrimBox und Beschnitt über `setTrimBoxes`. Standardmäßig `printBackground: tr
 Weiterhin: `preferCSSPageSize: options.width ? false : true` — **`--width`/`--height`
 niemals setzen**, sonst wird `@page { size }` ignoriert und die TrimBox stimmt nicht.
 
+### Beobachtungen aus der Umsetzung (Paged.js 0.4.3)
+
+Vier Punkte, die im Quelltext nicht dokumentiert sind und den Lauf geprägt haben:
+
+1. **`string-set` erzeugt einen unbrauchbaren Wert.** `src/modules/generated-content/string-sets.js`
+   schreibt `` `--pagedjs-string-first-${name}` `` mit öffnendem, aber ohne schließendes
+   Anführungszeichen. Der Wert ist damit ungültig, `string()` bleibt in allen Randboxen
+   leer. **Umgang:** `make-pdf.mjs` setzt die Variable `--laufender-kopf` je Seite selbst,
+   `book.css` liest nur noch `var(--laufender-kopf, "")`.
+2. **Der Inhalt einer Randbox steht im `::after`, nicht im Text.** Paged.js legt den Inhalt
+   als `content` auf `.pagedjs_margin-content::after`. Ein `textContent` oder `innerText`
+   der Randbox ist deshalb immer leer. **Wichtig beim Prüfen:** eine leere Randbox im DOM
+   beweist nicht, dass im PDF nichts steht. `pdftotext` zeigt den echten Text.
+3. **`counter(page)` in Randboxen funktioniert.** Der Zähler wird auf `.pagedjs_page`
+   (`counter-increment: page 1`) und `.pagedjs_pages` (`counter-reset: page 0`) geführt, der
+   Browser löst ihn im `::after` auf. Kein Eingriff nötig, nur eine Seitenzahl je Seite und
+   keine zweite in `@bottom-center`, sonst steht dieselbe Zahl doppelt.
+4. **`publicDir: false` lehnt Astro 7 ab** (`Expected type "string", received "boolean"`).
+   Der Ordner `src/book/public` wird deshalb gar nicht erst angelegt; Astro findet
+   schlicht keinen.
+
+Zwei eigene Fehler, die nur am fertigen PDF sichtbar wurden:
+
+* `pdfPage.setTrimBox(x, y, breite, hoehe)` erwartet **Breite und Höhe**, nicht die rechte
+  obere Ecke, und schreibt selbst `[x, y, x + breite, y + hoehe]`. Mit Eckpunkten wird die
+  Box um deren Betrag zu groß, hier 148 × 210 mm zu 151 × 213 mm.
+* Die seitlichen Beschnittmarken sitzen bei Paged.js 2 mm neben dem Schnitt, die oberen und
+  unteren direkt daran (`--pagedjs-crop-offset: 2mm` greift nur seitlich). Der Wert ist in
+  `book.css` auf `0.27mm` gesetzt, damit alle vier Marken denselben Abstand halten.
+  Maßgeblich bleibt die TrimBox im PDF.
+* **sharp füllt einen transparenten Grund schwarz, sobald als JPEG konvertiert wird.** Die
+  neun Wissensmotive aus `src/pic/smallactors/` sind PNG mit Alphakanal. `getImage` bekommt
+  für diese Bilder deshalb `format: 'png'`; `pages/*` und `actors/*` sind deckend und laufen
+  weiter als JPEG. `pdfimages -list` zeigt die Wissensmotive deshalb mit `smask`, die
+  Rezeptbilder ohne.
+* **`justify-content: center` greift auf der Bildseite nicht.** Paged.js gibt
+  `.pagedjs_page_content` keine volle Höhe, sodass ein Flexcontainer ohne `height: 100%`
+  oben klebt. Mit beiden Werten sitzt das Motiv mittig.
+
 ## 4. Blocker im bestehenden Projekt
 
 Alle Fundstellen in `src/styles/global.css` beziehen sich auf den Stand vom 2026-09-29
@@ -103,6 +150,12 @@ Iowan Old Style noch Palatino und fällt auf DejaVu/Liberation zurück. Für ein
 die Typografie metrisch feststehen, sonst ändert sich die Paginierung zwischen Maschine
 und Druckerei. Die Paged.js-Doku warnt ausdrücklich davor, Browser **und** OS zwischen
 Entwurf und Generierung zu wechseln.
+
+**Gelöst am 2026-09-30.** `src/book/fonts/` enthält die statischen Schnitte von
+EB Garamond (Regular, Medium, SemiBold, Italic) als Fließtext und Cinzel (Regular,
+SemiBold) als Display-Schrift, dazu je eine Kopie der OFL-Lizenz. Beide Familien stehen
+unter der SIL Open Font License. `book.css` bindet sie per `@font-face` ein, das
+Website-Stylesheet bleibt unangetastet.
 
 ### 4.2 `vw` bricht unter Paged.js
 
@@ -182,9 +235,18 @@ erzeugen `srcset` + `sizes`. Im Buch ist beides falsch:
 - `loading="lazy"` (`:256`, Wissensseite) lädt tiefer liegende Bilder unter Umständen
   nicht, bevor das PDF erzeugt wird.
 
-Lösung: im Buchdokument mit `getImage({ src, width: 1024 })` ein **einzelnes** Bild ohne
-`srcset`/`sizes` rendern, `loading="eager"`, `decoding="sync"`. `SMALL_ACTOR_SIZE` bzw.
-die Bilddaten bleiben die einzige Quelle für die Größe.
+Lösung: im Buchdokument mit `getImage()` ein **einzelnes** Bild ohne `srcset`/`sizes`
+rendern, `loading="eager"`, `decoding="sync"`. `SMALL_ACTOR_SIZE` bzw. die Bilddaten
+bleiben die einzige Quelle für die Größe. `renderImage()` in
+`src/book/pages/index.astro` merkt sich jedes Motiv nach Quelle und Breite, sonst rechnet
+sharp dieselbe Datei bis zu 39-mal neu.
+
+**Das Zielformat entscheidet über die Transparenz.** JPEG kennt keinen Alphakanal, und
+sharp füllt die-transparenten Stellen schwarz, statt sie zu komponieren. Betroffen sind
+die neun Wissensmotive aus `src/pic/smallactors/`, die als RGBA mit vollständig
+transparenten Ecken vorliegen. Sie bekommen deshalb `format: 'png'`. `src/pic/pages/*`
+und `src/pic/actors/*` sind deckend (RGB) und laufen weiter als JPEG, wo die Qualitätsstufe
+über die Dateigröße entscheidet.
 
 ### 4.8 Keine gemeinsame Layout-Komponente
 
@@ -217,6 +279,7 @@ src/
 ├── pages/                bestehend, nur Web
 ├── pic/                  gemeinsam genutzt
 └── book/                 NEU, eigener Entry
+    ├── fonts/            EB Garamond und Cinzel (TTF) plus OFL-Lizenzen
     ├── pages/index.astro
     └── styles/book.css
 astro.config.mjs          unverändert, Web
@@ -231,10 +294,14 @@ scripts/
 export default defineConfig({
 	srcDir: './src/book',
 	outDir: './dist-book',
-	publicDir: false,
-	site: process.env.PUBLIC_SITE_URL,
+	build: { assets: 'astral', inlineStylesheets: 'never' },
 });
 ```
+
+`assets: 'astral'` und `inlineStylesheets: 'never'` halten die `astro:assets`-Bilder und das
+Stylesheet als eigene Dateien. `publicDir` wird weggelassen, weil der Wert `false` in
+Astro 7 abgelehnt wird. `site` und `base` fehlen bewusst, das Buch hat keine kanonischen
+URLs.
 
 `src/book/pages/index.astro` importiert `../data/das_ferment.json` und
 `../lib/recipes.ts` — dieselben Dateien wie die Website. `import.meta.glob` in
@@ -256,57 +323,199 @@ Nur `src/book/styles/book.css` wird geladen, nie `src/styles/global.css`.
 
 ### Aufbau des Buchs
 
-Titelblatt → Inhaltsverzeichnis → Vorwort (Wissenseite) → Rezepte nach den 9 Kategorien.
-Vorlauf und Rezeptteil als **zwei getrennte Dokumente** rendern, weil Paged.js die
-Seitenzählung nicht zurücksetzen kann (Issue #31) und weil die Doku für unterschiedliche
-Seitenformate ohnehin zwei Dateien verlangt.
+```text
+Titelblatt → Inhaltsverzeichnis → Vorwort (Wissenseite) → Rezepte → Register
+```
+
+**Ein Dokument, fortlaufende arabische Zählung von der Titelseite an.** Der ursprüngliche
+Plan sah zwei Dateien vor, weil Paged.js die Seitenzählung nicht zurücksetzen kann
+(Issue #31) und weil die Doku für unterschiedliche Seitenformate zwei Dateien verlangt.
+Beides trifft hier nicht zu: Es gibt nur ein Format, und die Titelseite soll mitgezählt
+werden, weil das Inhaltsverzeichnis sonst um eine Zahl danebenliegt. Der Nachteil — das
+Inhaltsverzeichnis nennt keine römischen Vorlaufzahlen — ist bei 102 Seiten belanglos.
+Zwei Dokumente bleiben der Rückfallpfad, falls doch ein Vorlauf ohne Seitenzahlen
+entstehen soll; `pdf-lib` kann sie später in einer Datei zusammenführen.
+
+**Rezepte alphabetisch nach `titel`.** Die Rezepte tragen 22 Zutaten-Tags, aber im
+Schnitt nur 1,8 Rezepte je Kategorie, plus das auf allen 39 Rezepten liegende Tag
+`gemuese`. Eine Gruppierung nach Kategorie zerfällt also in 22 kleine Gruppen. Stattdessen
+steht jedes Rezept alphabetisch, beginnt auf einer neuen Seite und nennt seine Kategorien
+als Kicker. Die 22 Kategorien werden im **Register** am Ende des Buchs ausgewertet, dort
+darf ein Rezept mehrfach erscheinen.
+
+**Jedes Rezept ist eine Doppelseite.** Der Rezepttext steht auf der linken Seite (Verso),
+das Bild auf der rechten (Recto). Das ist die klassische Aufteilung eines Kochbuchs und
+nutzt den Satzspiegel, statt das Bild in eine schmale Spalte zu quetschen. Die Reihenfolge
+ist eine reine CSS-Aussage, keine Sonderlogik im Skript:
+
+```css
+.recipe       { break-before: left; }
+.recipe-plate { break-before: right; }
+```
+
+Läuft ein Rezepttext über eine Seite hinaus, läuft er auf der Folgeseite weiter. Weil das
+Bild danach wieder rechts stehen muss, schiebt der Umbruch automatisch eine Leerseite
+dazwischen. Leerseiten sind damit eine Folge der Regel und keine festen Seiten im
+Template. Bei 39 von 39 Rezepten, die auf eine Seite passen, entsteht im aktuellen Stand
+keine einzige zusätzliche Leerseite im Rezeptteil.
+
+**Rezeptüberschrift wie auf der Website:** der sachliche `titel` als kleine Zeile über der
+großen `codex_titel`. Der Kodex-Charakter bleibt damit erhalten, ohne dass die
+Sachbezeichnung verloren geht.
+
+Ohne Header, Footer, Brotkrümelnavigation und Site-Shell. Keine erfundenen Texte: Titel
+und Zeile auf dem Titelblatt stammen aus der Website (`Das Ferment`,
+`Aus der Küche der Geduld`), alle Zahlen aus den Daten.
 
 ### `book.css`
 
-`@page` mit Beschnitt und Passerzeichen, Satzspiegel über `@page :left` / `@page :right`,
-Kolumnentitel über `string-set`, Seitenzahl in `@bottom-center`, Typografie in `pt`.
-`break-before: right` für Rezeptbeginn, `break-inside: avoid` für Zutatenliste,
-Ratschlag und Tabellen. Keine Media Queries, kein `vw`.
+`@page` mit Beschnitt, Passerzeichen und `marks: crop`, Satzspiegel über
+`@page :left` / `@page :right`, Kolumnentitel über `var(--laufender-kopf, "")`, Seitenzahl
+als `counter(page)` in `@bottom-left` / `@bottom-right`, Typografie in `pt`.
+`break-before: left` für den Rezepttext und `break-before: right` für die Bildseite und
+die drei Buchteile, `break-inside: avoid` für Zutatenliste, Ratschlag und Tabellen. Keine
+Media Queries, kein `vw`.
+
+Das Rezeptbild steht 113 mm breit im Satzspiegel, so hoch wie das Seitenverhältnis der
+Quelle (1024 × 1536) es zulässt, mit der sachlichen Rezeptbezeichnung als Bildunterschrift.
+`height: 100%` und `justify-content: center` auf `.recipe-plate` gehören zusammen: ohne die
+volle Höhe klebt das Motiv oben, weil Paged.js dem Flexcontainer keine Höhe gibt.
+
+Der Kolumnentitel entsteht bewusst nicht über `string-set`, siehe die Beobachtungen in
+Abschnitt 3. Die Randboxen der Titelseite (`@page :first`) bleiben leer.
 
 ### `scripts/make-pdf.mjs`
 
 Puppeteer mit gesetztem Viewport, `emulateMediaType("print")`,
-`preferCSSPageSize` aktiv, `page.pdf()` mit `printBackground: true`. `outlineTags` für
-PDF-Lesezeichen.
+`preferCSSPageSize` aktiv, `page.pdf()` mit `printBackground: true`.
+
+Reihenfolge nach `PagedPolyfill.preview()`, alles ohne zweiten Umbruch:
+
+1. Kolumnentitel je Seite in `--laufender-kopf` schreiben.
+2. Inhaltsverzeichnis füllen. Die Platzhalter sind zweistellig breit, das Einfügen
+   verschiebt also keine Seite.
+3. Lesezeichen aus `[data-outline]` sammeln, dazu unsichtbare `<a href="#…">` einhängen,
+   weil Chromium nur für verankerte Links ein PDF-Ziel anlegt.
+4. Media- und Trimbox je Seite messen, PDF schreiben, TrimBoxen und Outline mit `pdf-lib`
+   nachtragen.
 
 ## 6. Phasen
 
-| # | Phase | Inhalt |
-| --- | --- | --- |
-| 0 | **Entscheidungen** | Die sechs offenen Punkte aus Abschnitt 7 klären. Blockiert alles Weitere. |
-| 1 | Datenweg | `src/lib/book.ts`: Rezepte gruppieren, Reihenfolge festlegen, Front-Matter-Bausteine. Nur die vorhandenen JSON-Quellen. |
-| 2 | Buchroute | `src/book/pages/index.astro`: ein `<body>` mit allem Inhalt, Bilder über `getImage` in fester Breite, ohne Header, Footer, Breadcrumbs und Site-Shell. |
-| 3 | `book.css` | `@page`, Satzspiegel, `string-set`, Seitenzahl, Typografie in `pt`. |
-| 4 | Generatorskript | Puppeteer + pagedjs, Viewport gesetzt, ein Durchlauf. |
-| 5 | Inhaltsverzeichnis | Erster Durchlauf liefert über das `page`-Event die Seitenposition jedes Rezepts, zweiter Durchlauf rendert mit gefülltem Verzeichnis. Punct-Leader mit einem Flex-Band aus `border-bottom: dotted` nachbauen. |
-| 6 | Silbentrennung | `hyphenation.de` (npm 0.2.1) plus `hypher` als Build-Zeit-Transformation, die weiche Trennzeichen in die Druckfassung schreibt. Bewusst als Build-Schritt, damit die Druckfassung nicht von System-Wörterbüchern abhängt. |
-| 7 | CI | `deploy.yml` aufteilen: Build → `make:pdf` → Upload, als eigener Job. Chromium-Version pinnen. |
+| # | Phase | Inhalt | Stand |
+| --- | --- | --- | --- |
+| 0 | **Entscheidungen** | Die sechs offenen Punkte aus Abschnitt 7 klären. | erledigt 2026-09-30 |
+| 1 | Datenweg | `src/lib/book.ts`: Rezepte sortieren, Kategorien-Register, Front-Matter-Bausteine. Nur die vorhandenen JSON-Quellen. | erledigt 2026-09-30 |
+| 2 | Buchroute | `src/book/pages/index.astro`: ein `<body>` mit allem Inhalt, Bilder über `getImage` in fester Breite, ohne Header, Footer, Breadcrumbs und Site-Shell. | erledigt 2026-09-30 |
+| 3 | `book.css` | `@page`, Satzspiegel, Seitenzahl, Typografie in `pt`, `@font-face`. | erledigt 2026-09-30 |
+| 4 | Generatorskript | Puppeteer + pagedjs, Viewport gesetzt, ein Durchlauf. | erledigt 2026-09-30 |
+| 5 | Inhaltsverzeichnis | Seitenzahlen aus dem fertigen Umbruch in die Platzhalter schreiben, Punct-Leader mit einem Flex-Band aus `border-bottom: dotted` nachbauen. **Kein zweiter Durchlauf nötig**, die Platzhalter sind brechendurch gleich breit. | erledigt 2026-09-30 |
+| 6 | Silbentrennung | `hyphenation.de` (npm 0.2.1) plus `hypher` als Build-Zeit-Transformation, die weiche Trennzeichen in die Druckfassung schreibt. Bewusst als Build-Schritt, damit die Druckfassung nicht von System-Wörterbüchern abhängt. | erledigt 2026-09-30 |
+| 7 | CI | Eigenständiger Job neben dem Website-Deploy, Chromium-Version gepinnt, PDF als Artefakt. | Workflow angelegt, erster Lauf steht aus |
+| 8 | Doppelseite je Rezept | Rezepttext auf der linken Seite, Bild auf der rechten. `break-before: left` auf `.recipe`, `break-before: right` auf `.recipe-plate`. Ein langer Text läuft auf der Folgeseite weiter, der Umbruch schiebt dann eine Leerseite dazwischen. | erledigt 2026-09-30 |
+| 9 | Transparente Bilder | Die neun Wissensmotive aus `smallactors/*` bleiben PNG. `pages/*` und `actors/*` sind deckend und laufen als JPEG. | erledigt 2026-09-30 |
 
-## 7. Offene Entscheidungen (blockierend)
+### Stand nach der Umsetzung
 
-| # | Frage | Warum blockierend |
+| | |
+| --- | --- |
+| Umfang | 102 Seiten: Titel, Inhalt (2), Vorwort, Wissen (12), Rezepte (78 = 39 Doppelseiten), Register (3), zwei Leerseiten für den Recto-Beginn |
+| Seitengröße | MediaBox 154,18 × 215,9 mm, TrimBox 148 × 210 mm bei 3 mm Versatz |
+| Rezeptseiten | 39 von 39 als Doppelseite: Text auf der linken, Bild auf der rechten Seite. Kein Rezept läuft über, deshalb keine zusätzlichen Leerseiten |
+| Lesezeichen | 70, davon 3 Haupteinträge, 9 Wissensgruppen, 18 Einträge, 39 Rezepte, 1 Wurzel |
+| Dateigröße | 12,7 MB bei 768 px Bildbreite und JPEG 80 |
+| Rezeptbild | 113 mm breit, 165 mm hoch, mittig bei 74,2 mm auf einer Satzspiegelmitte von 74 mm, Seitenverhältnis wie die Quelle |
+| Transparenz | 18 `smask`-Einträge in `pdfimages -list`, ausschließlich auf den Wissensseiten. Die Rezeptbilder sind deckend und haben keinen |
+| Kolumnentitel | 81 von 102 Seiten, seitenzahl außen, Titelseite ohne Randinhalt |
+| Offen | Erster CI-Lauf, Wissen-Teil mit neun Gruppenbeginnen auf neuen Seiten (12 statt 9 Seiten) |
+
+### Prüfstand des letzten Laufs
+
+Alles mit den Bordmitteln des Projekts nachprüfbar, `poppler-utils` vorausgesetzt:
+
+| Prüfung | Kommando | Ergebnis |
 | --- | --- | --- |
-| 1 | **Zielformat?** 148 × 210, 140 × 200 oder 170 × 240 mm? | Bestimmt das Bildbudget, siehe 4.6. Vorschlag: 148 × 210 mm. |
-| 2 | **Umfang?** Alle 39 Rezepte in einem PDF oder aufgeteilt nach den 9 Kategorien? | Bei ~60-80 Seiten ist ein Durchlauf realistisch, der Speicherbedarf im Headless-Browser aber nicht trivial. Aufteilung ist der Rückfallpfad. |
-| 3 | **Schriften?** Darf ich OFL-Schriften selbst hosten (z. B. EB Garamond für `--body`, eine Display-Schrift für `--display`)? | Ohne diese Freigabe ist kein reproduzierbares Buch möglich, siehe 4.1. |
-| 4 | **Abhängigkeiten?** Darf ich `pagedjs` und `puppeteer` als Dev-Dependencies installieren? | `AGENTS.md` verlangt ausdrücklich eine vorherige Frage. |
-| 5 | **PDF-Ablage?** Wohin mit dem Ergebnis, und soll es überhaupt auf die Website? | Ohne gemeinsamen Build ist das unkritisch, aber zu entscheiden. |
-| 6 | **CI-Form?** Buch im Deploy-Job oder als eigener Job, der unabhängig vom Website-Deploy läuft? | Bestimmt, ob ein Buchfehler die Website blockiert. |
+| Umbruch | `npm run make:pdf` | 102 Seiten im Umbruch, 102 gemeldet |
+| Inhaltsverzeichnis | Ausgabe von `make-pdf.mjs` | 69 Sprungmarken, 69 Lesezeichen, keine fehlende Seite |
+| Lesezeichen | `pdf-lib` über das fertige PDF | 70 Einträge, 3 Haupteinträge, keine weichen Trennzeichen in den Titeln |
+| Seitengröße | `pdf-lib` | MediaBox 154,18 × 215,9 mm, TrimBox 148 × 210 mm bei 3 mm Versatz |
+| Rezeptpaare | `pdftotext` je Seite | 39 ungerade Bildseiten mit nur Bildunterschrift, 39 linke Textseiten |
+| Transparenz | `pdfimages -list` | `smask` nur auf den Wissensseiten |
+| Anker | `dist-book/index.html` | 70 `id`, keine doppelt, keine tote Sprungmarke |
+| Website | `npm run build` | 71 Seiten, unverändert |
+
+Zwei Fehler dieses Laufs, die nur deshalb sichtbar wurden, weil am fertigen PDF und nicht
+am DOM gemessen wurde:
+
+* Die Rezeptschleife lief über `chapters` statt über `folios`. `image` war damit
+  `undefined`, und alle 39 Bildseiten fehlten im HTML, ohne dass der Build eine Warnung
+  gab. Das prüft man nur mit `grep -c 'recipe-plate' dist-book/index.html`, nicht mit dem
+  grünen Build.
+* Ein Flexcontainer mit `justify-content: center` klebt ohne `height: 100%` oben, weil
+  Paged.js `.pagedjs_page_content` keine volle Höhe gibt. Beide Eigenschaften gehören
+  zusammen.
+
+Der Wissen-Teil ist der einzige Bereich mit mehreren halbleeren Seiten: Jede der neun
+Gruppen beginnt auf einer neuen Seite, dadurch bleiben sechs Seiten unter halb voll. Das
+ist der klassische Kapitelbeginn und wurde bewusst so gelassen; wer später dichter
+drucken will, streicht `break-before: page` bei `.knowledge-group`.
+
+## 7. Getroffene Entscheidungen (Phase 0, 2026-09-30)
+
+| # | Frage | Entscheidung | Folge |
+| --- | --- | --- | --- |
+| 1 | **Zielformat?** | **148 × 210 mm (A5)** | Satzspiegel ca. 113 mm, Bilder mit ~230 dpi. Kleinere Formate bringen keinen Gewinn mehr, größere werden weich. |
+| 2 | **Umfang?** | **Ein PDF mit allen 39 Rezepten** | Ein Durchlauf, ein fertiges Band. Aufteilung nach Kategorien bleibt der Rückfallpfad, falls der Speicherbedarf kippt. |
+| 3 | **Schriften?** | **Ja, EB Garamond für den Fließtext, Cinzel als Display** | OFL, selbst gehostet in `src/book/fonts/`. Website-Stylesheet bleibt unverändert. |
+| 4 | **Abhängigkeiten?** | **Ja, `pagedjs` und `puppeteer` als devDependencies, exakt gepinnt** | `pagedjs` 0.4.3, `puppeteer` 25.12.0. Die CLI wird nicht benutzt, sie setzt den Viewport nicht und kennt keine Silbentrennung. |
+| 5 | **PDF-Ablage?** | **Nur lokal in `dist-book/`, kein Deploy** | Kein Eingriff in den Website-Deploy. Veröffentlichen kann später als eigener Schritt dazukommen. |
+| 6 | **CI-Form?** | **Eigener Job, unabhängig vom Website-Deploy** | Ein Buchfehler blockiert die Website nicht. |
+
+Dazu zwei Festlegungen aus der Umsetzungsvorbereitung:
+
+* **Reihenfolge der Rezepte:** alphabetisch nach `titel`, mit Kategorie-Register am Ende.
+* **Rezeptüberschrift:** sachlicher `titel` als Kicker über dem `codex_titel`.
+
+### Lokale Voraussetzungen für den PDF-Lauf
+
+Das gebündelte Chromium braucht Systembibliotheken, die ein schlanker Container nicht
+mitbringt. Unter Debian/Ubuntu:
+
+```bash
+sudo apt-get install -y libnss3 libnspr4 libatk1.0-0 libatk-bridge2.0-0 \
+	libatspi2.0-0 libcups2 libdbus-1-3 libgbm1 libxkbcommon0 libxcomposite1 \
+	libxdamage1 libxfixes3 libxrandr2 libasound2 libpango-1.0-0 libcairo2
+```
+
+Auf `ubuntu-latest` in CI sind sie vorhanden. Chromium startet nur mit
+`--no-sandbox --disable-dev-shm-usage` in Containern ohne Root-Rechte.
+
+Für die Kontrolle des fertigen PDF hilfreich, aber nicht nötig für den Bau:
+
+```bash
+sudo apt-get install -y poppler-utils python3-pil
+pdfinfo dist-book/das-ferment.pdf          # Seitenzahl, Seitengröße, Metadaten
+pdftotext -f 20 -l 20 -layout dist-book/das-ferment.pdf -   # Text, Seitenzahl, Kolumnentitel
+pdftoppm -r 300 -f 20 -l 20 -png dist-book/das-ferment.pdf s20   # Beschnittmarken im Bild prüfen
+```
+
+`textContent` der Randboxen im DOM taugt als Nachweis nicht, siehe Beobachtung 2 in
+Abschnitt 3.
 
 ## 8. Was die Trennung nicht löst
 
 Unverändert offen, unabhängig von Stufe 1:
 
 - **Bildauflösung 1024 × 1536** — die Obergrenze liegt im Material, nicht im Werkzeug.
+  768 px Rezeptbildbreite ergeben auf 113 mm rund 173 dpi; für einen echten Offset-Druck
+  wäre Material in 2× besserer Auflösung die einzige wirksame Verbesserung.
 - **Paged.js-Lücken** — kein `target-counter` (Inhaltsverzeichnis braucht Phase 5), kein
   `leaders()`, keine Seitenzahl-Reset für den Vorlauf.
-- **Keine Webfonts** — jetzt sauber auf `book.css` begrenzt, die Freigabe aus Phase 0
-  Punkt 3 braucht es trotzdem.
+- **Keine Webfonts auf der Website** — im Buch durch `src/book/fonts/` gelöst, die
+  Website behält ihre System-Stacks. Das ist Absicht, kein Restproblem.
+- **Kein `target-counter`** — die Seitenzahlen im Inhaltsverzeichnis kommen aus dem
+  fertigen Umbruch in einem Durchlauf. Vor einem Upgrade muss geprüft werden, ob Paged.js
+  das wieder selbst kann; der Kolumnentitel umgeht `string-set` wegen eines Fehlers in
+  Version 0.4.3.
 - **Seitenzahl-Stabilität** — wird durch den eigenen CI-Job besser, aber nicht gelöst.
 
 ## 9. Risiken
@@ -318,8 +527,10 @@ Unverändert offen, unabhängig von Stufe 1:
 | `vw` und Media Queries | Layout kollabiert | Buch-Stylesheet ohne `vw` und ohne Media Queries, dafür `--pagedjs-pagebox-width` |
 | `overflow: hidden` auf `.site-shell` | Seitenboxen abgeschnitten | Buchinhalt außerhalb der Site-Shell |
 | 1024 px Quellbilder | matschiger Offset-Druck | kleines Format wählen oder Bildmaterial neu anliefern |
-| 60-80 Seiten in einem Chromium | Speicher / Zeit | Kategorie-PDFs als Aufteilung |
+| 102 Seiten in einem Chromium | Speicher / Zeit | Läuft mit 12,7 MB stabil durch, Kategorie-PDFs bleiben der Rückfallpfad |
 | `astro: ^7.3.5` und `@page`-Semantik | Minor-Update bricht Buchbau | Build des Buchs separat, Site-Build bleibt unberührt |
+| `publicDir: false` in Astro 7 | Book-Build scheitert an einer Typprüfung | Ordner weglassen statt auf `false` setzen |
+| `string-set` in Paged.js 0.4.3 | Kolumnentitel bleiben leer | Variable in `make-pdf.mjs` selbst setzen, Vor Upgrade prüfen |
 
 ## 10. Quellen
 
