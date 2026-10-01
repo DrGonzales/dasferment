@@ -1,0 +1,53 @@
+name: Buch als PDF
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: buch
+  cancel-in-progress: true
+
+jobs:
+  pdf:
+    name: PDF bauen
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Abhängigkeiten
+        run: npm ci
+
+      - name: PDF bauen
+        run: npm run make:pdf
+
+      - name: Prüfen
+        run: |
+          test -f dist-book/das-ferment.pdf
+          pages=$(pdfinfo dist-book/das-ferment.pdf | awk '/^Pages:/ {print $2}')
+          if [ "$pages" -lt 90 ] || [ "$pages" -gt 115 ]; then
+            echo "Unerwartete Seitenzahl: $pages"
+            exit 1
+          fi
+          pdftotext -f 1 -l 1 dist-book/das-ferment.pdf - | grep -q "Das Ferment" \
+            || { echo "Titelseite ohne Titel"; exit 1; }
+
+      - name: Artefakt
+        uses: actions/upload-artifact@v5
+        with:
+          name: das-ferment
+          path: dist-book/das-ferment.pdf
+          retention-days: 30

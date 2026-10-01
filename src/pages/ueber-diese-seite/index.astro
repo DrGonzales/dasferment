@@ -5,6 +5,7 @@ import Footer from '../../components/Footer.astro';
 import Header from '../../components/Header.astro';
 import SeoHead from '../../components/SeoHead.astro';
 import { actorImageFor } from '../../lib/actorImages';
+import { FIGUREN } from '../../lib/figuren';
 import { type Recipe } from '../../lib/recipes';
 import '../../styles/global.css';
 
@@ -13,8 +14,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const withBase = (path: string) => `${base}${path}`;
 const illustratedCount = recipes.filter((recipe) => recipe.picture).length;
 const categoryCount = new Set(recipes.flatMap((recipe) => recipe.tags)).size;
-const connieImage = actorImageFor('Connie');
-const katzeImage = actorImageFor('Katze');
+const figuren = FIGUREN.map((figur) => ({
+	...figur,
+	image: actorImageFor(figur.sprecher),
+}));
 const canonicalPath = '/ueber-diese-seite/';
 const canonicalUrl = Astro.site ? new URL(withBase(canonicalPath), Astro.site).toString() : withBase(canonicalPath);
 const description = `Lerne das statische Rezeptbuch Das Ferment und seine ${recipes.length} Rezepte im Kodex kennen.`;
@@ -45,64 +48,37 @@ const description = `Lerne das statische Rezeptbuch Das Ferment und seine ${reci
 					<header class="prose-intro">
 						<p class="section-heading__kicker">Ein Wort zum Haus</p>
 						<h1>Über diese Seite</h1>
-						<p class="prose-intro__lead">Ein spielerischer Fermentations-Kodex, erzählt von Conni und Katze.</p>
+						<p class="prose-intro__lead">Ein spielerischer Fermentations-Kodex, erzählt von Connie und Katze.</p>
 					</header>
 
-					<section class="prose-section" aria-labelledby="conni-title">
-						<p class="section-heading__kicker">Die Küchenmeisterin</p>
-						<h2 id="conni-title">Conni</h2>
-						<div class="prose-figure">
-							{connieImage && (
-								<figure class="prose-figure__portrait">
-									<Image
-										src={connieImage}
-										alt="Connie in der Schreibkammer"
-										widths={[192, 288, 384]}
-										sizes="(max-width: 560px) 6rem, 9rem"
-										quality={80}
-										loading="lazy"
-										decoding="async"
-									/>
-								</figure>
-							)}
-							<div>
-								<p>
-									Conni ist die begeisterte Küchenmeisterin und neugierige Entdeckerin des Werkes. Sie probiert aus, erklärt, beobachtet und ist sich auch für ungewöhnliche Kombinationen nicht zu schade. Mal arbeitet sie konzentriert, mal völlig übermütig, mal staunt sie selbst über das Ergebnis. Ihre mittelalterliche Nonnentracht, das dunkle Haar und der auffällige Kreuzanhänger sind zu ihrem wiederkehrenden Erscheinungsbild geworden.
-								</p>
-								<p>
-									Conni steht dabei vor allem für Neugier, Freude am Ausprobieren und die Lust, Wissen weiterzugeben.
-								</p>
-							</div>
-						</div>
-					</section>
-
-					<section class="prose-section" aria-labelledby="katze-title">
-						<p class="section-heading__kicker">Der Gefährte</p>
-						<h2 id="katze-title">Katze</h2>
-						<div class="prose-figure">
-							{katzeImage && (
-								<figure class="prose-figure__portrait">
-									<Image
-										src={katzeImage}
-										alt="Katze in der Schreibkammer"
-										widths={[192, 288, 384]}
-										sizes="(max-width: 560px) 6rem, 9rem"
-										quality={80}
-										loading="lazy"
-										decoding="async"
-									/>
-								</figure>
-							)}
-							<div>
-								<p>
-									Katze ist Connis schwarzer, etwas eigenwilliger Gefährte. Er ist aufmerksam, neugierig und häufig deutlich skeptischer als Conni. Manchmal ist er begeistert, manchmal verwirrt, manchmal erschrocken – und gelegentlich muss er Conni sogar mit erhobener Pfote zur Ordnung rufen.
-								</p>
-								<p>
-									Gerade diese Gegensätze machen die beiden aus: Conni probiert – Katze hinterfragt. Conni erklärt – Katze staunt. Und manchmal geht beim gemeinsamen Fermentieren auch etwas schief.
-								</p>
-							</div>
-						</div>
-					</section>
+					{
+						figuren.map((figur) => (
+							<section class="prose-section" aria-labelledby={`${figur.id}-titel`}>
+								<p class="section-heading__kicker">{figur.kicker}</p>
+								<h2 id={`${figur.id}-titel`}>{figur.name}</h2>
+								<div class="prose-figure">
+									{figur.image && (
+										<figure class="prose-figure__portrait">
+											<Image
+												src={figur.image}
+												alt={`${figur.sprecher} in der Schreibkammer`}
+												widths={[192, 288, 384]}
+												sizes="(max-width: 560px) 6rem, 9rem"
+												quality={80}
+												loading="lazy"
+												decoding="async"
+											/>
+										</figure>
+									)}
+									<div>
+										{figur.abschnitte.map((abschnitt) => (
+											<p>{abschnitt}</p>
+										))}
+									</div>
+								</div>
+							</section>
+						))
+					}
 
 					<section class="prose-section" aria-labelledby="werk-title">
 						<p class="section-heading__kicker">Der Kodex</p>

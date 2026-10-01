@@ -1,0 +1,867 @@
+/* Druckfassung. Eigenes Stylesheet, ohne Media Queries und ohne vw: Paged.js
+   rechnet in pt und mm, weil 1vw im Buch der Browser-Viewport und nicht die
+   Seitenbox ist. Farben und Anmut entsprechen der Website, die Schrift nicht,
+   damit die Paginierung auf jeder Maschine gleich bleibt. */
+
+@font-face {
+	font-family: "EB Garamond";
+	src: url("../fonts/EBGaramond-Regular.ttf") format("truetype");
+	font-weight: 400;
+	font-style: normal;
+	font-display: block;
+}
+
+@font-face {
+	font-family: "EB Garamond";
+	src: url("../fonts/EBGaramond-Italic.ttf") format("truetype");
+	font-weight: 400;
+	font-style: italic;
+	font-display: block;
+}
+
+@font-face {
+	font-family: "EB Garamond";
+	src: url("../fonts/EBGaramond-Medium.ttf") format("truetype");
+	font-weight: 500;
+	font-style: normal;
+	font-display: block;
+}
+
+@font-face {
+	font-family: "EB Garamond";
+	src: url("../fonts/EBGaramond-SemiBold.ttf") format("truetype");
+	font-weight: 600;
+	font-style: normal;
+	font-display: block;
+}
+
+@font-face {
+	font-family: "Cinzel";
+	src: url("../fonts/Cinzel-Regular.ttf") format("truetype");
+	font-weight: 400;
+	font-style: normal;
+	font-display: block;
+}
+
+@font-face {
+	font-family: "Cinzel";
+	src: url("../fonts/Cinzel-SemiBold.ttf") format("truetype");
+	font-weight: 600;
+	font-style: normal;
+	font-display: block;
+}
+
+:root {
+	/* Paged.js rückt die Beschnittmarken an den Seitenkanten um 2 mm von der
+	   Schnittkante weg, die oben und unten sitzen dagegen direkt am Schnitt.
+	   Der Wert bringt alle vier Marken auf denselben Abstand. Maßgeblich für
+	   den Schnitt bleibt ohnehin die TrimBox im PDF. */
+	--pagedjs-crop-offset: 0.27mm;
+
+	--ink: #2b2118;
+	--ink-soft: #665140;
+	--ink-faint: #8b745c;
+	--page: #ffffff;
+	--page-deep: #f1e4c3;
+	--rust: #743d2b;
+	--moss: #536044;
+	--gold: #a47c35;
+	--rule: rgba(74, 52, 36, 0.28);
+	--display: "Cinzel", "EB Garamond", serif;
+	--body: "EB Garamond", Georgia, serif;
+	--measure: 100%;
+}
+
+/* 148 × 210 mm plus 3 mm Beschnitt, Passerzeichen für die Druckerei.
+   Innen 18 mm, außen 13 mm, das ist der übliche Unterschied für den Einband. */
+@page {
+	size: 148mm 210mm;
+	marks: crop;
+	bleed: 3mm;
+	margin-top: 15mm;
+	margin-bottom: 15mm;
+	margin-left: 14mm;
+	margin-right: 14mm;
+
+}
+
+@page :left {
+	margin-left: 18mm;
+	margin-right: 13mm;
+
+	@top-left {
+		content: var(--laufender-kopf, "");
+		font-family: var(--body);
+		font-size: 7.4pt;
+		letter-spacing: 0.09em;
+		text-transform: uppercase;
+		color: var(--ink-faint);
+	}
+
+	@bottom-left {
+		content: counter(page);
+		font-family: var(--body);
+		font-size: 8.5pt;
+		color: var(--ink-faint);
+	}
+}
+
+@page :right {
+	margin-left: 13mm;
+	margin-right: 18mm;
+
+	@top-right {
+		content: var(--laufender-kopf, "");
+		font-family: var(--body);
+		font-size: 7.4pt;
+		letter-spacing: 0.09em;
+		text-transform: uppercase;
+		color: var(--ink-faint);
+	}
+
+	@bottom-right {
+		content: counter(page);
+		font-family: var(--body);
+		font-size: 8.5pt;
+		color: var(--ink-faint);
+	}
+}
+
+/* Titelblatt und die Seite danach tragen weder Kolumnentitel noch Seitenzahl. */
+@page :first {
+	@top-left {
+		content: none;
+	}
+
+	@top-right {
+		content: none;
+	}
+
+	@bottom-left {
+		content: none;
+	}
+
+	@bottom-right {
+		content: none;
+	}
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	background: var(--page);
+}
+
+body {
+	margin: 0;
+	color: var(--ink);
+	background: var(--page);
+	font-family: var(--body);
+	font-size: 9.4pt;
+	line-height: 1.38;
+	text-align: justify;
+	text-justify: inter-word;
+	font-kerning: normal;
+	font-variant-numeric: oldstyle-nums;
+	hyphens: manual;
+}
+
+p {
+	margin: 0 0 0.6em;
+	text-indent: 1.2em;
+}
+
+h1,
+h2,
+h3,
+h4 {
+	margin: 0;
+	font-weight: 400;
+	text-align: left;
+	text-indent: 0;
+	hyphens: none;
+}
+
+/* Paged.js setzt am umbrochenen Block text-align-last: justify, damit der
+   Fließtext am Seitenende voll bleibt. Das erben die Kindelemente und ziehen
+   einzeilige Überschriften, Kicker und Listen über die ganze Spaltenbreite
+   auseinander. Für alles, was nicht im Blocksatz gesetzt wird, muss die letzte
+   Zeile wieder text-align folgen. */
+h1,
+h2,
+h3,
+h4,
+caption,
+.kicker,
+.knowledge-group__claim,
+.knowledge-entry__kicker,
+.gestalt__kicker,
+.book-title__subtitle,
+.book-title__ornament,
+.book-title__claim,
+.book-part__claim,
+.book-part__ornament,
+.block-title,
+.recipe__ingredients li,
+.recipe__method li,
+.ingredient-list li,
+.instruction-list li,
+.toc-list li,
+.register-entry {
+	text-align-last: auto;
+}
+
+ul,
+ol {
+	margin: 0 0 0.7em;
+	padding-left: 1.1em;
+}
+
+li {
+	margin: 0 0 0.22em;
+}
+
+li>p {
+	margin: 0;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.kicker {
+	margin: 0;
+	font-family: var(--body);
+	font-size: 7.2pt;
+	font-weight: 500;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: var(--rust);
+	text-indent: 0;
+}
+
+.ornament {
+	color: var(--gold);
+	font-size: 9pt;
+}
+
+.rule {
+	border: 0;
+	border-top: 0.4pt solid var(--rule);
+	margin: 3mm 0 0;
+}
+
+/* ---------------------------------------------------------------- Titelblatt */
+
+.book-title {
+	break-after: page;
+	text-align: center;
+	padding-top: 34mm;
+}
+
+.book-title__mark {
+	width: 14mm;
+	height: 14mm;
+	margin: 0 auto 8mm;
+	color: var(--moss);
+}
+
+.book-title__mark svg {
+	width: 100%;
+	height: 100%;
+}
+
+.book-title__name {
+	font-family: var(--display);
+	font-size: 30pt;
+	line-height: 1.1;
+	letter-spacing: 0.06em;
+	color: var(--ink);
+	text-align: center;
+}
+
+.book-title__subtitle {
+	margin: 6mm 0 0;
+	font-size: 10.5pt;
+	font-style: italic;
+	color: var(--ink-soft);
+	text-align: center;
+	text-indent: 0;
+}
+
+.book-title__ornament {
+	margin: 10mm 0 0;
+	font-size: 13pt;
+	color: var(--gold);
+	text-align: center;
+	text-indent: 0;
+}
+
+.book-title__claim {
+	margin: 0;
+	font-size: 8.4pt;
+	letter-spacing: 0.05em;
+	color: var(--ink-soft);
+	text-align: center;
+	text-indent: 0;
+}
+
+/* ------------------------------------------------------- Abschnittsopener */
+
+.book-part {
+	break-before: right;
+	break-after: page;
+	padding-top: 46mm;
+	text-align: center;
+}
+
+.book-part__kicker {
+	margin: 0 0 4mm;
+}
+
+.book-part__title {
+	font-family: var(--display);
+	font-size: 20pt;
+	line-height: 1.15;
+	letter-spacing: 0.05em;
+	color: var(--ink);
+	text-align: center;
+}
+
+.book-part__claim {
+	margin: 5mm auto 0;
+	max-width: 78mm;
+	font-size: 9pt;
+	font-style: italic;
+	color: var(--ink-soft);
+	text-align: center;
+	text-indent: 0;
+}
+
+.book-part__ornament {
+	margin: 8mm 0 0;
+	font-size: 12pt;
+	color: var(--gold);
+	text-align: center;
+	text-indent: 0;
+}
+
+/* Inhaltsverzeichnis */
+
+.book-contents {
+	break-after: page;
+}
+
+.book-contents__title {
+	margin: 0 0 6mm;
+	font-family: var(--display);
+	font-size: 15pt;
+	letter-spacing: 0.08em;
+	text-align: center;
+}
+
+.toc-group {
+	margin: 0 0 5mm;
+}
+
+.toc-group__title {
+	margin: 0 0 1.6mm;
+	font-size: 8pt;
+	font-weight: 600;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--rust);
+}
+
+.toc-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.toc-list li {
+	margin: 0;
+	padding: 0.7mm 0;
+	display: flex;
+	align-items: baseline;
+	overflow: hidden;
+}
+
+.toc-list__label {
+	flex: 0 1 auto;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.toc-list__leader {
+	flex: 1 1 auto;
+	min-width: 2mm;
+	margin: 0 1.2mm;
+	border-bottom: 0.4pt dotted var(--ink-faint);
+	transform: translateY(-0.6mm);
+}
+
+.toc-list__page {
+	flex: 0 0 auto;
+	font-variant-numeric: lining-nums tabular-nums;
+	color: var(--ink-soft);
+}
+
+/* ------------------------------------------------------------------- Vorwort */
+
+.book-part__body {
+	column-count: 1;
+}
+
+/* ----------------------------------------------------------------- Gestalten */
+
+.gestalten {
+	break-before: page;
+}
+
+.gestalt {
+	display: grid;
+	grid-template-columns: 24mm 1fr;
+	gap: 0 5mm;
+	align-items: start;
+	margin: 0 0 7mm;
+	break-inside: avoid;
+}
+
+.gestalt__portrait {
+	grid-column: 1;
+	grid-row: 1 / span 2;
+	width: 24mm;
+	margin: 0;
+}
+
+.gestalt__portrait img {
+	width: 100%;
+	height: auto;
+	object-fit: contain;
+}
+
+.gestalt__body {
+	grid-column: 2;
+}
+
+.gestalt__kicker {
+	margin: 0 0 0.8mm;
+	font-size: 7.2pt;
+	font-weight: 500;
+	letter-spacing: 0.13em;
+	text-transform: uppercase;
+	color: var(--rust);
+	text-indent: 0;
+}
+
+.gestalt__name {
+	margin: 0 0 1.6mm;
+	font-family: var(--display);
+	font-size: 12pt;
+	font-weight: 400;
+	letter-spacing: 0.04em;
+}
+
+.gestalt__body p {
+	text-indent: 0;
+}
+
+.gestalt__body p+p {
+	text-indent: 1.2em;
+}
+
+.knowledge-group {
+	break-before: page;
+}
+
+.knowledge-group__head {
+	margin: 0 0 5mm;
+	text-align: center;
+}
+
+.knowledge-group__title {
+	font-family: var(--display);
+	font-size: 13pt;
+	letter-spacing: 0.06em;
+	text-align: center;
+}
+
+.knowledge-group__claim {
+	margin: 2mm 0 0;
+	font-size: 7.6pt;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--ink-faint);
+	text-align: center;
+	text-indent: 0;
+}
+
+.knowledge-entry {
+	break-inside: avoid-page;
+	margin: 0 0 7mm;
+}
+
+.knowledge-entry__head {
+	display: grid;
+	grid-template-columns: 16mm 1fr;
+	gap: 0 4mm;
+	align-items: start;
+	margin: 0 0 2mm;
+}
+
+.knowledge-entry__portrait {
+	grid-column: 1;
+	grid-row: 1 / span 2;
+	width: 16mm;
+	height: 16mm;
+	margin: 0;
+}
+
+.knowledge-entry__portrait img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+
+.knowledge-entry__kicker {
+	grid-column: 2;
+	grid-row: 1;
+	margin: 0 0 0.6mm;
+	font-size: 7.2pt;
+	font-weight: 500;
+	letter-spacing: 0.13em;
+	text-transform: uppercase;
+	color: var(--rust);
+	text-indent: 0;
+}
+
+.knowledge-entry__title {
+	grid-column: 2;
+	grid-row: 2;
+	font-family: var(--body);
+	font-size: 12pt;
+	font-weight: 600;
+	font-style: italic;
+	line-height: 1.2;
+}
+
+.knowledge-entry__intro {
+	margin: 0 0 2mm;
+	font-style: italic;
+	color: var(--ink-soft);
+}
+
+.knowledge-entry__section {
+	margin: 0 0 2.4mm;
+	break-inside: avoid;
+}
+
+.knowledge-entry__section h4 {
+	margin: 0 0 0.8mm;
+	font-size: 9.4pt;
+	font-weight: 600;
+	letter-spacing: 0.02em;
+}
+
+.knowledge-entry__section ul {
+	margin: 0 0 0.4em;
+}
+
+.knowledge-table {
+	margin: 2mm 0 0;
+	break-inside: avoid;
+	font-size: 8.6pt;
+}
+
+.knowledge-table table {
+	width: 100%;
+	border-collapse: collapse;
+	text-align: left;
+}
+
+.knowledge-table caption {
+	margin-bottom: 1.4mm;
+	font-size: 8pt;
+	font-weight: 600;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--rust);
+	text-align: left;
+}
+
+.knowledge-table th,
+.knowledge-table td {
+	padding: 1mm 1.6mm 1mm 0;
+	border-bottom: 0.3pt solid var(--rule);
+	text-align: left;
+	vertical-align: top;
+}
+
+.knowledge-table thead th {
+	border-bottom: 0.6pt solid var(--rule);
+}
+
+.knowledge-table figcaption {
+	margin-top: 1.4mm;
+	font-size: 8pt;
+	font-style: italic;
+	color: var(--ink-soft);
+}
+
+/* ------------------------------------------------------------------ Rezepte */
+
+.recipe {
+	break-before: left;
+	hyphens: manual;
+}
+
+.recipe__head {
+	margin: 0 0 3.1mm;
+}
+
+.recipe__kicker {
+	margin: 0 0 1.4mm;
+}
+
+.recipe__heading {
+	font-family: var(--display);
+	font-size: 13.6pt;
+	line-height: 1.16;
+	letter-spacing: 0.03em;
+	break-after: avoid;
+}
+
+.recipe__intro {
+	margin: 0 0 3.1mm;
+	font-style: italic;
+	color: var(--ink-soft);
+}
+
+/* Das Bild steht auf der rechten Seite, der Rezepttext beginnt auf ihrer
+   Rückseite. Damit beginnt jedes Rezept mit einem reinen Bild; ein längerer
+   Text läuft auf die nächste Seite weiter und der Umbruch schiebt eine Leerseite
+   dazwischen, damit das Bild des nächsten Rezepts wieder rechts landet. */
+.recipe-plate {
+	break-before: right;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+}
+
+.recipe-plate__frame {
+	margin: 0;
+	break-inside: avoid;
+}
+
+/* 113 mm Breite ergeben 169,5 mm Höhe und passen damit in den Satzspiegel von
+   117 × 180 mm. Die Quelle (1024 × 1536) behält ihr Seitenverhältnis. */
+.recipe-plate__frame img {
+	display: block;
+	width: 113mm;
+	height: auto;
+	max-width: 100%;
+	object-fit: contain;
+}
+
+.recipe__ingredients {
+	break-inside: avoid;
+	margin: 0 0 3.1mm;
+}
+
+.block-title {
+	margin: 0 0 1.6mm;
+	font-size: 8pt;
+	font-weight: 600;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--rust);
+	text-indent: 0;
+	break-after: avoid;
+}
+
+.ingredient-list {
+	margin: 0;
+	padding-left: 0;
+	list-style: none;
+	font-size: 8.8pt;
+}
+
+.ingredient-list li {
+	position: relative;
+	margin: 0 0 0.7mm;
+	padding-left: 3.2mm;
+	text-indent: 0;
+	text-align: left;
+}
+
+.ingredient-list li::before {
+	position: absolute;
+	left: 0;
+	content: "·";
+	color: var(--gold);
+}
+
+.recipe__method {
+	break-inside: auto;
+	margin: 0 0 0.5mm;
+}
+
+.instruction-list {
+	margin: 0;
+	padding-left: 0;
+	list-style: none;
+	counter-reset: schritt;
+}
+
+.instruction-list li {
+	position: relative;
+	margin: 0 0 1.4mm;
+	padding-left: 5.4mm;
+	text-indent: 0;
+	text-align: left;
+	counter-increment: schritt;
+	break-inside: avoid;
+}
+
+.instruction-list li::before {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 4mm;
+	content: counter(schritt) ".";
+	font-size: 8pt;
+	font-weight: 600;
+	color: var(--rust);
+	text-align: right;
+}
+
+/* ------------------------------------------------------------------ Ratschlag */
+
+.recipe-advisor {
+	margin: 3.8mm 0 0;
+	padding: 2mm 3mm;
+	background: var(--page-deep);
+	break-inside: avoid;
+}
+
+.recipe-advisor__content {
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	align-items: center;
+}
+
+.recipe-advisor__portrait {
+	grid-column: 1;
+	justify-self: end;
+	margin: 0 2.4mm 0 0;
+	width: 11mm;
+}
+
+.recipe-advisor__portrait img {
+	width: 100%;
+	height: auto;
+	object-fit: contain;
+}
+
+.recipe-advisor__text {
+	grid-column: 2;
+	text-align: center;
+}
+
+.recipe-advisor__heading {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 2.2mm;
+	margin: 0 0 1.2mm;
+}
+
+.recipe-advisor__heading h2 {
+	font-size: 8pt;
+	font-weight: 600;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--rust);
+	text-align: center;
+}
+
+.recipe-advisor__text blockquote {
+	margin: 0;
+	font-size: 8.5pt;
+	font-style: italic;
+	line-height: 1.33;
+	text-align: center;
+	text-indent: 0;
+}
+
+.recipe-advisor__text blockquote::before {
+	content: "„";
+}
+
+.recipe-advisor__text blockquote::after {
+	content: "“";
+}
+
+/* ------------------------------------------------------------------ Register */
+
+.register-group {
+	break-inside: avoid;
+	margin: 0 0 4mm;
+}
+
+.register-group__title {
+	margin: 0 0 1.4mm;
+	font-size: 8.4pt;
+	font-weight: 600;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var(--rust);
+}
+
+.register-group__list {
+	columns: 2;
+	column-gap: 6mm;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-size: 8.4pt;
+}
+
+.register-entry {
+	display: flex;
+	align-items: baseline;
+	overflow: hidden;
+	margin: 0 0 0.5mm;
+	text-align: left;
+	text-indent: 0;
+	break-inside: avoid;
+}
+
+.register-entry__label {
+	flex: 0 1 auto;
+	min-width: 0;
+	hyphens: auto;
+}
+
+.register-entry__leader {
+	flex: 1 1 auto;
+	min-width: 2mm;
+	margin: 0 1mm;
+	border-bottom: 0.4pt dotted var(--ink-faint);
+	transform: translateY(-0.5mm);
+}
+
+.register-entry__page {
+	flex: 0 0 auto;
+	font-variant-numeric: lining-nums tabular-nums;
+	color: var(--ink-soft);
+}

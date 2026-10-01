@@ -1,5 +1,11 @@
 FROM mcr.microsoft.com/devcontainers/typescript-node:22
 
+# poppler-utils liefert pdftotext, pdfinfo und pdfimages. Das Skript scripts/buch-pruefen.mjs
+# braucht sie, um den fertigen Buchumbruch am PDF zu messen statt am DOM.
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends poppler-utils && \
+    rm -rf /var/lib/apt/lists/*
+
 # Install OpenCode: fetch the latest release from GitHub and install to /usr/local/bin
 RUN ARCH=$(uname -m | sed 's/x86_64/x64/;s/aarch64/arm64/') && \
     VERSION=$(curl -fsSL https://api.github.com/repos/anomalyco/opencode/releases/latest | grep '"tag_name"' | sed 's/.*"v\([^"]*\)".*/\1/') && \
