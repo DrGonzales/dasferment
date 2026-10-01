@@ -61,7 +61,7 @@
 	--ink: #2b2118;
 	--ink-soft: #665140;
 	--ink-faint: #8b745c;
-	--page: #f9f2e2;
+	--page: #ffffff;
 	--page-deep: #f1e4c3;
 	--rust: #743d2b;
 	--moss: #536044;
@@ -186,6 +186,35 @@ h4 {
 	hyphens: none;
 }
 
+/* Paged.js setzt am umbrochenen Block text-align-last: justify, damit der
+   Fließtext am Seitenende voll bleibt. Das erben die Kindelemente und ziehen
+   einzeilige Überschriften, Kicker und Listen über die ganze Spaltenbreite
+   auseinander. Für alles, was nicht im Blocksatz gesetzt wird, muss die letzte
+   Zeile wieder text-align folgen. */
+h1,
+h2,
+h3,
+h4,
+caption,
+.kicker,
+.knowledge-group__claim,
+.knowledge-entry__kicker,
+.gestalt__kicker,
+.book-title__subtitle,
+.book-title__ornament,
+.book-title__claim,
+.book-part__claim,
+.book-part__ornament,
+.block-title,
+.recipe__ingredients li,
+.recipe__method li,
+.ingredient-list li,
+.instruction-list li,
+.toc-list li,
+.register-entry {
+	text-align-last: auto;
+}
+
 ul,
 ol {
 	margin: 0 0 0.7em;
@@ -196,7 +225,7 @@ li {
 	margin: 0 0 0.22em;
 }
 
-li > p {
+li>p {
 	margin: 0;
 }
 
@@ -390,6 +419,64 @@ a {
 	column-count: 1;
 }
 
+/* ----------------------------------------------------------------- Gestalten */
+
+.gestalten {
+	break-before: page;
+}
+
+.gestalt {
+	display: grid;
+	grid-template-columns: 24mm 1fr;
+	gap: 0 5mm;
+	align-items: start;
+	margin: 0 0 7mm;
+	break-inside: avoid;
+}
+
+.gestalt__portrait {
+	grid-column: 1;
+	grid-row: 1 / span 2;
+	width: 24mm;
+	margin: 0;
+}
+
+.gestalt__portrait img {
+	width: 100%;
+	height: auto;
+	object-fit: contain;
+}
+
+.gestalt__body {
+	grid-column: 2;
+}
+
+.gestalt__kicker {
+	margin: 0 0 0.8mm;
+	font-size: 7.2pt;
+	font-weight: 500;
+	letter-spacing: 0.13em;
+	text-transform: uppercase;
+	color: var(--rust);
+	text-indent: 0;
+}
+
+.gestalt__name {
+	margin: 0 0 1.6mm;
+	font-family: var(--display);
+	font-size: 12pt;
+	font-weight: 400;
+	letter-spacing: 0.04em;
+}
+
+.gestalt__body p {
+	text-indent: 0;
+}
+
+.gestalt__body p+p {
+	text-indent: 1.2em;
+}
+
 .knowledge-group {
 	break-before: page;
 }
@@ -551,58 +638,38 @@ a {
 	break-after: avoid;
 }
 
-.recipe__source {
-	margin: 1.6mm 0 0;
-	font-size: 8pt;
-	font-weight: 500;
-	letter-spacing: 0.1em;
-	text-transform: uppercase;
-	color: var(--ink-faint);
-	text-indent: 0;
-}
-
 .recipe__intro {
 	margin: 0 0 3.1mm;
 	font-style: italic;
 	color: var(--ink-soft);
 }
 
-/* Das Bild steht auf der rechten Seite, der Text auf der linken. Damit
-   beginnt jedes Rezept auf einer Rückseite; ein längerer Text läuft auf die
-   nächste Seite weiter und der Umbruch schiebt eine Leerseite dazwischen, damit
-   das Bild wieder auf einer rechten Seite landet. */
+/* Das Bild steht auf der rechten Seite, der Rezepttext beginnt auf ihrer
+   Rückseite. Damit beginnt jedes Rezept mit einem reinen Bild; ein längerer
+   Text läuft auf die nächste Seite weiter und der Umbruch schiebt eine Leerseite
+   dazwischen, damit das Bild des nächsten Rezepts wieder rechts landet. */
 .recipe-plate {
 	break-before: right;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: center;
 	height: 100%;
-	text-align: center;
 }
 
 .recipe-plate__frame {
-	margin: 0 0 3mm;
+	margin: 0;
 	break-inside: avoid;
 }
 
-/* 113 mm Breite und 165 mm Höhe passen in den Satzspiegel von 117 × 180 mm und
-   behalten das Seitenverhältnis der Quelle (1024 × 1536). */
+/* 113 mm Breite ergeben 169,5 mm Höhe und passen damit in den Satzspiegel von
+   117 × 180 mm. Die Quelle (1024 × 1536) behält ihr Seitenverhältnis. */
 .recipe-plate__frame img {
 	display: block;
 	width: 113mm;
 	height: auto;
 	max-width: 100%;
 	object-fit: contain;
-}
-
-.recipe-plate__caption {
-	margin: 0;
-	max-width: 92mm;
-	font-size: 7.4pt;
-	font-style: italic;
-	color: var(--ink-soft);
-	text-indent: 0;
-	break-inside: avoid;
 }
 
 .recipe__ingredients {
@@ -766,17 +833,35 @@ a {
 	margin: 0;
 	padding: 0;
 	list-style: none;
-	font-size: 8.8pt;
+	font-size: 8.4pt;
 }
 
-.register-group__list li {
+.register-entry {
+	display: flex;
+	align-items: baseline;
+	overflow: hidden;
 	margin: 0 0 0.5mm;
 	text-align: left;
 	text-indent: 0;
 	break-inside: avoid;
 }
 
-.register-group__count {
-	color: var(--ink-faint);
+.register-entry__label {
+	flex: 0 1 auto;
+	min-width: 0;
+	hyphens: auto;
 }
 
+.register-entry__leader {
+	flex: 1 1 auto;
+	min-width: 2mm;
+	margin: 0 1mm;
+	border-bottom: 0.4pt dotted var(--ink-faint);
+	transform: translateY(-0.5mm);
+}
+
+.register-entry__page {
+	flex: 0 0 auto;
+	font-variant-numeric: lining-nums tabular-nums;
+	color: var(--ink-soft);
+}

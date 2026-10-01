@@ -11,7 +11,9 @@
     "preview": "astro preview",
     "astro": "astro",
     "build:book": "astro build --config astro.book.config.mjs",
-    "make:pdf": "npm run build:book && node scripts/make-pdf.mjs"
+    "make:pdf": "npm run build:book && node scripts/make-pdf.mjs",
+    "check:book": "node scripts/buch-pruefen.mjs",
+    "check": "npm run build && npm run make:pdf && npm run check:book"
   },
   "dependencies": {
     "astro": "^7.3.5"

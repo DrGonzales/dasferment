@@ -205,7 +205,10 @@ async function main() {
 
 				const kapitelTitel = inhalt.querySelector(kapitelWaehler);
 				const rezeptTitel = inhalt.querySelector('.recipe__heading');
-				const kopf = kapitelTitel ? '' : rezeptTitel ? kapitel : rezept || kapitel;
+				// Bildseiten tragen keinen Kolumnentitel: Das Rezept steht dort noch
+				// nicht im Fluss, `rezept` wäre der Titel des vorherigen.
+				const bildseite = Boolean(inhalt.querySelector('.recipe-plate'));
+				const kopf = bildseite || kapitelTitel ? '' : rezeptTitel ? kapitel : rezept || kapitel;
 
 				if (kopf && inhalt.textContent.trim() !== '') {
 					const wert = kopf.trim().replace(/\\/g, '\\\\').replace(/"/g, '\\"');

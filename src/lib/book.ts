@@ -10,7 +10,7 @@ export interface BookChapter {
 }
 
 export interface BookRegisterEntry {
-	titel: string;
+	codexTitel: string;
 	anchor: string;
 }
 
@@ -38,6 +38,10 @@ export function registerAnchor(): string {
 
 export function prefaceAnchor(): string {
 	return 'vorwort';
+}
+
+export function figurenAnchor(): string {
+	return 'gestalten';
 }
 
 export function recipesAnchor(): string {
@@ -95,7 +99,7 @@ export function bookRegister(chapters: BookChapter[]): BookRegisterGroup[] {
 				entries: [],
 			};
 
-			group.entries.push({ titel: chapter.recipe.titel, anchor: chapter.anchor });
+			group.entries.push({ codexTitel: chapter.recipe.codex_titel, anchor: chapter.anchor });
 			groups.set(tag, group);
 		}
 	}

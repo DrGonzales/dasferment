@@ -1,6 +1,6 @@
 # Buchdruck mit Paged.js — Plan
 
-**Status:** Phasen 0 bis 6 umgesetzt, Layout als Doppelseite umgesetzt, Phase 7 Workflow angelegt, erster CI-Lauf steht aus
+**Status:** Phasen 0 bis 6 umgesetzt, Layout als Blatt je Rezept umgesetzt, Phase 7 Workflow angelegt, erster CI-Lauf steht aus
 **Erstellt:** 2026-09-29
 **Recherche-Stand:** 2026-09-30 (Paged.js weiterhin ohne Release, siehe Versionsangaben unten)
 **Entscheidungen:** 2026-09-30 getroffen, siehe Abschnitt 7
@@ -324,7 +324,7 @@ Nur `src/book/styles/book.css` wird geladen, nie `src/styles/global.css`.
 ### Aufbau des Buchs
 
 ```text
-Titelblatt → Inhaltsverzeichnis → Vorwort (Wissenseite) → Rezepte → Register
+Titelblatt → Inhaltsverzeichnis → Vorwort → Gestalten → Wissen → Rezepte → Register
 ```
 
 **Ein Dokument, fortlaufende arabische Zählung von der Titelseite an.** Der ursprüngliche
@@ -336,22 +336,37 @@ Inhaltsverzeichnis nennt keine römischen Vorlaufzahlen — ist bei 102 Seiten b
 Zwei Dokumente bleiben der Rückfallpfad, falls doch ein Vorlauf ohne Seitenzahlen
 entstehen soll; `pdf-lib` kann sie später in einer Datei zusammenführen.
 
+**Gestalten zwischen Vorwort und Wissen.** Connie und Katze stehen auf einer Seite, beide
+mit Portrait links und Text rechts. Die Texte kommen aus `src/lib/figuren.ts`, weil sie
+auch auf `/ueber-diese-seite/` stehen und dort nicht doppelt im Template gepflegt werden
+dürfen. Beide Portraits stammen aus `src/pic/actors/` und laufen als JPEG.
+
 **Rezepte alphabetisch nach `titel`.** Die Rezepte tragen 22 Zutaten-Tags, aber im
 Schnitt nur 1,8 Rezepte je Kategorie, plus das auf allen 39 Rezepten liegende Tag
 `gemuese`. Eine Gruppierung nach Kategorie zerfällt also in 22 kleine Gruppen. Stattdessen
 steht jedes Rezept alphabetisch, beginnt auf einer neuen Seite und nennt seine Kategorien
-als Kicker. Die 22 Kategorien werden im **Register** am Ende des Buchs ausgewertet, dort
-darf ein Rezept mehrfach erscheinen.
+als Kicker. Die Kategorien werden im **Register der Rezepte** am Ende des Buchs
+ausgewertet, dort darf ein Rezept mehrfach erscheinen.
 
-**Jedes Rezept ist eine Doppelseite.** Der Rezepttext steht auf der linken Seite (Verso),
-das Bild auf der rechten (Recto). Das ist die klassische Aufteilung eines Kochbuchs und
-nutzt den Satzspiegel, statt das Bild in eine schmale Spalte zu quetschen. Die Reihenfolge
-ist eine reine CSS-Aussage, keine Sonderlogik im Skript:
+Das Register ist nach Zutat alphabetisch, ohne Anzahl der Rezepte je Zutat. Unter jeder
+Zutat stehen die Rezepte zweispaltig mit `codex_titel` und Seitenzahl, die Seitenzahlen
+kommen aus denselben Platzhaltern wie im Inhaltsverzeichnis (`data-toc-page`).
+
+**Jedes Rezept ist ein Blatt.** Das Bild steht auf der rechten Seite (Recto), der
+Rezepttext beginnt auf der Rückseite (Verso). Das Bild bekommt die gute Seite, der Text
+beginnt auf dem Blatt, das man beim Umblättern zuerst umschlägt. Die Reihenfolge entsteht
+aus dem Markup, die Seitenlage aus CSS:
 
 ```css
 .recipe       { break-before: left; }
 .recipe-plate { break-before: right; }
 ```
+
+In `src/book/pages/index.astro` steht deshalb `.recipe-plate` vor `.recipe`. Die
+Bildseite trägt nur das Bild: keine Bildunterschrift und keinen Kolumnentitel, sonst
+stünde dort der Titel des vorherigen Rezepts, weil das Rezept an dieser Stelle noch gar
+nicht im Textfluss ist. `data-book-ref` steht nur am Rezepttext, damit das
+Inhaltsverzeichnis nicht auf eine Bildseite zeigt.
 
 Läuft ein Rezepttext über eine Seite hinaus, läuft er auf der Folgeseite weiter. Weil das
 Bild danach wieder rechts stehen muss, schiebt der Umbruch automatisch eine Leerseite
@@ -359,9 +374,11 @@ dazwischen. Leerseiten sind damit eine Folge der Regel und keine festen Seiten i
 Template. Bei 39 von 39 Rezepten, die auf eine Seite passen, entsteht im aktuellen Stand
 keine einzige zusätzliche Leerseite im Rezeptteil.
 
-**Rezeptüberschrift wie auf der Website:** der sachliche `titel` als kleine Zeile über der
-großen `codex_titel`. Der Kodex-Charakter bleibt damit erhalten, ohne dass die
-Sachbezeichnung verloren geht.
+**Nur die Codex-Überschrift.** Das Blatt nennt `codex_titel` groß, darüber die Kategorien
+als Kicker. Den sachlichen `titel` führt das Buch nicht mehr. Auf der Website bleibt er
+stehen, weil er dort für SEO, Brotkrümelnavigation und die Beschriftung der Karten
+gebraucht wird; im Buch gibt es keine dieser Anforderungen, und der Kodex-Charakter
+wird durch die Codex-Überschrift allein getragen.
 
 Ohne Header, Footer, Brotkrümelnavigation und Site-Shell. Keine erfundenen Texte: Titel
 und Zeile auf dem Titelblatt stammen aus der Website (`Das Ferment`,
@@ -376,10 +393,12 @@ als `counter(page)` in `@bottom-left` / `@bottom-right`, Typografie in `pt`.
 die drei Buchteile, `break-inside: avoid` für Zutatenliste, Ratschlag und Tabellen. Keine
 Media Queries, kein `vw`.
 
-Das Rezeptbild steht 113 mm breit im Satzspiegel, so hoch wie das Seitenverhältnis der
-Quelle (1024 × 1536) es zulässt, mit der sachlichen Rezeptbezeichnung als Bildunterschrift.
-`height: 100%` und `justify-content: center` auf `.recipe-plate` gehören zusammen: ohne die
-volle Höhe klebt das Motiv oben, weil Paged.js dem Flexcontainer keine Höhe gibt.
+Das Rezeptbild steht 113 mm breit im Satzspiegel, damit 169,5 mm hoch nach dem
+Seitenverhältnis der Quelle (1024 × 1536). `height: 100%` und `justify-content: center` auf
+`.recipe-plate` gehören zusammen: ohne die volle Höhe klebt das Motiv oben, weil Paged.js
+dem Flexcontainer keine Höhe gibt. `margin: 0` auf `.recipe-plate__frame` ist ebenfalls
+Pflicht, sonst schiebt der Standardrahmen des `<figure>` (`margin: 1em 40px`) das Bild um
+80 px schmaler.
 
 Der Kolumnentitel entsteht bewusst nicht über `string-set`, siehe die Beobachtungen in
 Abschnitt 3. Die Randboxen der Titelseite (`@page :first`) bleiben leer.
@@ -411,21 +430,24 @@ Reihenfolge nach `PagedPolyfill.preview()`, alles ohne zweiten Umbruch:
 | 5 | Inhaltsverzeichnis | Seitenzahlen aus dem fertigen Umbruch in die Platzhalter schreiben, Punct-Leader mit einem Flex-Band aus `border-bottom: dotted` nachbauen. **Kein zweiter Durchlauf nötig**, die Platzhalter sind brechendurch gleich breit. | erledigt 2026-09-30 |
 | 6 | Silbentrennung | `hyphenation.de` (npm 0.2.1) plus `hypher` als Build-Zeit-Transformation, die weiche Trennzeichen in die Druckfassung schreibt. Bewusst als Build-Schritt, damit die Druckfassung nicht von System-Wörterbüchern abhängt. | erledigt 2026-09-30 |
 | 7 | CI | Eigenständiger Job neben dem Website-Deploy, Chromium-Version gepinnt, PDF als Artefakt. | Workflow angelegt, erster Lauf steht aus |
-| 8 | Doppelseite je Rezept | Rezepttext auf der linken Seite, Bild auf der rechten. `break-before: left` auf `.recipe`, `break-before: right` auf `.recipe-plate`. Ein langer Text läuft auf der Folgeseite weiter, der Umbruch schiebt dann eine Leerseite dazwischen. | erledigt 2026-09-30 |
+| 8 | Blatt je Rezept | Bild auf der rechten Seite, Rezepttext auf der Rückseite. `.recipe-plate` steht im Markup vor `.recipe`, `break-before: right` auf `.recipe-plate`, `break-before: left` auf `.recipe`. Die Bildseite trägt nur das Bild, ohne Bildunterschrift und Kolumnentitel. Ein langer Text läuft auf der Folgeseite weiter, der Umbruch schiebt dann eine Leerseite dazwischen. | erledigt 2026-10-01 |
 | 9 | Transparente Bilder | Die neun Wissensmotive aus `smallactors/*` bleiben PNG. `pages/*` und `actors/*` sind deckend und laufen als JPEG. | erledigt 2026-09-30 |
 
 ### Stand nach der Umsetzung
 
 | | |
 | --- | --- |
-| Umfang | 102 Seiten: Titel, Inhalt (2), Vorwort, Wissen (12), Rezepte (78 = 39 Doppelseiten), Register (3), zwei Leerseiten für den Recto-Beginn |
+| Umfang | 102 Seiten: Titel, Inhalt (2), Vorwort (5), Gestalten (6), Wissen (12: 7 bis 18), Rezepte (78 = 39 Blätter aus Bild- und Textseite), Register (4: 99 bis 102), zwei Leerseiten für den Recto-Beginn |
+| Gestalten | „Connie und Katze“ auf Seite 6, Text aus `src/lib/figuren.ts`, dieselbe Quelle wie `/ueber-dische-seite/`. Beide Portraits 24 mm breit links neben dem Text, 384 px, JPEG |
+| Register | „Register der Rezepte“, 24 Zutatengruppen alphabetisch, ohne Anzahlangabe. Die Rezepte stehen zweispaltig darunter mit `codex_titel`, Punct-Leader und Seitenzahl |
 | Seitengröße | MediaBox 154,18 × 215,9 mm, TrimBox 148 × 210 mm bei 3 mm Versatz |
-| Rezeptseiten | 39 von 39 als Doppelseite: Text auf der linken, Bild auf der rechten Seite. Kein Rezept läuft über, deshalb keine zusätzlichen Leerseiten |
-| Lesezeichen | 70, davon 3 Haupteinträge, 9 Wissensgruppen, 18 Einträge, 39 Rezepte, 1 Wurzel |
-| Dateigröße | 12,7 MB bei 768 px Bildbreite und JPEG 80 |
-| Rezeptbild | 113 mm breit, 165 mm hoch, mittig bei 74,2 mm auf einer Satzspiegelmitte von 74 mm, Seitenverhältnis wie die Quelle |
+| Rezeptseiten | 39 von 39 als Blatt: Bild auf der rechten Seite 21, 23, … 97, der Rezepttext auf der Rückseite 22, 24, … 98. Kein Rezept läuft über, deshalb keine zusätzlichen Leerseiten |
+| Lesezeichen | 72, davon 4 Haupteinträge, 2 Gestalten, 9 Wissensgruppen, 18 Einträge, 39 Rezepte, 1 Wurzel |
+| Dateigröße | 12,8 MB bei 768 px Bildbreite und JPEG 80 |
+| Rezeptbild | 113 mm breit, 169,5 mm hoch, mittig auf einer Satzspiegelmitte von 74 mm, Seitenverhältnis wie die Quelle |
+| Rezeptüberschrift | nur `codex_titel`, Kategorien als Kicker darüber, kein sachlicher `titel` im Buch |
 | Transparenz | 18 `smask`-Einträge in `pdfimages -list`, ausschließlich auf den Wissensseiten. Die Rezeptbilder sind deckend und haben keinen |
-| Kolumnentitel | 81 von 102 Seiten, seitenzahl außen, Titelseite ohne Randinhalt |
+| Kolumnentitel | 42 von 102 Seiten: alle Text- und Wissensseiten, keine Bildseite, Titelseite ohne Randinhalt |
 | Offen | Erster CI-Lauf, Wissen-Teil mit neun Gruppenbeginnen auf neuen Seiten (12 statt 9 Seiten) |
 
 ### Prüfstand des letzten Laufs
@@ -435,13 +457,23 @@ Alles mit den Bordmitteln des Projekts nachprüfbar, `poppler-utils` vorausgeset
 | Prüfung | Kommando | Ergebnis |
 | --- | --- | --- |
 | Umbruch | `npm run make:pdf` | 102 Seiten im Umbruch, 102 gemeldet |
-| Inhaltsverzeichnis | Ausgabe von `make-pdf.mjs` | 69 Sprungmarken, 69 Lesezeichen, keine fehlende Seite |
-| Lesezeichen | `pdf-lib` über das fertige PDF | 70 Einträge, 3 Haupteinträge, keine weichen Trennzeichen in den Titeln |
+| Inhaltsverzeichnis | Ausgabe von `make-pdf.mjs` | 70 Sprungmarken, 72 Lesezeichen, keine fehlende Seite |
+| Lesezeichen | `pdf-lib` über das fertige PDF | 72 Einträge, 4 Haupteinträge, keine weichen Trennzeichen in den Titeln |
 | Seitengröße | `pdf-lib` | MediaBox 154,18 × 215,9 mm, TrimBox 148 × 210 mm bei 3 mm Versatz |
-| Rezeptpaare | `pdftotext` je Seite | 39 ungerade Bildseiten mit nur Bildunterschrift, 39 linke Textseiten |
-| Transparenz | `pdfimages -list` | `smask` nur auf den Wissensseiten |
-| Anker | `dist-book/index.html` | 70 `id`, keine doppelt, keine tote Sprungmarke |
+| Rezeptpaare | `npm run check:book` | 39 Bildseiten 21 bis 97 auf Recto, je mit Text auf der Rückseite, keine mit Kolumnentitel, Bild 113 mm breit und mittig |
+| Blattsatz | `npm run check:book` | kein Überschriften-, Kicker- oder Claim-Element erbt `text-align-last: justify` |
+| Anker | `dist-book/index.html` | 73 `id`, keine doppelt, keine tote Sprungmarke |
 | Website | `npm run build` | 71 Seiten, unverändert |
+
+`scripts/buch-pruefen.mjs` macht diese Prüfungen. Sie misst den fertigen Paged.js-Umbruch
+im Browser und das fertige PDF mit `pdfinfo`, `pdftotext` und `pdfimages`. Aufruf über
+`npm run check:book`.
+
+Warum beides und nicht nur das PDF: Der DOM kennt die berechneten Stile, nur dort lässt
+sich der geerbte Blocksatz messen. `pdftotext` zerlegt Small-Caps-Kicker in einzelne
+Zeilen und taugt deshalb nicht für Typografie-Messungen. Der erste Entwurf der Prüfung
+suchte im PDF-Textlayer nach gedehnten Zeilen und fand nichts, obwohl der Fehler im DOM
+deutlich sichtbar war.
 
 Zwei Fehler dieses Laufs, die nur deshalb sichtbar wurden, weil am fertigen PDF und nicht
 am DOM gemessen wurde:
@@ -472,8 +504,10 @@ drucken will, streicht `break-before: page` bei `.knowledge-group`.
 
 Dazu zwei Festlegungen aus der Umsetzungsvorbereitung:
 
-* **Reihenfolge der Rezepte:** alphabetisch nach `titel`, mit Kategorie-Register am Ende.
-* **Rezeptüberschrift:** sachlicher `titel` als Kicker über dem `codex_titel`.
+* **Reihenfolge der Rezepte:** alphabetisch nach `titel`, mit Register der Rezepte am Ende,
+  darin alphabetisch nach Zutat.
+  Die Sortierung bleibt nach `titel`, auch wenn die Überschrift `codex_titel` ist.
+* **Rezeptüberschrift:** nur `codex_titel`, groß, mit den Kategorien als Kicker darüber.
 
 ### Lokale Voraussetzungen für den PDF-Lauf
 

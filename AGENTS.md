@@ -24,6 +24,11 @@ Manage the background server with `astro dev stop`, `astro dev status`, and `ast
 | `npx astro build` | Build ohne npm-Skript, wenn `npm` nicht verfügbar ist |
 | `npm run build:book` | Buch-Build nach `dist-book/`, eine Seite, aktuell 102 Seiten |
 | `npm run make:pdf` | Buch-Build plus `dist-book/das-ferment.pdf` |
+| `npm run check:book` | prüft den fertigen Umbruch im Browser und das PDF, siehe `scripts/buch-pruefen.mjs` |
+| `npm run check` | Website, Buch, PDF und Buchprüfung in einem Durchlauf |
+
+`npm run check:book` braucht `poppler-utils` für die PDF-Seite. Im Devcontainer ist es
+über `.devcontainer/Dockerfile` installiert, lokal `sudo apt-get install -y poppler-utils`.
 
 `npx astro check` funktioniert nicht, solange `@astrojs/check` und `typescript` nicht installiert sind. Nicht eigenmächtig installieren, sondern vorher fragen.
 
@@ -33,7 +38,7 @@ Manage the background server with `astro dev stop`, `astro dev status`, and `ast
 src/
 ├── components/        Header.astro, Footer.astro, RecipeCard.astro, SeoHead.astro
 ├── data/              das_ferment.json, das_ferment_infos.json
-├── lib/               recipes.ts, infos.ts, pageImages.ts, actorImages.ts, smallActors.ts, categoryImages.ts, social.ts, book.ts
+├── lib/               recipes.ts, infos.ts, pageImages.ts, actorImages.ts, smallActors.ts, categoryImages.ts, social.ts, book.ts, figuren.ts
 ├── pages/             index, rezepte, kategorien, wissen, ueber-diese-seite, kontakt, impressum, sitemap.xml.ts, robots.txt.ts
 ├── pic/               pages/ (Rezeptillustrationen), actors/ (Ratschlag-Portraits), smallactors/ (Wissenseite), categories/ (Kategorieseite)
 ├── styles/            global.css
@@ -341,15 +346,18 @@ Das Rezeptbuch existiert als zweite Ausgabe: `astro.book.config.mjs` baut `src/b
 ### Was im Buch gilt und auf der Website nicht
 
 * A5 mit 3 mm Beschnitt, `marks: crop`, Satzspiegel 117 × 180 mm, Seitenzahl außen, Kolumnentitel außen.
-* Ein Rezept je Seite, alphabetisch nach `titel`, Register der Zutatenkategorien am Ende.
-* Jedes Rezept ist eine Doppelseite: Der Rezepttext steht auf der linken Seite (Verso), das Bild auf der rechten (Recto). Der Text beginnt deshalb immer auf einer linken Seite und das Bild immer auf einer rechten. Wird der Text länger als eine Seite, läuft er auf der nächsten Seite weiter; der Umbruch schiebt dann eine Leerseite dazwischen, damit das Bild wieder rechts steht.
-* Überschrift: sachlicher `titel` als Kicker, `codex_titel` groß.
+* Reihenfolge: Titel, Inhalt, Vorwort, Gestalten, Wissen, Rezepte, Register.
+* Die Gestalten Connie und Katze stehen im Buch nach dem Vorwort und auf der Website unter `/ueber-dische-seite/`. Beide Ausgaben lesen `FIGUREN` aus `src/lib/figuren.ts`, die Texte stehen nirgends im Template.
+* Ein Rezept je Blatt, alphabetisch nach `titel`, Register der Rezepte am Ende, darin alphabetisch nach Zutat. Ohne Anzahl der Rezepte je Zutat, die Rezepte zweispaltig mit `codex_titel` und Seitenzahl.
+* Jedes Rezept ist ein Blatt: Das Bild steht auf der rechten Seite (Recto), der Rezepttext beginnt auf der Rückseite (Verso). Wird der Text länger als eine Seite, läuft er auf der nächsten Seite weiter; der Umbruch schiebt dann eine Leerseite dazwischen, damit das Bild des nächsten Rezepts wieder rechts steht.
+* Überschrift: nur `codex_titel`, groß. Der sachliche `titel` steht nicht im Buch.
 * Kein Header, Footer, keine Brotkrümelnavigation, keine Site-Shell.
-* Bild und Text getrennt: `break-before: left` auf `.recipe`, `break-before: right` auf `.recipe-plate`. Leerseiten entstehen aus dieser Regel, nicht aus festen Seiten.
+* Bild und Text getrennt: `.recipe-plate` steht im Markup vor `.recipe`, `break-before: right` auf `.recipe-plate`, `break-before: left` auf `.recipe`. Leerseiten entstehen aus dieser Regel, nicht aus festen Seiten.
+* Die Bildseite trägt nur das Bild: keine Bildunterschrift und keinen Kolumnentitel. `data-book-ref` steht deshalb nur am Text, damit das Inhaltsverzeichnis nicht auf eine Bildseite zeigt.
 * Typografie in `pt`, keine Media Queries, kein `vw`, keine Container Queries.
 * Bilder mit Transparenz bleiben PNG. Als JPEG verliert sharp den transparenten Grund und füllt ihn schwarz. Das gilt für `smallactors/*`; `pages/*` und `actors/*` sind deckend und laufen als JPEG.
 * Alle Bilder über `astro:assets` mit `getImage` in fester Breite, keine Originale im PDF.
-* Das Rezeptbild steht 113 mm breit und so hoch wie das Seitenverhältnis es zulässt (165 mm), mit der Rezepbenzeichnung als Bildunterschrift. Ohne `height: 100%` und ohne `justify-content: center` klebt es oben, weil Paged.js dem Flexcontainer keine volle Höhe gibt.
+* Das Rezeptbild steht 113 mm breit und damit 169,5 mm hoch, mittig im Satzspiegel. Ohne `height: 100%` und ohne `justify-content: center` klebt es oben, weil Paged.js dem Flexcontainer keine volle Höhe gibt. `margin: 0` auf `.recipe-plate__frame` ist Pflicht, sonst schiebt der Standardrahmen des `<figure>` das Bild um 80 px schmaler.
 
 ## Vor dem Abschluss prüfen
 
@@ -359,7 +367,24 @@ Das Rezeptbuch existiert als zweite Ausgabe: `astro.book.config.mjs` baut `src/b
 4. Neue Bilder laufen über `astro:assets` und haben Alt-Text beziehungsweise sind als dekorativ markiert.
 5. Neue Seiten: `SeoHead.astro`, Eintrag im Sitemap, Eintrag in der Navigation.
 6. Kein horizontales Scrollen, keine festen Layoutbreiten.
-7. Bei Änderungen an `src/data/` oder `src/lib/book.ts` zusätzlich `npm run make:pdf`: kein Rezept darf auf zwei Seiten laufen, jeder Inhaltsverzeichnis-Eintrag braucht eine Seitenzahl.
+7. Bei Änderungen an `src/data/`, `src/lib/book.ts` oder `src/book/` zusätzlich `npm run make:pdf` und `npm run check:book`. Das Skript prüft Bildseite auf Recto, Text auf der Rückseite, stumme Bildseite, Bildbreite und -mitte, geerbten Blocksatz, doppelte `id` und tote Sprungmarken.
+8. Geänderte Seitenzahlen im Buch kommen in `docs/buchdruck-plan.md`, Abschnitt „Stand nach der Umsetzung“, nach.
+
+## Skills und Commands
+
+Wiederkehrende Abläufe liegen als Skills und Commands im Projekt, nicht nur hier.
+
+| Datei | Wird geladen für |
+| --- | --- |
+| `.opencode/skills/buch-umbruch/SKILL.md` | Umbruch des Buchs ändern, Paged.js-Fallstricke, Bild- und Textblatt, Kolumnentitel |
+| `.opencode/skills/rezepte-daten/SKILL.md` | Rezepte und Wissenseiten in `src/data/*.json` ändern, Codex-Texte, Ratgeber, Pflichtfelder |
+| `.opencode/commands/buch-pruefen.md` | `/buch-pruefen` Buch neu bauen und Umbruch prüfen |
+| `.opencode/commands/abschluss.md` | `/abschluss` Checkliste „Vor dem Abschluss prüfen“ durchgehen |
+| `.opencode/commands/rezept.md` | `/rezept` Rezept oder Wissenseite in den Daten ändern |
+
+Neue Erkenntnisse aus dem Buchdruck gehören in `buch-umbruch`, Erkenntnisse über
+Datenform und Codex in `rezepte-daten`. Diese Datei bleibt die Übersicht, die
+Detailwissen gehört in den jeweiligen Skill.
 
 ## Documentation
 
@@ -373,3 +398,18 @@ Consult these guides before working on related tasks:
 - [Adding or managing content](https://docs.astro.build/en/guides/content-collections/)
 - [Adding styles or using Tailwind](https://docs.astro.build/en/guides/styling/)
 - [Supporting multiple languages](https://docs.astro.build/en/guides/internationalization/)
+
+
+## Astro
+
+For Astro questions, always use the official Astro Docs MCP.
+
+## Other libraries
+
+For library documentation, use Context7.
+
+## Paged.js
+
+For Paged.js documentation, use Context7 with:
+
+/pagedjs/pagedjs

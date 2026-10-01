@@ -10,12 +10,14 @@ import {
 	bookChapters,
 	bookRegister,
 	contentsAnchor,
+	figurenAnchor,
 	groupAnchor,
 	infoAnchor,
 	prefaceAnchor,
 	recipesAnchor,
 	registerAnchor,
 } from '../../lib/book';
+import { FIGUREN } from '../../lib/figuren';
 import { codexListe, codexText, gruppiereInfos, type Info } from '../../lib/infos';
 import { imageForRecipe } from '../../lib/pageImages';
 import { recipeImageAlt, type Recipe } from '../../lib/recipes';
@@ -29,6 +31,7 @@ import '../styles/book.css';
 const RECIPE_IMAGE_WIDTH = 768;
 const ADVISOR_IMAGE_WIDTH = 224;
 const PORTRAIT_IMAGE_WIDTH = 224;
+const FIGUREN_IMAGE_WIDTH = 384;
 const IMAGE_QUALITY = 80;
 
 const recipes = recipeData as Recipe[];
@@ -106,8 +109,18 @@ const knowledgePortraits = await Promise.all(
 	}),
 );
 
+// Die beiden Gestalten stehen im Buch nach dem Vorwort, im hohen Format wie
+// beim Ratschlag. actors/* ist deckend, deshalb JPEG.
+const figuren = await Promise.all(
+	FIGUREN.map(async (figur) => {
+		const image = actorImageFor(figur.sprecher);
+		return { ...figur, image: image ? await renderImage(image, FIGUREN_IMAGE_WIDTH) : undefined };
+	}),
+);
+
 const contents = [
 	{ ref: prefaceAnchor(), label: 'Vorwort: Was die Geduld lehrt', indent: 0 },
+	{ ref: figurenAnchor(), label: 'Connie und Katze', indent: 0 },
 	...gruppen.map((gruppe) => ({
 		ref: groupAnchor(gruppe.slug),
 		label: gruppe.label,
@@ -119,7 +132,7 @@ const contents = [
 		label: folio.recipe.codex_titel,
 		indent: 1,
 	})),
-	{ ref: registerAnchor(), label: 'Register der Zutaten', indent: 0 },
+	{ ref: registerAnchor(), label: 'Register der Rezepte', indent: 0 },
 ];
 ---
 
@@ -189,6 +202,45 @@ const contents = [
 				{infos.length} Einträge in {gruppen.length} Gruppen, dazu zwei Tabellen über Salz
 				und Lagerung.
 			</p>
+		</section>
+
+		<section class="gestalten" data-book-ref={figurenAnchor()}>
+			<header class="knowledge-group__head" id={figurenAnchor()}>
+				<h2 class="knowledge-group__title" data-outline data-outline-ref={figurenAnchor()}>
+					Connie und Katze
+				</h2>
+				<p class="knowledge-group__claim">Die Küchenmeisterin und ihr Gefährte</p>
+			</header>
+
+			{
+				figuren.map((figur) => (
+					<article class="gestalt" id={`gestalt-${figur.id}`}>
+						{figur.image && (
+							<figure class="gestalt__portrait">
+								<img
+									src={figur.image.src}
+									width={figur.image.width}
+									height={figur.image.height}
+									alt={`${figur.sprecher} in der Schreibkammer`}
+								/>
+							</figure>
+						)}
+						<div class="gestalt__body">
+							<p class="gestalt__kicker">{figur.kicker}</p>
+							<h3
+								class="gestalt__name"
+								data-outline
+								data-outline-ref={`gestalt-${figur.id}`}
+							>
+								{figur.name}
+							</h3>
+							{figur.abschnitte.map((abschnitt) => (
+								<p>{hyphenate(abschnitt)}</p>
+							))}
+						</div>
+					</article>
+				))
+			}
 		</section>
 
 		{
@@ -311,13 +363,25 @@ const contents = [
 {
 			folios.map((folio) => (
 				<Fragment>
+					{folio.image && (
+						<section class="recipe-plate">
+							<figure class="recipe-plate__frame">
+								<img
+									src={folio.image.src}
+									width={folio.image.width}
+									height={folio.image.height}
+									alt={recipeImageAlt(folio.recipe)}
+								/>
+							</figure>
+						</section>
+					)}
+
 					<article class="recipe" data-book-ref={folio.anchor} id={folio.anchor}>
 					<header class="recipe__head">
 						<p class="recipe__kicker kicker">{folio.categories.join(' · ')}</p>
 						<h2 class="recipe__heading" data-outline data-outline-ref={folio.anchor}>
 							{hyphenate(folio.recipe.codex_titel)}
 						</h2>
-						<p class="recipe__source">{hyphenate(folio.recipe.titel)}</p>
 					</header>
 
 					{folio.recipe.codex_einleitung ? (
@@ -371,48 +435,34 @@ const contents = [
 						</aside>
 					)}
 				</article>
-
-					{folio.image && (
-					<section class="recipe-plate" data-book-ref={folio.anchor}>
-						<figure class="recipe-plate__frame">
-							<img
-								src={folio.image.src}
-								width={folio.image.width}
-								height={folio.image.height}
-								alt={recipeImageAlt(folio.recipe)}
-							/>
-						</figure>
-						<p class="recipe-plate__caption">{folio.recipe.titel}</p>
-					</section>
-				)}
 				</Fragment>
 			))}
 
 		<section class="book-part" id={registerAnchor()} data-book-ref={registerAnchor()}>
 			<p class="book-part__kicker kicker">Nachschlagen</p>
 			<h1 class="book-part__title" data-outline data-outline-ref={registerAnchor()}>
-				Register der Zutaten
+				Register der Rezepte
 			</h1>
 			<p class="book-part__ornament" aria-hidden="true">❦</p>
 			<p class="book-part__claim">
-				{register.length} Zutatenkategorien. Jedes Rezept steht unter allen Zutaten, die es
-				trägt.
+				{register.length} Zutatengruppen, alphabetisch geordnet. Jedes Rezept steht unter
+				allen Zutaten, die es trägt.
 			</p>
 		</section>
 
 		{
 			register.map((gruppe) => (
 				<section class="register-group">
-					<h2 class="register-group__title">
-						{gruppe.label}{' '}
-						<span class="register-group__count">
-							{gruppe.entries.length}{' '}
-							{gruppe.entries.length === 1 ? 'Rezept' : 'Rezepte'}
-						</span>
-					</h2>
+					<h2 class="register-group__title">{gruppe.label}</h2>
 					<ul class="register-group__list">
 						{gruppe.entries.map((entry) => (
-							<li>{entry.titel}</li>
+							<li class="register-entry">
+								<span class="register-entry__label">{hyphenate(entry.codexTitel)}</span>
+								<span class="register-entry__leader" aria-hidden="true" />
+								<span class="register-entry__page" data-toc-page={entry.anchor}>
+									00
+								</span>
+							</li>
 						))}
 					</ul>
 				</section>
