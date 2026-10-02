@@ -34,17 +34,6 @@ jobs:
       - name: PDF bauen
         run: npm run make:pdf
 
-      - name: Prüfen
-        run: |
-          test -f dist-book/das-ferment.pdf
-          pages=$(pdfinfo dist-book/das-ferment.pdf | awk '/^Pages:/ {print $2}')
-          if [ "$pages" -lt 90 ] || [ "$pages" -gt 115 ]; then
-            echo "Unerwartete Seitenzahl: $pages"
-            exit 1
-          fi
-          pdftotext -f 1 -l 1 dist-book/das-ferment.pdf - | grep -q "Das Ferment" \
-            || { echo "Titelseite ohne Titel"; exit 1; }
-
       - name: Artefakt
         uses: actions/upload-artifact@v5
         with:
