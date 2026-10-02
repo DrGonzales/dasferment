@@ -5,22 +5,26 @@ on:
     branches:
       - main
   workflow_dispatch:
-  pull_request:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: buch
   cancel-in-progress: true
 
+env:
+  TAG: buch
+
 jobs:
   pdf:
-    name: PDF bauen
+    name: PDF bauen und veröffentlichen
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
 
       - name: Node
         uses: actions/setup-node@v6
@@ -34,9 +38,25 @@ jobs:
       - name: PDF bauen
         run: npm run make:pdf
 
-      - name: Artefakt
-        uses: actions/upload-artifact@v5
-        with:
-          name: das-ferment
-          path: dist-book/das-ferment.pdf
-          retention-days: 30
+      - name: Release veröffentlichen
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PREVIOUS=$(git rev-parse HEAD^ 2>/dev/null || true)
+          if [ -n "$PREVIOUS" ]; then RANGE="$PREVIOUS..${GITHUB_SHA}"; else RANGE="${GITHUB_SHA}"; fi
+          NOTES=$(mktemp)
+          {
+            echo "Automatisch aus \`main\` gebautes Rezeptbuch."
+            echo
+            echo "Quelle: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/commit/${GITHUB_SHA}"
+            echo
+            echo "### Änderungen an Buch und Daten"
+            echo
+            git log --pretty='- %s' "$RANGE" -- src/ scripts/ || true
+          } > "$NOTES"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" dist-book/das-ferment.pdf --clobber
+            gh release edit "$TAG" --title 'Das Ferment' --notes-file "$NOTES"
+          else
+            gh release create "$TAG" dist-book/das-ferment.pdf --title 'Das Ferment' --notes-file "$NOTES"
+          fi
