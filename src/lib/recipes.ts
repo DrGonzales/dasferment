@@ -34,7 +34,22 @@ export function categorySlug(tag: string): string {
 }
 
 export function categoryLabel(tag: string): string {
-	return tag === 'gemuese' ? 'Gemüse' : tag;
+	return tag;
+}
+
+export const GENERAL_TAG_LABEL = 'Gemüse';
+
+// Das Ober-Tag steckt in fast jedem Rezept und sagt für Leser, interne Verlinkung
+// und JSON-LD nichts. Der Vergleich läuft über den Slug, damit ein Umbenennen des
+// Tags in den Daten nicht wieder an einem hart verdrahteten String scheitert.
+const GENERAL_TAG_SLUG = slugify(GENERAL_TAG_LABEL);
+
+export function isGeneralTag(tag: string): boolean {
+	return slugify(tag) === GENERAL_TAG_SLUG;
+}
+
+export function hasGeneralTag(recipe: Pick<Recipe, 'tags'>): boolean {
+	return recipe.tags.some(isGeneralTag);
 }
 
 const DURATION_UNITS: Record<string, number> = {

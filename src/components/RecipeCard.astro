@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
-import { recipeImageAlt, slugify, type Recipe } from '../lib/recipes';
+import { isGeneralTag, recipeImageAlt, slugify, type Recipe } from '../lib/recipes';
 
 interface Props {
 	recipe: Recipe;
@@ -16,7 +16,7 @@ const withBase = (path: string) => `${base}${path}`;
 const slug = slugify(recipe.titel);
 const folio = String(index + 1).padStart(2, '0');
 const totalFolios = String(total).padStart(2, '0');
-const visibleTags = recipe.tags.filter((tag) => tag.toLowerCase() !== 'gemuese').slice(0, 2);
+const visibleTags = recipe.tags.filter((tag) => !isGeneralTag(tag)).slice(0, 2);
 ---
 
 <article class="recipe-card">

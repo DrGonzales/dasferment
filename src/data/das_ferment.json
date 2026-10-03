@@ -2,7 +2,7 @@
   {
     "titel": "Klassische Salzgurken (Milchsäuregärung)",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Gurke"
     ],
     "zutaten": [
@@ -33,7 +33,7 @@
   {
     "titel": "Würzige Knoblauch-Chili-Gurken",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Gurke"
     ],
     "zutaten": [
@@ -64,7 +64,7 @@
   {
     "titel": "Russische Gurken mit Meerrettich und Johannisbeerblättern",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Gurke"
     ],
     "zutaten": [
@@ -95,7 +95,7 @@
   {
     "titel": "Asiatisch inspirierte Sesam-Ingwer-Gurken",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Gurke"
     ],
     "zutaten": [
@@ -126,7 +126,7 @@
   {
     "titel": "Gurken-Pickles nach New-York-Deli-Art (Half Sour)",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Gurke"
     ],
     "zutaten": [
@@ -156,7 +156,7 @@
   {
     "titel": "Klassisches Baechu-Kimchi (Chinakohl-Kimchi)",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Kohl",
       "Kimchi"
     ],
@@ -190,7 +190,7 @@
   {
     "titel": "Kakkdugi (Rettich-Kimchi)",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Rettich",
       "Kimchi"
     ],
@@ -222,7 +222,7 @@
   {
     "titel": "Oi-Sobagi (Gefülltes Gurken-Kimchi)",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Gurke",
       "Kimchi"
     ],
@@ -255,7 +255,7 @@
   {
     "titel": "Nabak-Kimchi (Mildes Wasser-Kimchi)",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Kohl",
       "Rettich",
       "Kimchi"
@@ -289,7 +289,7 @@
   {
     "titel": "Aromatisches Fenchel-Orangen-Kimchi",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Fenchel",
       "Kimchi"
     ],
@@ -321,9 +321,11 @@
   {
     "titel": "Herbstliches Kürbis-Apfel-Kimchi",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Kürbis",
-      "Kimchi"
+      "Kimchi",
+      "Obst",
+      "Apfel"
     ],
     "zutaten": [
       "800 g Hokkaido-Kürbis (mit Schale, in feine Spalten oder Stifte geschnitten)",
@@ -354,7 +356,7 @@
   {
     "titel": "Knackiges Blumenkohl-Brokkoli-Kimchi",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Blumenkohl",
       "Brokkoli",
       "Kimchi"
@@ -388,7 +390,7 @@
   {
     "titel": "Möhren-Ingwer-Kimchi",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Möhre",
       "Kimchi"
     ],
@@ -420,7 +422,7 @@
   {
     "titel": "Klassisches Sauerkraut mit Kümmel",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Kohl",
       "Sauerkraut"
     ],
@@ -448,7 +450,7 @@
   {
     "titel": "Rotes Sauerkraut mit Apfel",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Kohl",
       "Rotkohl"
     ],
@@ -477,7 +479,7 @@
   {
     "titel": "Sauerkraut mit Karotte und Ingwer",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Kohl",
       "Möhre",
       "Sauerkraut"
@@ -507,7 +509,7 @@
   {
     "titel": "Mildes Weißkohl-Pfeffer-Ferment",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Kohl"
     ],
     "zutaten": [
@@ -535,7 +537,7 @@
   {
     "titel": "Fermentierte Möhren mit Ingwer",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Möhre"
     ],
     "zutaten": [
@@ -564,7 +566,7 @@
   {
     "titel": "Möhren mit Kreuzkümmel und Orange",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Möhre"
     ],
     "zutaten": [
@@ -593,7 +595,7 @@
   {
     "titel": "Fermentierte Radieschen mit Dill",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Radieschen"
     ],
     "zutaten": [
@@ -623,7 +625,7 @@
   {
     "titel": "Fermentierter Rettich mit Chili",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Rettich"
     ],
     "zutaten": [
@@ -653,7 +655,7 @@
   {
     "titel": "Fermentierte Rote Bete mit Meerrettich",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Rote Bete"
     ],
     "zutaten": [
@@ -682,9 +684,10 @@
   {
     "titel": "Rote Bete mit Apfel und Ingwer",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Rote Bete",
-      "Apfel"
+      "Apfel",
+      "Obst"
     ],
     "zutaten": [
       "700 g Rote Bete",
@@ -711,7 +714,7 @@
   {
     "titel": "Fermentierte grüne Bohnen mit Knoblauch",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Bohnen"
     ],
     "zutaten": [
@@ -741,7 +744,7 @@
   {
     "titel": "Fermentierte Paprika mit Knoblauch",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Paprika"
     ],
     "zutaten": [
@@ -770,7 +773,7 @@
   {
     "titel": "Paprika-Chili-Ferment",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Paprika",
       "Chili"
     ],
@@ -800,7 +803,7 @@
   {
     "titel": "Fermentierte rote Zwiebeln",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Zwiebel"
     ],
     "zutaten": [
@@ -829,7 +832,7 @@
   {
     "titel": "Fermentierte Perlzwiebeln mit Thymian",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Zwiebel"
     ],
     "zutaten": [
@@ -858,7 +861,7 @@
   {
     "titel": "Fermentierter Knoblauch mit Chili",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Knoblauch"
     ],
     "zutaten": [
@@ -887,7 +890,7 @@
   {
     "titel": "Fermentierter Blumenkohl mit Curry",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Blumenkohl"
     ],
     "zutaten": [
@@ -917,7 +920,7 @@
   {
     "titel": "Fermentierter Brokkoli mit Zitrone",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Brokkoli"
     ],
     "zutaten": [
@@ -946,7 +949,7 @@
   {
     "titel": "Fermentierter Fenchel mit Zitrone und Dill",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Fenchel"
     ],
     "zutaten": [
@@ -975,7 +978,7 @@
   {
     "titel": "Fermentierter Sellerie mit Wacholder",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Sellerie"
     ],
     "zutaten": [
@@ -1004,7 +1007,7 @@
   {
     "titel": "Fermentierte Kohlrabi mit Dill",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Kohlrabi"
     ],
     "zutaten": [
@@ -1033,7 +1036,7 @@
   {
     "titel": "Fermentierte Zucchini mit Knoblauch und Kräutern",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Zucchini"
     ],
     "zutaten": [
@@ -1063,7 +1066,7 @@
   {
     "titel": "Fermentierter Kürbis mit Chili und Ingwer",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Kürbis"
     ],
     "zutaten": [
@@ -1093,7 +1096,6 @@
   {
     "titel": "Gemischtes Bauernferment",
     "tags": [
-      "gemuese",
       "Gemüse"
     ],
     "zutaten": [
@@ -1122,7 +1124,7 @@
   {
     "titel": "Winterliches Wurzelgemüse-Ferment",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Wurzelgemüse"
     ],
     "zutaten": [
@@ -1152,7 +1154,7 @@
   {
     "titel": "Karotten-Rettich-Ferment mit Sesam",
     "tags": [
-      "gemuese",
+      "Gemüse",
       "Möhre",
       "Rettich"
     ],
@@ -1177,6 +1179,37 @@
     "ratgeber": {
       "sprecher": "Katze",
       "text": "Sesam wird geröstet, bevor er ins Ferment kommt. Kleine Mühe, großer Duft."
+    }
+  },
+  {
+    "titel": "Fermentierte Schlehen – falsche Oliven (Milchsäuregärung)",
+    "tags": [
+      "Obst",
+      "Schlehe"
+    ],
+    "zutaten": [
+      "1 kg reife, feste Schlehen",
+      "30 g Meersalz (ohne Jod und Trennmittel)",
+      "1–2 Zweige Thymian",
+      "1 Lorbeerblatt",
+      "3 Wacholderbeeren, leicht angedrückt",
+      "1 kleine Knoblauchzehe, optional"
+    ],
+    "zubereitung": [
+      "Schlehen sorgfältig verlesen und nur feste, unbeschädigte Früchte verwenden. Die Früchte vorsichtig waschen und gut abtropfen lassen. Nach Möglichkeit können die Schlehen zuvor einmal durchgefroren worden sein, was ihre herbe Note etwas milder werden lässt.",
+      "Die Schlehen wiegen und 3 % ihres Gewichtes an Salz berechnen. Bei 1 kg Schlehen sind dies 30 g Salz. Die Früchte mit dem Salz gründlich vermengen und etwa 1 Stunde stehen lassen.",
+      "Thymian, Lorbeer, Wacholder und nach Wunsch die Knoblauchzehe in ein sauberes Fermentationsglas geben. Die gesalzenen Schlehen hinzufügen und vorsichtig andrücken, damit sich möglichst viel eigener Fruchtsaft bildet.",
+      "Die Schlehen mit einem Fermentiergewicht beschweren. Die Früchte sollen möglichst vollständig unter ihrem eigenen Saft stehen. Falls dafür nicht genügend Flüssigkeit entsteht, vorsichtig mit etwas 3-prozentiger Salzlake auffüllen.",
+      "Das Glas mit einem Fermentationsdeckel oder Gärverschluss verschließen und 7 bis 10 Tage bei mäßiger Raumtemperatur vor direkter Sonne geschützt fermentieren lassen. Bläschenbildung und ein angenehm säuerlicher Duft sind Zeichen einer aktiven Gärung.",
+      "Nach etwa einer Woche eine Schlehe probieren. Die Früchte sollen deutlich säuerlicher schmecken und ihre starke herbe Zusammenziehendheit verloren haben. Ist der gewünschte Geschmack erreicht, die Schlehen kühl stellen.",
+      "Die fermentierten Schlehen im Kühlschrank weiter nachreifen lassen. Zum Servieren können sie wie Oliven zu Brot, Käse, Salaten oder einer Antipasti-Platte gereicht werden. Etwas gutes Olivenöl gibt man erst unmittelbar vor dem Verzehr hinzu."
+    ],
+    "picture": "40.png",
+    "codex_titel": "Von den herben Früchten des Schwarzdorns, die zu falschen Oliven werden",
+    "codex_einleitung": "Hier sei verzeichnet, wie aus den herben Früchten des Schwarzdorns durch Salz und die stille Kraft der Gärung ein gar wunderliches Geleit zu Brot, Käse und allerlei Speisen bereitet wird.",
+    "ratgeber": {
+      "sprecher": "Connie",
+      "text": "Nimm die Schlehen wohl zur Hand und gib ihnen ihr rechtes Maß an Salz. Sie brauchen ihre Zeit, bis aus ihrer herben Art ein säuerlicher und olivenähnlicher Geschmack geworden ist. Und hüte dich: Die Früchte mögen klein sein, doch ihre Kerne sind nichts zum Zerbeißen."
     }
   }
 ]

@@ -19,7 +19,7 @@ Manage the background server with `astro dev stop`, `astro dev status`, and `ast
 | Befehl | Wirkung |
 | --- | --- |
 | `npm run dev` | `astro dev --host 0.0.0.0` |
-| `npm run build` | statischer Build nach `dist/`, aktuell 71 Seiten |
+| `npm run build` | statischer Build nach `dist/`, aktuell 73 Seiten |
 | `npm run preview` | Build lokal ansehen |
 | `npx astro build` | Build ohne npm-Skript, wenn `npm` nicht verfügbar ist |
 | `npm run build:book` | Buch-Build nach `dist-book/`, eine Seite, aktuell 102 Seiten |
@@ -29,6 +29,14 @@ Manage the background server with `astro dev stop`, `astro dev status`, and `ast
 
 `npm run check:book` braucht `poppler-utils` für die PDF-Seite. Im Devcontainer ist es
 über `.devcontainer/Dockerfile` installiert, lokal `sudo apt-get install -y poppler-utils`.
+
+`npm run make:pdf` braucht zusätzlich Chrome für Puppeteer. Im Devcontainer legt das
+`Dockerfile` es unter `PUPPETEER_CACHE_DIR=/home/node/.cache/puppeteer` ab, lokal
+`npx puppeteer browsers install chrome`. Die Chrome-Version folgt der gepinnten
+`puppeteer`-Version in `package.json`. Fehlt eine Systembibliothek, meldet Chrome
+`error while loading shared libraries`; das `Dockerfile` installiert genau die Liste, die
+dann passt. Puppeteers eigenes `--install-deps` funktioniert auf Debian nicht, weil es
+das apt-Paket `google-chrome-stable` nachzieht und dafür das Google-Repository fehlt.
 
 `npx astro check` funktioniert nicht, solange `@astrojs/check` und `typescript` nicht installiert sind. Nicht eigenmächtig installieren, sondern vorher fragen.
 
@@ -57,7 +65,7 @@ Verwendet werden Astro, TypeScript (`astro/tsconfigs/strict`), HTML, CSS, JSON. 
 
 Beide JSON-Dateien sind Single Source of Truth:
 
-* `src/data/das_ferment.json` — 39 Rezepte, aktuell alle mit `picture`, `ratgeber` und `codex_einleitung`
+* `src/data/das_ferment.json` — 40 Rezepte, aktuell alle mit `picture`, `ratgeber` und `codex_einleitung`
 * `src/data/das_ferment_infos.json` — 18 Wissenseinträge, 9 Kategorien, 20 Abschnitte, 2 Tabellen
 
 Regeln:
@@ -76,6 +84,7 @@ Regeln:
 | Kategorien | `/kategorien/`, `/kategorien/<kategorie>/` |
 | Wissen | `/wissen/` |
 | Über diese Seite | `/ueber-diese-seite/` |
+| Kontakt | `/kontakt/` |
 | Impressum | `/impressum/` |
 | Hilfsdateien | `/sitemap.xml`, `/robots.txt` |
 
@@ -245,10 +254,10 @@ Alle Bilder werden über `astro:assets` mit `Image` oder `getImage()` ausgeliefe
 
 | Ordner | Inhalt | Maße | Einsatz |
 | --- | --- | --- | --- |
-| `src/pic/pages/` | 39 Rezeptillustrationen `1.png` … `39.png` | 1024 × 1536 | Rezeptbild, Karten, Social Card |
+| `src/pic/pages/` | 40 Rezeptillustrationen `1.png` … `40.png` | 1024 × 1536 | Rezeptbild, Karten, Social Card |
 | `src/pic/actors/` | `connie.png`, `katze.png` | 1024 × 1536 | Portrait im Ratschlag |
 | `src/pic/smallactors/` | `1.png` … `9.png` | 640 × 640 | Portrait auf der Wissensseite |
-| `src/pic/categories/` | 25 Kategoriebilder, eine Datei je Kategorie-Slug | 1254 × 1254 | Kachel auf `/kategorien/` |
+| `src/pic/categories/` | 26 Kategoriebilder, eine Datei je Kategorie-Slug | 1254 × 1254 | Kachel auf `/kategorien/` |
 
 `pageImages.ts` bildet den Dateinamen über den Key der Rezeptdaten zu, die Portrait-Module über `import.meta.glob` in `actorImages.ts` und `smallActors.ts`.
 
@@ -261,6 +270,16 @@ Alle Bilder werden über `astro:assets` mit `Image` oder `getImage()` ausgeliefe
 * Fehlt für einen Slug ein Bild, wird die Kachel ohne Bild gerendert. Kein kaputtes `<img>`, kein leerer Platzhalter.
 * Die Bilder sind rein illustrativ, der Kategoriename steht als Text daneben. Deshalb `alt="" aria-hidden="true"`.
 * Das Bild steht rechts vom Text, der Pfeil darunter. Breite über `clamp()`, Seitenverhältnis aus der Quelle, `object-fit: contain`, damit nichts beschnitten wird.
+
+### Tags und Kategorien
+
+Die Kategorien entstehen **allein** aus den `tags` der Rezepte. Es gibt keine eigene Kategorienliste im Code und keine festen Seiten pro Kategorie.
+
+* Der Slug ist `categorySlug(tag)`, also `slugify(tag)`. Der Anzeigename ist der Tag selbst. Zwei Tags dürfen nie denselben Slug ergeben, sonst entstehen zwei Seiten mit identischem Titel. Aktuell 26 Tags, 26 Slugs, keine Kollision.
+* **Kein Tag-Literal in Templates.** Tags in `src/data/*.json` sind Anzeigenamen mit Umlaut und dürfen umbenannt werden. Wer ein bestimmtes Tag in Code prüft, nimmt `isGeneralTag(tag)` beziehungsweise `hasGeneralTag(recipe)` aus `src/lib/recipes.ts` und vergleicht über `slugify`. Ein hart verdrahtetes `"gemuese"` hat `recipeCategory` auf allen 40 Rezeptseiten und den Chipfilter auf allen 40 Karten stillschweigend abgeschaltet, nachdem das Tag in den Daten zu `"Gemüse"` umbenannt wurde.
+* Ein Tag darf in einem Rezept nicht doppelt stehen. `kategorien/index.astro` zählt Tag-Vorkommen statt Rezepte, `kategorien/[category].astro` schiebt das Rezept sonst zweimal in die Liste.
+* Das Ober-Tag `Gemüse` trägt für Leser, interne Verlinkung und JSON-LD nichts. Es wird auf Rezeptkarten ausgeblendet und liefert nur `recipeCategory`. Rezepte ohne Ober-Tag, etwa die Obstfermente, bekommen deshalb kein `recipeCategory`. Das ist gewollt.
+* Wer einen Tag hinzufügt, braucht ein Bild in `src/pic/categories/<slug>.png`. Fehlt es, rendert die Kachel ohne Bild. Umgekehrt ist ein Bild ohne Slug ein Waisenbild und gehört gelöscht, weil die Quelldatei im Repository liegen bleibt.
 
 ## SEO
 
@@ -288,7 +307,7 @@ Rezeptdaten, die nicht aus der Quelle stammen, werden nicht erfunden.
 | `url`, `mainEntityOfPage` | Canonical URL der Seite |
 | `author`, `publisher` | Organization „Das Ferment“ |
 | `totalTime` | aus `zubereitung` abgeleitet |
-| `recipeCategory` | aus dem Tag `gemuese` |
+| `recipeCategory` | `hasGeneralTag(recipe) ? GENERAL_TAG_LABEL : undefined` |
 | `keywords` | `tags` |
 | `recipeIngredient` | `zutaten` |
 | `recipeInstructions` | `zubereitung` als `HowToStep` |
@@ -337,7 +356,7 @@ Diese Properties werden **nicht** erzeugt, weil die Datenquelle sie nicht hergib
 Das Rezeptbuch existiert als zweite Ausgabe: `astro.book.config.mjs` baut `src/book/` nach `dist-book/`, `scripts/make-pdf.mjs` rendert daraus mit Puppeteer und Paged.js das PDF. Der ausführliche Plan mit allen Entscheidungen, Messwerten und den Stolperfallen von Paged.js 0.4.3 liegt in `docs/buchdruck-plan.md`.
 
 * **Getrennte Ausgabe, gemeinsame Daten.** `src/data/` und `src/lib/` werden von beiden Ausgaben genutzt, `src/lib/book.ts` gehört zu beiden. Build, Layout-Hülle und Stylesheet sind getrennt.
-* Die Buchausgabe ändert **keine** der obigen Regeln. `global.css` bleibt das einzige Stylesheet der Website, `npm run build` bleibt bei 71 Seiten. Kein `@page`, kein Print-Stylesheet und keine Drucklogik gehören in die Website.
+* Die Buchausgabe ändert **keine** der obigen Regeln. `global.css` bleibt das einzige Stylesheet der Website, `npm run build` bleibt bei 73 Seiten. Kein `@page`, kein Print-Stylesheet und keine Drucklogik gehören in die Website.
 * Das PDF entsteht in einem Durchlauf. `make-pdf.mjs` schreibt Kolumnentitel, Inhaltsverzeichnis und Lesezeichen in das bereits umgebrochene DOM und ruft Paged.js nicht erneut auf.
 * Neue Rezepte oder Wissenseinträge brauchen im Buch nichts außer Daten: Reihenfolge, Anker, Kolumnentitel, Inhaltsverzeichnis und Register entstehen aus `src/lib/book.ts` und dem Template.
 * Geänderte Seitenzahlen sind normal. Nach jedem Umbruch neu bauen und die Seitenzahl im PDF prüfen, nicht im DOM.
@@ -352,6 +371,7 @@ Das Rezeptbuch existiert als zweite Ausgabe: `astro.book.config.mjs` baut `src/b
 * Jedes Rezept ist ein Blatt: Das Bild steht auf der rechten Seite (Recto), der Rezepttext beginnt auf der Rückseite (Verso). Wird der Text länger als eine Seite, läuft er auf der nächsten Seite weiter; der Umbruch schiebt dann eine Leerseite dazwischen, damit das Bild des nächsten Rezepts wieder rechts steht.
 * Überschrift: nur `codex_titel`, groß. Der sachliche `titel` steht nicht im Buch.
 * Kein Header, Footer, keine Brotkrümelnavigation, keine Site-Shell.
+* Kategorien im Buch kommen aus denselben `tags` wie auf der Website und folgen denselben Regeln: `isGeneralTag()` und `universalTags()` aus `src/lib/book.ts` halten das Ober-Tag und alle gemeinsamen Nenner aus den Blättern und aus dem Register. `universalTags()` zählt **Rezepte**, nicht Tag-Vorkommen, sonst macht ein doppeltes Tag in einem Rezept ein seltenes Tag zum scheinbar gemeinsamen. Das Blatt „Fermentierte Schlehen“ trägt `Obst` und `Schlehe` statt `Gemüse`; ohne den Rezeptzähler stünde `Gemüse` danach auf 39 von 40 Blättern.
 * Bild und Text getrennt: `.recipe-plate` steht im Markup vor `.recipe`, `break-before: right` auf `.recipe-plate`, `break-before: left` auf `.recipe`. Leerseiten entstehen aus dieser Regel, nicht aus festen Seiten.
 * Die Bildseite trägt nur das Bild: keine Bildunterschrift und keinen Kolumnentitel. `data-book-ref` steht deshalb nur am Text, damit das Inhaltsverzeichnis nicht auf eine Bildseite zeigt.
 * Typografie in `pt`, keine Media Queries, kein `vw`, keine Container Queries.

@@ -1,4 +1,4 @@
-import { categoryLabel, slugify, type Recipe } from './recipes';
+import { categoryLabel, isGeneralTag, slugify, type Recipe } from './recipes';
 
 export const BOOK_TITLE = 'Das Ferment';
 export const BOOK_SUBTITLE = 'Aus der Küche der Geduld';
@@ -54,14 +54,15 @@ export function contentsAnchor(): string {
 
 // Tags, die auf jedem Rezept stehen, bilden keine Kategorie, sondern nur den
 // gemeinsamen Nenner. Das Register würde sonst alle Rezepte unter einem einzigen
-// Eintrag wiederholen.
+// Eintrag wiederholen. Gezählt werden Rezepte, nicht Tag-Vorkommen, sonst macht
+// ein doppeltes Tag ein seltenes Tag zum scheinbar gemeinsamen.
 export function universalTags(recipes: Recipe[]): Set<string> {
 	if (recipes.length === 0) return new Set();
 
 	const counts = new Map<string, number>();
 
 	for (const recipe of recipes) {
-		for (const tag of recipe.tags) {
+		for (const tag of new Set(recipe.tags)) {
 			counts.set(tag, (counts.get(tag) ?? 0) + 1);
 		}
 	}
@@ -69,6 +70,13 @@ export function universalTags(recipes: Recipe[]): Set<string> {
 	return new Set(
 		[...counts].filter(([, count]) => count === recipes.length).map(([tag]) => tag),
 	);
+}
+
+// Das Ober-Tag steht fast auf jedem Blatt und würde Blatt für Blatt wiederholt,
+// obwohl es keine Kategorie ist. Ein Rezept ohne Ober-Tag darf es deshalb nicht
+// zum scheinbar gemeinsamen Tag machen.
+function isBookCategory(tag: string, universal: Set<string>): boolean {
+	return !universal.has(tag) && !isGeneralTag(tag);
 }
 
 export function bookChapters(recipes: Recipe[]): BookChapter[] {
@@ -80,7 +88,7 @@ export function bookChapters(recipes: Recipe[]): BookChapter[] {
 			recipe,
 			anchor: recipeAnchor(recipe),
 			categories: recipe.tags
-				.filter((tag) => !universal.has(tag))
+				.filter((tag) => isBookCategory(tag, universal))
 				.map(categoryLabel),
 		}));
 }
@@ -90,8 +98,8 @@ export function bookRegister(chapters: BookChapter[]): BookRegisterGroup[] {
 	const groups = new Map<string, BookRegisterGroup>();
 
 	for (const chapter of chapters) {
-		for (const tag of chapter.recipe.tags) {
-			if (universal.has(tag)) continue;
+		for (const tag of new Set(chapter.recipe.tags)) {
+			if (!isBookCategory(tag, universal)) continue;
 
 			const group = groups.get(tag) ?? {
 				slug: slugify(tag),

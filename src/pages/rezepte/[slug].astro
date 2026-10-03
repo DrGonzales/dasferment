@@ -8,7 +8,14 @@ import SeoHead from "../../components/SeoHead.astro";
 import { imageForRecipe } from "../../lib/pageImages";
 import { actorImageFor } from "../../lib/actorImages";
 import { socialCard } from "../../lib/social";
-import { recipeImageAlt, slugify, totalTimeIso, categoryLabel, type Recipe } from "../../lib/recipes";
+import {
+	GENERAL_TAG_LABEL,
+	hasGeneralTag,
+	recipeImageAlt,
+	slugify,
+	totalTimeIso,
+	type Recipe,
+} from "../../lib/recipes";
 import "../../styles/global.css";
 
 export function getStaticPaths() {
@@ -82,9 +89,7 @@ const recipeJsonLd = {
 	author: siteOrganization,
 	publisher: siteOrganization,
 	totalTime: totalTimeIso(recipe),
-	recipeCategory: recipe.tags.includes("gemuese")
-		? categoryLabel("gemuese")
-		: undefined,
+	recipeCategory: hasGeneralTag(recipe) ? GENERAL_TAG_LABEL : undefined,
 	keywords: recipe.tags.join(", "),
 	recipeIngredient: recipe.zutaten,
 	recipeInstructions: recipe.zubereitung.map((step) => ({
