@@ -1185,7 +1185,9 @@
     "titel": "Fermentierte Schlehen – falsche Oliven (Milchsäuregärung)",
     "tags": [
       "Obst",
-      "Schlehe"
+      "Wildobst",
+      "Schlehe",
+      "Beeren"
     ],
     "zutaten": [
       "1 kg reife, feste Schlehen",
@@ -1210,6 +1212,39 @@
     "ratgeber": {
       "sprecher": "Connie",
       "text": "Nimm die Schlehen wohl zur Hand und gib ihnen ihr rechtes Maß an Salz. Sie brauchen ihre Zeit, bis aus ihrer herben Art ein säuerlicher und olivenähnlicher Geschmack geworden ist. Und hüte dich: Die Früchte mögen klein sein, doch ihre Kerne sind nichts zum Zerbeißen."
+    }
+  },
+  {
+    "titel": "Fermentierte Weißdornbeeren (Wilde Würze)",
+    "tags": [
+      "Wildobst",
+      "Beeren",
+      "Obst",
+      "Weissdorn"
+    ],
+    "zutaten": [
+      "500 g frische, reife Weißdornbeeren (gewaschen und verlesen)",
+      "500 ml Wasser",
+      "20 g Meersalz (ohne Jod und Trennmittel; ca. 2 % Salzlake)",
+      "2 Zehen Knoblauch (leicht andrückt)",
+      "2 Lorbeerblätter",
+      "1 TL schwarze Pfefferkörner",
+      "1 TL Senfkörner"
+    ],
+    "zubereitung": [
+      "Wasser und Salz in einem Topf erwärmen oder verrühren, bis sich das Salz vollständig aufgelöst hat. Die Salzlake auf Raumtemperatur abkühlen lassen.",
+      "Die Weißdornbeeren gründlich waschen, von kleinen Stielen befreien und beschädigte Früchte aussortieren.",
+      "Gewürze und Knoblauch auf den Boden eines sterilen Fermentationsglases geben, danach die vorbereiteten Beeren einfüllen.",
+      "Die abgekühlte Salzlake über die Beeren gießen, sodass alle Früchte vollständig bedeckt sind. Ein Fermentiergewicht auflegen, damit keine Beere an der Oberfläche schwimmt.",
+      "Das Glas verschließen und 7 bis 14 Tage bei Raumtemperatur stehen lassen. Bei Gläsern ohne Gärventil täglich kurz den Druck entweichen lassen.",
+      "Sobald die Beeren eine angenehm säuerlich-herbe Note entwickelt haben, im Kühlschrank oder kühlen Keller lagern, um die Fermentation zu verlangsamen."
+    ],
+    "picture": "41.png",
+    "codex_titel": "Von den rothen Weißdornbeeren und ihrer sauren Reifung",
+    "codex_einleitung": "Hier sei kundgetan, wie Connie die roten Früchte des Dornbusches in edler Salzlake einlegt und der verdeckten Gärung anheimstellt.",
+    "ratgeber": {
+      "sprecher": "Katze",
+      "text": "Nimm dich der kleinen roten Beeren des Weißdorns an. Wenn du ihnen Zeit und gutes Salz schenkst, verwandeln sie sich von mehligen Waldfrüchten in eine kräftige Würze für den Winter."
     }
   }
 ]
