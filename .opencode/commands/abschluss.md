@@ -18,8 +18,8 @@ Prüfe zusätzlich von Hand:
 
 * doppelte `id`-Attribute und tote Sprungmarken, im Website-Build und im Buch
 * neue Bilder laufen über `astro:assets`, Alt-Text vorhanden oder `aria-hidden`
-* neue Seiten stehen in `src/components/SeoHead.astro`, `src/pages/sitemap.xml.ts`
-  und `src/components/Header.astro`
+* neue Seiten stehen in `src/components/SeoHead.astro` und `src/components/Header.astro`;
+  die Sitemap folgt den gebauten Routen und braucht keinen Eintrag
 * kein horizontaler Overflow, keine festen Layoutbreiten, `clamp()` für Typografie
 * keine erfundenen Rezept- oder Kontaktangaben
 

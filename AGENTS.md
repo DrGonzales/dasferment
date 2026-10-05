@@ -58,7 +58,7 @@ src/
 ├── components/        Header.astro, Footer.astro, RecipeCard.astro, SeoHead.astro
 ├── data/              das_ferment.json, das_ferment_infos.json
 ├── lib/               recipes.ts, infos.ts, pageImages.ts, actorImages.ts, smallActors.ts, categoryImages.ts, social.ts, book.ts, figuren.ts
-├── pages/             index, rezepte, kategorien, wissen, buch, ueber-diese-seite, kontakt, impressum, sitemap.xml.ts, robots.txt.ts
+├── pages/             index, rezepte, kategorien, wissen, buch, ueber-diese-seite, kontakt, impressum, robots.txt.ts
 ├── pic/               pages/ (Rezeptillustrationen), actors/ (Ratschlag-Portraits), smallactors/ (Wissenseite), categories/ (Kategorieseite), cover/ (Einband), icons/ (Download-Symbole)
 ├── styles/            global.css
 ├── book/              nur Buchausgabe, siehe Abschnitt Buchdruck
@@ -76,7 +76,7 @@ src/
 
 ## Architektur
 
-Verwendet werden Astro, TypeScript (`astro/tsconfigs/strict`), HTML, CSS, JSON. Sonst nichts.
+Verwendet werden Astro, TypeScript (`astro/tsconfigs/strict`), HTML, CSS, JSON. Dazu eine Build-Integration, `@astrojs/sitemap`, die ausschließlich die Sitemap-Dateien schreibt. Sonst nichts.
 
 Beide JSON-Dateien sind Single Source of Truth:
 
@@ -102,13 +102,32 @@ Regeln:
 | Über diese Seite | `/ueber-diese-seite/` |
 | Kontakt | `/kontakt/` |
 | Impressum | `/impressum/` |
-| Hilfsdateien | `/sitemap.xml`, `/robots.txt` |
+| Hilfsdateien | `/sitemap-index.xml`, `/sitemap-rezepte-0.xml`, `/sitemap-kategorien-0.xml`, `/sitemap-pages-0.xml`, `/robots.txt` |
 
 Die Site liegt unter `base: /dasferment` auf GitHub Pages. Konsequenzen:
 
 * Jeder interne Link wird über `import.meta.env.BASE_URL` gebildet, niemals als hartkodierter absoluter Pfad.
-* `src/pages/sitemap.xml.ts` enthält auch die Wissensseite, die Buchseite und alle Kategorien.
-* Neue öffentliche Seite in `sitemap.xml.ts` eintragen und in `Header.astro` verlinken.
+* Die Sitemap schreibt `@astrojs/sitemap` in `astro.config.mjs`, nicht `src/pages/`. Deshalb braucht eine neue öffentliche Seite dort keinen Eintrag.
+* `robots.txt` entsteht als Route aus `src/pages/robots.txt.ts`, nicht als Datei in `public/`. Eine Datei `public/robots.txt` überschattet die Route still, der Build warnt und lässt sie aus.
+* Neue öffentliche Seite in `Header.astro` verlinken.
+
+### Sitemap
+
+Die Sitemap entsteht beim Build aus den gebauten Routen, aufgeteilt in drei Dateien. Der Index nennt alle drei und ist die einzige Sitemap, die `robots.txt` erwähnt.
+
+```text
+/sitemap-index.xml              Index, zeigt auf die drei Dateien unten
+/sitemap-rezepte-0.xml          /rezepte/ und alle Rezepte
+/sitemap-kategorien-0.xml       /kategorien/ und alle Kategorien
+/sitemap-pages-0.xml            alle übrigen Seiten
+```
+
+* Die Aufteilung entsteht aus `chunks` in `astro.config.mjs`. Der Rest landet ohne Zutun der Integration in `sitemap-pages-0.xml`, deshalb heißt kein eigenes Chunk `pages`.
+* Ein Chunk entscheidet über den Pfad, nicht über einen Tag. Ein neues Tag, eine neue Kategorie oder ein neues Rezept braucht deshalb keinen Code, um in der Sitemap zu erscheinen.
+* Die Integration liest `site` und `base` aus der Konfiguration. Absolute URLs entstehen von selbst, es gibt keine hartkodierte Domain.
+* `lastmod` bleibt leer, weil die Datenquelle kein Änderungsdatum liefert. Die Integration setzt es nur, wenn `lastmod` in der Option steht.
+* Endpoints wie `robots.txt` und die Sitemap-Dateien selbst sind keine Seiten und stehen deshalb nicht in der Sitemap.
+* Die Buch- und EPUB-Ausgabe bauen mit eigenen Konfigurationen ohne `site`. Sie bekommen deshalb keine Sitemap.
 
 ## Rendering und JavaScript
 
@@ -449,7 +468,7 @@ Das Buch hat eine dritte Ausgabe: `astro.epub.config.mjs` baut `src/epub/` nach 
 2. Keine doppelten `id`-Attribute und keine toten Sprungmarken.
 3. Keine erfundenen Rezept- oder Kontaktangaben; alles stammt aus der Datenquelle.
 4. Neue Bilder laufen über `astro:assets` und haben Alt-Text beziehungsweise sind als dekorativ markiert.
-5. Neue Seiten: `SeoHead.astro`, Eintrag im Sitemap, Eintrag in der Navigation.
+5. Neue Seiten: `SeoHead.astro`, Eintrag in der Navigation. Die Sitemap braucht keinen Eintrag, sie folgt den gebauten Routen.
 6. Kein horizontales Scrollen, keine festen Layoutbreiten.
 7. Bei Änderungen an `src/data/`, `src/lib/book.ts` oder `src/book/` zusätzlich `npm run make:pdf` und `npm run check:book`. Das Skript prüft Bildseite auf Recto, Text auf der Rückseite, stumme Bildseite, Bildbreite und -mitte, geerbten Blocksatz, doppelte `id` und tote Sprungmarken.
 8. Geänderte Seitenzahlen im Buch kommen in `docs/buchdruck-plan.md`, Abschnitt „Stand nach der Umsetzung“, nach.

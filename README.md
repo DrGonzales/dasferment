@@ -72,8 +72,11 @@ npm run preview
 | `/kategorien/<category>/` | Statische Detailseite einer Kategorie |
 | `/ueber-diese-seite/` | Informationen zum Kodex und zur Website |
 | `/impressum/` | Impressumsseite |
-| `/sitemap.xml` | XML-Sitemap für Suchmaschinen |
-| `/robots.txt` | robots-Datei mit Verweis auf die Sitemap |
+| `/sitemap-index.xml` | Index der XML-Sitemaps, zeigt auf die drei Dateien darunter |
+| `/sitemap-rezepte-0.xml` | Rezepteübersicht und alle Rezepte |
+| `/sitemap-kategorien-0.xml` | Kategorienübersicht und alle Kategorien |
+| `/sitemap-pages-0.xml` | alle übrigen Seiten |
+| `/robots.txt` | robots-Datei mit Verweis auf den Sitemap-Index |
 
 Rezept-Slugs werden aus dem jeweiligen Rezeptfeld `titel` abgeleitet. Die Seiten werden über `getStaticPaths()` in `src/pages/rezepte/[slug].astro` erzeugt; sie hängen nicht von einem späteren JSON-Ladeprozess im Browser ab.
 
@@ -137,8 +140,7 @@ Die Detail- und Kartenbilder werden mit Astros `Image`-Komponente und passenden 
 │   │   │   └── index.astro
 │   │   ├── impressum/index.astro
 │   │   ├── ueber-diese-seite/index.astro
-│   │   ├── robots.txt.ts
-│   │   └── sitemap.xml.ts
+│   │   └── robots.txt.ts
 │   ├── pic/pages/
 │   │   └── 1.png … 22.png
 │   └── styles/
@@ -160,7 +162,7 @@ Jede Rezeptseite enthält:
 - ein `Recipe`-JSON-LD-Objekt mit Name, Beschreibung, Bild, Zutaten und Schritten
 - sinnvolle Bild-Alt-Texte aus der Bildzuordnung
 
-`src/pages/sitemap.xml.ts` und `src/pages/robots.txt.ts` erzeugen die technischen SEO-Dateien. Die Website wird vollständig in statisches HTML und optimierte Assets übersetzt; es gibt keine nachträgliche Rezeptdarstellung im Browser.
+`@astrojs/sitemap` in `astro.config.mjs` und `src/pages/robots.txt.ts` erzeugen die technischen SEO-Dateien. Die Sitemap entsteht beim Build aus den gebauten Routen, aufgeteilt in `sitemap-rezepte-0.xml`, `sitemap-kategorien-0.xml` und `sitemap-pages-0.xml`; `sitemap-index.xml` verweist auf alle drei und ist die einzige Sitemap, die `robots.txt` nennt. Eine neue Seite braucht deshalb keinen Sitemap-Eintrag. Die Website wird vollständig in statisches HTML und optimierte Assets übersetzt; es gibt keine nachträgliche Rezeptdarstellung im Browser.
 
 ## Produktions-URL und Basispfad konfigurieren
 
