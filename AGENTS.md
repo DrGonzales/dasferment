@@ -264,6 +264,14 @@ Mittelalterliches Kochbuch auf Pergament: Pergament, warme Naturfarben, dunkle T
 * Kodex-Bereich und Rezeptdaten werden visuell getrennt, nicht vermischt.
 * Keine dekorativen Bilder, die Layout oder Lesefluss stören.
 
+### Startseite
+
+Der Kopf der Startseite zeigt in `.hero__gallery` genau drei Motive:
+
+* Vorderseite und Rückseite des Einbands aus `src/pic/cover/` sowie **ein** Rezeptblatt, nicht drei. Das Blatt wird zur Build-Zeit mit `Math.random()` gezogen, im Browser läuft dafür kein JavaScript. Zwei Builds können deshalb verschiedene Blätter zeigen.
+* Es gibt keine Kachel mit Blattnummer über der Galerie (`.hero__gallery-label` ist entfernt). Die drei Rahmen behalten Größen und Rotationen; `object-fit: contain` fängt die unterschiedlichen Seitenverhältnisse von Einband (1055 × 1491) und Blatt (1024 × 1536) ab.
+* Die Social Card der Startseite bleibt unabhängig vom Zufall und nimmt weiterhin das erste illustrierte Rezept.
+
 ## Bilder
 
 Alle Bilder werden über `astro:assets` mit `Image` oder `getImage()` ausgeliefert, nie als Originaldatei referenziert. Responsive, optimiert, semantisch korrekt, mit sinnvollem Alt-Text.
@@ -275,6 +283,7 @@ Alle Bilder werden über `astro:assets` mit `Image` oder `getImage()` ausgeliefe
 | `src/pic/smallactors/` | `1.png` … `9.png` | 640 × 640 | Portrait auf der Wissensseite |
 | `src/pic/categories/` | 29 Kategoriebilder, eine Datei je Kategorie-Slug | 1254 × 1254 | Kachel auf `/kategorien/` |
 | `src/pic/icons/` | `pdf.png`, `epub.png` | 1293 × 1217, 1254 × 1254 | Symbol in der Download-Liste auf `/buch/` |
+| `src/pic/cover/` | `front.png`, `back.png` (Einband), `print.png` (Druckfassung) | 1055 × 1491, 1308 × 945 | Hero auf der Startseite, Einband im EPUB |
 
 `pageImages.ts` bildet den Dateinamen über den Key der Rezeptdaten zu, die Portrait-Module über `import.meta.glob` in `actorImages.ts` und `smallActors.ts`.
 

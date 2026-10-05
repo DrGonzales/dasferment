@@ -5,6 +5,8 @@ import RecipeCard from '../components/RecipeCard.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import SeoHead from '../components/SeoHead.astro';
+import coverBack from '../pic/cover/back.png';
+import coverFront from '../pic/cover/front.png';
 import { imageForRecipe } from '../lib/pageImages';
 import { socialCard } from '../lib/social';
 import { recipeImageAlt, type Recipe } from '../lib/recipes';
@@ -22,7 +24,7 @@ const illustratedRecipes = recipes.flatMap((recipe) => {
 	const image = getRecipeImage(recipe);
 	return image ? [{ recipe, image }] : [];
 });
-const featuredFolios = illustratedRecipes.slice(0, 3);
+const blatt = illustratedRecipes[Math.floor(Math.random() * illustratedRecipes.length)];
 const recipeCount = recipes.length;
 const illustratedCount = illustratedRecipes.length;
 const canonicalPath = '/';
@@ -74,27 +76,43 @@ const cardImage = await socialCard(
 						<p class="hero__footnote">{recipeCount} Rezepte, aufgeschrieben in {illustratedCount} illustrierten Blättern.</p>
 					</div>
 
-					<div class="hero__gallery" aria-label="Ausgewählte Buchmalereien">
-						{featuredFolios.map(({ recipe, image }, index) => (
-							<figure
-								class:list={[
-									'hero__folio',
-									index === 0 ? 'hero__folio--main' : index === 1 ? 'hero__folio--second' : 'hero__folio--third',
-								]}
-							>
-								<Image
-									src={image}
-									alt={recipeImageAlt(recipe)}
-									widths={[320, 640, 1024]}
-									sizes={index === 0 ? '(max-width: 560px) 61vw, 420px' : '(max-width: 560px) 40vw, 260px'}
-									format="webp"
-									quality={84}
-									loading="eager"
-									decoding="async"
-								/>
-							</figure>
-						))}
-						<span class="hero__gallery-label">Blätter 01–{String(featuredFolios.length).padStart(2, '0')}</span>
+					<div class="hero__gallery" aria-label="Einband und ein Blatt aus dem Kodex">
+						<figure class="hero__folio hero__folio--main">
+							<Image
+								src={coverFront}
+								alt="Vorderseite des Einbands von Das Ferment"
+								widths={[320, 640, 1024]}
+								sizes="(max-width: 560px) 61vw, 420px"
+								format="webp"
+								quality={84}
+								loading="eager"
+								decoding="async"
+							/>
+						</figure>
+						<figure class="hero__folio hero__folio--second">
+							<Image
+								src={coverBack}
+								alt="Rückseite des Einbands von Das Ferment"
+								widths={[320, 640, 1024]}
+								sizes="(max-width: 560px) 39vw, 240px"
+								format="webp"
+								quality={84}
+								loading="eager"
+								decoding="async"
+							/>
+						</figure>
+						<figure class="hero__folio hero__folio--third">
+							<Image
+								src={blatt.image}
+								alt={recipeImageAlt(blatt.recipe)}
+								widths={[320, 640, 1024]}
+								sizes="(max-width: 560px) 37vw, 224px"
+								format="webp"
+								quality={84}
+								loading="eager"
+								decoding="async"
+							/>
+						</figure>
 					</div>
 				</section>
 

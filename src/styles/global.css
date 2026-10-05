@@ -370,21 +370,6 @@ img {
 	--rotation: -7deg;
 }
 
-.hero__gallery-label {
-	position: absolute;
-	right: 0;
-	bottom: -0.4rem;
-	z-index: 4;
-	padding: 0.45rem 0.7rem;
-	color: var(--paper-light);
-	background: var(--moss);
-	font-size: 0.65rem;
-	font-weight: 700;
-	letter-spacing: 0.16em;
-	text-transform: uppercase;
-	transform: rotate(2deg);
-}
-
 .repertoire {
 	padding: clamp(3.2rem, 7vw, 6.5rem) clamp(1.25rem, 5vw, 5rem) clamp(4rem, 8vw, 7.5rem);
 	border-top: 1px solid var(--line);
