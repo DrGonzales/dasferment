@@ -1,0 +1,36 @@
+---
+import { gruppiereInfos, type Info } from '../../lib/infos';
+import type { Recipe } from '../../lib/recipes';
+import Rahmen from './Rahmen.astro';
+
+interface Props {
+	infos: Info[];
+	rezepte: Recipe[];
+}
+
+const { infos, rezepte } = Astro.props;
+const gruppen = gruppiereInfos(infos);
+---
+
+<Rahmen titel="Vorwort: Was die Geduld lehrt" kicker="Vorwort">
+	<p class="lead">
+		Dieses Buch sammelt {rezepte.length} Rezepte und {infos.length} Einträge aus dem Wissen um
+		die Fermentation. Die Rezepte stehen am Ende, alphabetisch nach Rezeptnamen. Davor liegt das
+		Wissen in {gruppen.length} Gruppen, weil man ohne Salz, Zucker und Zeit keine Gurke
+		vergessen kann.
+	</p>
+	<p>
+		Die Texte der Rezepte sind so geschrieben, wie sie in der Küche gelesen werden: erst das
+		Wasser, dann das Salz, dann die Zeit. Wo eine Zeitangabe steht, steht sie aus dem Rezept
+		selbst und nicht aus dem Bauchgefühl.
+	</p>
+	<p>
+		Jedes Rezept trägt am Ende einen Ratschlag von Connie oder Katze. Die beiden sind keine
+		Autorinnen dieses Buches, sondern Figuren, die sich einmischen. Für verbindliche Angaben zu
+		Hygiene, Lagerung und Sicherheit bleiben die Wissenseiten maßgeblich, nicht der Ratschlag.
+	</p>
+	<p class="schluss">
+		<span aria-hidden="true">❦</span>
+		Viel Geduld und ein sauberes Glas.
+	</p>
+</Rahmen>

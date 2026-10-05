@@ -19,16 +19,27 @@ Manage the background server with `astro dev stop`, `astro dev status`, and `ast
 | Befehl | Wirkung |
 | --- | --- |
 | `npm run dev` | `astro dev --host 0.0.0.0` |
-| `npm run build` | statischer Build nach `dist/`, aktuell 73 Seiten |
+| `npm run build` | statischer Build nach `dist/`, aktuell 78 Seiten |
 | `npm run preview` | Build lokal ansehen |
 | `npx astro build` | Build ohne npm-Skript, wenn `npm` nicht verfügbar ist |
-| `npm run build:book` | Buch-Build nach `dist-book/`, eine Seite, aktuell 102 Seiten |
+| `npm run build:book` | Buch-Build nach `dist-book/`, eine Seite, aktuell 111 Seiten |
 | `npm run make:pdf` | Buch-Build plus `dist-book/das-ferment.pdf` |
 | `npm run check:book` | prüft den fertigen Umbruch im Browser und das PDF, siehe `scripts/buch-pruefen.mjs` |
-| `npm run check` | Website, Buch, PDF und Buchprüfung in einem Durchlauf |
+| `npm run build:epub` | EPUB-Build nach `dist-epub/`, 64 Blätter als `.xhtml` |
+| `npm run make:epub` | EPUB-Build plus `dist-epub/das-ferment.epub` |
+| `npm run check:epub` | prüft das fertige Archiv und ruft epubcheck auf, siehe `scripts/epub-pruefen.mjs` |
+| `npm run check` | Website, Buch, PDF, Buchprüfung, EPUB und EPUB-Prüfung in einem Durchlauf |
 
 `npm run check:book` braucht `poppler-utils` für die PDF-Seite. Im Devcontainer ist es
 über `.devcontainer/Dockerfile` installiert, lokal `sudo apt-get install -y poppler-utils`.
+
+`npm run check:epub` braucht eine Java-Laufzeit für `epubcheck`. Im Devcontainer legt
+das `Dockerfile` sie über `default-jre-headless` ab, lokal
+`sudo apt-get install -y default-jre-headless`. Das Programm selbst steckt in
+`node_modules/epub-check`, aufgerufen wird es direkt als
+`java -jar node_modules/epub-check/lib/epubcheck/epubcheck.jar`. Ohne Java prüft das
+Skript nur die eigene Struktur und schlägt fehl, statt still zu bestehen. Mit
+`--kein-epubcheck` lässt sich der Strukturteil allein laufen.
 
 `npm run make:pdf` braucht zusätzlich Chrome für Puppeteer. Im Devcontainer legt das
 `Dockerfile` es unter `PUPPETEER_CACHE_DIR=/home/node/.cache/puppeteer` ab, lokal
@@ -47,14 +58,18 @@ src/
 ├── components/        Header.astro, Footer.astro, RecipeCard.astro, SeoHead.astro
 ├── data/              das_ferment.json, das_ferment_infos.json
 ├── lib/               recipes.ts, infos.ts, pageImages.ts, actorImages.ts, smallActors.ts, categoryImages.ts, social.ts, book.ts, figuren.ts
-├── pages/             index, rezepte, kategorien, wissen, ueber-diese-seite, kontakt, impressum, sitemap.xml.ts, robots.txt.ts
-├── pic/               pages/ (Rezeptillustrationen), actors/ (Ratschlag-Portraits), smallactors/ (Wissenseite), categories/ (Kategorieseite)
+├── pages/             index, rezepte, kategorien, wissen, buch, ueber-diese-seite, kontakt, impressum, sitemap.xml.ts, robots.txt.ts
+├── pic/               pages/ (Rezeptillustrationen), actors/ (Ratschlag-Portraits), smallactors/ (Wissenseite), categories/ (Kategorieseite), cover/ (Einband), icons/ (Download-Symbole)
 ├── styles/            global.css
-└── book/              nur Buchausgabe, siehe Abschnitt Buchdruck
-    ├── fonts/         EB Garamond und Cinzel als TTF, dazu OFL-Lizenzen
-    ├── pages/index.astro
-    ├── styles/book.css
-    └── hyphenate.ts   Silbentrennung zur Build-Zeit
+├── book/              nur Buchausgabe, siehe Abschnitt Buchdruck
+│   ├── fonts/         EB Garamond und Cinzel als TTF, dazu OFL-Lizenzen
+│   ├── pages/index.astro
+│   ├── styles/book.css
+│   └── hyphenate.ts   Silbentrennung zur Build-Zeit
+└── epub/              nur EPUB-Ausgabe, siehe Abschnitt EPUB
+    ├── components/    Rahmen, Titelblatt, Vorwort, Gestalten, Wissen, Rezept, Register
+    ├── pages/         [slug].xhtml.ts (ein Blatt je Datei), epub-manifest.json.ts
+    └── styles/epub.css  eigenes Stylesheet, das vom Web niemals geladen wird
 ```
 
 `src/styles/global.css` ist das einzige Stylesheet der Website. Keine weiteren CSS-Dateien für die Website anlegen. `src/book/styles/book.css` gehört zur Buchausgabe und wird nie von der Website geladen.
@@ -65,8 +80,8 @@ Verwendet werden Astro, TypeScript (`astro/tsconfigs/strict`), HTML, CSS, JSON. 
 
 Beide JSON-Dateien sind Single Source of Truth:
 
-* `src/data/das_ferment.json` — 40 Rezepte, aktuell alle mit `picture`, `ratgeber` und `codex_einleitung`
-* `src/data/das_ferment_infos.json` — 18 Wissenseinträge, 9 Kategorien, 20 Abschnitte, 2 Tabellen
+* `src/data/das_ferment.json` — 41 Rezepte, aktuell alle mit `picture`, `ratgeber` und `codex_einleitung`
+* `src/data/das_ferment_infos.json` — 19 Wissenseinträge, 9 Kategorien, 27 Abschnitte, 2 Tabellen
 
 Regeln:
 
@@ -83,6 +98,7 @@ Regeln:
 | Rezepte | `/rezepte/`, `/rezepte/<slug>/` |
 | Kategorien | `/kategorien/`, `/kategorien/<kategorie>/` |
 | Wissen | `/wissen/` |
+| Buch | `/buch/` |
 | Über diese Seite | `/ueber-diese-seite/` |
 | Kontakt | `/kontakt/` |
 | Impressum | `/impressum/` |
@@ -91,7 +107,7 @@ Regeln:
 Die Site liegt unter `base: /dasferment` auf GitHub Pages. Konsequenzen:
 
 * Jeder interne Link wird über `import.meta.env.BASE_URL` gebildet, niemals als hartkodierter absoluter Pfad.
-* `src/pages/sitemap.xml.ts` enthält auch die Wissensseite und alle Kategorien.
+* `src/pages/sitemap.xml.ts` enthält auch die Wissensseite, die Buchseite und alle Kategorien.
 * Neue öffentliche Seite in `sitemap.xml.ts` eintragen und in `Header.astro` verlinken.
 
 ## Rendering und JavaScript
@@ -254,10 +270,11 @@ Alle Bilder werden über `astro:assets` mit `Image` oder `getImage()` ausgeliefe
 
 | Ordner | Inhalt | Maße | Einsatz |
 | --- | --- | --- | --- |
-| `src/pic/pages/` | 40 Rezeptillustrationen `1.png` … `40.png` | 1024 × 1536 | Rezeptbild, Karten, Social Card |
+| `src/pic/pages/` | 41 Rezeptillustrationen `1.png` … `41.png` | 1024 × 1536 | Rezeptbild, Karten, Social Card |
 | `src/pic/actors/` | `connie.png`, `katze.png` | 1024 × 1536 | Portrait im Ratschlag |
 | `src/pic/smallactors/` | `1.png` … `9.png` | 640 × 640 | Portrait auf der Wissensseite |
-| `src/pic/categories/` | 26 Kategoriebilder, eine Datei je Kategorie-Slug | 1254 × 1254 | Kachel auf `/kategorien/` |
+| `src/pic/categories/` | 29 Kategoriebilder, eine Datei je Kategorie-Slug | 1254 × 1254 | Kachel auf `/kategorien/` |
+| `src/pic/icons/` | `pdf.png`, `epub.png` | 1293 × 1217, 1254 × 1254 | Symbol in der Download-Liste auf `/buch/` |
 
 `pageImages.ts` bildet den Dateinamen über den Key der Rezeptdaten zu, die Portrait-Module über `import.meta.glob` in `actorImages.ts` und `smallActors.ts`.
 
@@ -275,8 +292,8 @@ Alle Bilder werden über `astro:assets` mit `Image` oder `getImage()` ausgeliefe
 
 Die Kategorien entstehen **allein** aus den `tags` der Rezepte. Es gibt keine eigene Kategorienliste im Code und keine festen Seiten pro Kategorie.
 
-* Der Slug ist `categorySlug(tag)`, also `slugify(tag)`. Der Anzeigename ist der Tag selbst. Zwei Tags dürfen nie denselben Slug ergeben, sonst entstehen zwei Seiten mit identischem Titel. Aktuell 26 Tags, 26 Slugs, keine Kollision.
-* **Kein Tag-Literal in Templates.** Tags in `src/data/*.json` sind Anzeigenamen mit Umlaut und dürfen umbenannt werden. Wer ein bestimmtes Tag in Code prüft, nimmt `isGeneralTag(tag)` beziehungsweise `hasGeneralTag(recipe)` aus `src/lib/recipes.ts` und vergleicht über `slugify`. Ein hart verdrahtetes `"gemuese"` hat `recipeCategory` auf allen 40 Rezeptseiten und den Chipfilter auf allen 40 Karten stillschweigend abgeschaltet, nachdem das Tag in den Daten zu `"Gemüse"` umbenannt wurde.
+* Der Slug ist `categorySlug(tag)`, also `slugify(tag)`. Der Anzeigename ist der Tag selbst. Zwei Tags dürfen nie denselben Slug ergeben, sonst entstehen zwei Seiten mit identischem Titel. Aktuell 29 Tags, 29 Slugs, keine Kollision.
+* **Kein Tag-Literal in Templates.** Tags in `src/data/*.json` sind Anzeigenamen mit Umlaut und dürfen umbenannt werden. Wer ein bestimmtes Tag in Code prüft, nimmt `isGeneralTag(tag)` beziehungsweise `hasGeneralTag(recipe)` aus `src/lib/recipes.ts` und vergleicht über `slugify`. Ein hart verdrahtetes `"gemuese"` hat `recipeCategory` auf allen 41 Rezeptseiten und den Chipfilter auf allen 41 Karten stillschweigend abgeschaltet, nachdem das Tag in den Daten zu `"Gemüse"` umbenannt wurde.
 * Ein Tag darf in einem Rezept nicht doppelt stehen. `kategorien/index.astro` zählt Tag-Vorkommen statt Rezepte, `kategorien/[category].astro` schiebt das Rezept sonst zweimal in die Liste.
 * Das Ober-Tag `Gemüse` trägt für Leser, interne Verlinkung und JSON-LD nichts. Es wird auf Rezeptkarten ausgeblendet und liefert nur `recipeCategory`. Rezepte ohne Ober-Tag, etwa die Obstfermente, bekommen deshalb kein `recipeCategory`. Das ist gewollt.
 * Wer einen Tag hinzufügt, braucht ein Bild in `src/pic/categories/<slug>.png`. Fehlt es, rendert die Kachel ohne Bild. Umgekehrt ist ein Bild ohne Slug ein Waisenbild und gehört gelöscht, weil die Quelldatei im Repository liegen bleibt.
@@ -342,6 +359,18 @@ Diese Properties werden **nicht** erzeugt, weil die Datenquelle sie nicht hergib
 * Der Bildrechtshinweis ist ein eigener Abschnitt mit eigenem Kicker und wird wortgleich wiedergegeben, nicht zusammengefasst.
 * Zusätzlich verlinkt die Seite auf das Impressum von am-kalten-polar.blogspot.com für fortlaufend aktualisierte Angaben.
 
+## Buch-Download
+
+`/buch/` bietet die beiden Ausgaben des Buchs zum Laden an: PDF und EPUB. Die Dateien gehören weder zum Repository noch zum Site-Build. Sie entstehen in `.github/workflows/buch-pdf.yml` mit `npm run make:pdf` und `npm run make:epub` und liegen im GitHub-Release `buch`:
+
+    https://github.com/DrGonzales/dasferment/releases/download/buch/das-ferment.pdf
+    https://github.com/DrGonzales/dasferment/releases/download/buch/das-ferment.epub
+
+* Die Links stehen als Konstante `releaseUrl` im Frontmatter von `src/pages/buch/index.astro`, der Release-Tag als `env.TAG` in der Workflow-Datei. Stimmt nur einer der beiden nicht, hängt die Seite toten Downloads aus.
+* Kopfbild ist `src/pic/smallactors/8.png`, die Symbole kommen aus `src/pic/icons/`. Beide Motive sind rein illustrativ, deshalb `alt=""` und `aria-hidden="true"`. Die Linktexte sind fest: „PDF herunterladen“ und „EPUB herunterladen“.
+* Das Layout steht in `global.css` als `.book-intro__motiv`, `.download-list` und `.download`: Icons mit `width: clamp()` und freier Höhe, Kacheln über `flex-wrap`, kein eigenes Stylesheet und keine feste Pixelbreite.
+* `SeoHead` bekommt die Social Card über `coverImageFor()` wie die Übersichtsseiten.
+
 ## Konventionen
 
 * Einrückung mit Tabs in `.astro`, `.ts` und `.css`.
@@ -356,7 +385,7 @@ Diese Properties werden **nicht** erzeugt, weil die Datenquelle sie nicht hergib
 Das Rezeptbuch existiert als zweite Ausgabe: `astro.book.config.mjs` baut `src/book/` nach `dist-book/`, `scripts/make-pdf.mjs` rendert daraus mit Puppeteer und Paged.js das PDF. Der ausführliche Plan mit allen Entscheidungen, Messwerten und den Stolperfallen von Paged.js 0.4.3 liegt in `docs/buchdruck-plan.md`.
 
 * **Getrennte Ausgabe, gemeinsame Daten.** `src/data/` und `src/lib/` werden von beiden Ausgaben genutzt, `src/lib/book.ts` gehört zu beiden. Build, Layout-Hülle und Stylesheet sind getrennt.
-* Die Buchausgabe ändert **keine** der obigen Regeln. `global.css` bleibt das einzige Stylesheet der Website, `npm run build` bleibt bei 73 Seiten. Kein `@page`, kein Print-Stylesheet und keine Drucklogik gehören in die Website.
+* Die Buchausgabe ändert **keine** der obigen Regeln. `global.css` bleibt das einzige Stylesheet der Website, `npm run build` bleibt bei 78 Seiten. Kein `@page`, kein Print-Stylesheet und keine Drucklogik gehören in die Website.
 * Das PDF entsteht in einem Durchlauf. `make-pdf.mjs` schreibt Kolumnentitel, Inhaltsverzeichnis und Lesezeichen in das bereits umgebrochene DOM und ruft Paged.js nicht erneut auf.
 * Neue Rezepte oder Wissenseinträge brauchen im Buch nichts außer Daten: Reihenfolge, Anker, Kolumnentitel, Inhaltsverzeichnis und Register entstehen aus `src/lib/book.ts` und dem Template.
 * Geänderte Seitenzahlen sind normal. Nach jedem Umbruch neu bauen und die Seitenzahl im PDF prüfen, nicht im DOM.
@@ -371,13 +400,39 @@ Das Rezeptbuch existiert als zweite Ausgabe: `astro.book.config.mjs` baut `src/b
 * Jedes Rezept ist ein Blatt: Das Bild steht auf der rechten Seite (Recto), der Rezepttext beginnt auf der Rückseite (Verso). Wird der Text länger als eine Seite, läuft er auf der nächsten Seite weiter; der Umbruch schiebt dann eine Leerseite dazwischen, damit das Bild des nächsten Rezepts wieder rechts steht.
 * Überschrift: nur `codex_titel`, groß. Der sachliche `titel` steht nicht im Buch.
 * Kein Header, Footer, keine Brotkrümelnavigation, keine Site-Shell.
-* Kategorien im Buch kommen aus denselben `tags` wie auf der Website und folgen denselben Regeln: `isGeneralTag()` und `universalTags()` aus `src/lib/book.ts` halten das Ober-Tag und alle gemeinsamen Nenner aus den Blättern und aus dem Register. `universalTags()` zählt **Rezepte**, nicht Tag-Vorkommen, sonst macht ein doppeltes Tag in einem Rezept ein seltenes Tag zum scheinbar gemeinsamen. Das Blatt „Fermentierte Schlehen“ trägt `Obst` und `Schlehe` statt `Gemüse`; ohne den Rezeptzähler stünde `Gemüse` danach auf 39 von 40 Blättern.
+* Kategorien im Buch kommen aus denselben `tags` wie auf der Website und folgen denselben Regeln: `isGeneralTag()` und `universalTags()` aus `src/lib/book.ts` halten das Ober-Tag und alle gemeinsamen Nenner aus den Blättern und aus dem Register. `universalTags()` zählt **Rezepte**, nicht Tag-Vorkommen, sonst macht ein doppeltes Tag in einem Rezept ein seltenes Tag zum scheinbar gemeinsamen. Das Blatt „Fermentierte Schlehen“ trägt `Obst` und `Schlehe` statt `Gemüse`; ohne den Rezeptzähler stünde `Gemüse` danach auf 39 von 41 Blättern.
 * Bild und Text getrennt: `.recipe-plate` steht im Markup vor `.recipe`, `break-before: right` auf `.recipe-plate`, `break-before: left` auf `.recipe`. Leerseiten entstehen aus dieser Regel, nicht aus festen Seiten.
 * Die Bildseite trägt nur das Bild: keine Bildunterschrift und keinen Kolumnentitel. `data-book-ref` steht deshalb nur am Text, damit das Inhaltsverzeichnis nicht auf eine Bildseite zeigt.
 * Typografie in `pt`, keine Media Queries, kein `vw`, keine Container Queries.
+* Kein Blocksatz. `body` steht auf `text-align: left`, und `html [data-align-last-split-element="justify"]` hält die von Paged.js gesetzte letzte Zeile auf `auto`, damit weder Fließtext noch geerbte Überschriften gedehnt werden.
 * Bilder mit Transparenz bleiben PNG. Als JPEG verliert sharp den transparenten Grund und füllt ihn schwarz. Das gilt für `smallactors/*`; `pages/*` und `actors/*` sind deckend und laufen als JPEG.
 * Alle Bilder über `astro:assets` mit `getImage` in fester Breite, keine Originale im PDF.
 * Das Rezeptbild steht 113 mm breit und damit 169,5 mm hoch, mittig im Satzspiegel. Ohne `height: 100%` und ohne `justify-content: center` klebt es oben, weil Paged.js dem Flexcontainer keine volle Höhe gibt. `margin: 0` auf `.recipe-plate__frame` ist Pflicht, sonst schiebt der Standardrahmen des `<figure>` das Bild um 80 px schmaler.
+
+## EPUB
+
+Das Buch hat eine dritte Ausgabe: `astro.epub.config.mjs` baut `src/epub/` nach `dist-epub/`, `scripts/make-epub.mjs` schreibt daraus `dist-epub/das-ferment.epub`, `scripts/epub-pruefen.mjs` prüft das fertige Archiv mit eigenen Regeln und mit epubcheck.
+
+* **Getrennte Ausgabe, gemeinsame Teileiste.** `src/lib/epub.ts` ist die einzige Quelle für Reihenfolge, Anker, Dateinamen und Titel. Aus ihr entstehen die Blätter im Build, das Inhaltsverzeichnis und die Spine. Website, Buch und EPUB lesen dieselben Daten.
+* **Ein Blatt je Datei.** `src/epub/pages/[slug].xhtml.ts` rendert über `experimental_AstroContainer` eine `.xhtml`-Datei je Eintrag der Teileiste. Die Kennung dagegen, `src/epub/pages/epub-manifest.json.ts`, schreibt die Teileiste als JSON, weil der Packer als reines Node-Skript kein TypeScript aus `src/lib/` importieren kann.
+* **Reihenfolge, wie im Buch.** Titel, Vorwort, Gestalten, Wissen, Rezepte, Register. Die Wissensgruppen haben keine eigene Datei, ihre Überschrift steht im Inhaltsverzeichnis und zeigt auf den ersten Eintrag der Gruppe, ebenso wie die Sprungmarken der Wissensseite nur vorhandene Anker nennen.
+* **Astro liefert kein XHTML.** Leere Elemente bleiben offen, und `alt=""` fällt weg. `make-epub.mjs` parst die Ausgabe mit `htmlparser2` als HTML und schreibt sie mit `dom-serializer` als XML (`xmlMode`, `selfClosingTags`, `encodeEntities: 'utf8'`). Das steht in `alsXhtml()`.
+* **Keine CSS-Variablen im Stylesheet.** epubcheck meldet `--name` als `CSS-008`, weil sein Parser nur CSS 2.1 kennt. Farben stehen deshalb als Wert an jeder Stelle. Das Stylesheet gehört keinem der beiden anderen Ausgaben.
+* **`getImage`-Pfade sind das Layout des Archivs.** Die Blätter liegen unter `EPUB/text/`, Assets unter `EPUB/assets/` und `EPUB/images/`, Schriften und Styles eine Ebene höher. Ordnernamen sind deshalb vertraglich zwischen `src/epub/` und `make-epub.mjs`. Ein Verweis, der nicht aufgeht, bedeutet einen Fehler in einer der beiden Seiten.
+* **Nur referenzierte Bilder wandern ins Archiv.** Der Build legt neben den bearbeiteten Bildern auch die unveränderten Originale aus `src/pic/` in `assets/`. `make-epub.mjs` sammelt deshalb die `../assets/`-Verweise aus den Blättern und nimmt genau diese Dateien. Was im Ordner liegt, zählt nicht.
+* **Einband und Rückseite** liegen als PNG in `src/pic/cover/`, werden im Packer über `sharp` zu JPEG (Qualität 88) und stehen als `cover-image` im Manifest. Die neun Motive der Wissensseite bleiben PNG, weil ein transparenter Grund sonst schwarz gefüllt wird.
+* **Das Archiv entsteht ohne fremdes ZIP-Skript.** `make-epub.mjs` schreibt lokale Kopfzeilen und Inhaltsverzeichnis selbst. Der `mimetype`-Eintrag ist erster Eintrag und unkomprimiert, sonst öffnet kein Leser die Datei.
+* **Der Packer ist eigen.** Er kennt die Daten nur über die JSON-Kennung, die der Build schreibt, und wirft einen Fehler, wenn Blatt und Teileiste auseinanderlaufen.
+* `htmlparser2`, `dom-serializer`, `epub-check` und `sharp` sind devDependencies und exakt gepinnt. `sharp` liegt auch als Abhängigkeit von Astro darunter, wird aber hier direkt angesprochen und deshalb eigenständig gepinnt.
+
+### Was im EPUB gilt und im Buch nicht
+
+* Jeder Eintrag ist eine eigene Datei, damit ein Lesegerät blättern und springen kann. Der Umbruch entsteht beim Lesen, nicht beim Bauen: keine Media Queries, keine feste Satzbreite, keine `pt`-Typografie.
+* Der sachliche `titel` steht neben dem `codex_titel`, weil Leser in der Volltextsuche nach dem Rezeptnamen suchen, nicht nach dem Kodex-Titel. Im Buch steht er nicht.
+* Schriften werden eingebettet (`EBGaramond-Regular`, `-Italic`, `-SemiBold`, `Cinzel-Regular`) mit den OFL-Lizenzen im Archiv. epubcheck meldet dafür ein `INFO(CSS-007)` über den Schrifttyp; das trifft jede eingebettete TTF und ist kein Befund.
+* Seitenzahlen gibt es nicht. Das Register verweist mit `href` auf das Blatt, im Buch mit einer Seitenzahl.
+* Kein Blocksatz. `epub.css` nennt `text-align: left` an jedem Textelement ausdrücklich, weil manche Lesegeräte ihre eigene Voreinstellung „Blocksatz“ nur dort anwenden, wo eine Regel die Eigenschaft nicht selbst nennt, und sie gegen den Wert vom `body` stellen. Die zentrierten Flächen `.titelblatt` und `.ratschlag` holen die Mitte an ihren Kindern zurück, sonst gewinnt diese Regel.
+* Cover, Rückseite und das Inhaltsverzeichnis kommen nur hier vor, das Inhaltsverzeichnis als `<nav epub:type="toc">`.
 
 ## Vor dem Abschluss prüfen
 
@@ -389,6 +444,7 @@ Das Rezeptbuch existiert als zweite Ausgabe: `astro.book.config.mjs` baut `src/b
 6. Kein horizontales Scrollen, keine festen Layoutbreiten.
 7. Bei Änderungen an `src/data/`, `src/lib/book.ts` oder `src/book/` zusätzlich `npm run make:pdf` und `npm run check:book`. Das Skript prüft Bildseite auf Recto, Text auf der Rückseite, stumme Bildseite, Bildbreite und -mitte, geerbten Blocksatz, doppelte `id` und tote Sprungmarken.
 8. Geänderte Seitenzahlen im Buch kommen in `docs/buchdruck-plan.md`, Abschnitt „Stand nach der Umsetzung“, nach.
+9. Bei Änderungen an `src/data/`, `src/lib/epub.ts` oder `src/epub/` zusätzlich `npm run make:epub` und `npm run check:epub`. Das Skript prüft mimetype zuerst, Manifest gegen Archiv, doppelte `id`, tote Verweise, nicht referenzierte Bilder und Schriften ohne Stylesheet und ruft epubcheck darüber hinaus auf.
 
 ## Skills und Commands
 

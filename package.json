@@ -1,31 +1,38 @@
 {
-  "name": "dasferment",
-  "type": "module",
-  "version": "0.0.1",
-  "engines": {
-    "node": ">=22.12.0"
-  },
-  "scripts": {
-    "dev": "astro dev  --host 0.0.0.0",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro",
-    "build:book": "astro build --config astro.book.config.mjs",
-    "make:pdf": "npm run build:book && node scripts/make-pdf.mjs",
-    "check:book": "node scripts/buch-pruefen.mjs",
-    "check": "npm run build && npm run make:pdf && npm run check:book"
-  },
-  "dependencies": {
-    "astro": "^7.3.5"
-  },
-  "allowScripts": {
-    "esbuild": true
-  },
-  "devDependencies": {
-    "hyphenation.de": "0.2.1",
-    "hypher": "0.2.5",
-    "pagedjs": "0.4.3",
-    "pdf-lib": "1.17.1",
-    "puppeteer": "25.12.0"
-  }
+	"name": "dasferment",
+	"type": "module",
+	"version": "0.0.1",
+	"engines": {
+		"node": ">=22.12.0"
+	},
+	"scripts": {
+		"dev": "astro dev  --host 0.0.0.0",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro",
+		"build:book": "astro build --config astro.book.config.mjs",
+		"make:pdf": "npm run build:book && node scripts/make-pdf.mjs",
+		"check:book": "node scripts/buch-pruefen.mjs",
+		"build:epub": "astro build --config astro.epub.config.mjs",
+		"make:epub": "npm run build:epub && node scripts/make-epub.mjs",
+		"check:epub": "node scripts/epub-pruefen.mjs",
+		"check": "npm run build && npm run make:pdf && npm run check:book && npm run make:epub && npm run check:epub"
+	},
+	"dependencies": {
+		"astro": "^7.3.5"
+	},
+	"allowScripts": {
+		"esbuild": true
+	},
+	"devDependencies": {
+		"dom-serializer": "2.0.0",
+		"epub-check": "0.3.0",
+		"htmlparser2": "9.1.0",
+		"hyphenation.de": "0.2.1",
+		"hypher": "0.2.5",
+		"pagedjs": "0.4.3",
+		"pdf-lib": "1.17.1",
+		"puppeteer": "25.12.0",
+		"sharp": "0.35.4"
+	}
 }

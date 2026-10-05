@@ -4,8 +4,8 @@
 **Erstellt:** 2026-09-29
 **Recherche-Stand:** 2026-09-30 (Paged.js weiterhin ohne Release, siehe Versionsangaben unten)
 **Entscheidungen:** 2026-09-30 getroffen, siehe Abschnitt 7
-**Ergebnis des letzten Laufs:** 102 Seiten, Rezepttext links und Bild rechts, A5 mit 3 mm Beschnitt
-**Stand:** 2026-09-30, PDF `dist-book/das-ferment.pdf`, 12,7 MB, alle Prüfungen grün (siehe Abschnitt 6)
+**Ergebnis des letzten Laufs:** 111 Seiten, Rezepttext links und Bild rechts, A5 mit 3 mm Beschnitt
+**Stand:** 2026-10-05, PDF `dist-book/das-ferment.pdf`, 13,6 MB, alle Prüfungen grün (siehe Abschnitt 6)
 
 Dieser Plan ist keine Projektregel. Er beschreibt die zweite Ausgabe des Rezeptbuchs als
 PDF. Die Website bleibt unverändert und funktionsfähig, auch wenn der Buchbau nicht
@@ -318,7 +318,7 @@ Nur `src/book/styles/book.css` wird geladen, nie `src/styles/global.css`.
 "make:pdf":   "npm run build:book && node scripts/make-pdf.mjs"
 ```
 
-`npm run build` bleibt unverändert bei 71 Seiten. Das PDF landet in `dist-book/` und
+`npm run build` bleibt unverändert bei 78 Seiten. Das PDF landet in `dist-book/` und
 **nicht** in `dist/` — es wird nicht mitdeployt.
 
 ### Aufbau des Buchs
@@ -332,7 +332,7 @@ Plan sah zwei Dateien vor, weil Paged.js die Seitenzählung nicht zurücksetzen 
 (Issue #31) und weil die Doku für unterschiedliche Seitenformate zwei Dateien verlangt.
 Beides trifft hier nicht zu: Es gibt nur ein Format, und die Titelseite soll mitgezählt
 werden, weil das Inhaltsverzeichnis sonst um eine Zahl danebenliegt. Der Nachteil — das
-Inhaltsverzeichnis nennt keine römischen Vorlaufzahlen — ist bei 102 Seiten belanglos.
+Inhaltsverzeichnis nennt keine römischen Vorlaufzahlen — ist bei 111 Seiten belanglos.
 Zwei Dokumente bleiben der Rückfallpfad, falls doch ein Vorlauf ohne Seitenzahlen
 entstehen soll; `pdf-lib` kann sie später in einer Datei zusammenführen.
 
@@ -437,18 +437,18 @@ Reihenfolge nach `PagedPolyfill.preview()`, alles ohne zweiten Umbruch:
 
 | | |
 | --- | --- |
-| Umfang | 102 Seiten: Titel, Inhalt (2), Vorwort (5), Gestalten (6), Wissen (12: 7 bis 18), Rezepte (78 = 39 Blätter aus Bild- und Textseite), Register (4: 99 bis 102), zwei Leerseiten für den Recto-Beginn |
+| Umfang | 111 Seiten: Titel, Inhalt (2), Vorwort (5), Gestalten (6), Wissen (13: 7 bis 19), Rezepte (84: 23 bis 106 aus 41 Bildseiten, 42 Textseiten und einer Leerseite), Register (5: 107 bis 111), drei Leerseiten für den Recto-Beginn |
 | Gestalten | „Connie und Katze“ auf Seite 6, Text aus `src/lib/figuren.ts`, dieselbe Quelle wie `/ueber-dische-seite/`. Beide Portraits 24 mm breit links neben dem Text, 384 px, JPEG |
-| Register | „Register der Rezepte“, 24 Zutatengruppen alphabetisch, ohne Anzahlangabe. Die Rezepte stehen zweispaltig darunter mit `codex_titel`, Punct-Leader und Seitenzahl |
+| Register | „Register der Rezepte“, 28 Zutatengruppen alphabetisch, ohne Anzahlangabe. Die Rezepte stehen zweispaltig darunter mit `codex_titel`, Punct-Leader und Seitenzahl |
 | Seitengröße | MediaBox 154,18 × 215,9 mm, TrimBox 148 × 210 mm bei 3 mm Versatz |
-| Rezeptseiten | 39 von 39 als Blatt: Bild auf der rechten Seite 21, 23, … 97, der Rezepttext auf der Rückseite 22, 24, … 98. Kein Rezept läuft über, deshalb keine zusätzlichen Leerseiten |
-| Lesezeichen | 72, davon 4 Haupteinträge, 2 Gestalten, 9 Wissensgruppen, 18 Einträge, 39 Rezepte, 1 Wurzel |
-| Dateigröße | 12,8 MB bei 768 px Bildbreite und JPEG 80 |
+| Rezeptseiten | 41 von 41 als Blatt: Bild auf der rechten Seite 23, 25, … 43 und 47, 49, … 105, der Rezepttext auf der Rückseite 24, 26, … 44 und 48, … 106. Ein Rezepttext läuft über und nimmt die Seite 45 rechts mit, die Leerseite 46 hält das nächste Bild wieder auf einer Recto-Seite |
+| Lesezeichen | 75, davon 3 Haupteinträge, 2 Gestalten, 9 Wissensgruppen, 19 Einträge, 41 Rezepte und die Überschrift „Connie und Katze“ |
+| Dateigröße | 13,6 MB bei 768 px Bildbreite und JPEG 80 |
 | Rezeptbild | 113 mm breit, 169,5 mm hoch, mittig auf einer Satzspiegelmitte von 74 mm, Seitenverhältnis wie die Quelle |
 | Rezeptüberschrift | nur `codex_titel`, Kategorien als Kicker darüber, kein sachlicher `titel` im Buch |
-| Transparenz | 18 `smask`-Einträge in `pdfimages -list`, ausschließlich auf den Wissensseiten. Die Rezeptbilder sind deckend und haben keinen |
-| Kolumnentitel | 42 von 102 Seiten: alle Text- und Wissensseiten, keine Bildseite, Titelseite ohne Randinhalt |
-| Offen | Erster CI-Lauf, Wissen-Teil mit neun Gruppenbeginnen auf neuen Seiten (12 statt 9 Seiten) |
+| Transparenz | 19 `smask`-Einträge in `pdfimages -list`, ausschließlich auf den Wissensseiten. Die Rezeptbilder sind deckend und haben keinen |
+| Kolumnentitel | 46 von 111 Seiten: alle Text- und Wissensseiten, keine Bildseite, Titelseite ohne Randinhalt |
+| Offen | Erster CI-Lauf, Wissen-Teil mit neun Gruppenbeginnen auf neuen Seiten (13 statt 9 Seiten) |
 
 ### Prüfstand des letzten Laufs
 
@@ -456,14 +456,14 @@ Alles mit den Bordmitteln des Projekts nachprüfbar, `poppler-utils` vorausgeset
 
 | Prüfung | Kommando | Ergebnis |
 | --- | --- | --- |
-| Umbruch | `npm run make:pdf` | 102 Seiten im Umbruch, 102 gemeldet |
-| Inhaltsverzeichnis | Ausgabe von `make-pdf.mjs` | 70 Sprungmarken, 72 Lesezeichen, keine fehlende Seite |
-| Lesezeichen | `pdf-lib` über das fertige PDF | 72 Einträge, 4 Haupteinträge, keine weichen Trennzeichen in den Titeln |
+| Umbruch | `npm run make:pdf` | 111 Seiten im Umbruch, 111 gemeldet |
+| Inhaltsverzeichnis | Ausgabe von `make-pdf.mjs` | 73 Sprungmarken, 75 Lesezeichen, keine fehlende Seite |
+| Lesezeichen | `pdf-lib` über das fertige PDF | 75 Einträge, 3 Haupteinträge, keine weichen Trennzeichen in den Titeln |
 | Seitengröße | `pdf-lib` | MediaBox 154,18 × 215,9 mm, TrimBox 148 × 210 mm bei 3 mm Versatz |
-| Rezeptpaare | `npm run check:book` | 39 Bildseiten 21 bis 97 auf Recto, je mit Text auf der Rückseite, keine mit Kolumnentitel, Bild 113 mm breit und mittig |
-| Blattsatz | `npm run check:book` | kein Überschriften-, Kicker- oder Claim-Element erbt `text-align-last: justify` |
-| Anker | `dist-book/index.html` | 73 `id`, keine doppelt, keine tote Sprungmarke |
-| Website | `npm run build` | 71 Seiten, unverändert |
+| Rezeptpaare | `npm run check:book` | 41 Bildseiten 23 bis 105 auf Recto, je mit Text auf der Rückseite, eine Fortsetzungsseite 45, keine mit Kolumnentitel, Bild 113 mm breit und mittig |
+| Blattsatz | `npm run check:book` | kein Element steht im Blocksatz: `text-align: left` im Body und kein Überschriften-, Kicker- oder Claim-Element erbt `text-align-last: justify` |
+| Anker | `dist-book/index.html` | 76 `id`, keine doppelt, keine tote Sprungmarke |
+| Website | `npm run build` | 78 Seiten, unverändert |
 
 `scripts/buch-pruefen.mjs` macht diese Prüfungen. Sie misst den fertigen Paged.js-Umbruch
 im Browser und das fertige PDF mit `pdfinfo`, `pdftotext` und `pdfimages`. Aufruf über
@@ -561,7 +561,7 @@ Unverändert offen, unabhängig von Stufe 1:
 | `vw` und Media Queries | Layout kollabiert | Buch-Stylesheet ohne `vw` und ohne Media Queries, dafür `--pagedjs-pagebox-width` |
 | `overflow: hidden` auf `.site-shell` | Seitenboxen abgeschnitten | Buchinhalt außerhalb der Site-Shell |
 | 1024 px Quellbilder | matschiger Offset-Druck | kleines Format wählen oder Bildmaterial neu anliefern |
-| 102 Seiten in einem Chromium | Speicher / Zeit | Läuft mit 12,7 MB stabil durch, Kategorie-PDFs bleiben der Rückfallpfad |
+| 111 Seiten in einem Chromium | Speicher / Zeit | Läuft mit 13,6 MB stabil durch, Kategorie-PDFs bleiben der Rückfallpfad |
 | `astro: ^7.3.5` und `@page`-Semantik | Minor-Update bricht Buchbau | Build des Buchs separat, Site-Build bleibt unberührt |
 | `publicDir: false` in Astro 7 | Book-Build scheitert an einer Typprüfung | Ordner weglassen statt auf `false` setzen |
 | `string-set` in Paged.js 0.4.3 | Kolumnentitel bleiben leer | Variable in `make-pdf.mjs` selbst setzen, Vor Upgrade prüfen |

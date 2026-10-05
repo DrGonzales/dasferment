@@ -2,8 +2,12 @@ FROM mcr.microsoft.com/devcontainers/typescript-node:22
 
 # poppler-utils liefert pdftotext, pdfinfo und pdfimages. Das Skript scripts/buch-pruefen.mjs
 # braucht sie, um den fertigen Buchumbruch am PDF zu messen statt am DOM.
+#
+# default-jre-headless liefert die Laufzeit für epubcheck. Das Programm selbst steckt
+# in node_modules/epub-check, aber es ist ein Java-Programm. Ohne die Laufzeit prüft
+# scripts/epub-pruefen.mjs nur die eigene Struktur und meldet sich nicht als bestanden.
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends poppler-utils && \
+    apt-get install -y --no-install-recommends poppler-utils default-jre-headless && \
     rm -rf /var/lib/apt/lists/*
 
 # Chrome für scripts/make-pdf.mjs. Die Bibliotheken kommen aus apt, das Browser-Binary

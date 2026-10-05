@@ -1,0 +1,117 @@
+---
+import { getImage, Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import recipeData from '../../data/das_ferment.json';
+import epubIcon from '../../pic/icons/epub.png';
+import pdfIcon from '../../pic/icons/pdf.png';
+import kopfBild from '../../pic/smallactors/8.png';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import SeoHead from '../../components/SeoHead.astro';
+import { coverImageFor } from '../../lib/pageImages';
+import { type Recipe } from '../../lib/recipes';
+import { socialCard } from '../../lib/social';
+import '../../styles/global.css';
+
+const recipes = recipeData as Recipe[];
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const withBase = (path: string) => `${base}${path}`;
+const canonicalPath = '/buch/';
+const canonicalUrl = Astro.site ? new URL(withBase(canonicalPath), Astro.site).toString() : withBase(canonicalPath);
+const absoluteUrl = (path: string) => (Astro.site ? new URL(path, Astro.site).toString() : path);
+const description = `Das Ferment als PDF und E-Book (EPUB) – mit den ${recipes.length} Rezepten und Illustrationen aus dem Kodex.`;
+
+// Die Dateien werden in .github/workflows/buch-pdf.yml gebaut und liegen im
+// Release „buch“. Sie gehören nicht ins Repository und nicht in den Site-Build.
+const releaseUrl = 'https://github.com/DrGonzales/dasferment/releases/download/buch';
+const downloads = [
+	{ href: `${releaseUrl}/das-ferment.pdf`, label: 'PDF herunterladen', icon: pdfIcon },
+	{ href: `${releaseUrl}/das-ferment.epub`, label: 'EPUB herunterladen', icon: epubIcon },
+];
+
+const cover = coverImageFor(recipes);
+const cardImage = await socialCard(
+	(options) => getImage({ ...options, src: cover as ImageMetadata }),
+	cover
+		? {
+				width: cover.width,
+				height: cover.height,
+				alt: 'Buchmalerei aus dem Kodex von Das Ferment',
+			}
+		: undefined,
+	absoluteUrl,
+);
+---
+
+<!doctype html>
+<html lang="de">
+	<head>
+		<SeoHead
+			title="Das Ferment als Buch | Das Ferment"
+			description={description}
+			canonicalUrl={canonicalUrl}
+			base={base}
+			image={cardImage}
+		/>
+	</head>
+	<body>
+		<div class="site-shell">
+			<Header />
+
+			<main class="recipe-main prose-page">
+				<nav class="breadcrumbs" aria-label="Brotkrümelnavigation">
+					<a href={withBase('/')}>Startseite</a>
+					<span aria-hidden="true">/</span>
+					<span aria-current="page">Buch</span>
+				</nav>
+
+				<article class="prose-article">
+					<header class="prose-intro book-intro">
+						<figure class="book-intro__motiv">
+							<Image
+								src={kopfBild}
+								alt=""
+								aria-hidden="true"
+								width={384}
+								height={384}
+								quality={80}
+								loading="eager"
+								decoding="async"
+							/>
+						</figure>
+						<h1>Das Ferment als Buch</h1>
+						<p class="prose-intro__lead">
+							Du möchtest den Codex lieber in Ruhe auf Papier lesen oder unterwegs dabei haben?
+						</p>
+					</header>
+
+					<div class="prose-section">
+						<p>Das Ferment gibt es auch als PDF und E-Book (EPUB) – mit den Rezepten und Illustrationen aus dem Codex.</p>
+						<p>Für den Bildschirm, den E-Reader oder zum Selbstausdrucken.</p>
+
+						<div class="download-list">
+							{
+								downloads.map((download) => (
+									<a class="download" href={download.href} target="_blank" rel="noopener noreferrer">
+										<Image
+											class="download__icon"
+											src={download.icon}
+											alt=""
+											aria-hidden="true"
+											width={256}
+											loading="lazy"
+											decoding="async"
+										/>
+										<span class="download__label">{download.label}</span>
+									</a>
+								))
+							}
+						</div>
+					</div>
+				</article>
+			</main>
+
+			<Footer />
+		</div>
+	</body>
+</html>

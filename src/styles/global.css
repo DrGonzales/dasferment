@@ -1564,6 +1564,64 @@ img {
 	font-style: italic;
 }
 
+.book-intro__motiv {
+	display: flex;
+	justify-content: center;
+	margin: 0 0 clamp(1rem, 3vw, 1.8rem);
+}
+
+.book-intro__motiv img {
+	width: clamp(6.5rem, 18vw, 10rem);
+	height: auto;
+}
+
+.download-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: clamp(1rem, 2.5vw, 1.6rem);
+	margin-top: clamp(1.6rem, 3.5vw, 2.4rem);
+}
+
+.download {
+	display: flex;
+	align-items: center;
+	gap: clamp(0.9rem, 2vw, 1.3rem);
+	flex: 1 1 clamp(14rem, 44%, 22rem);
+	padding: clamp(0.8rem, 1.8vw, 1.1rem) clamp(1rem, 2vw, 1.4rem);
+	border: 1px solid var(--line);
+	color: var(--ink);
+	background: var(--paper-light);
+	text-decoration: none;
+	transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
+}
+
+.download::after {
+	margin-left: auto;
+	content: "↓";
+	color: var(--rust);
+	font-size: 1.05rem;
+}
+
+.download:hover,
+.download:focus-visible {
+	border-color: var(--rust);
+	background: var(--paper);
+	transform: translateY(-2px);
+}
+
+.download__icon {
+	flex: 0 0 auto;
+	width: clamp(2.8rem, 7vw, 3.6rem);
+	height: auto;
+}
+
+.download__label {
+	font-size: clamp(0.76rem, 1.3vw, 0.86rem);
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+}
+
 .knowledge-page {
 	max-width: 68rem;
 	margin: 0 auto;

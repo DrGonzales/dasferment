@@ -106,6 +106,58 @@
             ]
         },
         {
+            "id": "welches-salz",
+            "titel": "Welches Salz eignet sich zur Fermentation?",
+            "codex_titel": "Vom rechten Salz für die Gärung",
+            "kategorie": "salz",
+            "intro": "Nicht jedes Salz aus dem Küchenregal ist für die Fermentation gleichermaßen geeignet. Für Gemüsefermente empfiehlt sich möglichst reines Salz ohne Trennmittel, Rieselhilfen oder andere Zusätze. Entscheidend ist außerdem, das Salz genau abzuwiegen, damit die gewünschte Salzkonzentration zuverlässig erreicht wird.",
+            "codex_intro": "Nicht jedes Salz, das auf dem Tische stehet, ist gleichermaßen wohl für die Gärung geeignet. Der kundige Fermentierer greife zu einem möglichst reinen Salze, frei von unnötigen Zusätzen, und wäge dasselbe mit Bedacht.",
+            "abschnitte": [
+                {
+                    "titel": "Salz ohne Zusätze",
+                    "codex_titel": "Vom reinen Salze",
+                    "text": "Für die Fermentation ist möglichst reines Salz mit einer klaren Zutatenliste geeignet. Zusätzliche Stoffe sind für den Fermentationsprozess nicht erforderlich.",
+                    "codex_text": "Das Salz, welches der Speise beigegeben wird, bedarf keiner fremden Zusätze. Wo das Salz in seiner reinen Gestalt zu haben ist, sei solches wohl zu wählen."
+                },
+                {
+                    "titel": "Keine Trennmittel oder Rieselhilfen",
+                    "codex_titel": "Von den Stoffen, die das Salz locker halten",
+                    "text": "Viele handelsübliche Salze enthalten Trennmittel oder Rieselhilfen, damit das Salz nicht verklumpt. Für Fermentationen sollte möglichst ein Salz ohne solche Zusätze verwendet werden.",
+                    "codex_text": "Manche Salze werden mit allerlei Mitteln versehen, auf dass sie locker aus dem Gefäße fallen und nicht zusammenbacken. Für die Gärung bedarf es solcher Hilfen nicht."
+                },
+                {
+                    "titel": "Was steht auf der Packung?",
+                    "codex_titel": "Wie man das rechte Salz erkennet",
+                    "text": "Ein Blick auf die Zutatenliste schafft Klarheit. Ideal ist eine Zutatenliste, die lediglich Salz beziehungsweise Meersalz oder Steinsalz ausweist. Begriffe wie Trennmittel, Rieselhilfe oder entsprechende E-Nummern weisen auf zusätzliche Stoffe hin.",
+                    "codex_text": "Wer Gewissheit wünschet, der schaue auf das Verzeichnis der Zutaten. Stehet dort allein Salz, so ist die Sache einfach. Fremde Zusätze aber mögen dem aufmerksamen Fermentierer ein Zeichen sein, genauer hinzusehen."
+                },
+                {
+                    "titel": "Meersalz, Steinsalz oder Siedesalz?",
+                    "codex_titel": "Von den verschiedenen Arten des Salzes",
+                    "text": "Für die Fermentation können verschiedene Salzarten verwendet werden. Entscheidend ist weniger die Herkunft des Salzes als seine Zusammensetzung und die genaue Dosierung. Reines Meersalz und reines Steinsalz sind ebenso geeignet wie reines Siedesalz.",
+                    "codex_text": "Ob das Salz aus dem Meere, aus dem Berge oder aus der Sole gewonnen ward, ist für die Gärung nicht das Wesentliche. Vielmehr komme es darauf an, dass es rein sei und nach rechtem Maße gegeben werde."
+                },
+                {
+                    "titel": "Feines oder grobes Salz?",
+                    "codex_titel": "Von der Körnung des Salzes",
+                    "text": "Feines Salz löst sich schneller und lässt sich besonders einfach dosieren. Grobes Salz kann ebenfalls verwendet werden, sollte für reproduzierbare Rezepte aber möglichst gewogen werden.",
+                    "codex_text": "Feines Salz löset sich geschwinder, doch auch grobes Salz kann gute Dienste tun. Wo Genauigkeit gefordert ist, verlasse man sich auf die Waage."
+                },
+                {
+                    "titel": "Jodsalz",
+                    "codex_titel": "Vom Jod im Salze",
+                    "text": "Jodiertes Salz ist nicht grundsätzlich ungeeignet für die Fermentation. Wer möglichst reproduzierbare Fermentationen anstrebt, kann jedoch ein einfaches Salz ohne weitere Zusätze wählen.",
+                    "codex_text": "Auch das mit Jod versehene Salz ist nicht ohne Weiteres als untauglich zu verwerfen. Wer aber ein möglichst schlichtes und gleichbleibendes Salz wünschet, mag zu reinem Salze ohne weitere Zusätze greifen."
+                },
+                {
+                    "titel": "Salz immer wiegen",
+                    "codex_titel": "Warum die Waage besser ist als der Löffel",
+                    "text": "Unterschiedliche Salze und Körnungen haben bei gleichem Volumen unterschiedliche Gewichte. Deshalb sollte Salz für Fermentationsrezepte möglichst immer in Gramm abgewogen werden.",
+                    "codex_text": "Ein Löffel Salz ist nicht allezeit gleich schwer, denn Körnung und Beschaffenheit ändern das Maß. Darum sei die Waage dem kundigen Fermentierer ein zuverlässigerer Gehilfe."
+                }
+            ]
+        },
+        {
             "id": "gemuese-unter-lake",
             "titel": "Gemüse muss unter der Lake bleiben",
             "codex_titel": "Dass kein Gemüse über der Lauge schwimme",

@@ -1,0 +1,35 @@
+---
+import { BOOK_SUBTITLE, BOOK_TITLE } from '../../lib/book';
+import { FIGUREN } from '../../lib/figuren';
+import type { Recipe } from '../../lib/recipes';
+import type { Info } from '../../lib/infos';
+
+interface Props {
+	cover?: { src: string };
+	rezepte: Recipe[];
+	infos: Info[];
+}
+
+const { cover, rezepte, infos } = Astro.props;
+---
+
+<section class="blatt titelblatt">
+	{
+		cover && (
+			<figure class="titelblatt__cover">
+				<img src={cover.src} alt={`Einband von ${BOOK_TITLE}`} />
+			</figure>
+		)
+	}
+
+	<h1 class="titelblatt__name">{BOOK_TITLE}</h1>
+	<p class="titelblatt__zusatz">{BOOK_SUBTITLE}</p>
+	<p class="ornament" aria-hidden="true">❦</p>
+	<p class="titelblatt__anspruch">
+		{rezepte.length} Rezepte und {infos.length} Einträge aus dem Wissen, aufgeschrieben in den
+		Blättern eines Kodex.
+	</p>
+	<p class="titelblatt__gestalten">
+		Mit {FIGUREN.map((figur) => figur.name).join(' und ')}
+	</p>
+</section>

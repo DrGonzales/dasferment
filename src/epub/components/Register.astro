@@ -1,0 +1,54 @@
+---
+import Rahmen from './Rahmen.astro';
+
+export interface RegisterEintrag {
+	titel: string;
+	/** Dateiname des Rezepts im EPUB, ohne Endung. Leer, wenn es kein Rezept dazu gibt. */
+	slug: string;
+}
+
+export interface RegisterGruppe {
+	slug: string;
+	label: string;
+	eintraege: RegisterEintrag[];
+}
+
+interface Props {
+	gruppen: RegisterGruppe[];
+	rezepte: number;
+	zutatengruppen: number;
+}
+
+const { gruppen, rezepte, zutatengruppen } = Astro.props;
+---
+
+<Rahmen titel="Register der Rezepte" kicker="Nachschlagen">
+	<p class="lead">
+		{zutatengruppen} Zutatengruppen, alphabetisch geordnet. Jedes Rezept steht unter allen Zutaten,
+		die es trägt. Im Buch tragen die Verweise Seitenzahlen, hier führen sie zum Blatt.
+	</p>
+
+	{
+		gruppen.map((gruppe) => (
+			<section class="register-gruppe">
+				<h2>{gruppe.label}</h2>
+				<ul>
+					{gruppe.eintraege.map((eintrag) => (
+						<li>
+							{eintrag.slug ? (
+								<a href={`${eintrag.slug}.xhtml`}>{eintrag.titel}</a>
+							) : (
+								eintrag.titel
+							)}
+						</li>
+					))}
+				</ul>
+			</section>
+		))
+	}
+
+	<p class="schluss">
+		<span aria-hidden="true">❦</span>
+		{rezepte} Rezepte, ein einziges Register.
+	</p>
+</Rahmen>

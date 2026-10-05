@@ -1,0 +1,20 @@
+---
+interface Props {
+	titel: string;
+	kicker?: string;
+}
+
+const { titel, kicker } = Astro.props;
+---
+
+<section class="blatt">
+	{
+		kicker && (
+			<p class="blatt__kicker" epub:type="bridgehead">
+				{kicker}
+			</p>
+		)
+	}
+	<h1 class="blatt__titel">{titel}</h1>
+	<slot />
+</section>

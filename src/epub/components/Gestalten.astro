@@ -1,0 +1,36 @@
+---
+import { actorImageFor } from '../../lib/actorImages';
+import { FIGUREN } from '../../lib/figuren';
+import Rahmen from './Rahmen.astro';
+
+interface Props {
+	bilder: Map<string, { src: string; breite: number; hoehe: number }>;
+}
+
+const { bilder } = Astro.props;
+---
+
+<Rahmen titel="Connie und Katze" kicker="Die Gestalten">
+	<p class="lead">Die Küchenmeisterin und ihr Gefährte, wie sie im Buch mitreden.</p>
+
+	{
+		FIGUREN.map((figur) => {
+			const bild = bilder.get(figur.id);
+
+			return (
+				<article class="gestalt" id={`gestalt-${figur.id}`}>
+					{bild && (
+						<figure class="gestalt__portrait">
+							<img src={bild.src} width={bild.breite} height={bild.hoehe} alt={`${figur.sprecher} in der Schreibkammer`} />
+						</figure>
+					)}
+					<h2 class="gestalt__name">{figur.name}</h2>
+					<p class="gestalt__kicker">{figur.kicker}</p>
+					{figur.abschnitte.map((abschnitt) => (
+						<p>{abschnitt}</p>
+					))}
+				</article>
+			);
+		})
+	}
+</Rahmen>

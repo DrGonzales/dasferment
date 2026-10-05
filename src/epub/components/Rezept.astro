@@ -1,0 +1,70 @@
+---
+import { actorImageFor } from '../../lib/actorImages';
+import { recipeImageAlt } from '../../lib/recipes';
+import type { EpubTeilRezept } from '../../lib/epub';
+import Rahmen from './Rahmen.astro';
+
+interface Props {
+	teil: EpubTeilRezept;
+	bild?: { src: string; breite: number; hoehe: number };
+	portrait?: { src: string; breite: number; hoehe: number };
+}
+
+const { teil, bild, portrait } = Astro.props;
+const { recipe, categories } = teil.kapitel;
+---
+
+<Rahmen titel={recipe.codex_titel} kicker={categories.join(' · ')}>
+	<p class="sachbezeichnung">{recipe.titel}</p>
+
+	{
+		bild && (
+			<figure class="rezept__bild">
+				<img
+					src={bild.src}
+					width={bild.breite}
+					height={bild.hoehe}
+					alt={recipeImageAlt(recipe)}
+				/>
+			</figure>
+		)
+	}
+
+	{recipe.codex_einleitung && <p class="lead">{recipe.codex_einleitung}</p>}
+
+	<section class="block">
+		<h2>Zutaten</h2>
+		<ul class="zutaten">
+			{recipe.zutaten.map((zutat) => <li>{zutat}</li>)}
+		</ul>
+	</section>
+
+	<section class="block">
+		<h2>Zubereitung</h2>
+		<ol class="schritte">
+			{recipe.zubereitung.map((schritt) => <li>{schritt}</li>)}
+		</ol>
+	</section>
+
+	{
+		recipe.ratgeber && (
+			<aside class="ratschlag">
+				<h2>
+					<span aria-hidden="true">✦</span> {recipe.ratgeber.sprecher}s Ratschlag{' '}
+					<span aria-hidden="true">✦</span>
+				</h2>
+				{portrait && (
+					<figure class="ratschlag__portrait">
+						<img
+							src={portrait.src}
+							width={portrait.breite}
+							height={portrait.hoehe}
+							alt={`${recipe.ratgeber.sprecher} in der Schreibkammer`}
+						/>
+					</figure>
+				)}
+				<blockquote>{recipe.ratgeber.text}</blockquote>
+			</aside>
+		)
+	}
+</Rahmen>

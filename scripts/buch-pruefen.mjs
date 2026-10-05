@@ -157,7 +157,12 @@ async function pruefeUmbruch() {
 				doppelte: [...new Set(doppelte)],
 				toteAnker: [...new Set(toteAnker)],
 				bilder: document.querySelectorAll('.recipe-plate__frame img').length,
-				rezepte: document.querySelectorAll('article.recipe').length,
+				// Ein Rezept, dessen Text über eine Seite läuft, bringt Paged.js dazu,
+				// die Fortsetzung in ein zweites article.recipe zu legen. Gezählt wird
+				// deshalb der Kopf des Rezepts, nicht das Element.
+				rezepte: [...document.querySelectorAll('article.recipe')].filter((artikel) =>
+					artikel.querySelector('.recipe__head'),
+				).length,
 				plaettenOhneBild: document.querySelectorAll('.recipe-plate:not(:has(img))').length,
 			};
 		});

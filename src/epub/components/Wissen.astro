@@ -1,0 +1,79 @@
+---
+import { codexListe, codexText, type Info } from '../../lib/infos';
+import Rahmen from './Rahmen.astro';
+
+interface Props {
+	info: Info;
+	gruppenLabel: string;
+	portrait?: { src: string; breite: number; hoehe: number };
+}
+
+const { info, gruppenLabel, portrait } = Astro.props;
+const liste = (abschnitt: NonNullable<Info['abschnitte']>[number]) =>
+	codexListe(abschnitt.codex_liste, abschnitt.liste);
+---
+
+<Rahmen titel={codexText(info.codex_titel, info.titel)} kicker={info.titel}>
+	<p class="gruppenweg">{gruppenLabel}</p>
+
+	{
+		portrait && (
+			<figure class="wissen__motiv">
+				<img src={portrait.src} width={portrait.breite} height={portrait.hoehe} alt="" />
+			</figure>
+		)
+	}
+
+	<p class="lead">{codexText(info.codex_intro, info.intro)}</p>
+
+	{
+		info.abschnitte?.map((abschnitt) => {
+			const punkte = liste(abschnitt);
+
+			return (
+				<section class="abschnitt">
+					<h2>{codexText(abschnitt.codex_titel, abschnitt.titel)}</h2>
+					{abschnitt.text || abschnitt.codex_text ? (
+						<p>{codexText(abschnitt.codex_text, abschnitt.text)}</p>
+					) : null}
+					{punkte.length > 0 ? (
+						<ul>
+							{punkte.map((punkt) => (
+								<li>{punkt}</li>
+							))}
+						</ul>
+					) : null}
+				</section>
+			);
+		})
+	}
+
+	{
+		info.tabelle ? (
+			<figure class="tabelle">
+				<table>
+					<caption>{codexText(info.tabelle.codex_titel, info.tabelle.titel)}</caption>
+					<thead>
+						<tr>
+							{info.tabelle.spalten.map((spalte) => (
+								<th scope="col">{spalte}</th>
+							))}
+						</tr>
+					</thead>
+					<tbody>
+						{info.tabelle.zeilen.map((zeile) => (
+							<tr>
+								{zeile.map((zelle, index) =>
+									index === 0 ? <th scope="row">{zelle}</th> : <td>{zelle}</td>,
+								)}
+							</tr>
+						))}
+					</tbody>
+				</table>
+				{info.tabelle.hinweis || info.tabelle.codex_hinweis ? (
+					<figcaption>{codexText(info.tabelle.codex_hinweis, info.tabelle.hinweis)}</figcaption>
+				) : null}
+			</figure>
+		) : null
+	}
+</Rahmen>

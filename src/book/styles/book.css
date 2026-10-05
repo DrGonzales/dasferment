@@ -163,8 +163,7 @@ body {
 	font-family: var(--body);
 	font-size: 9.4pt;
 	line-height: 1.38;
-	text-align: justify;
-	text-justify: inter-word;
+	text-align: left;
 	font-kerning: normal;
 	font-variant-numeric: oldstyle-nums;
 	hyphens: manual;
@@ -186,32 +185,14 @@ h4 {
 	hyphens: none;
 }
 
-/* Paged.js setzt am umbrochenen Block text-align-last: justify, damit der
-   Fließtext am Seitenende voll bleibt. Das erben die Kindelemente und ziehen
-   einzeilige Überschriften, Kicker und Listen über die ganze Spaltenbreite
-   auseinander. Für alles, was nicht im Blocksatz gesetzt wird, muss die letzte
-   Zeile wieder text-align folgen. */
-h1,
-h2,
-h3,
-h4,
-caption,
-.kicker,
-.knowledge-group__claim,
-.knowledge-entry__kicker,
-.gestalt__kicker,
-.book-title__subtitle,
-.book-title__ornament,
-.book-title__claim,
-.book-part__claim,
-.book-part__ornament,
-.block-title,
-.recipe__ingredients li,
-.recipe__method li,
-.ingredient-list li,
-.instruction-list li,
-.toc-list li,
-.register-entry {
+/* Paged.js trägt am umbrochenen Block das Attribut
+   data-align-last-split-element="justify" ein und regelt darüber
+   text-align-last: justify. Das erben die Kindelemente und ziehen einzeilige
+   Überschriften, Kicker und Listen über die ganze Spaltenbreite auseinander.
+   Dieses Buch kennt keinen Blocksatz, deshalb steht die letzte Zeile immer auf
+   auto. Die Spezifität muss über der Regel von Paged.js liegen, sonst entscheidet
+   die Reihenfolge, und Paged.js fügt sein Stylesheet später ein. */
+html [data-align-last-split-element="justify"] {
 	text-align-last: auto;
 }
 

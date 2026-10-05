@@ -1,0 +1,397 @@
+/* EPUB-Ausgabe. Eigenes Stylesheet, getrennt von global.css und book.css, weil
+   ein Lesegerät weder den Satzspiegel des Buches noch die Site-Shell kennt.
+   Farben und Anmut entsprechen der Website. Sie stehen hier als Wert an jeder
+   Stelle und nicht als Custom Property: epubcheck meldet `--name` als
+   CSS-Fehler, weil sein Parser nur die Eigenschaften des CSS 2.1 kennt.
+
+   Feste Zahlen in em und Prozent, keine Media Queries: Ein Lesegerät rechnet die
+   Schriftgröße selbst um, und eine Media Query würde eine Bildschirmbreite gegen
+   eine Gerätebreite ausspielen, die es nicht gibt. Der Umbruch des Buches entsteht
+   hier nicht, er entsteht beim Lesen. */
+
+@font-face {
+	font-family: "EB Garamond";
+	src: url("../fonts/EBGaramond-Regular.ttf") format("truetype");
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "EB Garamond";
+	src: url("../fonts/EBGaramond-Italic.ttf") format("truetype");
+	font-weight: 400;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: "EB Garamond";
+	src: url("../fonts/EBGaramond-SemiBold.ttf") format("truetype");
+	font-weight: 600;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Cinzel";
+	src: url("../fonts/Cinzel-Regular.ttf") format("truetype");
+	font-weight: 400;
+	font-style: normal;
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+}
+
+body {
+	margin: 0 5%;
+	color: #2b2118;
+	font-family: "EB Garamond", Georgia, serif;
+	font-size: 1em;
+	line-height: 1.55;
+	text-align: left;
+	hanging-punctuation: first last;
+	/* Lesegerätausgaben blenden die Fläche gern aus. Kein Element dieses
+	   Stylesheets trägt deshalb eine Hintergrundfarbe, nur Linien und Schrift. */
+	background: none;
+}
+
+p {
+	margin: 0 0 0.85em;
+	 orphans: 2;
+	widows: 2;
+}
+
+h1,
+h2,
+h3 {
+	font-weight: 600;
+	line-height: 1.25;
+	text-wrap: balance;
+	page-break-after: avoid;
+	break-after: avoid;
+}
+
+h1 {
+	font-family: "Cinzel", "EB Garamond", Georgia, serif;
+	font-size: 1.5em;
+	margin: 0 0 0.6em;
+}
+
+h2 {
+	font-size: 1.15em;
+	margin: 1.4em 0 0.5em;
+}
+
+h3 {
+	font-size: 1.05em;
+	margin: 1.1em 0 0.4em;
+}
+
+a {
+	color: #743d2b;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.15em;
+}
+
+blockquote {
+	margin: 1.1em 0;
+	padding-left: 1em;
+	border-left: 2px solid rgba(74, 52, 36, 0.28);
+	font-style: italic;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+ul,
+ol {
+	margin: 0 0 0.9em;
+	padding-left: 1.4em;
+}
+
+li {
+	margin-bottom: 0.25em;
+}
+
+/* Manche Lesegeräte begründen ihre eigene Voreinstellung „Blocksatz“ nur dort,
+   wo eine Regel die Eigenschaft selbst nicht nennt, und stellen sie gegen den
+   Wert vom body. Links steht deshalb an jedem Textelement ausdrücklich. */
+p,
+h1,
+h2,
+h3,
+blockquote,
+li,
+caption,
+th,
+td,
+figcaption {
+	text-align: left;
+}
+
+/* Die zentrierten Flächen holen sich die Mitte an ihren Kindern zurück, sonst
+   gewinnt die Regel darüber. */
+.titelblatt > *,
+.ratschlag > * {
+	text-align: center;
+}
+
+/* Blatt --------------------------------------------------------------- */
+
+.blatt__kicker {
+	margin: 0 0 0.35em;
+	color: #8b745c;
+	font-size: 0.85em;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.blatt__titel {
+	padding-bottom: 0.3em;
+	border-bottom: 1px solid rgba(74, 52, 36, 0.28);
+}
+
+.lead {
+	color: #665140;
+	font-size: 1.05em;
+}
+
+.schluss {
+	margin-top: 1.6em;
+	color: #8b745c;
+	text-align: center;
+}
+
+.ornament {
+	margin: 0.5em 0;
+	color: #a47c35;
+	text-align: center;
+}
+
+/* Titelblatt ---------------------------------------------------------- */
+
+.titelblatt {
+	text-align: center;
+}
+
+.titelblatt__cover {
+	margin: 0 0 1.6em;
+}
+
+/* Der Einband liegt als fertige Datei im Archiv, `scripts/make-epub.mjs` legt sie
+   dorthin. Deshalb steht hier eine Breite statt eines Maßes aus der Quelldatei:
+   Das Cover trägt bewusst keine Breiten- und Höhenattribute. */
+.titelblatt__cover img {
+	width: 100%;
+	max-width: 20em;
+}
+
+.titelblatt__name {
+	font-family: "Cinzel", "EB Garamond", Georgia, serif;
+	font-size: 2em;
+	border-bottom: none;
+	letter-spacing: 0.04em;
+}
+
+.titelblatt__zusatz {
+	margin: 0 0 0.4em;
+	color: #665140;
+	font-size: 1.1em;
+	font-style: italic;
+}
+
+.titelblatt__anspruch {
+	margin: 0 auto;
+	max-width: 26em;
+	color: #665140;
+}
+
+.titelblatt__gestalten {
+	margin-top: 1.2em;
+	color: #8b745c;
+	font-size: 0.95em;
+}
+
+/* Gestalten ----------------------------------------------------------- */
+
+.gestalt {
+	margin: 1.8em 0 0;
+	page-break-before: always;
+	break-before: page;
+}
+
+.gestalt:first-of-type {
+	page-break-before: avoid;
+	break-before: avoid;
+}
+
+.gestalt__portrait {
+	margin: 0 0 1em;
+}
+
+.gestalt__name {
+	margin: 0;
+	border-bottom: none;
+}
+
+.gestalt__kicker {
+	margin: 0 0 0.6em;
+	color: #8b745c;
+	font-style: italic;
+}
+
+/* Wissen -------------------------------------------------------------- */
+
+.gruppenweg {
+	margin: -0.4em 0 1em;
+	color: #8b745c;
+	font-size: 0.85em;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+}
+
+.wissen__motiv {
+	margin: 0 0 1.2em;
+	text-align: center;
+}
+
+.wissen__motiv img {
+	width: 7em;
+}
+
+.abschnitt {
+	margin-top: 1.2em;
+}
+
+.abschnitt h2 {
+	color: #536044;
+}
+
+.tabelle {
+	margin: 1.4em 0;
+	page-break-inside: avoid;
+	break-inside: avoid;
+}
+
+.tabelle table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.95em;
+}
+
+.tabelle caption {
+	padding-bottom: 0.5em;
+	color: #665140;
+	font-style: italic;
+	text-align: left;
+}
+
+.tabelle th,
+.tabelle td {
+	padding: 0.35em 0.5em;
+	border-bottom: 1px solid rgba(74, 52, 36, 0.28);
+	text-align: left;
+	vertical-align: top;
+}
+
+.tabelle thead th {
+	border-bottom-width: 2px;
+}
+
+.tabelle figcaption {
+	margin-top: 0.5em;
+	color: #8b745c;
+	font-size: 0.9em;
+}
+
+/* Rezepte ------------------------------------------------------------- */
+
+/* Im Buch steht der sachliche Titel nicht, im EPUB hilft er beim Nachschlagen,
+   weil Leser in der Volltextsuche nach dem Rezeptnamen suchen und nicht nach
+   dem Kodex-Titel. */
+.sachbezeichnung {
+	margin: -0.3em 0 1em;
+	color: #8b745c;
+	font-size: 0.9em;
+}
+
+.rezept__bild {
+	margin: 0 0 1.2em;
+	text-align: center;
+}
+
+.block h2 {
+	color: #743d2b;
+	font-size: 0.9em;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.zutaten {
+	list-style: none;
+	padding-left: 0;
+}
+
+.zutaten li {
+	margin-bottom: 0.15em;
+	padding-left: 1em;
+	text-indent: -1em;
+}
+
+.schritte li {
+	margin-bottom: 0.5em;
+}
+
+.ratschlag {
+	margin: 1.8em 0 0;
+	padding-top: 0.9em;
+	border-top: 1px solid rgba(74, 52, 36, 0.28);
+	text-align: center;
+}
+
+.ratschlag h2 {
+	margin: 0 0 0.5em;
+	color: #a47c35;
+	font-size: 0.85em;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+}
+
+.ratschlag__portrait {
+	margin: 0 0 0.7em;
+}
+
+.ratschlag__portrait img {
+	width: 5em;
+}
+
+.ratschlag blockquote {
+	padding-left: 0;
+	border-left: none;
+}
+
+/* Register ------------------------------------------------------------ */
+
+.register-gruppe {
+	margin: 1.4em 0 0;
+	page-break-inside: avoid;
+	break-inside: avoid;
+}
+
+.register-gruppe h2 {
+	margin: 0 0 0.4em;
+	padding-bottom: 0.2em;
+	border-bottom: 1px solid rgba(74, 52, 36, 0.28);
+	color: #743d2b;
+}
+
+.register-gruppe ul {
+	margin: 0;
+	padding-left: 0;
+	list-style: none;
+}
+
+.register-gruppe li {
+	margin-bottom: 0.2em;
+}

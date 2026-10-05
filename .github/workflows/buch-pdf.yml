@@ -1,4 +1,4 @@
-name: Buch als PDF
+name: Buch als PDF und EPUB
 
 on:
   push:
@@ -17,8 +17,8 @@ env:
   TAG: buch
 
 jobs:
-  pdf:
-    name: PDF bauen und veröffentlichen
+  buch:
+    name: Buch bauen und veröffentlichen
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -38,6 +38,9 @@ jobs:
       - name: PDF bauen
         run: npm run make:pdf
 
+      - name: EPUB bauen
+        run: npm run make:epub
+
       - name: Release veröffentlichen
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -46,7 +49,7 @@ jobs:
           if [ -n "$PREVIOUS" ]; then RANGE="$PREVIOUS..${GITHUB_SHA}"; else RANGE="${GITHUB_SHA}"; fi
           NOTES=$(mktemp)
           {
-            echo "Automatisch aus \`main\` gebautes Rezeptbuch."
+            echo "Automatisch aus \`main\` gebautes Rezeptbuch als PDF und E-Book."
             echo
             echo "Quelle: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/commit/${GITHUB_SHA}"
             echo
@@ -55,8 +58,8 @@ jobs:
             git log --pretty='- %s' "$RANGE" -- src/ scripts/ || true
           } > "$NOTES"
           if gh release view "$TAG" >/dev/null 2>&1; then
-            gh release upload "$TAG" dist-book/das-ferment.pdf --clobber
+            gh release upload "$TAG" dist-book/das-ferment.pdf dist-epub/das-ferment.epub --clobber
             gh release edit "$TAG" --title 'Das Ferment' --notes-file "$NOTES"
           else
-            gh release create "$TAG" dist-book/das-ferment.pdf --title 'Das Ferment' --notes-file "$NOTES"
+            gh release create "$TAG" dist-book/das-ferment.pdf dist-epub/das-ferment.epub --title 'Das Ferment' --notes-file "$NOTES"
           fi

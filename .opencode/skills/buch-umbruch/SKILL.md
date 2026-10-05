@@ -19,7 +19,7 @@ oder `src/lib/book.ts` braucht am Ende `npm run check`.
 1. Änderung in `src/book/pages/index.astro` oder `src/book/styles/book.css`.
 2. `npm run build:book` für den HTML-Umbruch, `npm run make:pdf` für das PDF.
 3. `npm run check:book` prüft Umbruch und PDF. Erst danach ist eine Änderung fertig.
-4. `npm run build` prüfen, die Website bleibt bei 71 Seiten.
+4. `npm run build` prüfen, die Website bleibt bei 78 Seiten.
 
 `npm run check:book` misst den fertigen Paged.js-Umbruch im Browser und das fertige
 PDF mit den Werkzeugen aus poppler-utils. Das Skript schlägt bei Bildseite auf einem
@@ -48,9 +48,13 @@ Leerseiten sind deshalb nie im Template festgelegt.
   schmaler, ohne Fehlermeldung.
 * **Paged.js erbt `text-align-last`.** An jedem umbrochenen Block setzt Paged.js
   `data-align-last-split-element="justify"`, was `text-align-last: justify` bedeutet.
-  Kindelemente erben das und werden über die volle Spaltenbreite auseinandergezogen.
-  Deshalb die Reset-Liste in `book.css`. `npm run check:book` findet den Fehler
-  wieder, wenn sie fehlt.
+  Kindelemente erben das und werden über die volle Spaltenbreite auseinandergezogen,
+  einzeilige Überschriften am deutlichsten. Dieses Buch setzt nirgends Blocksatz:
+  `body` steht auf `text-align: left`, und `html [data-align-last-split-element="justify"]`
+  holt die letzte Zeile auf `auto` zurück. Die Spezifität muss über der Regel von
+  Paged.js liegen, sonst entscheidet die Reihenfolge, und Paged.js fügt sein
+  Stylesheet später ein. `npm run check:book` findet den Fehler wieder, wenn eine
+  der beiden Regeln fehlt.
 * **Der Kolumnentitel entsteht nicht über `string-set`.** Paged.js 0.4.3 schreibt den
   Wert ohne schließendes Anführungszeichen in die Custom Property, `string()` bleibt
   leer. `scripts/make-pdf.mjs` setzt `--laufender-kopf` deshalb selbst, je Seite.
