@@ -352,6 +352,86 @@
             ]
         },
         {
+            "id": "fermentationsglaeser",
+            "titel": "Gefäße und Gläser zum Fermentieren",
+            "codex_titel": "Von den rechten Gefäßen für die Gärung",
+            "kategorie": "ausruestung",
+            "intro": "Für die meisten Gemüsefermente genügen saubere, lebensmittelechte Gläser. Besonders praktisch sind Schraub- oder Weckgläser mit ausreichend großer Öffnung. Das Gefäß sollte sauber, unbeschädigt und groß genug sein, damit Gemüse, Lake und Gewicht ausreichend Platz haben.",
+            "codex_intro": "Der Fermentierer bedarf keiner kostbaren Gerätschaft. Ein wohl gereinigtes und untadeliges Glas, darein das Gemüse mit seiner Lauge wohl Raum finde, genüget für manch gutes Ferment.",
+            "abschnitte": [
+                {
+                    "titel": "Das richtige Glas",
+                    "codex_titel": "Von einem wohlgeeigneten Gefäße",
+                    "text": "Für Gemüsefermente eignen sich besonders saubere, lebensmittelechte Gläser. Klassische Schraubgläser, Weckgläser oder andere geeignete Einmachgläser können verwendet werden. Das Glas sollte keine Risse oder Abplatzungen aufweisen und ausreichend groß sein.",
+                    "codex_text": "Man nehme ein Gefäß, das für Speisen geschaffen und frei von Rissen und Schaden sei. Schraubglas und Weckglas mögen hierzu wohl dienen, sofern sie reinlich und von guter Beschaffenheit sind."
+                },
+                {
+                    "titel": "Weite Öffnung",
+                    "codex_titel": "Von der weiten Öffnung",
+                    "text": "Gläser mit einer ausreichend großen Öffnung erleichtern das Einfüllen des Gemüses, das Einsetzen des Fermentationsgewichts und die spätere Entnahme.",
+                    "codex_text": "Ein Gefäß mit weiter Mündung erweise sich dem Fermentierer als besonders bequem. Denn Gemüse, Gewicht und Lauge lassen sich darinnen leichter wohl setzen und später wieder entnehmen."
+                },
+                {
+                    "titel": "Das Glas nicht bis zum Rand füllen",
+                    "codex_titel": "Warum man dem Fermente Raum lassen soll",
+                    "text": "Während der Fermentation entstehen Gase und die Lake kann durch die Bewegung des Gemüses aufsteigen. Deshalb sollte oberhalb des Ferments ausreichend Freiraum bleiben.",
+                    "codex_text": "Man fülle das Gefäß nicht bis an den obersten Rand. Denn während der Gärung steigen Gase empor und die Lauge mag sich heben. Darum lasse man dem Fermente gebührenden Raum."
+                },
+                {
+                    "titel": "Sauberkeit",
+                    "codex_titel": "Von der Reinlichkeit der Gefäße",
+                    "text": "Glas, Deckel und Gewicht sollten vor der Verwendung gründlich gereinigt werden. Für die Fermentation sind saubere und lebensmittelechte Materialien entscheidend.",
+                    "codex_text": "Vor dem Beginne der Gärung reinige man Glas, Deckel und Gewicht wohl. Denn ein reinlich begonnenes Werk hat bessere Aussicht, wohl zu geraten."
+                }
+            ]
+        },
+        {
+            "id": "verschliessen-der-glaeser",
+            "titel": "Das richtige Verschließen der Gläser",
+            "codex_titel": "Vom Verschließen der Gefäße und dem Entweichen der Gärgase",
+            "kategorie": "ausruestung",
+            "intro": "Während der Fermentation soll möglichst wenig Umgebungsluft an das Ferment gelangen. Gleichzeitig entsteht Kohlendioxid. Der Verschluss muss deshalb so gewählt werden, dass entstehendes Gas entweichen kann und sich kein gefährlicher Überdruck aufbaut.",
+            "codex_intro": "Das Ferment verlange nach Schutz vor der äußeren Luft, doch die Gärung gebäre zugleich unsichtbare Gase. Darum wähle der kundige Fermentierer den Verschluss mit Bedacht, auf dass die Gase ihren Weg hinaus finden und kein gefährlicher Druck im Gefäße sich sammle.",
+            "abschnitte": [
+                {
+                    "titel": "Schraubglas mit locker aufgelegtem Deckel",
+                    "codex_titel": "Vom nur leicht verschlossenen Glase",
+                    "text": "Für einfache Fermente kann ein normales Schraubglas verwendet werden. Der Deckel wird zunächst nur leicht zugeschraubt. So kann überschüssiges Gas entweichen, während das Glas dennoch weitgehend verschlossen bleibt.",
+                    "codex_text": "Bei einfachen Fermenten mag ein gewöhnliches Schraubglas wohl dienen. Man schraube den Deckel nicht mit aller Gewalt fest, sondern lasse ihm ein wenig Spiel, auf dass die Gärgase entweichen können und das Gefäß doch vor allerlei Unrat bewahret bleibe."
+                },
+                {
+                    "titel": "Gäraufsatz",
+                    "codex_titel": "Vom Aufsatz, der die Gärgase ziehen lässt",
+                    "text": "Besonders praktisch sind spezielle Fermentationsdeckel mit Gäraufsatz. Sie ermöglichen, dass das während der Gärung entstehende Kohlendioxid entweichen kann, während gleichzeitig der Zutritt von Umgebungsluft weitgehend verhindert wird.",
+                    "codex_text": "Gar wohl dienet ein besonderer Gäraufsatz. Er gestattet den Gärgasen, ihren Weg aus dem Gefäße zu nehmen, hält aber die äußere Luft weitgehend davon ab, in die Speise einzudringen."
+                },
+                {
+                    "titel": "Warum nicht völlig luftdicht verschließen?",
+                    "codex_titel": "Warum man das gärende Gefäß nicht gänzlich versiegeln soll",
+                    "text": "Während einer aktiven Fermentation entsteht Kohlendioxid. Wird ein Glas vollständig luftdicht verschlossen, kann sich darin zunehmend Druck aufbauen. Deshalb sollte ein aktiv fermentierendes Glas nicht druckdicht verschlossen werden, wenn keine Möglichkeit zum Druckausgleich besteht.",
+                    "codex_text": "Solange die Gärung lebhaft im Gange ist, entstehen Gase und sammeln sich im Gefäße. Wer dasselbe ohne Weg zum Entweichen der Gase gänzlich versiegelt, mag einen gefährlichen Druck darin entstehen lassen. Darum lasse man den Gärgasen stets einen sicheren Weg."
+                },
+                {
+                    "titel": "Das gelegentliche Entlüften",
+                    "codex_titel": "Vom gelegentlichen Lösen des Druckes",
+                    "text": "Bei einem einfachen Schraubglas kann der Deckel gelegentlich kurz geöffnet werden, um aufgebauten Druck entweichen zu lassen. Dabei gelangt jedoch auch wieder Umgebungsluft an das Ferment. Ein geeigneter Gäraufsatz ist deshalb die komfortablere Lösung.",
+                    "codex_text": "Wo kein besonderer Gäraufsatz vorhanden ist, mag man den Deckel von Zeit zu Zeit vorsichtig lösen, auf dass der angesammelte Druck entweiche. Doch dringt hierbei auch äußere Luft ein. Ein rechter Gäraufsatz ist darum die bequemere und wohlbedachtere Wahl."
+                },
+                {
+                    "titel": "Nach der aktiven Fermentation",
+                    "codex_titel": "Von der kühlen Lagerung nach vollbrachter Gärung",
+                    "text": "Wenn das Ferment den gewünschten Säuregrad und Geschmack erreicht hat, kann es kühl gelagert werden. Die niedrigere Temperatur verlangsamt die weitere Fermentation. Auch gekühlte Fermente können jedoch noch langsam weitergären und Gas entwickeln.",
+                    "codex_text": "Hat die Speise die rechte Säure und den gewünschten Wohlgeschmack erlanget, so bringe man sie an eine kühle Lagerstatt. Dort wird das Werk der kleinen Gärwesen langsamer. Doch auch in der Kälte mag noch manche Gärung geschehen und Gas entstehen."
+                },
+                {
+                    "titel": "Eine einfache Faustregel",
+                    "codex_titel": "Die einfache Regel für den kundigen Fermentierer",
+                    "text": "Während der aktiven Gärung muss Gas entweichen können. Nach Erreichen des gewünschten Geschmacks wird das Ferment kühl gelagert. Während der gesamten Zeit sollte das Gemüse unter der Lake bleiben und das Gefäß sauber gehalten werden.",
+                    "codex_text": "Solange die Gärung tätig ist, lasse man die Gase ihren Weg finden. Hat die Speise ihren rechten Wohlgeschmack erreicht, so bringe man sie in die Kühle. Allezeit aber halte man das Gemüse unter der Lauge und das Gefäß in Reinlichkeit."
+                }
+            ]
+        },
+        {
             "id": "fermentationsgewicht",
             "titel": "Gewichte und Beschwerung",
             "codex_titel": "Von den Gewichten, welche das Gemüse niederhalten",
