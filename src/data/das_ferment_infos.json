@@ -524,6 +524,136 @@
                     ]
                 }
             ]
+        },
+        {
+            "id": "haeufige-fehler",
+            "titel": "Häufige Fehler beim Fermentieren",
+            "codex_titel": "Von den Missgeschicken des unerfahrenen Fermentierers",
+            "kategorie": "fehler",
+            "intro": "Viele Probleme bei der Fermentation entstehen durch zu wenig Salz, zu viel Wärme, mangelnde Sauberkeit oder Gemüse, das nicht vollständig unter der Lake bleibt. Wer einige einfache Grundregeln beachtet, kann die häufigsten Fehler vermeiden.",
+            "codex_intro": "Gar manches Missgeschick mag dem jungen Fermentierer widerfahren. Doch wer das rechte Salzmaß wahret, für Reinlichkeit sorgt, das Gemüse unter der Lauge hält und dem Werk seine gebührende Zeit und Wärme gibt, der wird viele solcher Plagen vermeiden.",
+            "tabelle": {
+                "titel": "Die häufigsten Fehler",
+                "codex_titel": "Tafel von den häufigsten Missgeschicken",
+                "spalten": [
+                    "Fehler",
+                    "Mögliche Folge",
+                    "Besser so"
+                ],
+                "codex_spalten": [
+                    "Missgeschick",
+                    "Was daraus erwachsen mag",
+                    "Wie man es besser mache"
+                ],
+                "zeilen": [
+                    [
+                        "Zu wenig Salz",
+                        "Der Fermentationsverlauf kann ungünstig beeinflusst werden.",
+                        "Die im Rezept angegebene Salzmenge genau abwiegen."
+                    ],
+                    [
+                        "Zu viel Salz",
+                        "Die Fermentation kann stark verlangsamt werden und das Ferment wird sehr salzig.",
+                        "Die vorgesehene Salzkonzentration einhalten."
+                    ],
+                    [
+                        "Gemüse ragt aus der Lake",
+                        "Kontakt mit Sauerstoff kann unerwünschte Hefen und Schimmel begünstigen.",
+                        "Das Gemüse mit einem geeigneten Gewicht vollständig unter der Lake halten."
+                    ],
+                    [
+                        "Glas bis zum Rand gefüllt",
+                        "Lake kann durch Gasbildung und Bewegung des Gemüses überlaufen.",
+                        "Ausreichend Kopfraum lassen."
+                    ],
+                    [
+                        "Glas druckdicht verschlossen",
+                        "Durch entstehendes Kohlendioxid kann sich Druck im Glas aufbauen.",
+                        "Einen geeigneten Gäraufsatz verwenden oder einen Verschluss wählen, der den Druckausgleich ermöglicht."
+                    ],
+                    [
+                        "Zu warm fermentiert",
+                        "Die Fermentation läuft sehr schnell und die Textur kann leiden.",
+                        "Einen geeigneten, möglichst gleichmäßigen Standort wählen."
+                    ],
+                    [
+                        "Unsauberes Glas oder Werkzeug",
+                        "Unerwünschte Mikroorganismen können in das Ferment gelangen.",
+                        "Glas, Deckel, Gewicht und Arbeitsflächen gründlich reinigen."
+                    ],
+                    [
+                        "Salz nach Volumen statt nach Gewicht gemessen",
+                        "Unterschiedliche Körnungen können zu unterschiedlichen tatsächlichen Salzkonzentrationen führen.",
+                        "Salz möglichst immer in Gramm abwiegen."
+                    ],
+                    [
+                        "Ferment zu lange warm stehen gelassen",
+                        "Das Ferment kann sehr sauer werden und an Festigkeit verlieren.",
+                        "Regelmäßig kontrollieren und bei erreichtem Geschmack kühl lagern."
+                    ]
+                ],
+                "codex_zeilen": [
+                    [
+                        "Am Salze gespart",
+                        "Die Gärung mag dadurch einen schlechten Gang nehmen.",
+                        "Man wäge das Salz nach dem rechten Rezeptmaße."
+                    ],
+                    [
+                        "Des Salzes zu viel",
+                        "Die Gärung mag allzu langsam werden und die Speise gar salzig geraten.",
+                        "Man halte sich an das rechte Salzmaß."
+                    ],
+                    [
+                        "Das Gemüse schwimmt über der Lauge",
+                        "Wo die Luft an das Gemüse gelanget, mögen unerwünschte Wesen ihr Werk beginnen.",
+                        "Man halte die Früchte mit einem guten Gewicht sicher unter der Lauge."
+                    ],
+                    [
+                        "Das Gefäß bis an den Rand gefüllet",
+                        "Die Lauge mag durch die aufsteigenden Gase über den Rand treten.",
+                        "Man lasse dem Fermente gebührenden Raum."
+                    ],
+                    [
+                        "Das Gefäß gänzlich versiegelt",
+                        "Die Gärgase mögen sich sammeln und einen gefährlichen Druck hervorbringen.",
+                        "Man gebe den Gasen einen sicheren Weg durch einen rechten Gäraufsatz oder geeigneten Verschluss."
+                    ],
+                    [
+                        "Das Ferment in allzu großer Wärme gehalten",
+                        "Die Gärung eile zu sehr dahin und das Gemüse mag seine Festigkeit verlieren.",
+                        "Man suche ihm einen mäßig warmen und beständigen Ort."
+                    ],
+                    [
+                        "Unreines Gefäß oder Werkzeug",
+                        "Fremde und unerwünschte Wesen mögen in die Speise gelangen.",
+                        "Man reinige Gefäß, Deckel, Gewicht und Werkzeuge wohl."
+                    ],
+                    [
+                        "Das Salz nach Löffelmaß gegeben",
+                        "Die Körnung des Salzes kann das wahre Maß verfälschen.",
+                        "Man vertraue lieber der Waage als dem Löffel."
+                    ],
+                    [
+                        "Das Ferment zu lange in der Wärme belassen",
+                        "Die Speise mag übermäßig sauer und weich werden.",
+                        "Man wache über die Gärung und bringe das Ferment zur rechten Zeit in die kühle Lagerstatt."
+                    ]
+                ]
+            },
+            "abschnitte": [
+                {
+                    "titel": "Nicht jeder Fehler zeigt sich sofort",
+                    "codex_titel": "Dass manches Missgeschick sich erst spät offenbaret",
+                    "text": "Nicht jeder Fehler führt unmittelbar zu einem sichtbaren Problem. Deshalb lohnt es sich, während der aktiven Fermentation regelmäßig Lake, Gemüse, Geruch, Oberfläche und Gasbildung zu kontrollieren.",
+                    "codex_text": "Nicht jedes Missgeschick zeiget sich alsbald dem Auge. Darum halte der Fermentierer von Zeit zu Zeit Wacht über Lauge, Gemüse, Geruch, Oberfläche und die aufsteigenden Gase."
+                },
+                {
+                    "titel": "Im Zweifel nicht probieren",
+                    "codex_titel": "Dass man verdächtige Speisen nicht kosten soll",
+                    "text": "Bei eindeutigem Verderb sollte das Ferment nicht probiert werden. Fauliger Geruch, stark schleimige Konsistenz, deutlicher pelziger Schimmel oder ungewöhnliche Verfärbungen sind Warnzeichen. Im Zweifel sollte das Ferment entsorgt werden.",
+                    "codex_text": "Wo die Speise übel riechet, gar schleimig ward, pelzigen Schimmel zeiget oder sich auf andere Weise verdächtig verändert hat, koste man nicht davon. Wo Zweifel herrschet, sei das Verwerfen der bessere Weg."
+                }
+            ]
         }
     ]
 }
