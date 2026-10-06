@@ -330,22 +330,6 @@
             ]
         },
         {
-            "id": "wasser-und-salz",
-            "titel": "Wasser und Salz auswählen",
-            "codex_titel": "Von gutem Wasser und rechtem Salz",
-            "kategorie": "zutaten",
-            "intro": "Für reproduzierbare Fermentationen sollte das Salz möglichst genau abgewogen werden. Salz ohne Zusätze und mit gleichmäßiger Körnung erleichtert die Berechnung.",
-            "codex_intro": "Wer ein stets wohlgeratenes Ferment wünschet, der wäge sein Salz mit Bedacht und nehme ein Salz von gleichmäßiger Beschaffenheit und ohne unnötige Zusätze.",
-            "abschnitte": [
-                {
-                    "titel": "Salz abwiegen",
-                    "codex_titel": "Das Salz soll gewogen werden",
-                    "text": "Das Abwiegen ist zuverlässiger als die Messung mit Löffeln, da unterschiedliche Salzarten und Körnungen unterschiedlich viel wiegen.",
-                    "codex_text": "Man verlasse sich lieber auf die Waage als auf den Löffel, denn nicht jedes Salz hat dieselbe Schwere und Körnung."
-                }
-            ]
-        },
-        {
             "id": "hygiene",
             "titel": "Sauberkeit und Hygiene",
             "codex_titel": "Von der Reinlichkeit beim Fermentieren",
