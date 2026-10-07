@@ -305,20 +305,41 @@ const breadcrumbTrail = [
 									<h2 id="verwandte-title">Verwandte Rezepte</h2>
 								</header>
 								<ul class="recipe-related__list">
-									{related.map((entry) => (
-										<li>
-											<a
-												href={withBase(`/rezepte/${slugify(entry.titel)}/`)}
-											>
-												<span class="recipe-related__codex">
-													{entry.codex_titel}
-												</span>
-												<span class="recipe-related__plain">
-													{entry.titel}
-												</span>
-											</a>
-										</li>
-									))}
+									{related.map((entry) => {
+										const relatedImage = imageForRecipe(entry);
+										return (
+											<li>
+												<a
+													href={withBase(`/rezepte/${slugify(entry.titel)}/`)}
+												>
+													<div class="recipe-related__visual">
+														{relatedImage ? (
+															<Image
+																src={relatedImage}
+																alt={recipeImageAlt(entry)}
+																widths={[220, 280, 360, 480]}
+																sizes="(max-width: 520px) calc(100vw - 80px), (max-width: 880px) 44vw, 280px"
+																quality={74}
+																loading="lazy"
+																decoding="async"
+															/>
+														) : (
+															<div
+																class="recipe-related__placeholder"
+																aria-hidden="true"
+															/>
+														)}
+													</div>
+													<span class="recipe-related__codex">
+														{entry.codex_titel}
+													</span>
+													<span class="recipe-related__plain">
+														{entry.titel}
+													</span>
+												</a>
+											</li>
+										);
+									})}
 								</ul>
 							</section>
 						)
