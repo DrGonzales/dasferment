@@ -21,7 +21,7 @@ Berichte danach:
 3. Ob die Zahlen im Buchdruck-Plan noch stimmen. Wenn sich Seitenzahlen,
    Leerseiten, Kolumnentitelzahl, Bildhöhe oder Umfang geändert haben, aktualisiere
    den Abschnitt im Plan und passe die Description in @AGENTS.md an.
-4. `npm run build` zur Kontrolle, die Website muss bei 78 Seiten bleiben.
+4. `npm run build` zur Kontrolle, die Website muss bei 79 Seiten bleiben.
 
 Beende die Arbeit nicht, solange `check:book` einen Befund ausgibt. Gehe jeden
 Befund einzeln an, statt die Prüfung zu lockern.

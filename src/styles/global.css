@@ -294,6 +294,14 @@ img {
 	color: var(--rust);
 }
 
+.error-links {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 1.2rem 1.8rem;
+	margin-top: clamp(2rem, 5vw, 3rem);
+}
+
 .hero__footnote {
 	display: flex;
 	align-items: center;
@@ -945,6 +953,17 @@ img {
 	overflow-wrap: anywhere;
 }
 
+.recipe-intro__recipe-title {
+	max-width: 42rem;
+	margin: 0.75rem 0 0;
+	color: var(--ink-soft);
+	font-family: var(--display);
+	font-size: clamp(0.95rem, 1.3vw, 1.12rem);
+	font-style: italic;
+	letter-spacing: 0.02em;
+	line-height: 1.4;
+}
+
 .recipe-intro__lead {
 	max-width: 42rem;
 	margin: 1.8rem 0 0;
@@ -969,7 +988,7 @@ img {
 	margin-top: 1.8rem;
 }
 
-.recipe-intro__tags span {
+.recipe-intro__tags a {
 	padding: 0.2rem 0.1rem 0.32rem;
 	border-bottom: 1px solid rgba(83, 96, 68, 0.45);
 	color: var(--moss);
@@ -979,6 +998,14 @@ img {
 	font-weight: 700;
 	letter-spacing: 0.14em;
 	line-height: 1.2;
+	text-decoration: none;
+	transition: color 180ms ease, border-color 180ms ease;
+}
+
+.recipe-intro__tags a:hover,
+.recipe-intro__tags a:focus-visible {
+	border-bottom-color: var(--rust);
+	color: var(--rust);
 }
 
 .recipe-intro__image {
@@ -1220,6 +1247,82 @@ img {
 		grid-column: 1;
 		grid-row: 2;
 	}
+}
+
+.recipe-related {
+	position: relative;
+	min-width: 0;
+	margin-top: clamp(3rem, 7vw, 5.5rem);
+	padding-top: 1.5rem;
+	border-top: 1px solid var(--line);
+}
+
+.recipe-related::before {
+	position: absolute;
+	top: -2px;
+	left: 0;
+	width: 3.5rem;
+	height: 2px;
+	content: "";
+	background: var(--gold);
+}
+
+.recipe-related h2 {
+	margin: 0;
+	font-family: var(--display);
+	font-size: clamp(1.6rem, 2.6vw, 2.3rem);
+	font-weight: 400;
+	letter-spacing: 0.015em;
+	line-height: 1.08;
+}
+
+.recipe-related__list {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+	gap: clamp(1rem, 2vw, 1.5rem);
+	margin: clamp(1.4rem, 3vw, 2rem) 0 0;
+	padding: 0;
+	list-style: none;
+}
+
+.recipe-related__list a {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	height: 100%;
+	padding: clamp(1rem, 2vw, 1.35rem);
+	border: 1px solid var(--line);
+	background: rgba(247, 238, 216, 0.55);
+	text-decoration: none;
+	transition:
+		border-color 180ms ease,
+		background 180ms ease,
+		transform 180ms ease;
+}
+
+.recipe-related__list a:hover,
+.recipe-related__list a:focus-visible {
+	border-color: rgba(116, 61, 43, 0.55);
+	background: var(--paper-light);
+	transform: translateY(-2px);
+}
+
+.recipe-related__codex {
+	font-family: var(--display);
+	font-size: clamp(1.02rem, 1.5vw, 1.2rem);
+	letter-spacing: 0.01em;
+	line-height: 1.2;
+}
+
+.recipe-related__list a:hover .recipe-related__codex,
+.recipe-related__list a:focus-visible .recipe-related__codex {
+	color: var(--rust);
+}
+
+.recipe-related__plain {
+	color: var(--ink-faint);
+	font-size: 0.78rem;
+	line-height: 1.4;
 }
 
 .site-footer__back {
@@ -1784,6 +1887,9 @@ img {
 }
 
 .knowledge-table {
+	/* Auf schmalen Geräten wäre die rechte Spalte sonst unter `overflow-x:
+	   hidden` von `body` abgeschnitten und unerreichbar. */
+	overflow-x: auto;
 	margin: 1.8rem 0 0;
 }
 

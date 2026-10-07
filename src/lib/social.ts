@@ -30,7 +30,7 @@ export function socialCardOptions(): ImageTransform {
 		fit: 'cover',
 		position: 'top',
 		format: 'jpeg',
-		quality: 82,
+		quality: 72,
 	};
 }
 

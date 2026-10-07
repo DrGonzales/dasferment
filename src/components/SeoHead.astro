@@ -1,5 +1,6 @@
 ---
 import { SITE_NAME, type SocialImage } from '../lib/social';
+import { breadcrumbObjects, itemListObject, siteObjects, type TrailEntry } from '../lib/seo';
 
 interface Props {
 	title: string;
@@ -8,17 +9,64 @@ interface Props {
 	base: string;
 	image?: SocialImage;
 	type?: 'website' | 'article';
+	noindex?: boolean;
+	/** Sichtbare Brotkrümelnavigation der Seite als Pfade, zum Beispiel `/wissen/`. */
+	breadcrumbs?: TrailEntry[];
+	/** Liste, die die Seite zeigt, etwa alle Rezepte einer Kategorie. */
+	itemList?: { name: string; items: TrailEntry[] };
+	/** Seitenspezifische Objekte, etwa ein Rezept. */
+	jsonLd?: object[];
 }
 
-const { title, description, canonicalUrl, base, image, type = 'website' } = Astro.props;
+const {
+	title,
+	description,
+	canonicalUrl,
+	base,
+	image,
+	type = 'website',
+	noindex = false,
+	breadcrumbs,
+	itemList,
+	jsonLd = [],
+} = Astro.props;
 const withBase = (path: string) => `${base}${path}`;
 const cardType = image ? 'summary_large_image' : 'summary';
+
+// Absolute URLs für die strukturierten Daten entstehen hier, damit keine Seite
+// denselben Aufbau selbst bauen muss. Ohne Herkunft bleiben sie aus.
+function originOf(url: string): URL | undefined {
+	try {
+		return new URL(url);
+	} catch {
+		return undefined;
+	}
+}
+
+const origin = Astro.site ?? originOf(canonicalUrl);
+const absolute = (path: string) => (origin ? new URL(withBase(path), origin).toString() : '');
+const withUrls = (entries: TrailEntry[]) =>
+	origin ? entries.map((entry) => ({ name: entry.name, url: absolute(entry.path) })) : undefined;
+
+const trail = breadcrumbs ? withUrls(breadcrumbs) : undefined;
+const list = itemList ? withUrls(itemList.items) : undefined;
+const structuredData = [
+	...(origin ? siteObjects(absolute('/')) : []),
+	...(trail ? [breadcrumbObjects(trail)] : []),
+	...(list && itemList ? [itemListObject(itemList.name, list)] : []),
+	...jsonLd,
+];
+const structuredDataScript =
+	structuredData.length === 1
+		? structuredData[0]
+		: { '@context': 'https://schema.org', '@graph': structuredData };
 ---
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="generator" content={Astro.generator} />
 <meta name="description" content={description} />
+{noindex && <meta name="robots" content="noindex, follow" />}
 <meta name="theme-color" content="#2b2118" />
 <link rel="canonical" href={canonicalUrl} />
 <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
@@ -51,5 +99,10 @@ const cardType = image ? 'summary_large_image' : 'summary';
 			<meta name="twitter:image" content={image.url} />
 			<meta name="twitter:image:alt" content={image.alt} />
 		</Fragment>
+	)
+}
+{
+	structuredData.length > 0 && (
+		<script type="application/ld+json" set:html={JSON.stringify(structuredDataScript)} />
 	)
 }

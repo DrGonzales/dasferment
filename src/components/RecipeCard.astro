@@ -20,15 +20,15 @@ const visibleTags = recipe.tags.filter((tag) => !isGeneralTag(tag)).slice(0, 2);
 ---
 
 <article class="recipe-card">
-	<a class="recipe-card__link" href={withBase(`/rezepte/${slug}/`)} aria-label={`${recipe.codex_titel} – ${recipe.titel}`}>
+	<a class="recipe-card__link" href={withBase(`/rezepte/${slug}/`)}>
 		<div class="recipe-card__visual">
 			{image ? (
 				<Image
 					src={image}
 					alt={recipeImageAlt(recipe)}
-					widths={[280, 480, 720]}
-					sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 900px) 46vw, (max-width: 1280px) 30vw, 260px"
-					quality={82}
+					widths={[280, 360, 480, 600, 720]}
+					sizes="(max-width: 390px) calc(100vw - 40px), (max-width: 560px) 46vw, (max-width: 1120px) 29vw, min(22vw, 320px)"
+					quality={74}
 					loading={index < 4 ? 'eager' : 'lazy'}
 					decoding="async"
 				/>

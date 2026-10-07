@@ -8,7 +8,7 @@ import Header from '../../components/Header.astro';
 import SeoHead from '../../components/SeoHead.astro';
 import { coverImageFor, imageForRecipe } from '../../lib/pageImages';
 import { socialCard } from '../../lib/social';
-import { categoryLabel, categorySlug, recipeImageAlt, type Recipe } from '../../lib/recipes';
+import { categoryLabel, categorySlug, recipeImageAlt, slugify, type Recipe } from '../../lib/recipes';
 import '../../styles/global.css';
 
 interface Props {
@@ -45,7 +45,13 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const withBase = (path: string) => `${base}${path}`;
 const canonicalPath = `/kategorien/${category}/`;
 const canonicalUrl = Astro.site ? new URL(withBase(canonicalPath), Astro.site).toString() : withBase(canonicalPath);
-const description = `${recipes.length} ${recipes.length === 1 ? 'Rezept' : 'Rezepte'} mit dem Thema ${categoryTitle} im Kodex von Das Ferment.`;
+const recipeWord = recipes.length === 1 ? 'Rezept' : 'Rezepte';
+const title = `${categoryTitle} fermentieren – ${recipes.length} ${recipeWord} | Das Ferment`;
+const description = `${recipes.length} ${recipeWord} zum Fermentieren mit ${categoryTitle} – mit Zutaten, Zubereitung und Buchmalereien aus dem Kodex von Das Ferment.`;
+const recipeItems = recipes.map((recipe) => ({
+	name: recipe.titel,
+	path: `/rezepte/${slugify(recipe.titel)}/`,
+}));
 const absoluteUrl = (path: string) => Astro.site ? new URL(path, Astro.site).toString() : path;
 const coverRecipe = recipes.find((recipe) => imageForRecipe(recipe));
 const cover = coverImageFor(recipes);
@@ -66,11 +72,17 @@ const cardImage = await socialCard(
 <html lang="de">
 	<head>
 		<SeoHead
-			title={`${categoryTitle} | Rezepte | Das Ferment`}
+			title={title}
 			description={description}
 			canonicalUrl={canonicalUrl}
 			base={base}
 			image={cardImage}
+			breadcrumbs={[
+				{ name: 'Startseite', path: '/' },
+				{ name: 'Kategorien', path: '/kategorien/' },
+				{ name: categoryTitle, path: canonicalPath },
+			]}
+			itemList={{ name: `Rezepte in ${categoryTitle}`, items: recipeItems }}
 		/>
 	</head>
 	<body>

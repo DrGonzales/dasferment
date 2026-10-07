@@ -8,16 +8,20 @@ import Header from '../../components/Header.astro';
 import SeoHead from '../../components/SeoHead.astro';
 import { coverImageFor, imageForRecipe } from '../../lib/pageImages';
 import { socialCard } from '../../lib/social';
-import { recipeImageAlt, type Recipe } from '../../lib/recipes';
+import { recipeImageAlt, slugify, type Recipe } from '../../lib/recipes';
 import '../../styles/global.css';
 
 const recipes = recipeData as Recipe[];
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const withBase = (path: string) => `${base}${path}`;
 const illustratedCount = recipes.filter((recipe) => imageForRecipe(recipe)).length;
-const description = `Alle ${recipes.length} Rezepte aus dem Kodex von Das Ferment – mit Zutaten, Zubereitung und ${illustratedCount} Buchmalereien.`;
+const description = `Alle ${recipes.length} Rezepte zum Fermentieren aus dem Kodex von Das Ferment – mit Zutaten, Zubereitung und ${illustratedCount} Buchmalereien.`;
 const canonicalPath = '/rezepte/';
 const canonicalUrl = Astro.site ? new URL(withBase(canonicalPath), Astro.site).toString() : withBase(canonicalPath);
+const recipeItems = recipes.map((recipe) => ({
+	name: recipe.titel,
+	path: `/rezepte/${slugify(recipe.titel)}/`,
+}));
 const absoluteUrl = (path: string) => Astro.site ? new URL(path, Astro.site).toString() : path;
 const cover = coverImageFor(recipes);
 const cardImage = await socialCard(
@@ -37,11 +41,16 @@ const cardImage = await socialCard(
 <html lang="de">
 	<head>
 		<SeoHead
-			title="Rezepte | Das Ferment"
+			title={`Alle ${recipes.length} Rezepte zum Fermentieren | Das Ferment`}
 			description={description}
 			canonicalUrl={canonicalUrl}
 			base={base}
 			image={cardImage}
+			breadcrumbs={[
+				{ name: 'Startseite', path: '/' },
+				{ name: 'Rezepte', path: canonicalPath },
+			]}
+			itemList={{ name: 'Alle Rezepte aus dem Kodex', items: recipeItems }}
 		/>
 	</head>
 	<body>

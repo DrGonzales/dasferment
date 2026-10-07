@@ -31,6 +31,10 @@ const description = `Lerne das statische Rezeptbuch Das Ferment und seine ${reci
 			description={description}
 			canonicalUrl={canonicalUrl}
 			base={base}
+			breadcrumbs={[
+				{ name: 'Startseite', path: '/' },
+				{ name: 'Über diese Seite', path: canonicalPath },
+			]}
 		/>
 	</head>
 	<body>

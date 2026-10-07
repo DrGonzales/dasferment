@@ -19,7 +19,7 @@ oder `src/lib/book.ts` braucht am Ende `npm run check`.
 1. Änderung in `src/book/pages/index.astro` oder `src/book/styles/book.css`.
 2. `npm run build:book` für den HTML-Umbruch, `npm run make:pdf` für das PDF.
 3. `npm run check:book` prüft Umbruch und PDF. Erst danach ist eine Änderung fertig.
-4. `npm run build` prüfen, die Website bleibt bei 78 Seiten.
+4. `npm run build` prüfen, die Website bleibt bei 79 Seiten.
 
 `npm run check:book` misst den fertigen Paged.js-Umbruch im Browser und das fertige
 PDF mit den Werkzeugen aus poppler-utils. Das Skript schlägt bei Bildseite auf einem

@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import Footer from '../../components/Footer.astro';
 import Header from '../../components/Header.astro';
 import SeoHead from '../../components/SeoHead.astro';
+import { shorten } from '../../lib/seo';
 import { SMALL_ACTOR_SIZE, smallActorImage } from '../../lib/smallActors';
 import '../../styles/global.css';
 
@@ -13,8 +14,12 @@ const canonicalPath = '/kontakt/';
 const canonicalUrl = Astro.site
 	? new URL(withBase(canonicalPath), Astro.site).toString()
 	: withBase(canonicalPath);
-const description =
+const lead =
 	'Habt Ihr eine Anregung, eine Frage oder einen Wunsch für unsern Kodex? Oder kennt Ihr ein gar köstlich und ungewöhnlich Ferment, das in diesem Buche noch fehlet? So lasset uns wissen, was Euch umtreibet. Sendet uns Eure Gedanken, Geschichten und Vorschläge – auf dass der Kodex stetig wachse und sich mit allerlei wunderlichen, schmackhaften und wohlgeratenen Gärungen fülle.';
+// Der Fließtext darf lang sein, die Meta-Beschreibung nicht.
+const description = shorten(
+	'Habt Ihr eine Anregung, eine Frage oder einen Wunsch für unsern Kodex? So lasset uns wissen, was Euch umtreibet – auf dass der Kodex stetig wachse.',
+);
 const contactMail = 'amkaltenpolar71@gmail.com';
 ---
 
@@ -26,6 +31,10 @@ const contactMail = 'amkaltenpolar71@gmail.com';
 			description={description}
 			canonicalUrl={canonicalUrl}
 			base={base}
+			breadcrumbs={[
+				{ name: 'Startseite', path: '/' },
+				{ name: 'Kontakt', path: canonicalPath },
+			]}
 		/>
 	</head>
 	<body>
@@ -56,7 +65,7 @@ const contactMail = 'amkaltenpolar71@gmail.com';
 						)}
 						<p class="section-heading__kicker">Ein Wort an die Küche</p>
 						<h1>Kontakt</h1>
-						<p class="prose-intro__lead">{description}</p>
+						<p class="prose-intro__lead">{lead}</p>
 					</header>
 
 					<section class="prose-section" aria-labelledby="formular-title">

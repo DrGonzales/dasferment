@@ -47,11 +47,15 @@ const cardImage = await socialCard(
 <html lang="de">
 	<head>
 		<SeoHead
-			title="Das Ferment als Buch | Das Ferment"
+			title="Das Ferment als Buch – PDF und EPUB"
 			description={description}
 			canonicalUrl={canonicalUrl}
 			base={base}
 			image={cardImage}
+			breadcrumbs={[
+				{ name: 'Startseite', path: '/' },
+				{ name: 'Buch', path: canonicalPath },
+			]}
 		/>
 	</head>
 	<body>

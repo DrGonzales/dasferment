@@ -8,10 +8,13 @@ import SeoHead from "../../components/SeoHead.astro";
 import { imageForRecipe } from "../../lib/pageImages";
 import { actorImageFor } from "../../lib/actorImages";
 import { socialCard } from "../../lib/social";
+import { recipeDescription } from "../../lib/seo";
 import {
+	categorySlug,
 	GENERAL_TAG_LABEL,
 	hasGeneralTag,
 	recipeImageAlt,
+	relatedRecipes,
 	slugify,
 	totalTimeIso,
 	type Recipe,
@@ -39,7 +42,12 @@ const canonicalPath = `/rezepte/${slug}/`;
 const canonicalUrl = Astro.site
 	? new URL(withBase(canonicalPath), Astro.site).toString()
 	: withBase(canonicalPath);
-const description = recipe.codex_einleitung ?? recipe.titel;
+const description = recipeDescription(recipe);
+const related = relatedRecipes(recipe, recipeData as Recipe[]);
+// Ab etwa 60 Zeichen schneidet die Suche den Titel ab. Dann entfällt der
+// Markenzusatz, der Name steht ohnehin in den WebSite-Daten und im Kopf jeder Seite.
+const pageTitle = `${recipe.titel} | Das Ferment`;
+const title = pageTitle.length > 60 ? recipe.titel : pageTitle;
 const image = imageForRecipe(recipe);
 const advisorImage = recipe.ratgeber
 	? actorImageFor(recipe.ratgeber.sprecher)
@@ -97,40 +105,25 @@ const recipeJsonLd = {
 		text: step,
 	})),
 };
-const breadcrumbJsonLd = {
-	"@context": "https://schema.org",
-	"@type": "BreadcrumbList",
-	itemListElement: [
-		{ "@type": "ListItem", position: 1, name: "Startseite", item: homeUrl },
-		{
-			"@type": "ListItem",
-			position: 2,
-			name: "Rezepte",
-			item: absoluteUrl(withBase("/rezepte/")),
-		},
-		{ "@type": "ListItem", position: 3, name: recipe.titel, item: canonicalUrl },
-	],
-};
+const breadcrumbTrail = [
+	{ name: "Startseite", path: "/" },
+	{ name: "Rezepte", path: "/rezepte/" },
+	{ name: recipe.titel, path: canonicalPath },
+];
 ---
 
 <!doctype html>
 <html lang="de">
 	<head>
 		<SeoHead
-			title={`${recipe.titel} | Das Ferment`}
+			title={title}
 			description={description}
 			canonicalUrl={canonicalUrl}
 			base={base}
 			image={cardImage}
 			type="article"
-		/>
-		<script
-			type="application/ld+json"
-			set:html={JSON.stringify(recipeJsonLd)}
-		/>
-		<script
-			type="application/ld+json"
-			set:html={JSON.stringify(breadcrumbJsonLd)}
+			breadcrumbs={breadcrumbTrail}
+			jsonLd={[recipeJsonLd]}
 		/>
 	</head>
 	<body>
@@ -158,6 +151,7 @@ const breadcrumbJsonLd = {
 							<h1>
 								{recipe.codex_titel}
 							</h1>
+							<p class="recipe-intro__recipe-title">{recipe.titel}</p>
 							{
 								recipe.codex_einleitung && (
 									<p class="recipe-intro__lead">
@@ -165,12 +159,18 @@ const breadcrumbJsonLd = {
 									</p>
 								)
 							}
-							<div
+							<nav
 								class="recipe-intro__tags"
 								aria-label="Rezeptkategorien"
 							>
-								{recipe.tags.map((tag) => <span>{tag}</span>)}
-							</div>
+								{recipe.tags.map((tag) => (
+									<a
+										href={withBase(`/kategorien/${categorySlug(tag)}/`)}
+									>
+										{tag}
+									</a>
+								))}
+							</nav>
 						</div>
 
 						<div class="recipe-intro__image">
@@ -180,10 +180,11 @@ const breadcrumbJsonLd = {
 										<Image
 											src={image}
 											alt={recipeImageAlt(recipe)}
-											widths={[320, 640, 1024]}
-											sizes="(max-width: 780px) calc(100vw - 40px), 30rem"
-											quality={86}
+											widths={[320, 480, 640, 780, 1024]}
+											sizes="(max-width: 520px) calc(100vw - 40px), 480px"
+											quality={78}
 											loading="eager"
+											fetchpriority="high"
 											decoding="async"
 										/>
 										<figcaption>
@@ -289,6 +290,37 @@ const breadcrumbJsonLd = {
 									</div>
 								</div>
 							</aside>
+						)
+					}
+					{
+						related.length > 0 && (
+							<section
+								class="recipe-related"
+								aria-labelledby="verwandte-title"
+							>
+								<header class="recipe-section__header">
+									<p class="section-heading__kicker">
+										Weiter im Kodex
+									</p>
+									<h2 id="verwandte-title">Verwandte Rezepte</h2>
+								</header>
+								<ul class="recipe-related__list">
+									{related.map((entry) => (
+										<li>
+											<a
+												href={withBase(`/rezepte/${slugify(entry.titel)}/`)}
+											>
+												<span class="recipe-related__codex">
+													{entry.codex_titel}
+												</span>
+												<span class="recipe-related__plain">
+													{entry.titel}
+												</span>
+											</a>
+										</li>
+									))}
+								</ul>
+							</section>
 						)
 					}
 				</article>

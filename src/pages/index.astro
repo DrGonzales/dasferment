@@ -29,7 +29,7 @@ const recipeCount = recipes.length;
 const illustratedCount = illustratedRecipes.length;
 const canonicalPath = '/';
 const canonicalUrl = Astro.site ? new URL(withBase(canonicalPath), Astro.site).toString() : withBase(canonicalPath);
-const description = `Im mittelalterlich inspirierten Kodex von Das Ferment: ${recipeCount} Rezepte für Kimchi, Sauerkraut, Gurken und weitere lebendige Fermente.`;
+const description = `Mittelalterlich inspirierter Kodex mit ${recipeCount} Rezepten zum Fermentieren – von Kimchi, Sauerkraut und Gurken bis zu weiteren lebendigen Fermenten.`;
 const absoluteUrl = (path: string) => Astro.site ? new URL(path, Astro.site).toString() : path;
 const cover = illustratedRecipes[0];
 const cardImage = await socialCard(
@@ -49,7 +49,7 @@ const cardImage = await socialCard(
 <html lang="de">
 	<head>
 		<SeoHead
-			title="Das Ferment | Rezepte aus dem Kodex"
+			title={`Das Ferment – ${recipeCount} Rezepte zum Fermentieren`}
 			description={description}
 			canonicalUrl={canonicalUrl}
 			base={base}
@@ -81,10 +81,10 @@ const cardImage = await socialCard(
 							<Image
 								src={coverFront}
 								alt="Vorderseite des Einbands von Das Ferment"
-								widths={[320, 640, 1024]}
-								sizes="(max-width: 560px) 61vw, 420px"
+								widths={[320, 480, 640, 780, 1024]}
+								sizes="(max-width: 560px) 52vw, (max-width: 780px) 48vw, (max-width: 1440px) 23vw, 340px"
 								format="webp"
-								quality={84}
+								quality={78}
 								loading="eager"
 								decoding="async"
 							/>
@@ -93,10 +93,10 @@ const cardImage = await socialCard(
 							<Image
 								src={coverBack}
 								alt="Rückseite des Einbands von Das Ferment"
-								widths={[320, 640, 1024]}
-								sizes="(max-width: 560px) 39vw, 240px"
+								widths={[160, 240, 320, 480]}
+								sizes="(max-width: 560px) 32vw, (max-width: 780px) 33vw, (max-width: 1440px) 15.5vw, 230px"
 								format="webp"
-								quality={84}
+								quality={78}
 								loading="eager"
 								decoding="async"
 							/>
@@ -105,10 +105,10 @@ const cardImage = await socialCard(
 							<Image
 								src={blatt.image}
 								alt={recipeImageAlt(blatt.recipe)}
-								widths={[320, 640, 1024]}
-								sizes="(max-width: 560px) 37vw, 224px"
+								widths={[160, 240, 320, 480]}
+								sizes="(max-width: 560px) 30vw, 210px"
 								format="webp"
-								quality={84}
+								quality={78}
 								loading="eager"
 								decoding="async"
 							/>

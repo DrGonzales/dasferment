@@ -19,10 +19,10 @@ Manage the background server with `astro dev stop`, `astro dev status`, and `ast
 | Befehl | Wirkung |
 | --- | --- |
 | `npm run dev` | `astro dev --host 0.0.0.0` |
-| `npm run build` | statischer Build nach `dist/`, aktuell 78 Seiten |
+| `npm run build` | statischer Build nach `dist/`, aktuell 79 Seiten |
 | `npm run preview` | Build lokal ansehen |
 | `npx astro build` | Build ohne npm-Skript, wenn `npm` nicht verfügbar ist |
-| `npm run build:book` | Buch-Build nach `dist-book/`, eine Seite, aktuell 111 Seiten |
+| `npm run build:book` | Buch-Build nach `dist-book/`, eine Seite, aktuell 113 Seiten |
 | `npm run make:pdf` | Buch-Build plus `dist-book/das-ferment.pdf` |
 | `npm run check:book` | prüft den fertigen Umbruch im Browser und das PDF, siehe `scripts/buch-pruefen.mjs` |
 | `npm run build:epub` | EPUB-Build nach `dist-epub/`, 64 Blätter als `.xhtml` |
@@ -57,8 +57,8 @@ das apt-Paket `google-chrome-stable` nachzieht und dafür das Google-Repository 
 src/
 ├── components/        Header.astro, Footer.astro, RecipeCard.astro, SeoHead.astro
 ├── data/              das_ferment.json, das_ferment_infos.json
-├── lib/               recipes.ts, infos.ts, pageImages.ts, actorImages.ts, smallActors.ts, categoryImages.ts, social.ts, book.ts, figuren.ts
-├── pages/             index, rezepte, kategorien, wissen, buch, ueber-diese-seite, kontakt, impressum, robots.txt.ts
+├── lib/               recipes.ts, infos.ts, pageImages.ts, actorImages.ts, smallActors.ts, categoryImages.ts, social.ts, seo.ts, book.ts, figuren.ts
+├── pages/             index, rezepte, kategorien, wissen, buch, ueber-diese-seite, kontakt, impressum, 404.astro, robots.txt.ts
 ├── pic/               pages/ (Rezeptillustrationen), actors/ (Ratschlag-Portraits), smallactors/ (Wissenseite), categories/ (Kategorieseite), cover/ (Einband), icons/ (Download-Symbole)
 ├── styles/            global.css
 ├── book/              nur Buchausgabe, siehe Abschnitt Buchdruck
@@ -81,7 +81,7 @@ Verwendet werden Astro, TypeScript (`astro/tsconfigs/strict`), HTML, CSS, JSON. 
 Beide JSON-Dateien sind Single Source of Truth:
 
 * `src/data/das_ferment.json` — 41 Rezepte, aktuell alle mit `picture`, `ratgeber` und `codex_einleitung`
-* `src/data/das_ferment_infos.json` — 19 Wissenseinträge, 9 Kategorien, 27 Abschnitte, 2 Tabellen
+* `src/data/das_ferment_infos.json` — 21 Wissenseinträge, 9 Kategorien, 38 Abschnitte, 3 Tabellen
 
 Regeln:
 
@@ -103,6 +103,7 @@ Regeln:
 | Kontakt | `/kontakt/` |
 | Impressum | `/impressum/` |
 | Hilfsdateien | `/sitemap-index.xml`, `/sitemap-rezepte-0.xml`, `/sitemap-kategorien-0.xml`, `/sitemap-pages-0.xml`, `/robots.txt` |
+| Fehlerseite | `/404.html` — GitHub Pages liefert sie mit Status 404 aus, sie steht auf `noindex` und nicht in der Sitemap |
 
 Die Site liegt unter `base: /dasferment` auf GitHub Pages. Konsequenzen:
 
@@ -306,6 +307,25 @@ Alle Bilder werden über `astro:assets` mit `Image` oder `getImage()` ausgeliefe
 
 `pageImages.ts` bildet den Dateinamen über den Key der Rezeptdaten zu, die Portrait-Module über `import.meta.glob` in `actorImages.ts` und `smallActors.ts`.
 
+### Responsive Breiten
+
+Jedes `<Image>` mit `widths` braucht ein `sizes`, das die **gemessene** Layout-Breite beschreibt, nicht die Breite, die man erwartet. Die Karte ist auf dem Handy 178 px breit (Zwei-Spalten-Maschine unter 560 px), nicht `calc(100vw - 40px)`. Ein zu großes `sizes` lässt das Handy eine 720er-Datei laden, wo 360 genügen.
+
+* Die Bruchpunkte in `sizes` müssen den Media Queries im Stylesheet entsprechen. Bei der Rezeptkarte sind das `.recipe-grid`: 1 Spalte ≤ 390 px, 2 ≤ 560 px, 3 ≤ 1120 px, 4 darüber; dazu die Shell-Begrenzung auf 1440 px.
+* Die Galerie auf der Startseite kippt bei 781 px in ein anderes Layout; deshalb braucht `sizes` dort eine Stufe für ≤ 560, ≤ 780 und ≤ 1440 px.
+* Breitenstufen so wählen, dass jede gemessene Breite mal Device-Pixel-Ratio auf eine Stufe fällt. Das 360er-Stufendeckt die Zwei-Spalten-Karte bei DPR 2, das 600er bei DPR 3.
+* `quality` für die Buchmalerei liegt bei 74 (Karten) und 78 (Hero, Galerie). WebP bei q64 ist barely smaller als q72, darunter lohnt der Qualitätsverlust nicht.
+* Gemessen wird mit Puppeteer über `offsetWidth`, nicht über `getBoundingClientRect()` — die Hero-Folios sind rotiert und der Rect enthält die Drehung.
+* Der Hero des Rezeptblatts trägt `fetchpriority="high"`, weil er das LCP-Element ist.
+
+### Verwandte Rezepte
+
+Am Ende jeder Rezeptseite stehen drei verwandte Blätter in `.recipe-related`, nach dem Ratgeber.
+
+* Auswahl über `relatedRecipes()` aus `src/lib/recipes.ts`: geteilte `tags`, das Ober-Tag `Gemüse` zählt nicht, sonst hängt hinter jedem Blatt dasselbe Blatt. Bei Gleichstand entscheidet `titel` alphabetisch — die Reihenfolge ist fest und nicht zufällig.
+* Alle 41 Rezepte haben verwandte Blätter. Fehlen sie dennoch, bleibt die Sektion aus, statt leere Links zu zeigen.
+* Der Link zeigt `codex_titel` und darunter den sachlichen `titel` als Fließtext, kein `aria-label` — der sichtbare Text ist der zugängliche Name. Das `aria-label` der Karte war entbehrlich, weil Kodex- und Rezepttitel ohnehin im Linktext stehen; Lighthouse meldete es als `label-content-name-mismatch`, weil es den sichtbaren Text „Rezept öffnen" nicht enthielt.
+
 ### Kategorieseite
 
 `/kategorien/` zeigt je Kategorie eine Kachel aus Text links und Bild rechts.
@@ -341,12 +361,33 @@ Jede Rezeptseite liefert:
 
 Rezeptdaten, die nicht aus der Quelle stammen, werden nicht erfunden.
 
+### Strukturierte Daten sitweit
+
+`SeoHead.astro` erzeugt die JSON-LD-Daten einer Seite selbst. Seiten bauen kein eigenes `<script type="application/ld+json">` mehr, sondern übergeben:
+
+| Prop | Inhalt |
+| --- | --- |
+| `breadcrumbs` | Pfaddaten der sichtbaren Brotkrümelnavigation, z. B. `{ name: 'Wissen', path: '/wissen/' }`, wird zu `BreadcrumbList` |
+| `itemList` | `{ name, items }` einer sichtbaren Liste, etwa alle Rezepte einer Kategorie, wird zu `ItemList` |
+| `jsonLd` | seitenspezifische Objekte, zum Beispiel das `Recipe` der Rezeptseite |
+| `noindex` | setzt `<meta name="robots" content="noindex, follow">`, benutzt nur die Fehlerseite |
+
+Jede Seite bekommt zusätzlich `WebSite` und `Organization`. Alle absoluten URLs entstehen aus `base` und der Canonical-URL der Seite, nicht in den Templates. Die Helfer liegen in `src/lib/seo.ts`: `siteObjects()`, `breadcrumbObjects()`, `itemListObject()`, `recipeDescription()` und `shorten()`.
+
+Weitere Regeln:
+
+* `title` bleibt unter etwa 60 Zeichen, die Meta Description unter 155. Läuft ein Rezept-Titel darüber, entfällt der Markenzusatz `| Das Ferment`, weil die Marke ohnehin in `WebSite` steht.
+* Die Meta Description einer Rezeptseite ist `recipeDescription()`: sachlicher `titel`, danach die Kodex-Einleitung, am Wortende gekürzt. Ein eigenes Verfassen von Beschreibungen für Rezepte gibt es nicht.
+* Der sachliche `titel` steht sichtbar als `.recipe-intro__recipe-title` unter dem Kodex-`h1`. Er gehört zur sachlichen Ebene und wird deshalb nicht in die Überschrift gemischt.
+* Die Tags der Rezeptseite verlinken ihre Kategorieseiten über `categorySlug()`. Tags in `RecipeCard.astro` bleiben Text, weil die Karte von einem einzigen Anker umschlossen ist und ein zweiter Anker darin ungültiges HTML ergäbe.
+* Die Fehlerseite steht auf `noindex` und taucht nicht in der Sitemap auf. Die Sitemap-Integration schließt sie von selbst aus, weil sie kein Verzeichnis-Routenblatt ist; nach einem Build einmal nachsehen.
+
 ### JSON-LD der Rezeptseite
 
 | Property | Quelle |
 | --- | --- |
 | `name` | `titel` |
-| `description` | `codex_einleitung`, Fallback `titel` |
+| `description` | derselbe Wert wie die Meta Description, also `recipeDescription()` |
 | `image` | `picture`, zwei Breiten (800 px und 1200 px) als `ImageObject` |
 | `inLanguage` | `"de"` |
 | `url`, `mainEntityOfPage` | Canonical URL der Seite |
@@ -413,7 +454,7 @@ Diese Properties werden **nicht** erzeugt, weil die Datenquelle sie nicht hergib
 Das Rezeptbuch existiert als zweite Ausgabe: `astro.book.config.mjs` baut `src/book/` nach `dist-book/`, `scripts/make-pdf.mjs` rendert daraus mit Puppeteer und Paged.js das PDF. Der ausführliche Plan mit allen Entscheidungen, Messwerten und den Stolperfallen von Paged.js 0.4.3 liegt in `docs/buchdruck-plan.md`.
 
 * **Getrennte Ausgabe, gemeinsame Daten.** `src/data/` und `src/lib/` werden von beiden Ausgaben genutzt, `src/lib/book.ts` gehört zu beiden. Build, Layout-Hülle und Stylesheet sind getrennt.
-* Die Buchausgabe ändert **keine** der obigen Regeln. `global.css` bleibt das einzige Stylesheet der Website, `npm run build` bleibt bei 78 Seiten. Kein `@page`, kein Print-Stylesheet und keine Drucklogik gehören in die Website.
+* Die Buchausgabe ändert **keine** der obigen Regeln. `global.css` bleibt das einzige Stylesheet der Website, `npm run build` bleibt bei 79 Seiten. Kein `@page`, kein Print-Stylesheet und keine Drucklogik gehören in die Website.
 * Das PDF entsteht in einem Durchlauf. `make-pdf.mjs` schreibt Kolumnentitel, Inhaltsverzeichnis und Lesezeichen in das bereits umgebrochene DOM und ruft Paged.js nicht erneut auf.
 * Neue Rezepte oder Wissenseinträge brauchen im Buch nichts außer Daten: Reihenfolge, Anker, Kolumnentitel, Inhaltsverzeichnis und Register entstehen aus `src/lib/book.ts` und dem Template.
 * Geänderte Seitenzahlen sind normal. Nach jedem Umbruch neu bauen und die Seitenzahl im PDF prüfen, nicht im DOM.

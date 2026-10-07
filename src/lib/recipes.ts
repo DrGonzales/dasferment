@@ -52,6 +52,35 @@ export function hasGeneralTag(recipe: Pick<Recipe, 'tags'>): boolean {
 	return recipe.tags.some(isGeneralTag);
 }
 
+// Verwandtschaft entsteht ausschließlich aus geteilten Tags, nie aus geratenem
+// Ähnlichkeitsgefühl. Das Ober-Tag zählt nicht mit, sonst stünde hinter fast
+// jedem Blatt dasselbe Blatt. Bei gleichem Ergebnis entscheidet der Titel,
+// damit zwei Builds dieselbe Reihenfolge liefern.
+export function relatedRecipes(
+	recipe: Recipe,
+	all: Recipe[],
+	limit = 3,
+): Recipe[] {
+	const candidates = all
+		.filter((candidate) => candidate.titel !== recipe.titel)
+		.map((candidate) => {
+			const sharedSpecific = candidate.tags.filter(
+				(tag) => !isGeneralTag(tag) && recipe.tags.includes(tag),
+			).length;
+			const anyShared = candidate.tags.some((tag) => recipe.tags.includes(tag));
+			return { candidate, sharedSpecific, anyShared };
+		})
+		.filter((entry) => entry.anyShared)
+		.sort(
+			(a, b) =>
+				b.sharedSpecific - a.sharedSpecific ||
+				a.candidate.titel.localeCompare(b.candidate.titel, 'de'),
+		)
+		.map((entry) => entry.candidate);
+
+	return candidates.slice(0, limit);
+}
+
 const DURATION_UNITS: Record<string, number> = {
 	minute: 1,
 	minuten: 1,

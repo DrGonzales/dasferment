@@ -39,7 +39,11 @@ for (const recipe of recipes) {
 const categories = [...categoryMap.values()].sort((a, b) => b.count - a.count || a.label.localeCompare(b.label, 'de'));
 const canonicalPath = '/kategorien/';
 const canonicalUrl = Astro.site ? new URL(withBase(canonicalPath), Astro.site).toString() : withBase(canonicalPath);
-const description = `Entdecke die ${categories.length} Kategorien im Rezeptbuch von Das Ferment.`;
+const description = `Entdecke die ${categories.length} Kategorien zum Fermentieren im Rezeptbuch von Das Ferment – jede Kategorie mit ihren Rezepten, Zutaten und Buchmalereien.`;
+const categoryItems = categories.map((category) => ({
+	name: category.label,
+	path: `/kategorien/${category.slug}/`,
+}));
 const absoluteUrl = (path: string) => Astro.site ? new URL(path, Astro.site).toString() : path;
 const cover = coverImageFor(recipes);
 const cardImage = await socialCard(
@@ -59,11 +63,16 @@ const cardImage = await socialCard(
 <html lang="de">
 	<head>
 		<SeoHead
-			title="Kategorien | Das Ferment"
+			title="Ferment-Rezepte nach Kategorie | Das Ferment"
 			description={description}
 			canonicalUrl={canonicalUrl}
 			base={base}
 			image={cardImage}
+			breadcrumbs={[
+				{ name: 'Startseite', path: '/' },
+				{ name: 'Kategorien', path: canonicalPath },
+			]}
+			itemList={{ name: 'Alle Kategorien im Kodex', items: categoryItems }}
 		/>
 	</head>
 	<body>

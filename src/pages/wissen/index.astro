@@ -18,17 +18,21 @@ const canonicalPath = '/wissen/';
 const canonicalUrl = Astro.site
 	? new URL(withBase(canonicalPath), Astro.site).toString()
 	: withBase(canonicalPath);
-const description = `${infos.length} Tips, Hinweise und Grundlagen rund um die Fermentation, im Kodex formuliert.`;
+const description = `${infos.length} Tipps, Hinweise und Grundlagen rund um die Fermentation – von der Salzlake über Temperatur und Hygiene bis zu häufigen Fehlern, im Kodex formuliert.`;
 ---
 
 <!doctype html>
 <html lang="de">
 	<head>
 		<SeoHead
-			title="Wissen | Das Ferment"
+			title="Fermentation – Wissen & Grundlagen | Das Ferment"
 			description={description}
 			canonicalUrl={canonicalUrl}
 			base={base}
+			breadcrumbs={[
+				{ name: 'Startseite', path: '/' },
+				{ name: 'Wissen', path: canonicalPath },
+			]}
 		/>
 	</head>
 	<body>
