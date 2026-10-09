@@ -27,7 +27,7 @@ export const FIGUREN: Figur[] = [
 		name: 'Katze',
 		kicker: 'Der Gefährte',
 		abschnitte: [
-			'Katze ist Connies schwarzer, etwas eigenwilliger Gefährte. Er ist aufmerksam, neugierig und häufig deutlich skeptischer als Connie. Manchmal ist er begeistert, manchmal verwirrt, manchmal erschrocken – und gelegentlich muss er Connie sogar mit erhobener Pfote zur Ordnung rufen.',
+			'Katze ist Connies etwas eigenwilliger Gefährte. Er ist aufmerksam, neugierig und häufig deutlich skeptischer als Connie. Manchmal ist er begeistert, manchmal verwirrt, manchmal erschrocken – und gelegentlich muss er Connie sogar mit erhobener Pfote zur Ordnung rufen.',
 			'Gerade diese Gegensätze machen die beiden aus: Connie probiert – Katze hinterfragt. Connie erklärt – Katze staunt. Und manchmal geht beim gemeinsamen Fermentieren auch etwas schief.',
 		],
 	},
