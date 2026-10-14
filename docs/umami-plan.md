@@ -245,3 +245,32 @@ Nicht betroffen: `astro.config.mjs` (keine Integration nötig, das Skript ist ke
 * Zugang und Wiederherstellung des Umami-Kontos regeln, Zweifaktor aktivieren.
 * Nach dem ersten Deploy die Events im Dashboard gegenprüfen (Abschnitt 9, Schritt 6).
 * Rechtliche Letztbewertung und, falls gewünscht, ein kurzer Hinweis auf der Startseite.
+
+## 12. Bekannte Einschränkung: Werbeblocker und Tracking-Schutz
+
+`cloud.umami.is` steht auf gängigen Filterlisten:
+
+```text
+EasyPrivacy                 ||umami.is^$third-party
+EasyPrivacy                 ||umami.*/script.js|$script
+AdGuard tracking_servers    ||umami.is^$third-party
+```
+
+`||umami.is^` trifft jedes Subdomain, also auch `cloud.umami.is`, und `$third-party`
+trifft genau den Fall Website → Umami. Betroffen sind Script **und** Sende-Endpunkt,
+also nicht nur das Laden des Skripts, sondern auch die Übertragung der Messung.
+
+Folgen:
+
+* In Browsern und Erweiterungen mit EasyPrivacy oder AdGuard (uBlock Origin, AdGuard,
+  Brave Shields und ähnliche) meldet die Konsole „Laden fehlgeschlagen für das
+  `<script>` …“. Das ist **keine Fehlkonfiguration** der Seite: Das Tag ist korrekt, die
+  URL `https://cloud.umami.is/script.js` antwortet mit HTTP 200, und GitHub Pages setzt
+  keine Content-Security-Policy. Der Block entsteht im Browser oder im Netz.
+* Diese Aufrufe fehlen in der Statistik. Die Zahlen sind eine Stichprobe, keine
+  Vollerhebung. Das ist bei clientseitiger Webanalyse üblich und schadet der Seite nicht:
+  Ohne Skript bleibt sie vollständig nutzbar.
+* Wer die Blockade umgehen will, muss die Messung selbst hosten beziehungsweise über eine
+  eigene, nicht gelistete Domain ausliefern. Dann ändern sich in
+  `src/components/Analytics.astro` nur Script-URL und Kennung; alles andere bleibt. Das
+  setzt einen Server voraus, den GitHub Pages nicht bietet.

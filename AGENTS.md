@@ -454,6 +454,7 @@ Diese Properties werden **nicht** erzeugt, weil die Datenquelle sie nicht hergib
 * Die Download-Events stehen als `event` im `downloads`-Array in `src/pages/buch/index.astro`, ausgegeben als `data-umami-event`. Die Namen sind fest: `pdf-download` und `epub-download`. Ein neuer Download braucht nur einen Eintrag mit `event`, kein eigenes Skript.
 * Gezählt wird der Klick, nicht der fertige Download. Die Zahl der fertigen Downloads bleibt beim GitHub-Release und hat keinen Bezug zur Quellseite.
 * Neue Ereignisse bleiben deklarativ über `data-umami-event`. Kein Inline-JavaScript und kein `onclick`, solange Umami die Attribute selbst auswertet.
+* `cloud.umami.is` steht auf EasyPrivacy und den AdGuard-Tracking-Listen (`||umami.is^$third-party`). Werbeblocker blockieren Skript und Sende-Endpunkt, in der Konsole steht dann „Laden fehlgeschlagen für das `<script>` …“. Das ist kein Fehler der Seite, sondern erwarteter Datenverlust; die Zahlen bleiben eine Stichprobe. Volle Abdeckung bräuchte selbst gehostetes Umami.
 * Der Abschnitt „Reichweitenmessung“ in `src/pages/impressum/index.astro` gehört zur Ausnahme. Wer die Messung ändert, prüft ihn mit.
 
 ## Konventionen
