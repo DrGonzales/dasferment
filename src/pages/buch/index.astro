@@ -25,8 +25,8 @@ const description = `Das Ferment als PDF und E-Book (EPUB) – mit den ${recipes
 // Release „buch“. Sie gehören nicht ins Repository und nicht in den Site-Build.
 const releaseUrl = 'https://github.com/DrGonzales/dasferment/releases/download/buch';
 const downloads = [
-	{ href: `${releaseUrl}/das-ferment.pdf`, label: 'PDF herunterladen', icon: pdfIcon },
-	{ href: `${releaseUrl}/das-ferment.epub`, label: 'EPUB herunterladen', icon: epubIcon },
+	{ href: `${releaseUrl}/das-ferment.pdf`, label: 'PDF herunterladen', icon: pdfIcon, event: 'pdf-download' },
+	{ href: `${releaseUrl}/das-ferment.epub`, label: 'EPUB herunterladen', icon: epubIcon, event: 'epub-download' },
 ];
 
 const cover = coverImageFor(recipes);
@@ -96,7 +96,13 @@ const cardImage = await socialCard(
 						<div class="download-list">
 							{
 								downloads.map((download) => (
-									<a class="download" href={download.href} target="_blank" rel="noopener noreferrer">
+									<a
+										class="download"
+										href={download.href}
+										target="_blank"
+										rel="noopener noreferrer"
+										data-umami-event={download.event}
+									>
 										<Image
 											class="download__icon"
 											src={download.icon}

@@ -1,4 +1,5 @@
 ---
+import Analytics from './Analytics.astro';
 import { SITE_NAME, type SocialImage } from '../lib/social';
 import { breadcrumbObjects, itemListObject, siteObjects, type TrailEntry } from '../lib/seo';
 
@@ -106,3 +107,5 @@ const structuredDataScript =
 		<script type="application/ld+json" set:html={JSON.stringify(structuredDataScript)} />
 	)
 }
+
+<Analytics />

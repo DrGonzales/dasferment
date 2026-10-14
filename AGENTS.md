@@ -55,7 +55,7 @@ das apt-Paket `google-chrome-stable` nachzieht und dafür das Google-Repository 
 
 ```text
 src/
-├── components/        Header.astro, Footer.astro, RecipeCard.astro, SeoHead.astro
+├── components/        Header.astro, Footer.astro, RecipeCard.astro, SeoHead.astro, Analytics.astro
 ├── data/              das_ferment.json, das_ferment_infos.json
 ├── lib/               recipes.ts, infos.ts, pageImages.ts, actorImages.ts, smallActors.ts, categoryImages.ts, social.ts, seo.ts, book.ts, figuren.ts
 ├── pages/             index, rezepte, kategorien, wissen, buch, ueber-diese-seite, kontakt, impressum, 404.astro, robots.txt.ts
@@ -135,6 +135,8 @@ Die Sitemap entsteht beim Build aus den gebauten Routen, aufgeteilt in drei Date
 Statische Generierung mit `getStaticPaths()`. Jede Seite muss als vollständiges HTML im Build entstehen.
 
 Kein clientseitiges JavaScript, solange ein konkreter interaktiver Anwendungsfall nicht vorliegt. Vor JavaScript immer prüfen, ob Astro, HTML oder CSS reichen. Svelte, React oder Vue werden nicht eingeführt.
+
+Die einzige Ausnahme ist das Umami-Tracking, siehe „Webanalyse“. Es ist ein Fremdskript und ohne eigenen Code angebunden; die Seite hängt nicht von ihm ab, ohne Skript bleibt sie vollständig nutzbar. Sonst gilt das Verbot unverändert.
 
 ## Kodex-Konzept
 
@@ -439,6 +441,20 @@ Diese Properties werden **nicht** erzeugt, weil die Datenquelle sie nicht hergib
 * Kopfbild ist `src/pic/smallactors/8.png`, die Symbole kommen aus `src/pic/icons/`. Beide Motive sind rein illustrativ, deshalb `alt=""` und `aria-hidden="true"`. Die Linktexte sind fest: „PDF herunterladen“ und „EPUB herunterladen“.
 * Das Layout steht in `global.css` als `.book-intro__motiv`, `.download-list` und `.download`: Icons mit `width: clamp()` und freier Höhe, Kacheln über `flex-wrap`, kein eigenes Stylesheet und keine feste Pixelbreite.
 * `SeoHead` bekommt die Social Card über `coverImageFor()` wie die Übersichtsseiten.
+* Download-Klicks werden als Umami-Events gezählt, siehe „Webanalyse“.
+
+## Webanalyse
+
+`src/components/Analytics.astro` ist die einzige Stelle mit einem clientseitigen Skript und die einzige Ausnahme vom JavaScript-Verbot. Der Plan mit den Entscheidungen liegt in `docs/umami-plan.md`.
+
+* Umami Cloud, Script `https://cloud.umami.is/script.js`, Kennung `cb4db255-4651-4c36-b97e-6273974b8c10`. Die Kennung ist öffentlich und steht deshalb im Bauteil, nicht in einer Umgebungsvariable.
+* Eingebunden wird `Analytics` allein in `SeoHead.astro`, damit jede Seite genau ein Script-Tag bekommt. Buch (`src/book/`) und EPUB (`src/epub/`) haben ein eigenes `<head>` und bleiben ohne Messung.
+* Das Script steht auf `is:inline` und `defer`: exaktes Markup, nicht render-blocking. `Astro.site.hostname` setzt `data-domains`, damit nur die echte Domain zählt und lokale Builds, Vorschauen und `dev` still bleiben. `data-do-not-track` achtet das Do-Not-Track-Signal.
+* Die Web-Vitals-Messung (`data-performance`) bleibt aus. Seitenaufrufe und Verweise sind die Voreinstellung und werden nicht abgeschaltet.
+* Die Download-Events stehen als `event` im `downloads`-Array in `src/pages/buch/index.astro`, ausgegeben als `data-umami-event`. Die Namen sind fest: `pdf-download` und `epub-download`. Ein neuer Download braucht nur einen Eintrag mit `event`, kein eigenes Skript.
+* Gezählt wird der Klick, nicht der fertige Download. Die Zahl der fertigen Downloads bleibt beim GitHub-Release und hat keinen Bezug zur Quellseite.
+* Neue Ereignisse bleiben deklarativ über `data-umami-event`. Kein Inline-JavaScript und kein `onclick`, solange Umami die Attribute selbst auswertet.
+* Der Abschnitt „Reichweitenmessung“ in `src/pages/impressum/index.astro` gehört zur Ausnahme. Wer die Messung ändert, prüft ihn mit.
 
 ## Konventionen
 
@@ -514,6 +530,7 @@ Das Buch hat eine dritte Ausgabe: `astro.epub.config.mjs` baut `src/epub/` nach 
 7. Bei Änderungen an `src/data/`, `src/lib/book.ts` oder `src/book/` zusätzlich `npm run make:pdf` und `npm run check:book`. Das Skript prüft Bildseite auf Recto, Text auf der Rückseite, stumme Bildseite, Bildbreite und -mitte, geerbten Blocksatz, doppelte `id` und tote Sprungmarken.
 8. Geänderte Seitenzahlen im Buch kommen in `docs/buchdruck-plan.md`, Abschnitt „Stand nach der Umsetzung“, nach.
 9. Bei Änderungen an `src/data/`, `src/lib/epub.ts` oder `src/epub/` zusätzlich `npm run make:epub` und `npm run check:epub`. Das Skript prüft mimetype zuerst, Manifest gegen Archiv, doppelte `id`, tote Verweise, nicht referenzierte Bilder und Schriften ohne Stylesheet und ruft epubcheck darüber hinaus auf.
+10. Bei Änderungen an `Analytics.astro`, `SeoHead.astro` oder den Download-Links: `npm run build`, dann hat jede Seite genau ein Umami-Script-Tag, `dist-book/` und `dist-epub/` haben keins, die Download-Links tragen `data-umami-event`, und der Impressum-Abschnitt „Reichweitenmessung“ passt zur Messung.
 
 ## Skills und Commands
 

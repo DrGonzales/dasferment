@@ -1,0 +1,17 @@
+---
+// Umami in der Cloud, das einzige clientseitige Skript der Website. Die Kennung ist
+// öffentlich, sie steht ohnehin in jeder ausgelieferten Seite. Die Domainschranke hält
+// lokale Entwicklungs- und Vorschaubuilds aus der Zählung, die Web-Vitals-Messung
+// bleibt aus.
+const websiteId = 'cb4db255-4651-4c36-b97e-6273974b8c10';
+const domains = Astro.site?.hostname;
+---
+
+<script
+	is:inline
+	defer
+	src="https://cloud.umami.is/script.js"
+	data-website-id={websiteId}
+	data-domains={domains}
+	data-do-not-track="true"
+></script>
