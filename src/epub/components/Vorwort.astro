@@ -1,23 +1,23 @@
 ---
-import { gruppiereInfos, type Info } from '../../lib/infos';
+import type { Info } from '../../lib/infos';
 import type { Recipe } from '../../lib/recipes';
 import Rahmen from './Rahmen.astro';
 
 interface Props {
 	infos: Info[];
 	rezepte: Recipe[];
+	gruppenAnzahl: number;
 }
 
-const { infos, rezepte } = Astro.props;
-const gruppen = gruppiereInfos(infos);
+const { infos, rezepte, gruppenAnzahl } = Astro.props;
 ---
 
 <Rahmen titel="Vorwort: Was die Geduld lehrt" kicker="Vorwort">
 	<p class="lead">
 		Dieses Buch sammelt {rezepte.length} Rezepte und {infos.length} Einträge aus dem Wissen um
-		die Fermentation. Die Rezepte stehen am Ende, alphabetisch nach Rezeptnamen. Davor liegt das
-		Wissen in {gruppen.length} Gruppen, weil man ohne Salz, Zucker und Zeit keine Gurke
-		vergessen kann.
+		die Fermentation. Jedes Kapitel beginnt mit seinen Rezepten, alphabetisch nach Rezeptnamen,
+		danach folgt sein Wissen in zusammen {gruppenAnzahl} Gruppen, weil man ohne Salz, Zucker
+		und Zeit keine Gurke vergessen kann.
 	</p>
 	<p>
 		Die Texte der Rezepte sind so geschrieben, wie sie in der Küche gelesen werden: erst das

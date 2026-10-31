@@ -1,0 +1,366 @@
+{
+    "infos": [
+        {
+            "id": "ginger-bug-grundlagen",
+            "titel": "Was ist ein Ginger Bug?",
+            "codex_titel": "Von dem lebendigen Ingwertranke und seinen unsichtbaren Helfern",
+            "kategorie": "ginger-bug",
+            "intro": "Ein Ginger Bug ist eine spontan entstandene Mischkultur aus Mikroorganismen, die sich auf Ingwer und in der Umgebung befinden. Mit Wasser und Zucker wird daraus ein aktiver Starter für fermentierte Getränke. Hefen können Zucker in Kohlendioxid und Alkohol umwandeln; weitere Mikroorganismen können Säuren und andere Aromastoffe bilden. Die genaue Zusammensetzung der Kultur ist nicht standardisiert.",
+            "codex_intro": "Aus Ingwer, reinem Wasser und süßem Zucker lässt sich ein lebendiger Trank bereiten. Gar kleine Wesen, dem Auge verborgen, finden sich darin zusammen. Sie nähren sich von der Süße und schenken dem Fermentierer Bläslein, Duft und manch neue Geschmacksnote.",
+            "abschnitte": [
+                {
+                    "titel": "Die unsichtbaren Helfer",
+                    "codex_titel": "Von den kleinen Wesen im Glase",
+                    "text": "Ein Ginger Bug enthält gewöhnlich verschiedene Hefen und Bakterien. Welche Arten vorhanden sind, hängt unter anderem vom Ingwer, Wasser, Zucker, der Umgebung und der Pflege ab. Deshalb können zwei Ansätze trotz gleicher Zutaten unterschiedlich riechen, schmecken und stark gären.",
+                    "codex_text": "Im Glase wohnen mancherlei kleine Helfer, deren Namen kein gewöhnlicher Wanderer kennt. Ein jeder Ansatz hat sein eigenes Wesen; darum soll man beobachten, riechen und mit Bedacht handeln."
+                },
+                {
+                    "titel": "Was der Ginger Bug bewirkt",
+                    "codex_titel": "Von den Gaben des Ingwerstarters",
+                    "text": "Als Starter bringt ein aktiver Ginger Bug Mikroorganismen in einen gesüßten Getränkeansatz ein. Dabei können Kohlendioxid, Alkohol, Säuren und Aromastoffe entstehen. Die Ergebnisse sind nicht vollständig vorhersehbar. Ein Ginger Bug ist weder eine reine Hefekultur noch eine Garantie für die Sicherheit des fertigen Getränks.",
+                    "codex_text": "Gibst du den lebendigen Starter zu einem süßen Tranke, so kann er Bläslein und neue Würze hervorbringen. Doch ist er kein allmächtiger Schutzgeist, und sein Wirken muss stets mit wachem Auge begleitet werden."
+                },
+                {
+                    "titel": "Worin sich der Ginger Bug von anderen Startern unterscheidet",
+                    "codex_titel": "Von den verschiedenen Wegen der Gärung",
+                    "text": "Für Ginger Beer und fermentierte Limonaden wird häufig ein Ginger Bug verwendet. Wasserkefir nutzt dagegen eine andere, charakteristische Mischkultur. Kombucha wird mit einer Kultur aus Hefen und Bakterien in gesüßtem Tee angesetzt. Milchsauer vergorenes Gemüse folgt wiederum anderen Rezepturen und Bedingungen. Die Starter sollten nicht beliebig gegeneinander ausgetauscht werden.",
+                    "codex_text": "Nicht jeder Gärstarter ist für jedes Werk bestimmt. Der Ingwerstarter dienet vornehmlich den süßen Getränken, der Teepilz dem Tee und die Salzgärung dem Gemüse. Ein weiser Fermentierer wahret die Eigenart eines jeden."
+                }
+            ]
+        },
+        {
+            "id": "ginger-bug-ansetzen-und-fuettern",
+            "titel": "Ginger Bug ansetzen und füttern",
+            "codex_titel": "Von der rechten Pflege des Ingwerstarters",
+            "kategorie": "ginger-bug",
+            "intro": "Ein Ginger Bug wird gewöhnlich aus frischem Ingwer, Wasser und Zucker angesetzt. Regelmäßige kleine Fütterungen können die Aktivität fördern. Saubere Arbeitsgeräte, geeignete Zutaten und eine gleichmäßige Temperatur helfen, den Ansatz zu beobachten und zu pflegen. Eine bestimmte Zahl von Tagen allein beweist noch nicht, dass eine Kultur sicher oder ausreichend aktiv ist.",
+            "codex_intro": "Wer einen Ingwerstarter ziehen will, der versehe ihn mit frischem Ingwer, reinem Wasser und süßem Zucker. Er halte das Gefäß sauber, gewähre ihm eine milde Wärme und nähre ihn regelmäßig, doch ohne Hast und Ungeduld.",
+            "abschnitte": [
+                {
+                    "titel": "Die tägliche Fütterung",
+                    "codex_titel": "Von der täglichen Speise des Starters",
+                    "text": "Als üblicher Ausgangspunkt können zu einem kleinen Ansatz täglich etwa 1 Esslöffel frisch geriebener Ingwer und 1 Esslöffel Zucker gegeben werden. Die genaue Menge richtet sich nach der Größe und Aktivität des Ansatzes. Saubere Löffel verwenden und nur so viel Wasser ergänzen, wie für die gewünschte Konsistenz nötig ist. Ein sauberer Deckel oder ein geeigneter Gäraufsatz soll vor Verunreinigungen schützen und den Gasabzug ermöglichen.",
+                    "codex_text": "Reiche dem Starter täglich eine kleine Gabe Ingwer und Zucker. Das Maß sei dem Gefäße angemessen. Verwende einen reinen Löffel und sorge dafür, dass die entstehenden Gase entweichen können."
+                },
+                {
+                    "titel": "Wasser, Ingwer und Zucker",
+                    "codex_titel": "Von den drei Zutaten des lebendigen Trankes",
+                    "text": "Frischer, unverdorbener Ingwer eignet sich für den Ansatz. Er kann gründlich unter fließendem Wasser gereinigt und fein geschnitten oder gerieben werden. Sauberes Trinkwasser und gewöhnlicher Haushaltszucker sind geeignete Ausgangszutaten. Zucker dient den Mikroorganismen als Nahrung; mehr Zucker bedeutet jedoch nicht automatisch eine bessere oder sicherere Kultur.",
+                    "codex_text": "Wähle Ingwer, der frisch und ohne Fäulnis sei. Wasche ihn sorgfältig, und reiche ihm reines Wasser und gewöhnlichen Zucker. Doch wisse: Ein Übermaß an Süße macht den Starter nicht zwangsläufig kräftiger."
+                },
+                {
+                    "titel": "Wann ist der Starter aktiv?",
+                    "codex_titel": "An welchen Zeichen man die Lebendigkeit erkennt",
+                    "text": "Kleine Bläschen, ein sichtbares Aufsteigen von Gas nach dem Umrühren und eine erkennbare Aktivität nach der Fütterung können auf Gärung hinweisen. Der Geruch sollte nicht faulig oder anderweitig verdorben sein. Bläschen allein beweisen keine mikrobiologische Sicherheit. Bei Schimmel oder auffälligem Verderb ist der gesamte Ansatz zu entsorgen.",
+                    "codex_text": "Sieh nach den kleinen Bläslein und achte darauf, ob der Starter nach seiner Speise wieder lebhafter wird. Doch trau nicht allein dem Schäumen; wo Schimmel oder fauliger Gestank erscheint, ist das Werk zu verwerfen."
+                },
+                {
+                    "titel": "Aufbewahrung zwischen den Ansätzen",
+                    "codex_titel": "Wie der Starter zwischen seinen Diensten ruhet",
+                    "text": "Ein aktiver Ginger Bug kann je nach Rezept und Kultur regelmäßig gefüttert oder zeitweise gekühlt aufbewahrt werden. Im Kühlschrank verlangsamt sich die Aktivität, sie endet jedoch nicht zuverlässig. Vor einer erneuten Verwendung kann eine Auffrischung mit Ingwer und Zucker nötig sein. Auffällige Kulturen sollten nicht durch bloßes Füttern wiederbelebt werden.",
+                    "codex_text": "Auch der Starter darf eine Ruhezeit haben. Kühle ihn, wenn er eine Weile nicht dienen soll, doch wisse, dass seine Arbeit dadurch nicht gänzlich endet. Vor dem nächsten Gebrauche prüfe sein Wesen und frische ihn bei guter Beschaffenheit auf."
+                }
+            ]
+        },
+        {
+            "id": "ginger-bug-temperatur-und-gaerung",
+            "titel": "Temperatur und Verlauf der Gärung",
+            "codex_titel": "Von der rechten Wärme und dem Fortgang der Gärung",
+            "kategorie": "gaerung",
+            "intro": "Temperatur, Zuckerangebot, Zusammensetzung der Kultur und Art des Getränkeansatzes beeinflussen die Gärung. Bei mäßiger Raumtemperatur kann ein Ginger Bug gut aktiv werden. Wärme beschleunigt die Aktivität häufig, während Kälte sie verlangsamt. Zu hohe Temperaturen können die Kultur beeinträchtigen und den Gärverlauf unberechenbarer machen.",
+            "codex_intro": "Die Gärung liebt weder große Kälte noch übermäßige Hitze. Gib dem Tranke eine milde Wärme und gewähre ihm Zeit, doch beobachte sein Wirken täglich.",
+            "abschnitte": [
+                {
+                    "titel": "Die geeignete Temperatur",
+                    "codex_titel": "Von der milden Wärme des Gärgefäßes",
+                    "text": "Für viele Ginger-Bug-Ansätze ist eine Umgebung von ungefähr 20 bis 26 °C ein brauchbarer Ausgangspunkt. Die optimale Temperatur hängt von der Kultur und dem Rezept ab. Direkte Sonne, starke Temperaturschwankungen und sehr warme Standorte sollten vermieden werden.",
+                    "codex_text": "Eine milde Wärme, etwa wie in einer wohltemperierten Küche, ist meist dienlich. Stelle das Gefäß nicht in die pralle Sonne und bewahre es vor allzu großen Wechseln der Temperatur."
+                },
+                {
+                    "titel": "Warum die Gärdauer schwankt",
+                    "codex_titel": "Warum die Gärung nicht nach einer festen Sanduhr arbeitet",
+                    "text": "Ein frischer Ginger Bug kann mehrere Tage benötigen, bis eine deutliche Aktivität sichtbar wird. Auch Getränke können innerhalb kurzer Zeit Kohlensäure entwickeln oder länger brauchen. Die Dauer hängt von Temperatur, Startermenge, Zucker, Fruchtbestandteilen und Mikroorganismen ab. Feste Zeitangaben sind daher nur grobe Orientierungen.",
+                    "codex_text": "Nicht jeder Ansatz folgt derselben Sanduhr. Mancher beginnt früh zu blubbern, ein anderer lässt sich länger Zeit. Prüfe den Fortgang, statt allein die Tage zu zählen."
+                },
+                {
+                    "titel": "Gäraufsatz und Gasabzug",
+                    "codex_titel": "Von dem Wege, auf dem das Gas entweichen soll",
+                    "text": "Während der Gärung entsteht häufig Kohlendioxid. In einem Gärgefäß mit Gäraufsatz kann dieses Gas entweichen, während der Kontakt mit der Umgebung begrenzt wird. Ein dicht verschlossenes Gefäß ohne kontrollierten Gasabzug kann gefährlichen Druck aufbauen. Auch ein Gäraufsatz ersetzt keine Hygiene und keine Prüfung des Ansatzes.",
+                    "codex_text": "Wo die Gärgeister ihr Gas erschaffen, muss ein sicherer Weg hinausführen. Verschließe den Trank während der Hauptgärung nicht in einem ungeeigneten Gefäße, auf dass der Druck keinen Schaden bringe."
+                }
+            ]
+        },
+        {
+            "id": "ginger-bug-fruechte-und-aromen",
+            "titel": "Früchte, Kräuter und neue Geschmacksrichtungen",
+            "codex_titel": "Von den Früchten und Kräutern, die dem Tranke Würze schenken",
+            "kategorie": "zutaten",
+            "intro": "Mit einem aktiven Ginger Bug lassen sich gesüßte Getränke aus Beeren, Zitrusfrüchten, tropischen Früchten, Kräutern und Tee ansetzen. Die Zutaten beeinflussen Geschmack, Farbe, Säure und Gärverlauf. Da frische Zutaten unterschiedliche Mikroorganismen und Verunreinigungen mitbringen können, ist eine saubere Vorbereitung wichtig.",
+            "codex_intro": "Nicht allein der Ingwer schenkt dem Tranke sein Wesen. Beeren bringen Farbe, Zitrusfrüchte ihre Säure, Kräuter ihren Duft und exotische Früchte die Erinnerung an ferne Länder.",
+            "abschnitte": [
+                {
+                    "titel": "Tiefgekühlte Beeren verwenden",
+                    "codex_titel": "Von den Früchten aus der kalten Truhe",
+                    "text": "Tiefgekühlte Himbeeren, Blaubeeren, Brombeeren und Erdbeeren können für Ginger-Bug-Getränke verwendet werden. Beim Auftauen geben sie oft viel Saft und Farbe ab. Für eine kontrolliertere Zubereitung können die Früchte kurz aufgekocht und anschließend abgedeckt vollständig abgekühlt werden. Erst danach wird der Starter hinzugegeben.",
+                    "codex_text": "Auch die Früchte aus der kalten Truhe können einen köstlichen Trank ergeben. Erwärme sie nach deinem Rezept, lasse sie danach gänzlich erkalten und füge erst dann den lebendigen Starter hinzu."
+                },
+                {
+                    "titel": "Zitrusfrüchte und Säure",
+                    "codex_titel": "Von der Säure der Zitrone und Limette",
+                    "text": "Zitronen, Limetten, Orangen und Blutorangen geben den Getränken Frische und Aroma. Saft und fein abgeriebene Schale können unterschiedlich intensive Geschmacksnoten liefern. Die Zugabe von Zitrussaft macht ein Getränk nicht automatisch sicher; der tatsächliche pH-Wert hängt von allen Zutaten und ihrer Menge ab.",
+                    "codex_text": "Die Zitrone und ihre Verwandten bringen eine frische Säure in den Becher. Doch wähne nicht, dass ein saurer Geschmack allein alle unerwünschten Wesen fernhalte."
+                },
+                {
+                    "titel": "Kräuter und Blüten",
+                    "codex_titel": "Von den duftenden Kräutern und Blüten",
+                    "text": "Minze, Basilikum, Rosmarin und geeignete essbare Blüten können aromatische Getränke bereichern. Kräuter und Blüten sollten eindeutig identifiziert, für den Verzehr geeignet und gründlich gereinigt sein. Stark aromatische Kräuter zunächst sparsam dosieren. Ein heißer Auszug kann helfen, die Zutaten kontrollierter vorzubereiten; vor Zugabe des Starters muss er vollständig abkühlen.",
+                    "codex_text": "Minze, Basilikum und Rosmarin schenken dem Tranke ihren Duft, doch jedes Kraut hat seine eigene Stärke. Wähle nur sicher bestimmbare Speisepflanzen und lasse heiße Auszüge erkalten, ehe du den Starter hinzugibst."
+                },
+                {
+                    "titel": "Gurke, Tee und andere ungewöhnliche Zutaten",
+                    "codex_titel": "Von den überraschenden Gaben des Gartens und des Tees",
+                    "text": "Gurke-Limette-Minze, Grüntee-Zitrone und Blutorange-Rosmarin sind mögliche Geschmackskombinationen. Gurken und manche Kräuter enthalten jedoch wenig vergärbaren Zucker. Deshalb hängt die Kohlensäureentwicklung besonders stark von der zusätzlichen Zuckerquelle und der Aktivität des Starters ab. Tee sollte ohne Starter aufgebrüht und vollständig abgekühlt werden.",
+                    "codex_text": "Auch Gurke, Tee und würzige Kräuter können neue Tränke hervorbringen. Doch wo wenig süße Nahrung vorhanden ist, kann die Gärung anders verlaufen. Gib dem Starter die passende Grundlage und beobachte das Gefäß mit Bedacht."
+                }
+            ]
+        },
+        {
+            "id": "ginger-bug-zucker-und-kohlensaeure",
+            "titel": "Zucker, Kohlensäure und Süße",
+            "codex_titel": "Von der süßen Nahrung und den sprudelnden Bläslein",
+            "kategorie": "gaerung",
+            "intro": "Zucker dient den Mikroorganismen als Nahrung und kann bei der Gärung zur Bildung von Kohlendioxid und Alkohol beitragen. Wie viel Zucker am Ende übrig bleibt, lässt sich aus der Ausgangsmenge allein nicht zuverlässig bestimmen. Auch die Stärke der Kohlensäure hängt von der Gäraktivität, Temperatur, Zeit und Art des Gefäßes ab.",
+            "codex_intro": "Der Zucker ist Nahrung für die kleinen Gärwesen. Wo sie ihn verzehren, entstehen mitunter Bläslein und neue Aromen. Doch nicht alle Süße verschwindet, und der Fortgang lässt sich nicht allein aus der anfänglichen Gabe weissagen.",
+            "abschnitte": [
+                {
+                    "titel": "Warum Zucker benötigt wird",
+                    "codex_titel": "Von der süßen Speise der Gärwesen",
+                    "text": "Viele Ginger-Bug-Getränke benötigen zugesetzten Zucker, damit die Mikroorganismen genügend vergärbare Nahrung vorfinden. Auch Fruchtsäfte und Früchte liefern Zucker, jedoch in wechselnden Mengen. Eine Rezeptur sollte nicht ohne Verständnis für die Auswirkungen auf Gärung und Geschmack verändert werden.",
+                    "codex_text": "Die süße Speise nährt die Gärwesen und lässt sie ihr Werk beginnen. Früchte bringen selbst Zucker mit, doch dessen Menge ist von Frucht zu Frucht verschieden."
+                },
+                {
+                    "titel": "Warum Kohlensäure entsteht",
+                    "codex_titel": "Wie die kleinen Bläslein in den Tranke gelangen",
+                    "text": "Bei der alkoholischen Gärung können Hefen Zucker in Alkohol und Kohlendioxid umwandeln. Das Kohlendioxid löst sich teilweise im Getränk und erzeugt beim Öffnen oder Einschenken die sichtbaren Bläschen. Eine starke Schaumbildung ist kein verlässlicher Beweis für Sicherheit oder vollständige Gärung.",
+                    "codex_text": "Wo die Hefen ihre süße Nahrung verwandeln, entsteht ein Gas, das dem Tranke seine Bläslein schenkt. Doch ein mächtiges Schäumen ist kein Siegel für das rechte Gelingen."
+                },
+                {
+                    "titel": "Restzucker und Alkohol",
+                    "codex_titel": "Von der verbleibenden Süße und dem verborgenen Geiste",
+                    "text": "Nach der Gärung können sowohl Zucker als auch Alkohol im Getränk verbleiben. Aus Geschmack, Dauer oder Bläschen lässt sich der Alkoholgehalt nicht zuverlässig ableiten. Wer Alkohol vermeiden muss oder möchte, sollte nicht davon ausgehen, dass ein Ginger-Bug-Getränk alkoholfrei ist. Auch längere Gärung beseitigt Alkohol nicht garantiert.",
+                    "codex_text": "Nicht alle Süße wird vom Tranke genommen, und ein verborgener Geist kann darin verbleiben. Wer keinen Alkohol begehrt, verlasse sich nicht allein auf den Geschmack oder auf die Zahl der vergangenen Tage."
+                },
+                {
+                    "titel": "Süße nach der Gärung",
+                    "codex_titel": "Wie man die Süße des fertigen Trankes beurteilt",
+                    "text": "Die wahrgenommene Süße verändert sich während der Gärung. Fruchtsäure, Kohlensäure und Aromastoffe beeinflussen, wie süß ein Getränk schmeckt. Eine nachträgliche Zugabe von Zucker oder Saft kann die Gärung erneut anregen und in einer verschlossenen Flasche den Druck erhöhen.",
+                    "codex_text": "Der fertige Trank schmeckt anders als der süße Ansatz zu Beginn. Füge neue Süße nur mit Bedacht hinzu, denn die Gärwesen können auch diese Nahrung aufnehmen und abermals Gas erschaffen."
+                }
+            ]
+        },
+        {
+            "id": "ginger-bug-hygiene-und-sicherheit",
+            "titel": "Hygiene und Sicherheit bei fermentierten Getränken",
+            "codex_titel": "Von der Reinlichkeit und den Gefahren des gärenden Trankes",
+            "kategorie": "sicherheit",
+            "intro": "Fermentierte Getränke werden mit lebenden Mikroorganismen hergestellt. Saubere Arbeitsweisen, geeignete Gefäße und eine sorgfältige Beobachtung sind daher wichtig. Eine spontan entstandene Kultur wie Ginger Bug garantiert weder eine bestimmte Säuerung noch die Abwesenheit unerwünschter Mikroorganismen. Sichtbare Aktivität oder ein angenehmer Geruch allein reichen nicht aus, um die Sicherheit eines Getränks zu bestätigen.",
+            "codex_intro": "Wo lebendige Wesen ihr Werk verrichten, bedarf es Reinlichkeit und Wachsamkeit. Nicht jeder Schaum kündet von gutem Gelingen, und nicht jeder wohlriechende Trank ist ohne Gefahr.",
+            "abschnitte": [
+                {
+                    "titel": "Saubere Arbeitsgeräte",
+                    "codex_titel": "Von reinen Händen, Löffeln und Gefäßen",
+                    "text": "Hände, Arbeitsflächen, Löffel, Siebe und Gärgefäße sollten vor der Verwendung gründlich gereinigt werden. Gefäße müssen für Lebensmittel und die vorgesehene Gärung geeignet sein. Reste von Reinigungsmitteln dürfen nicht in den Ansatz gelangen. Zutaten mit sichtbarem Verderb sollten nicht verwendet werden.",
+                    "codex_text": "Reinige Hände, Werkzeuge und Gefäße, ehe du den Trank bereitest. Kein verdorbenes Obst und kein schmutziger Löffel sollen dem Werke beigegeben werden."
+                },
+                {
+                    "titel": "Schimmel und Verderb erkennen",
+                    "codex_titel": "Von den Zeichen, bei denen man das Werk verwerfen soll",
+                    "text": "Flauschige oder pelzige Beläge, farbige Schimmelstellen und deutlich faulige oder anderweitig verdorbene Gerüche sind Gründe, den gesamten Ansatz zu entsorgen. Nicht probieren, nicht bloß die sichtbare Stelle entfernen und nicht versuchen, einen verdächtigen Ansatz durch weiteres Füttern zu retten. Eine dünne Oberflächenschicht ist nicht immer eindeutig zu beurteilen; im Zweifel ist Entsorgen die sichere Wahl.",
+                    "codex_text": "Wo pelziger Schimmel oder ein widerwärtiger Gestank erscheint, verwerfe den ganzen Ansatz. Entferne nicht bloß die sichtbare Stelle, und koste niemals von einem verdächtigen Tranke."
+                },
+                {
+                    "titel": "Säure und pH-Wert",
+                    "codex_titel": "Von der Säure, die man nicht allein mit der Zunge ermessen kann",
+                    "text": "Der pH-Wert beschreibt, wie sauer eine Flüssigkeit ist. Er kann mit einem geeigneten Messgerät oder geeigneten Testmitteln bestimmt werden. Ein niedriger pH-Wert kann das Wachstum vieler unerwünschter Mikroorganismen hemmen, beweist allein jedoch nicht, dass ein Getränk sicher ist. Bei Ginger-Bug-Getränken sollte man nicht von einer zuverlässig erreichten Säuerung ausgehen, wenn diese nicht gemessen und fachlich eingeordnet wurde.",
+                    "codex_text": "Die Zunge vermag Säure zu schmecken, doch sie ist kein zuverlässiges Messinstrument. Wer die Säure wissen will, bediene sich eines geeigneten Mittels und halte dennoch alle übrigen Regeln der Reinlichkeit ein."
+                },
+                {
+                    "titel": "Für wen besondere Vorsicht gilt",
+                    "codex_titel": "Von den Gästen, denen besondere Obacht gebührt",
+                    "text": "Spontan fermentierte Getränke können lebende Mikroorganismen und Alkohol enthalten. Menschen mit erhöhtem Risiko für lebensmittelbedingte Infektionen sowie Schwangere und Personen, die Alkohol meiden müssen, sollten besondere Vorsicht walten lassen und bei Bedarf fachlichen Rat einholen. Für diese Gruppen sind nicht kontrolliert fermentierte Getränke keine automatisch geeignete Wahl.",
+                    "codex_text": "Nicht jedem Gast ist ein solcher Trank gleichermaßen zuträglich. Wer besondere Vorsicht üben muss oder Alkohol meiden soll, wähle nur mit kundigem Rate und wisse um die Ungewissheit spontaner Gärung."
+                }
+            ]
+        },
+        {
+            "id": "ginger-bug-flaschen-und-druck",
+            "titel": "Abfüllen, Kohlensäure und Flaschendruck",
+            "codex_titel": "Von den Flaschen, den Bläslein und dem mächtigen Druck",
+            "kategorie": "abfuellen",
+            "intro": "Bei der Gärung kann Kohlendioxid entstehen und in einem geschlossenen Gefäß Druck aufbauen. Dieser Druck kann Glasflaschen bersten lassen oder Verschlüsse gefährlich herausschleudern. Die Gärung lässt sich nicht zuverlässig allein anhand einer festen Zeitangabe oder der Zahl sichtbarer Bläschen steuern. Für die Hauptgärung ist ein geeignetes Gefäß mit kontrolliertem Gasabzug vorzuziehen.",
+            "codex_intro": "Die kleinen Gärwesen können große Kräfte entfalten. Darum wähle die Gefäße mit Bedacht, gewähre dem Gase einen sicheren Ausgang und lasse niemals unbemerkt einen mächtigen Druck entstehen.",
+            "abschnitte": [
+                {
+                    "titel": "Geeignete Gefäße wählen",
+                    "codex_titel": "Von den Gefäßen, die dem Drucke standhalten",
+                    "text": "Für die Hauptgärung sollte ein lebensmittelgeeignetes Gefäß mit Gäraufsatz oder einem anderen geeigneten Gasabzug verwendet werden. Für eine Nachgärung in Flaschen sind ausschließlich ausdrücklich für kohlensäurehaltige Getränke geeignete, unbeschädigte Flaschen zu verwenden. Gewöhnliche Dekoflaschen, dünnwandige Glasflaschen und nicht druckgeeignete Behälter sind ungeeignet.",
+                    "codex_text": "Wähle ein Gefäß, das für sein Werk bestimmt ist. Eine Zierflasche ist kein Bollwerk gegen den Druck der Gärung. Während der Hauptgärung soll das Gas sicher entweichen können."
+                },
+                {
+                    "titel": "Die Gärung beobachten",
+                    "codex_titel": "Warum das Gefäß täglicher Obhut bedarf",
+                    "text": "Gäraktivität kann sich rasch verändern. Temperatur, Zucker und Starterstärke beeinflussen den Druckaufbau. Bei einer kontrollierten Nachgärung müssen geeignete Flaschen regelmäßig überprüft und bei deutlichem Druckaufbau gekühlt werden. Kühlung verlangsamt die Gärung, beendet sie aber nicht zuverlässig. Flaschen dürfen nicht unkontrolliert weitergären.",
+                    "codex_text": "Prüfe die Flaschen regelmäßig, denn die Gärung kann plötzlich an Kraft gewinnen. Kühle den Trank, wenn seine Spritzigkeit genügt, doch wisse, dass die Gärgeister auch in der Kälte nicht sicher verstummen."
+                },
+                {
+                    "titel": "Flaschen sicher öffnen",
+                    "codex_titel": "Von der vorsichtigen Öffnung des sprudelnden Trankes",
+                    "text": "Stark kohlensäurehaltige Flaschen sollten gut gekühlt und vorsichtig geöffnet werden. Die Öffnung von Gesicht und anderen Personen fernhalten. Flaschen mit auffälligem Druck, beschädigtem Glas oder unbekannter Druckfestigkeit nicht riskant öffnen oder weiter lagern. Eine Flaschengärung sollte nicht allein nach Kalender, Geschmack oder einer vermeintlich sicheren Anzahl von Tagen beendet werden.",
+                    "codex_text": "Kühle den Trank vor dem Öffnen und halte die Öffnung von Gesicht und Gefährten fern. Wo eine Flasche beschädigt ist oder bedrohlich unter Druck stehet, wage kein unbedachtes Werk."
+                }
+            ]
+        },
+        {
+            "id": "ginger-bug-lagerung-und-haltbarkeit",
+            "titel": "Lagerung und Haltbarkeit fermentierter Limonaden",
+            "codex_titel": "Von der kühlen Ruhestatt und der begrenzten Dauer des Trankes",
+            "kategorie": "lagerung",
+            "intro": "Kühlung verlangsamt die Aktivität vieler Mikroorganismen und kann den weiteren Druckaufbau bremsen. Sie stoppt die Gärung jedoch nicht zuverlässig und macht einen unsicheren Ansatz nicht sicher. Bei spontanen Getränkegärungen hängt die Haltbarkeit von Rezept, Säure, Hygiene, Temperatur und verbleibendem Zucker ab. Eine pauschale Haltbarkeitsangabe ist ohne validiertes Verfahren nicht möglich.",
+            "codex_intro": "Wenn der Trank die gewünschte Spritzigkeit erlangt hat, bringe ihn an einen kühlen Ort. Doch die Kälte ist nur eine Bremse, kein Zauber, der jede Gärung beendet oder einen verdorbenen Trank wieder gut macht.",
+            "abschnitte": [
+                {
+                    "titel": "Im Kühlschrank aufbewahren",
+                    "codex_titel": "Von der kalten Ruhestatt des Trankes",
+                    "text": "Fertige Getränke sollten zeitnah gekühlt werden. Saubere, geeignete und druckfeste Gefäße verwenden und auch im Kühlschrank auf zunehmenden Druck achten. Eine aktive Nachgärung kann weiterhin Kohlendioxid bilden. Getränke nicht bei Raumtemperatur vergessen, wenn sie bereits in verschlossenen Flaschen stehen.",
+                    "codex_text": "Bringe den Trank nach seiner gewünschten Gärung in die Kühle und behalte seine Flaschen dennoch im Auge. Auch dort kann sich Gas sammeln, wenn die kleinen Wesen weiterarbeiten."
+                },
+                {
+                    "titel": "Woran man eine begrenzte Haltbarkeit erkennt",
+                    "codex_titel": "Von der kurzen Frist des lebendigen Getränkes",
+                    "text": "Geschmack, Geruch und Aussehen können sich bei weiterer Gärung verändern. Sie sind aber keine ausreichenden Einzeltests für Sicherheit. Ohne ein kontrolliertes Verfahren mit geprüfter Säuerung und Lagerung sollte keine lange Haltbarkeit angenommen werden. Verdächtige Getränke sind zu entsorgen und nicht durch erneutes Erhitzen oder Filtern zu retten.",
+                    "codex_text": "Ein lebendiger Trank verändert sich mit der Zeit. Doch weder guter Duft noch klare Farbe geben Gewissheit. Bewahre ihn nicht länger auf, als ein nicht validiertes Verfahren rechtfertigt, und verwerfe Verdächtiges ohne Zögern."
+                },
+                {
+                    "titel": "Transport und Mitnahme",
+                    "codex_titel": "Wie der Trank auf Reisen zu bewahren ist",
+                    "text": "Beim Transport sollten fermentierte Getränke kühl gehalten und gegen Bruch gesichert werden. Aktive, verschlossene Flaschen können auch unterwegs weiter Druck aufbauen. Für längere Reisen oder warme Umgebungen sind unkontrolliert nachgärende Getränke ungeeignet.",
+                    "codex_text": "Wer den Trank auf eine Reise mitnimmt, halte ihn kühl und schütze die Gefäße vor Stoß und Wärme. Eine Flasche, die unterwegs weitergärt, ist ein unzuverlässiger Reisegefährte."
+                }
+            ]
+        },
+        {
+            "id": "ginger-bug-fehler-und-probleme",
+            "titel": "Häufige Probleme beim Ginger Bug",
+            "codex_titel": "Von den Missgeschicken und ihrer rechten Deutung",
+            "kategorie": "fehlerhilfe",
+            "intro": "Ein Ginger Bug kann anfangs wenig Aktivität zeigen, ungewöhnlich sauer riechen oder bei der Getränkeherstellung nur wenig Kohlensäure entwickeln. Solche Beobachtungen können verschiedene Ursachen haben. Nicht jedes Problem lässt sich durch mehr Zucker oder längere Gärung beheben. Verdorbene oder verdächtige Ansätze müssen entsorgt werden.",
+            "codex_intro": "Nicht jeder Ansatz gelingt auf Anhieb. Wo die Bläslein ausbleiben oder der Trank ein fremdes Wesen annimmt, prüfe die Umstände mit Bedacht. Doch versuche nicht, ein verdorbenes Werk durch bloßes Füttern zu retten.",
+            "abschnitte": [
+                {
+                    "titel": "Der Ginger Bug blubbert nicht",
+                    "codex_titel": "Wenn die Bläslein auf sich warten lassen",
+                    "text": "Mögliche Ursachen sind eine niedrige Temperatur, eine noch junge Kultur, wenig verfügbare Nahrung oder eine wenig aktive Mikroorganismengemeinschaft. Prüfe die Temperatur, die verwendeten Zutaten und die bisherige Pflege. Ein gesunder, unverdächtiger Ansatz kann unter geeigneten Bedingungen weiter beobachtet werden. Bei Schimmel oder fauligem Geruch wird er entsorgt.",
+                    "codex_text": "Wenn die Bläslein fehlen, prüfe zuerst Wärme, Nahrung und Alter des Starters. Doch wo Schimmel oder Fäulnis erscheinen, sei nicht tapfer wider besseres Wissen, sondern verwerfe den Ansatz."
+                },
+                {
+                    "titel": "Das Getränk wird nicht spritzig",
+                    "codex_titel": "Wenn der Trank ohne Bläslein bleibt",
+                    "text": "Zu wenig aktive Starterkultur, geringe Temperatur, ungeeignete Zutaten oder ein undichtes Gefäß können die wahrgenommene Kohlensäure beeinflussen. Auch eine kurze Gärdauer kann eine Rolle spielen. Nicht einfach Zucker hinzufügen und die Flasche verschließen: Dadurch kann später ein unerwartet starker Druckaufbau entstehen. Die Ursache sollte zuerst geklärt werden.",
+                    "codex_text": "Ein stiller Trank mag viele Ursachen haben. Prüfe die Lebendigkeit des Starters und das Gefäß, ehe du neue Süße hinzugibst. Denn ein späteres Erwachen kann mächtiger sein, als du erwartest."
+                },
+                {
+                    "titel": "Der Trank ist zu sauer",
+                    "codex_titel": "Wenn die Säure die Oberhand gewinnt",
+                    "text": "Ein sehr saurer Geschmack kann durch Säurebildung, Fruchtbestandteile und die Dauer der Gärung entstehen. Eine Verdünnung verändert den Geschmack, stellt aber keine Sicherheit wieder her. Bei einem unbekannten oder auffälligen Ansatz darf übermäßige Säure nicht als Beweis für Unbedenklichkeit gelten.",
+                    "codex_text": "Wenn die Säure zu stark wird, so mag eine Verdünnung den Geschmack mildern. Doch wisse, dass eine saure Zunge kein sicheres Urteil über die Güte des Trankes spricht."
+                },
+                {
+                    "titel": "Der Geruch ist ungewöhnlich",
+                    "codex_titel": "Von fremden Düften und zweifelhaftem Wesen",
+                    "text": "Ein Ginger Bug kann frisch, würzig, hefig oder leicht säuerlich riechen. Deutlich faulige, verwesungsartige oder sonst verdächtige Gerüche sind ein Warnzeichen. Im Zweifel wird der gesamte Ansatz entsorgt. Nicht kosten, nicht mit Gewürzen überdecken und nicht durch erneutes Füttern zu retten versuchen.",
+                    "codex_text": "Ein würziger oder leicht säuerlicher Duft mag zum Wesen des Starters gehören. Doch wo der Gestank der Fäulnis aufsteigt, schließe das Buch dieses Ansatzes und wirf ihn fort."
+                }
+            ]
+        },
+        {
+            "id": "ginger-bug-rezeptanpassung",
+            "titel": "Rezepte anpassen und eigene Sorten entwickeln",
+            "codex_titel": "Von der Kunst, neue Tränke nach eigenem Geschmack zu bereiten",
+            "kategorie": "rezeptentwicklung",
+            "intro": "Neue Ginger-Bug-Getränke lassen sich durch unterschiedliche Früchte, Kräuter, Tees und Zitrusnoten entwickeln. Für aussagekräftige Versuche ist es hilfreich, jeweils nur eine oder wenige Zutaten zu verändern und die Mengen zu dokumentieren. Unterschiede bei Zucker, Fruchtanteil und Temperatur können Geschmack und Gärung stark beeinflussen.",
+            "codex_intro": "Der kundige Fermentierer darf neue Geschmäcker erkunden. Doch er ändere die Zutaten mit Bedacht, notiere seine Maße und prüfe jedes Werk, ehe er es als bewährtes Rezept in sein Buch aufnimmt.",
+            "abschnitte": [
+                {
+                    "titel": "Eine Grundrezeptur wählen",
+                    "codex_titel": "Von der Grundlage, auf der neue Tränke wachsen",
+                    "text": "Als Ausgangspunkt kann eine erprobte Rezeptur für ungefähr einen Liter verwendet werden. Die Mengen an Wasser, Zucker, Starter und Frucht sollten notiert werden. Für weitere Versuche wird möglichst nur eine Variable verändert, damit sich Unterschiede besser zuordnen lassen.",
+                    "codex_text": "Wähle ein bewährtes Grundmaß und schreibe alle Zutaten nieder. Verändere bei einem neuen Versuche nicht zugleich alle Dinge, sonst weißt du am Ende nicht, was den Unterschied hervorbrachte."
+                },
+                {
+                    "titel": "Geschmack und Säure ausbalancieren",
+                    "codex_titel": "Von dem rechten Gleichgewicht der Aromen",
+                    "text": "Süße, Säure, Bitterkeit, Fruchtaroma und Kräuterwürze beeinflussen sich gegenseitig. Beeren vertragen oft Zitrusnoten, während kräftige Kräuter wie Rosmarin sparsam dosiert werden sollten. Eine geschmacklich ausgewogene Rezeptur ist nicht automatisch mikrobiologisch sicher; Sicherheit und Geschmack müssen getrennt beurteilt werden.",
+                    "codex_text": "Süße und Säure sollen einander nicht blind bekämpfen. Gib den Kräutern nur so viel Raum, wie ihrem Wesen gebührt. Doch verwechsle einen guten Geschmack niemals mit einem sicheren Tranke."
+                },
+                {
+                    "titel": "Versuche dokumentieren",
+                    "codex_titel": "Wie der Fermentierer seine Erkenntnisse bewahrt",
+                    "text": "Notiere Zutaten, Mengen, Temperatur, Beginn und Ende der Beobachtung, sichtbare Aktivität sowie Veränderungen von Geruch und Geschmack. Falls der pH-Wert gemessen wird, sollten Messmethode und Zeitpunkt ebenfalls dokumentiert werden. Eine gelungene Charge beweist nicht, dass jede spätere Charge unter denselben Bedingungen sicher ist.",
+                    "codex_text": "Schreibe deine Beobachtungen nieder, auf dass sie dir beim nächsten Male dienen. Doch bedenke, dass ein gelungenes Werk keine ewige Garantie für das folgende ist."
+                }
+            ]
+        },
+        {
+            "id": "alkohol-bei-ginger-bug-getraenken",
+            "titel": "Alkoholbildung bei Ginger-Bug-Getränken",
+            "codex_titel": "Vom verborgenen Geiste im sprudelnden Tranke",
+            "kategorie": "alkohol",
+            "intro": "Getränke, die mit Ginger Bug fermentiert werden, können Alkohol enthalten. Hefen wandeln vergärbare Zucker unter geeigneten Bedingungen in Ethanol und Kohlendioxid um. Dabei entsteht Alkohol auch dann, wenn das Getränk als Limonade gedacht ist und nicht wie ein alkoholisches Getränk schmeckt. Der tatsächliche Alkoholgehalt lässt sich nicht zuverlässig allein aus Zutaten, Gärdauer, Süße oder sichtbarer Kohlensäure ableiten. Ohne ein geeignetes Prüfverfahren darf ein Ginger-Bug-Getränk deshalb nicht als alkoholfrei bezeichnet werden.",
+            "codex_intro": "Höret wohl, ihr Freunde der lebendigen Tränke: Wo die kleinen Hefen den süßen Zucker verzehren, da können sie neben den sprudelnden Bläslein auch einen verborgenen Geiste erschaffen. Dieser vermag sich im Tranke zu halten, selbst wenn dieser süß, fruchtig und harmlos erscheint. Darum sei ein Ingwertrank nicht ohne Prüfung als frei von Alkohol gepriesen.",
+            "abschnitte": [
+                {
+                    "titel": "Wie Alkohol entsteht",
+                    "codex_titel": "Wie die Hefen den süßen Zucker verwandeln",
+                    "text": "Hefen können vergärbare Zucker in Ethanol und Kohlendioxid umwandeln. Das Kohlendioxid erzeugt die Spritzigkeit, während Ethanol im Getränk verbleiben kann. Bei Ginger-Bug-Ansätzen arbeiten unterschiedliche Mikroorganismen zusammen, weshalb der Verlauf nicht vollständig vorhersehbar ist. Die Entstehung von Kohlensäure und Alkohol sind miteinander verbundene mögliche Folgen der Gärung.",
+                    "codex_text": "Die Hefen nähren sich vom süßen Zucker und verwandeln ihn in zweierlei Gaben: in das Gas, welches die Bläslein schenkt, und in einen verborgenen Geiste, der im Tranke verbleiben mag."
+                },
+                {
+                    "titel": "Welche Faktoren den Alkoholgehalt beeinflussen",
+                    "codex_titel": "Von Zucker, Wärme und der Dauer des Gärwerkes",
+                    "text": "Der mögliche Alkoholgehalt hängt unter anderem von der Menge vergärbarer Zucker, der Zusammensetzung und Aktivität der Kultur, der Temperatur, der Gärdauer und den Bedingungen im Gefäß ab. Fruchtsäfte und Früchte bringen eigenen Zucker mit. Auch eine nachträgliche Zugabe von Zucker, Saft oder Sirup kann die Gärung erneut anregen. Aus einer festen Zahl von Gärtagen lässt sich kein verlässlicher Alkoholgehalt ableiten.",
+                    "codex_text": "Je nach Maß des Zuckers, der Wärme und der Kraft der Gärwesen fällt das Werk verschieden aus. Auch die Früchte tragen ihre eigene Süße bei. Darum vermag niemand allein aus der Sanduhr zu erkennen, wie viel verborgener Geist im Becher wohnt."
+                },
+                {
+                    "titel": "Warum Geschmack und Bläschen täuschen können",
+                    "codex_titel": "Warum die Zunge den verborgenen Geist nicht sicher erkennt",
+                    "text": "Ein Getränk kann fruchtig, süß, sauer oder nur leicht sprudelnd schmecken und dennoch Alkohol enthalten. Ebenso beweist starke Kohlensäure weder einen hohen noch einen niedrigen Alkoholgehalt. Zucker kann während der Gärung teilweise verbraucht werden, sodass sich die wahrgenommene Süße verändert. Geschmack, Geruch, Schaum und Gärdauer sind keine zuverlässigen Messmethoden für den Alkoholgehalt.",
+                    "codex_text": "Lass dich nicht von süßem Geschmack oder prächtigen Bläslein täuschen. Die Zunge ist kein kundiger Messmeister, und auch ein stiller Trank kann den verborgenen Geist in sich tragen."
+                },
+                {
+                    "titel": "Lässt sich der Alkoholgehalt messen?",
+                    "codex_titel": "Von den Mitteln, den verborgenen Geist zu bestimmen",
+                    "text": "Für eine verlässliche Bestimmung des Alkoholgehalts sind geeignete Messverfahren erforderlich. Bei selbst hergestellten Fruchtgetränken können einfache Messungen durch Zucker, Säuren, Fruchtbestandteile und weitere gelöste Stoffe verfälscht werden. Dichte- oder Refraktometermessungen benötigen fachgerechte Ausgangs- und Endmessungen sowie geeignete Korrekturen; sie liefern bei komplexen Getränken nicht automatisch einen verlässlichen Wert. Für eine belastbare Angabe, insbesondere für die Kennzeichnung als alkoholfrei, ist eine geeignete Laboranalyse die verlässlichere Wahl.",
+                    "codex_text": "Wer den verborgenen Geist genau bestimmen will, bediene sich kundiger Messkunst. Ein einfaches Werkzeug vermag durch Frucht und Zucker getäuscht zu werden. Für ein verlässliches Urteil bedarf es eines geeigneten Verfahrens und, wo Gewissheit nötig ist, eines kundigen Laboratoriums."
+                },
+                {
+                    "titel": "Kann man Ginger-Bug-Getränke alkoholfrei herstellen?",
+                    "codex_titel": "Ob ein sprudelnder Trank gänzlich ohne Geist bereitet werden kann",
+                    "text": "Bei einer spontanen Gärung mit Ginger Bug lässt sich die vollständige Abwesenheit von Alkohol nicht zuverlässig garantieren. Kurze Gärdauer, wenig Zucker oder Kühlung sind keine sichere Garantie für Alkoholfreiheit. Auch Kühlung stoppt die Gärung nicht zuverlässig. Wer Alkohol vollständig vermeiden muss oder möchte, sollte auf nicht fermentierte Alternativen zurückgreifen oder ausschließlich ein entsprechend geprüftes Produkt verwenden.",
+                    "codex_text": "Wer keinerlei verborgenen Geist im Tranke dulden darf, soll sich nicht auf kurze Gärung oder kalte Lagerung verlassen. Wähle lieber einen unvergorenen Trank oder ein geprüftes Getränk, dessen Beschaffenheit verlässlich bekannt ist."
+                },
+                {
+                    "titel": "Was beim Abfüllen und Lagern zu beachten ist",
+                    "codex_titel": "Vom Drucke der Gärung und der Obhut über die Flaschen",
+                    "text": "Während der Gärung entsteht häufig Kohlendioxid, das in geschlossenen Flaschen Druck aufbaut. Gleichzeitig kann sich Alkohol bilden. Eine verschlossene Flasche kann auch nach dem Abfüllen weitergären, besonders wenn vergärbarer Zucker vorhanden ist. Deshalb sind für die Hauptgärung geeignete Gefäße mit kontrolliertem Gasabzug und für eine mögliche Nachgärung ausschließlich druckgeeignete Flaschen erforderlich. Kühlung verlangsamt die Gärung, macht das Getränk aber weder zuverlässig alkoholfrei noch dauerhaft druckstabil.",
+                    "codex_text": "Die Gärwesen verrichten ihr Werk auch nach dem Abfüllen, wenn ihnen Nahrung verbleibt. So können der verborgene Geist und der Druck der Bläslein weiter wachsen. Gib dem Gase einen sicheren Ausgang und bewahre die Flaschen unter wachsamer Obhut."
+                },
+                {
+                    "titel": "Für wen besondere Vorsicht gilt",
+                    "codex_titel": "Von jenen, die den verborgenen Geist meiden sollen",
+                    "text": "Wer Alkohol aus gesundheitlichen, persönlichen oder anderen Gründen vollständig vermeiden muss oder möchte, sollte Ginger-Bug-Getränke nicht als alkoholfrei voraussetzen. Das gilt besonders, wenn eine vollständige Vermeidung medizinisch erforderlich ist oder Alkohol aus anderen Gründen ausgeschlossen werden soll. Bei Unsicherheit sind nicht fermentierte Getränke oder nachweislich geeignete Alternativen die bessere Wahl.",
+                    "codex_text": "Wer den verborgenen Geist aus gutem Grunde meiden muss, der trinke nicht auf bloßes Vertrauen. Ein unvergorener Trank ist die bessere Wahl, wenn völlige Gewissheit vonnöten ist."
+                }
+            ]
+        }
+    ]
+}

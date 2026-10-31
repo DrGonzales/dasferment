@@ -1,46 +1,46 @@
 ---
 import type { ImageMetadata } from 'astro';
 import { getImage } from 'astro:assets';
-import infoData from '../../data/das_ferment_infos.json';
-import recipeData from '../../data/das_ferment.json';
 import { actorImageFor } from '../../lib/actorImages';
 import {
 	BOOK_SUBTITLE,
 	BOOK_TITLE,
-	bookChapters,
 	bookRegister,
+	bookSections,
 	contentsAnchor,
 	figurenAnchor,
 	groupAnchor,
 	infoAnchor,
 	prefaceAnchor,
-	recipesAnchor,
 	registerAnchor,
 } from '../../lib/book';
+import { allInfos as infos, allRecipes as recipes, chapters as chapterConfigs } from '../../lib/chapters';
 import { FIGUREN } from '../../lib/figuren';
-import { codexListe, codexText, gruppiereInfos, type Info } from '../../lib/infos';
+import { codexListe, codexText } from '../../lib/infos';
 import { imageForRecipe } from '../../lib/pageImages';
-import { recipeImageAlt, type Recipe } from '../../lib/recipes';
+import { recipeImageAlt } from '../../lib/recipes';
 import { assignPortraits } from '../../lib/smallActors';
 import { hyphenate } from '../hyphenate';
 import '../styles/book.css';
 
-// Das Bild steht fast seitenhoch: 164 mm Höhe, rund 113 mm Breite. 720 px
-// ergeben dort etwa 160 dpi, 1024 px würden das PDF auf ein Viertel Megabyte je
-// Blatt aufblähen.
-const RECIPE_IMAGE_WIDTH = 768;
+// Das Bild füllt die ganze Seite: 154 mm Breite auf dem Beschnitt. Bei 768 px
+// wären das nur rund 127 dpi, also geht das Motiv in der vollen Quellenbreite
+// von 1024 px ins PDF, rund 169 dpi.
+const RECIPE_IMAGE_WIDTH = 1024;
+const CHAPTER_IMAGE_WIDTH = 768;
 const ADVISOR_IMAGE_WIDTH = 224;
 const PORTRAIT_IMAGE_WIDTH = 224;
 const FIGUREN_IMAGE_WIDTH = 384;
 const IMAGE_QUALITY = 80;
 
-const recipes = recipeData as Recipe[];
-const infos = infoData.infos as Info[];
-const gruppen = gruppiereInfos(infos);
-const chapters = bookChapters(recipes);
-const register = bookRegister(chapters);
-const portraits = assignPortraits(infos);
-const portraitById = new Map(infos.map((info, index) => [info.id, portraits[index]]));
+const sections = bookSections(chapterConfigs);
+const register = bookRegister(sections.flatMap((section) => section.recipes));
+const gruppenAnzahl = sections.reduce((summe, section) => summe + section.gruppen.length, 0);
+const portraitById = new Map<string, ImageMetadata | undefined>();
+for (const config of chapterConfigs) {
+	const portraits = assignPortraits(config.infos, config.slug);
+	config.infos.forEach((info, index) => portraitById.set(info.id, portraits[index]));
+}
 
 type Bildformat = 'jpeg' | 'png';
 
@@ -82,21 +82,29 @@ function renderImage(
 	return promise;
 }
 
-const folios = await Promise.all(
-	chapters.map(async (chapter) => {
-		const image = imageForRecipe(chapter.recipe);
-		const advisor = chapter.recipe.ratgeber
-			? actorImageFor(chapter.recipe.ratgeber.sprecher)
-			: undefined;
+const renderedSections = await Promise.all(
+	sections.map(async (section) => ({
+		...section,
+		image: section.config.image
+			? await renderImage(section.config.image, CHAPTER_IMAGE_WIDTH)
+			: undefined,
+		recipes: await Promise.all(
+			section.recipes.map(async (folio) => {
+				const image = imageForRecipe(folio.recipe);
+				const advisor = folio.recipe.ratgeber
+					? actorImageFor(folio.recipe.ratgeber.sprecher, folio.recipe.kapitel)
+					: undefined;
 
-		return {
-			...chapter,
-			image: image ? await renderImage(image, RECIPE_IMAGE_WIDTH) : undefined,
-			advisorImage: advisor
-				? await renderImage(advisor, ADVISOR_IMAGE_WIDTH)
-				: undefined,
-		};
-	}),
+				return {
+					...folio,
+					image: image ? await renderImage(image, RECIPE_IMAGE_WIDTH) : undefined,
+					advisorImage: advisor
+						? await renderImage(advisor, ADVISOR_IMAGE_WIDTH)
+						: undefined,
+				};
+			}),
+		),
+	})),
 );
 
 // Die Wissensmotive liegen als PNG mit transparentem Grund vor. Als JPEG
@@ -113,7 +121,7 @@ const knowledgePortraits = await Promise.all(
 // beim Ratschlag. actors/* ist deckend, deshalb JPEG.
 const figuren = await Promise.all(
 	FIGUREN.map(async (figur) => {
-		const image = actorImageFor(figur.sprecher);
+		const image = actorImageFor(figur.sprecher, chapterConfigs[0]?.slug);
 		return { ...figur, image: image ? await renderImage(image, FIGUREN_IMAGE_WIDTH) : undefined };
 	}),
 );
@@ -121,17 +129,23 @@ const figuren = await Promise.all(
 const contents = [
 	{ ref: prefaceAnchor(), label: 'Vorwort: Was die Geduld lehrt', indent: 0 },
 	{ ref: figurenAnchor(), label: 'Connie und Katze', indent: 0 },
-	...gruppen.map((gruppe) => ({
-		ref: groupAnchor(gruppe.slug),
-		label: gruppe.label,
-		indent: 1,
-	})),
-	{ ref: recipesAnchor(), label: 'Die Rezepte', indent: 0 },
-	...folios.map((folio) => ({
-		ref: folio.anchor,
-		label: folio.recipe.codex_titel,
-		indent: 1,
-	})),
+	...renderedSections.flatMap((section) => [
+		{
+			ref: section.anchor,
+			label: section.config.titel,
+			indent: 0,
+		},
+		...section.recipes.map((folio) => ({
+			ref: folio.anchor,
+			label: folio.recipe.codex_titel,
+			indent: 1,
+		})),
+		...section.gruppen.map((gruppe) => ({
+			ref: groupAnchor(gruppe.slug, section.config.slug),
+			label: gruppe.label,
+			indent: 1,
+		})),
+	]),
 	{ ref: registerAnchor(), label: 'Register der Rezepte', indent: 0 },
 ];
 ---
@@ -199,7 +213,7 @@ const contents = [
 			</h1>
 			<p class="book-part__ornament" aria-hidden="true">❦</p>
 			<p class="book-part__claim">
-				{infos.length} Einträge in {gruppen.length} Gruppen, dazu zwei Tabellen über Salz
+				{infos.length} Einträge in {gruppenAnzahl} Gruppen, dazu zwei Tabellen über Salz
 				und Lagerung.
 			</p>
 		</section>
@@ -244,199 +258,237 @@ const contents = [
 		</section>
 
 		{
-			gruppen.map((gruppe) => (
-				<section class="knowledge-group" data-book-ref={groupAnchor(gruppe.slug)}>
-					<header class="knowledge-group__head" id={groupAnchor(gruppe.slug)}>
-						<h2 class="knowledge-group__title" data-outline data-outline-ref={groupAnchor(gruppe.slug)}>
-							{gruppe.label}
-						</h2>
-						<p class="knowledge-group__claim">
-							{gruppe.infos.length}{' '}
-							{gruppe.infos.length === 1 ? 'Eintrag' : 'Einträge'}
-						</p>
-					</header>
+			renderedSections.map((section) => {
+				const kapitelRef = section.anchor;
+				return (
+					<Fragment>
+						<section
+							class="book-part book-chapter"
+							id={kapitelRef}
+							data-book-ref={kapitelRef}
+						>
+							<p class="book-part__kicker kicker">Kapitel</p>
+							<h1 class="book-part__title" data-outline data-outline-ref={kapitelRef}>
+								{hyphenate(section.config.titel)}
+							</h1>
+							{section.image && (
+								<figure class="book-chapter__image">
+									<img
+										src={section.image.src}
+										width={section.image.width}
+										height={section.image.height}
+										alt={`Kapitelbild zu ${section.config.titel}`}
+									/>
+								</figure>
+							)}
+							<p class="book-part__ornament" aria-hidden="true">❦</p>
+							<p class="book-part__claim">
+								{hyphenate(section.config.beschreibung)}
+							</p>
+						</section>
 
-					{gruppe.infos.map((info, index) => {
-						const portrait = knowledgePortraits[infos.indexOf(info)];
-						return (
-							<article
-								class="knowledge-entry"
-								data-book-ref={infoAnchor(info.id)}
-								id={infoAnchor(info.id)}
-							>
-								<header class="knowledge-entry__head">
-									{portrait && (
-										<figure class="knowledge-entry__portrait">
+						{section.recipes.map((folio) => (
+							<Fragment>
+								{folio.image && (
+									<section class="recipe-plate">
+										<figure class="recipe-plate__frame">
 											<img
-												src={portrait.src}
-												width={portrait.width}
-												height={portrait.height}
-												alt=""
+												src={folio.image.src}
+												width={folio.image.width}
+												height={folio.image.height}
+												alt={recipeImageAlt(folio.recipe)}
 											/>
 										</figure>
-									)}
-									<p class="knowledge-entry__kicker">{info.titel}</p>
-									<h3
-										data-outline
-										data-outline-ref={infoAnchor(info.id)}
-									>
-										{hyphenate(codexText(info.codex_titel, info.titel))}
-									</h3>
-								</header>
-
-								<p class="knowledge-entry__intro">
-									{hyphenate(codexText(info.codex_intro, info.intro))}
-								</p>
-
-								{info.abschnitte?.map((abschnitt) => {
-									const liste = codexListe(abschnitt.codex_liste, abschnitt.liste);
-									return (
-										<section class="knowledge-entry__section">
-											<h4>{hyphenate(codexText(abschnitt.codex_titel, abschnitt.titel))}</h4>
-											{abschnitt.text || abschnitt.codex_text ? (
-												<p>{hyphenate(codexText(abschnitt.codex_text, abschnitt.text))}</p>
-											) : null}
-											{liste.length > 0 ? (
-												<ul>
-													{liste.map((punkt) => (
-														<li>{hyphenate(punkt)}</li>
-													))}
-												</ul>
-											) : null}
-										</section>
-									);
-								})}
-
-								{info.tabelle ? (
-									<figure class="knowledge-table">
-										<table>
-											<caption>
-												{codexText(info.tabelle.codex_titel, info.tabelle.titel)}
-											</caption>
-											<thead>
-												<tr>
-													{info.tabelle.spalten.map((spalte) => (
-														<th scope="col">{spalte}</th>
-													))}
-												</tr>
-											</thead>
-											<tbody>
-												{info.tabelle.zeilen.map((zeile) => (
-													<tr>
-														{zeile.map((zelle, zellenIndex) =>
-															zellenIndex === 0 ? (
-																<th scope="row">{zelle}</th>
-															) : (
-																<td>{zelle}</td>
-															),
-														)}
-													</tr>
-												))}
-											</tbody>
-										</table>
-										{info.tabelle.hinweis || info.tabelle.codex_hinweis ? (
-											<figcaption>
-												{codexText(info.tabelle.codex_hinweis, info.tabelle.hinweis)}
-											</figcaption>
-										) : null}
-									</figure>
-								) : null}
-							</article>
-						);
-					})}
-				</section>
-			))
-		}
-
-		<section class="book-part" id={recipesAnchor()} data-book-ref={recipesAnchor()}>
-			<p class="book-part__kicker kicker">Der Kodex</p>
-			<h1 class="book-part__title" data-outline data-outline-ref={recipesAnchor()}>
-				Die Rezepte
-			</h1>
-			<p class="book-part__ornament" aria-hidden="true">❦</p>
-			<p class="book-part__claim">
-				{chapters.length} Blätter, alphabetisch nach Rezeptnamen. Jedes Blatt nennt seine
-				Zutaten, den Gang der Gärung und einen Ratschlag.
-			</p>
-		</section>
-
-{
-			folios.map((folio) => (
-				<Fragment>
-					{folio.image && (
-						<section class="recipe-plate">
-							<figure class="recipe-plate__frame">
-								<img
-									src={folio.image.src}
-									width={folio.image.width}
-									height={folio.image.height}
-									alt={recipeImageAlt(folio.recipe)}
-								/>
-							</figure>
-						</section>
-					)}
-
-					<article class="recipe" data-book-ref={folio.anchor} id={folio.anchor}>
-					<header class="recipe__head">
-						<p class="recipe__kicker kicker">{folio.categories.join(' · ')}</p>
-						<h2 class="recipe__heading" data-outline data-outline-ref={folio.anchor}>
-							{hyphenate(folio.recipe.codex_titel)}
-						</h2>
-					</header>
-
-					{folio.recipe.codex_einleitung ? (
-						<p class="recipe__intro">{hyphenate(folio.recipe.codex_einleitung)}</p>
-					) : null}
-
-					<section class="recipe__ingredients">
-						<h3 class="block-title">Zutaten</h3>
-						<ul class="ingredient-list">
-							{folio.recipe.zutaten.map((zutat) => (
-								<li>{hyphenate(zutat)}</li>
-							))}
-						</ul>
-					</section>
-
-					<section class="recipe__method">
-						<h3 class="block-title">Zubereitung</h3>
-						<ol class="instruction-list">
-							{folio.recipe.zubereitung.map((schritt) => (
-								<li>{hyphenate(schritt)}</li>
-							))}
-						</ol>
-					</section>
-
-					{folio.recipe.ratgeber && (
-						<aside class="recipe-advisor">
-							<div class="recipe-advisor__content">
-								{folio.advisorImage && (
-									<figure class="recipe-advisor__portrait">
-										<img
-											src={folio.advisorImage.src}
-											width={folio.advisorImage.width}
-											height={folio.advisorImage.height}
-											alt={`${folio.recipe.ratgeber.sprecher} in der Schreibkammer`}
-										/>
-									</figure>
+									</section>
 								)}
-								<div class="recipe-advisor__text">
-									<div class="recipe-advisor__heading">
-										<span class="ornament" aria-hidden="true">
-											✦
-										</span>
-										<h2>{folio.recipe.ratgeber.sprecher}s Ratschlag</h2>
-										<span class="ornament" aria-hidden="true">
-											✦
-										</span>
-									</div>
-									<blockquote>{hyphenate(folio.recipe.ratgeber.text)}</blockquote>
-								</div>
-							</div>
-						</aside>
-					)}
-				</article>
-				</Fragment>
-			))}
+
+								<article class="recipe" data-book-ref={folio.anchor} id={folio.anchor}>
+									<header class="recipe__head">
+										<p class="recipe__kicker kicker">{folio.categories.join(' · ')}</p>
+										<h2 class="recipe__heading" data-outline data-outline-ref={folio.anchor}>
+											{hyphenate(folio.recipe.codex_titel)}
+										</h2>
+									</header>
+
+									{folio.recipe.codex_einleitung ? (
+										<p class="recipe__intro">{hyphenate(folio.recipe.codex_einleitung)}</p>
+									) : null}
+
+									<section class="recipe__ingredients">
+										<h3 class="block-title">Zutaten</h3>
+										<ul class="ingredient-list">
+											{folio.recipe.zutaten.map((zutat) => (
+												<li>{hyphenate(zutat)}</li>
+											))}
+										</ul>
+									</section>
+
+									<section class="recipe__method">
+										<h3 class="block-title">Zubereitung</h3>
+										<ol class="instruction-list">
+											{folio.recipe.zubereitung.map((schritt) => (
+												<li>{hyphenate(schritt)}</li>
+											))}
+										</ol>
+									</section>
+
+									{folio.recipe.ratgeber && (
+										<aside class="recipe-advisor">
+											<div class="recipe-advisor__content">
+												{folio.advisorImage && (
+													<figure class="recipe-advisor__portrait">
+														<img
+															src={folio.advisorImage.src}
+															width={folio.advisorImage.width}
+															height={folio.advisorImage.height}
+															alt={`${folio.recipe.ratgeber.sprecher} in der Schreibkammer`}
+														/>
+													</figure>
+												)}
+												<div class="recipe-advisor__text">
+													<div class="recipe-advisor__heading">
+														<span class="ornament" aria-hidden="true">
+															✦
+														</span>
+														<h2>{folio.recipe.ratgeber.sprecher}s Ratschlag</h2>
+														<span class="ornament" aria-hidden="true">
+															✦
+														</span>
+													</div>
+													<blockquote>{hyphenate(folio.recipe.ratgeber.text)}</blockquote>
+												</div>
+											</div>
+										</aside>
+									)}
+								</article>
+							</Fragment>
+						))}
+
+						{section.gruppen.map((gruppe) => {
+							const gruppenRef = groupAnchor(gruppe.slug, section.config.slug);
+							return (
+								<section class="knowledge-group" data-book-ref={gruppenRef}>
+									<header class="knowledge-group__head" id={gruppenRef}>
+										<h2
+											class="knowledge-group__title"
+											data-outline
+											data-outline-ref={gruppenRef}
+										>
+											{gruppe.label}
+										</h2>
+										<p class="knowledge-group__claim">
+											{gruppe.infos.length}{' '}
+											{gruppe.infos.length === 1 ? 'Eintrag' : 'Einträge'}
+										</p>
+									</header>
+
+									{gruppe.infos.map((info) => {
+										const portrait = knowledgePortraits[infos.indexOf(info)];
+										return (
+											<article
+												class="knowledge-entry"
+												data-book-ref={infoAnchor(info.id)}
+												id={infoAnchor(info.id)}
+											>
+												<header class="knowledge-entry__head">
+													{portrait && (
+														<figure class="knowledge-entry__portrait">
+															<img
+																src={portrait.src}
+																width={portrait.width}
+																height={portrait.height}
+																alt=""
+															/>
+														</figure>
+													)}
+													<p class="knowledge-entry__kicker">{info.titel}</p>
+													<h3
+														data-outline
+														data-outline-ref={infoAnchor(info.id)}
+													>
+														{hyphenate(codexText(info.codex_titel, info.titel))}
+													</h3>
+												</header>
+
+												<p class="knowledge-entry__intro">
+													{hyphenate(codexText(info.codex_intro, info.intro))}
+												</p>
+
+												{info.abschnitte?.map((abschnitt) => {
+													const liste = codexListe(abschnitt.codex_liste, abschnitt.liste);
+													return (
+														<section class="knowledge-entry__section">
+															<h4>
+																{hyphenate(codexText(abschnitt.codex_titel, abschnitt.titel))}
+															</h4>
+															{abschnitt.text || abschnitt.codex_text ? (
+																<p>
+																	{hyphenate(
+																		codexText(abschnitt.codex_text, abschnitt.text),
+																	)}
+																</p>
+															) : null}
+															{liste.length > 0 ? (
+																<ul>
+																	{liste.map((punkt) => (
+																		<li>{hyphenate(punkt)}</li>
+																	))}
+																</ul>
+															) : null}
+														</section>
+													);
+												})}
+
+												{info.tabelle ? (
+													<figure class="knowledge-table">
+														<table>
+															<caption>
+																{codexText(
+																	info.tabelle.codex_titel,
+																	info.tabelle.titel,
+																)}
+															</caption>
+															<thead>
+																<tr>
+																	{info.tabelle.spalten.map((spalte) => (
+																		<th scope="col">{spalte}</th>
+																	))}
+																</tr>
+															</thead>
+															<tbody>
+																{info.tabelle.zeilen.map((zeile) => (
+																	<tr>
+																		{zeile.map((zelle, zellenIndex) =>
+																			zellenIndex === 0 ? (
+																				<th scope="row">{zelle}</th>
+																			) : (
+																				<td>{zelle}</td>
+																			),
+																		)}
+																	</tr>
+																))}
+															</tbody>
+														</table>
+														{info.tabelle.hinweis || info.tabelle.codex_hinweis ? (
+															<figcaption>
+																{codexText(
+																	info.tabelle.codex_hinweis,
+																	info.tabelle.hinweis,
+																)}
+															</figcaption>
+														) : null}
+													</figure>
+												) : null}
+											</article>
+										);
+									})}
+								</section>
+							);
+						})}
+					</Fragment>
+				);
+			})
+		}
 
 		<section class="book-part" id={registerAnchor()} data-book-ref={registerAnchor()}>
 			<p class="book-part__kicker kicker">Nachschlagen</p>

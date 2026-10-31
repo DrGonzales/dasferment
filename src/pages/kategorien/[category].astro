@@ -1,14 +1,14 @@
 ---
 import { getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
-import recipeData from '../../data/das_ferment.json';
 import RecipeCard from '../../components/RecipeCard.astro';
 import Footer from '../../components/Footer.astro';
 import Header from '../../components/Header.astro';
 import SeoHead from '../../components/SeoHead.astro';
+import { allRecipes, recipePath } from '../../lib/chapters';
 import { coverImageFor, imageForRecipe } from '../../lib/pageImages';
 import { socialCard } from '../../lib/social';
-import { categoryLabel, categorySlug, recipeImageAlt, slugify, type Recipe } from '../../lib/recipes';
+import { categoryLabel, categorySlug, MIN_CATEGORY_RECIPES, recipeImageAlt, type Recipe } from '../../lib/recipes';
 import '../../styles/global.css';
 
 interface Props {
@@ -18,7 +18,7 @@ interface Props {
 }
 
 export function getStaticPaths() {
-	const recipes = recipeData as Recipe[];
+	const recipes = allRecipes;
 	const categoryMap = new Map<string, { label: string; recipes: Recipe[] }>();
 
 	for (const recipe of recipes) {
@@ -30,14 +30,16 @@ export function getStaticPaths() {
 		}
 	}
 
-	return [...categoryMap.entries()].map(([category, { label, recipes: categoryRecipesForPath }]) => ({
-		params: { category },
-		props: {
-			category,
-			categoryLabel: label,
-			categoryRecipes: categoryRecipesForPath,
-		},
-	}));
+	return [...categoryMap.entries()]
+		.filter(([, { recipes: categoryRecipesForPath }]) => categoryRecipesForPath.length >= MIN_CATEGORY_RECIPES)
+		.map(([category, { label, recipes: categoryRecipesForPath }]) => ({
+			params: { category },
+			props: {
+				category,
+				categoryLabel: label,
+				categoryRecipes: categoryRecipesForPath,
+			},
+		}));
 }
 
 const { category, categoryLabel: categoryTitle, categoryRecipes: recipes } = Astro.props;
@@ -50,7 +52,7 @@ const title = `${categoryTitle} fermentieren – ${recipes.length} ${recipeWord}
 const description = `${recipes.length} ${recipeWord} zum Fermentieren mit ${categoryTitle} – mit Zutaten, Zubereitung und Buchmalereien aus dem Kodex von Das Ferment.`;
 const recipeItems = recipes.map((recipe) => ({
 	name: recipe.titel,
-	path: `/rezepte/${slugify(recipe.titel)}/`,
+	path: recipePath(recipe),
 }));
 const absoluteUrl = (path: string) => Astro.site ? new URL(path, Astro.site).toString() : path;
 const coverRecipe = recipes.find((recipe) => imageForRecipe(recipe));

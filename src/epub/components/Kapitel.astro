@@ -1,0 +1,36 @@
+---
+import type { BookSection } from '../../lib/book';
+import Rahmen from './Rahmen.astro';
+
+interface Props {
+	abschnitt: BookSection;
+	bild?: { src: string; breite: number; hoehe: number };
+}
+
+const { abschnitt, bild } = Astro.props;
+const { config } = abschnitt;
+---
+
+<Rahmen titel={config.titel} kicker="Kapitel">
+	{
+		bild && (
+			<figure class="kapitel__bild">
+				<img
+					src={bild.src}
+					width={bild.breite}
+					height={bild.hoehe}
+					alt={`Kapitelbild zu ${config.titel}`}
+				/>
+			</figure>
+		)
+	}
+
+	<p class="ornament" aria-hidden="true">❦</p>
+
+	<p class="lead">{config.beschreibung}</p>
+
+	<p class="kapitel__umfang">
+		{abschnitt.recipes.length} {abschnitt.recipes.length === 1 ? 'Rezept' : 'Rezepte'} und{' '}
+		{config.infos.length} {config.infos.length === 1 ? 'Wissenseintrag' : 'Wissenseinträge'}.
+	</p>
+</Rahmen>

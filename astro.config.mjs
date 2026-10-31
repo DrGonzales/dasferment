@@ -14,7 +14,9 @@ const basePath = `${base.replace(/\/$/, '')}/`;
 // sitemap-pages-0.xml ab.
 const sitemapChunk = (page) => {
 	const { pathname } = new URL(page.url);
-	if (pathname.startsWith(`${basePath}rezepte/`)) return 'rezepte';
+	if (pathname.startsWith(`${basePath}kapitel/`) && pathname.includes('/rezepte/')) {
+		return 'rezepte';
+	}
 	if (pathname.startsWith(`${basePath}kategorien/`)) return 'kategorien';
 	return undefined;
 };

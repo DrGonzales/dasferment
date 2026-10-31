@@ -1,0 +1,110 @@
+---
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import ChapterNav from '../../../../components/ChapterNav.astro';
+import RecipeCard from '../../../../components/RecipeCard.astro';
+import Footer from '../../../../components/Footer.astro';
+import Header from '../../../../components/Header.astro';
+import SeoHead from '../../../../components/SeoHead.astro';
+import {
+	chapterPath,
+	chapterRecipesPath,
+	chapters,
+	recipePath,
+	type Chapter,
+} from '../../../../lib/chapters';
+import { coverImageFor, imageForRecipe } from '../../../../lib/pageImages';
+import { socialCard } from '../../../../lib/social';
+import '../../../../styles/global.css';
+
+export function getStaticPaths() {
+	return chapters.map((chapter) => ({
+		params: { chapter: chapter.slug },
+		props: { chapter },
+	}));
+}
+
+interface Props {
+	chapter: Chapter;
+}
+
+const { chapter } = Astro.props;
+const recipes = chapter.recipes;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const withBase = (path: string) => `${base}${path}`;
+const illustratedCount = recipes.filter((recipe) => imageForRecipe(recipe)).length;
+const description = `Alle ${recipes.length} Rezepte aus dem Kapitel ${chapter.titel} – mit Zutaten, Zubereitung und ${illustratedCount} Buchmalereien.`;
+const canonicalPath = chapterRecipesPath(chapter);
+const canonicalUrl = Astro.site
+	? new URL(withBase(canonicalPath), Astro.site).toString()
+	: withBase(canonicalPath);
+const recipeItems = recipes.map((recipe) => ({
+	name: recipe.titel,
+	path: recipePath(recipe),
+}));
+const absoluteUrl = (path: string) =>
+	Astro.site ? new URL(path, Astro.site).toString() : path;
+const cover = coverImageFor(recipes);
+const cardImage = await socialCard(
+	(options) => getImage({ ...options, src: cover as ImageMetadata }),
+	cover
+		? {
+				width: cover.width,
+				height: cover.height,
+				alt: `Buchmalerei aus dem Kapitel ${chapter.titel}`,
+			}
+		: undefined,
+	absoluteUrl,
+);
+---
+
+<!doctype html>
+<html lang="de">
+	<head>
+		<SeoHead
+			title={`${chapter.titel}: ${recipes.length} Rezepte | Das Ferment`}
+			description={description}
+			canonicalUrl={canonicalUrl}
+			base={base}
+			image={cardImage}
+			breadcrumbs={[
+				{ name: 'Kapitelübersicht', path: '/' },
+				{ name: chapter.titel, path: chapterPath(chapter) },
+				{ name: 'Rezepte', path: canonicalPath },
+			]}
+			itemList={{ name: `Rezepte im Kapitel ${chapter.titel}`, items: recipeItems }}
+		/>
+	</head>
+	<body>
+		<div class="site-shell">
+			<Header />
+
+			<main class="repertoire recipes-index">
+				<ChapterNav chapter={chapter} />
+
+				<header class="section-heading">
+					<div>
+						<p class="section-heading__kicker">{chapter.titel}</p>
+						<h1 id="rezepte-title">Die Rezepte</h1>
+					</div>
+					<p class="section-heading__count">
+						{recipes.length} Rezepte, nach den Namen ihrer Blätter geordnet. Wähle ein Rezept und folge seinem Gärweg.
+					</p>
+				</header>
+
+				<div class="recipe-grid" aria-labelledby="rezepte-title">
+					{recipes.map((recipe, index) => (
+						<RecipeCard
+							recipe={recipe}
+							image={imageForRecipe(recipe)}
+							index={index}
+							total={recipes.length}
+						/>
+					))}
+				</div>
+			</main>
+
+			<Footer />
+		</div>
+	</body>
+</html>

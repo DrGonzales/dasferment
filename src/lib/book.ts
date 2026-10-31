@@ -1,3 +1,5 @@
+import type { Chapter } from './chapters';
+import { gruppiereInfos, type InfoGruppe } from './infos';
 import { categoryLabel, isGeneralTag, slugify, type Recipe } from './recipes';
 
 export const BOOK_TITLE = 'Das Ferment';
@@ -20,6 +22,13 @@ export interface BookRegisterGroup {
 	entries: BookRegisterEntry[];
 }
 
+export interface BookSection {
+	config: Chapter;
+	anchor: string;
+	recipes: BookChapter[];
+	gruppen: InfoGruppe[];
+}
+
 export function recipeAnchor(recipe: Pick<Recipe, 'titel'>): string {
 	return `rezept-${slugify(recipe.titel)}`;
 }
@@ -28,8 +37,12 @@ export function infoAnchor(id: string): string {
 	return `wissen-${id}`;
 }
 
-export function groupAnchor(slug: string): string {
-	return `gruppe-${slug}`;
+export function groupAnchor(slug: string, chapter?: string): string {
+	return chapter ? `gruppe-${chapter}-${slug}` : `gruppe-${slug}`;
+}
+
+export function chapterAnchor(slug: string): string {
+	return `kapitel-${slug}`;
 }
 
 export function registerAnchor(): string {
@@ -42,10 +55,6 @@ export function prefaceAnchor(): string {
 
 export function figurenAnchor(): string {
 	return 'gestalten';
-}
-
-export function recipesAnchor(): string {
-	return 'rezepte';
 }
 
 export function contentsAnchor(): string {
@@ -91,6 +100,15 @@ export function bookChapters(recipes: Recipe[]): BookChapter[] {
 				.filter((tag) => isBookCategory(tag, universal))
 				.map(categoryLabel),
 		}));
+}
+
+export function bookSections(chapters: Chapter[]): BookSection[] {
+	return chapters.map((config) => ({
+		config,
+		anchor: chapterAnchor(config.slug),
+		recipes: bookChapters(config.recipes),
+		gruppen: gruppiereInfos(config.infos),
+	}));
 }
 
 export function bookRegister(chapters: BookChapter[]): BookRegisterGroup[] {

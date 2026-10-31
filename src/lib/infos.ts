@@ -25,6 +25,8 @@ export interface Info {
 	codex_intro?: string;
 	abschnitte?: InfoAbschnitt[];
 	tabelle?: InfoTabelle;
+	/** Kapitel-Slug, gesetzt beim Laden aus `src/data/<kapitel>/Kapitel.json`. */
+	kapitel?: string;
 }
 
 export interface InfoGruppe {

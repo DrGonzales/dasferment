@@ -1,32 +1,29 @@
 import { getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import { experimental_AstroContainer } from 'astro/container';
-import infoData from '../../data/das_ferment_infos.json';
-import recipeData from '../../data/das_ferment.json';
 import { actorImageFor } from '../../lib/actorImages';
-import { BOOK_SUBTITLE, BOOK_TITLE } from '../../lib/book';
+import { BOOK_SUBTITLE, BOOK_TITLE, bookSections } from '../../lib/book';
+import { allInfos as infos, allRecipes as rezepte, chapters as chapterConfigs } from '../../lib/chapters';
 import { epubRegister, epubTeile, type EpubTeil } from '../../lib/epub';
 import { FIGUREN } from '../../lib/figuren';
-import type { Info } from '../../lib/infos';
 import { imageForRecipe } from '../../lib/pageImages';
-import type { Recipe } from '../../lib/recipes';
 import { assignPortraits, SMALL_ACTOR_SIZE } from '../../lib/smallActors';
 import Gestalten from '../components/Gestalten.astro';
+import Kapitel from '../components/Kapitel.astro';
 import Rezept from '../components/Rezept.astro';
 import Register from '../components/Register.astro';
 import Titelblatt from '../components/Titelblatt.astro';
 import Vorwort from '../components/Vorwort.astro';
 import Wissen from '../components/Wissen.astro';
 
-const rezepte = recipeData as Recipe[];
-const infos = infoData.infos as Info[];
-const teile = epubTeile(rezepte, infos);
+const teile = epubTeile(chapterConfigs);
 
 // Die Rezeptbilder stehen im Buch fast seitenhoch, im EPUB sind sie Beiwerk zum
 // Text. Ein Reader zeigt sie höchstens in Spaltenbreite, und die meisten Geräte
 // rechnen mit 600 bis 700 px. Mehr einzusparen macht die Strichzeichnung unscharf
 // und das Archiv nur größer.
 const REZEPT_BILD = 640;
+const KAPITEL_BILD = 768;
 const PORTRAIT_BILD = 224;
 
 // Die Dateien der Lesefolge liegen in `EPUB/text/`, Bilder und Schriften eine Ebene
@@ -79,8 +76,11 @@ function bild(
 // Die Wissensmotive liegen als PNG mit transparentem Grund vor. Als JPEG verliert
 // sharp diese Durchsichtigkeit und füllt sie schwarz, deshalb bleiben sie PNG. Der
 // Leser setzt sie auf die Seite, nicht auf Pergament.
-const portraits = assignPortraits(infos);
-const portraitNachId = new Map(infos.map((info, index) => [info.id, portraits[index]]));
+const portraitNachId = new Map<string, ReturnType<typeof assignPortraits>[number]>();
+for (const config of chapterConfigs) {
+	const portraits = assignPortraits(config.infos, config.slug);
+	config.infos.forEach((info, index) => portraitNachId.set(info.id, portraits[index]));
+}
 
 const rezeptSlugNachAnker = new Map(
 	teile.filter((teil) => teil.art === 'rezept').map((teil) => [teil.anker, teil.slug]),
@@ -102,17 +102,29 @@ async function propsFuer(teil: EpubTeil): Promise<Record<string, unknown>> {
 		case 'titel':
 			return { cover: COVER, rezepte, infos };
 		case 'vorwort':
-			return { infos, rezepte };
+			return {
+				infos,
+				rezepte,
+				gruppenAnzahl: bookSections(chapterConfigs).reduce(
+					(summe, abschnitt) => summe + abschnitt.gruppen.length,
+					0,
+				),
+			};
 		case 'gestalten':
 			return {
 				bilder: new Map(
 					await Promise.all(
 						FIGUREN.map(
 							async (figur) =>
-								[figur.id, await bild(actorImageFor(figur.sprecher), PORTRAIT_BILD)] as const,
+								[figur.id, await bild(actorImageFor(figur.sprecher, chapterConfigs[0]?.slug), PORTRAIT_BILD)] as const,
 						),
 					),
 				),
+			};
+		case 'kapitel':
+			return {
+				abschnitt: teil.abschnitt,
+				bild: await bild(teil.abschnitt.config.image, KAPITEL_BILD),
 			};
 		case 'wissen':
 			return {
@@ -126,7 +138,7 @@ async function propsFuer(teil: EpubTeil): Promise<Record<string, unknown>> {
 			return {
 				teil,
 				bild: await bild(imageForRecipe(teil.kapitel.recipe), REZEPT_BILD),
-				portrait: ratschlag ? await bild(actorImageFor(ratschlag.sprecher), PORTRAIT_BILD) : undefined,
+				portrait: ratschlag ? await bild(actorImageFor(ratschlag.sprecher, teil.kapitel.recipe.kapitel), PORTRAIT_BILD) : undefined,
 			};
 		}
 		case 'register':
@@ -146,6 +158,7 @@ const KOMPONENTEN = {
 	titel: Titelblatt,
 	vorwort: Vorwort,
 	gestalten: Gestalten,
+	kapitel: Kapitel,
 	wissen: Wissen,
 	rezept: Rezept,
 	register: Register,

@@ -1,22 +1,21 @@
 ---
 import { Image } from 'astro:assets';
-import recipeData from '../../data/das_ferment.json';
 import Footer from '../../components/Footer.astro';
 import Header from '../../components/Header.astro';
 import SeoHead from '../../components/SeoHead.astro';
 import { actorImageFor } from '../../lib/actorImages';
+import { allRecipes, chapters } from '../../lib/chapters';
 import { FIGUREN } from '../../lib/figuren';
-import { type Recipe } from '../../lib/recipes';
 import '../../styles/global.css';
 
-const recipes = recipeData as Recipe[];
+const recipes = allRecipes;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const withBase = (path: string) => `${base}${path}`;
 const illustratedCount = recipes.filter((recipe) => recipe.picture).length;
 const categoryCount = new Set(recipes.flatMap((recipe) => recipe.tags)).size;
 const figuren = FIGUREN.map((figur) => ({
 	...figur,
-	image: actorImageFor(figur.sprecher),
+	image: actorImageFor(figur.sprecher, chapters[0]?.slug),
 }));
 const canonicalPath = '/ueber-diese-seite/';
 const canonicalUrl = Astro.site ? new URL(withBase(canonicalPath), Astro.site).toString() : withBase(canonicalPath);
@@ -88,7 +87,7 @@ const description = `Lerne das statische Rezeptbuch Das Ferment und seine ${reci
 						<p class="section-heading__kicker">Der Kodex</p>
 						<h2 id="werk-title">Das Werk</h2>
 						<p>
-							Das Werk ist ein spielerischer Fermentations-Kodex, der traditionelle und moderne Gemüsefermente in einer mittelalterlich anmutenden Welt präsentiert. Grundlage bildet eine Sammlung von {recipes.length} Rezepten für fermentiertes Gemüse, von klassischen Salzgurken und Sauerkraut über Kimchi bis hin zu Fermenten aus Karotten, Roter Bete, Paprika, Zwiebeln, Fenchel, Sellerie, Kohlrabi, Zucchini und Kürbis.
+							Das Werk ist ein spielerischer Fermentations-Kodex, der traditionelle und moderne Fermente in einer mittelalterlich anmutenden Welt präsentiert. Grundlage bildet eine Sammlung von {recipes.length} Rezepten in {chapters.length} Kapiteln, von klassischen Salzgurken und Sauerkraut über Kimchi bis hin zu fermentierten Limonaden mit Ginger Bug.
 						</p>
 						<p>
 							{illustratedCount} der {recipes.length} Rezepte sind mit einer Buchmalerei versehen. Die {categoryCount} Kategorien geben einen weiteren Weg durch das Repertoire.

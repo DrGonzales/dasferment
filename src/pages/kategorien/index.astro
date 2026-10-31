@@ -1,14 +1,14 @@
 ---
 import { Image, getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
-import recipeData from '../../data/das_ferment.json';
 import Footer from '../../components/Footer.astro';
 import Header from '../../components/Header.astro';
 import SeoHead from '../../components/SeoHead.astro';
+import { allRecipes } from '../../lib/chapters';
 import { categoryImageFor } from '../../lib/categoryImages';
 import { coverImageFor } from '../../lib/pageImages';
 import { socialCard } from '../../lib/social';
-import { categoryLabel, categorySlug, type Recipe } from '../../lib/recipes';
+import { categoryLabel, categorySlug, MIN_CATEGORY_RECIPES } from '../../lib/recipes';
 import '../../styles/global.css';
 
 interface Category {
@@ -18,7 +18,7 @@ interface Category {
 	image?: ImageMetadata;
 }
 
-const recipes = recipeData as Recipe[];
+const recipes = allRecipes;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const withBase = (path: string) => `${base}${path}`;
 const categoryMap = new Map<string, Category>();
@@ -36,7 +36,9 @@ for (const recipe of recipes) {
 	}
 }
 
-const categories = [...categoryMap.values()].sort((a, b) => b.count - a.count || a.label.localeCompare(b.label, 'de'));
+const categories = [...categoryMap.values()]
+	.filter((category) => category.count >= MIN_CATEGORY_RECIPES)
+	.sort((a, b) => b.count - a.count || a.label.localeCompare(b.label, 'de'));
 const canonicalPath = '/kategorien/';
 const canonicalUrl = Astro.site ? new URL(withBase(canonicalPath), Astro.site).toString() : withBase(canonicalPath);
 const description = `Entdecke die ${categories.length} Kategorien zum Fermentieren im Rezeptbuch von Das Ferment – jede Kategorie mit ihren Rezepten, Zutaten und Buchmalereien.`;

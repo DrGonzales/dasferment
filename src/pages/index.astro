@@ -1,36 +1,42 @@
 ---
-import { getImage, Image } from 'astro:assets';
-import recipeData from '../data/das_ferment.json';
-import RecipeCard from '../components/RecipeCard.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
-import SeoHead from '../components/SeoHead.astro';
-import coverBack from '../pic/cover/back.png';
-import coverFront from '../pic/cover/front.png';
-import { imageForRecipe } from '../lib/pageImages';
-import { socialCard } from '../lib/social';
-import { recipeImageAlt, type Recipe } from '../lib/recipes';
-import '../styles/global.css';
+import { getImage, Image } from "astro:assets";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import SeoHead from "../components/SeoHead.astro";
+import { allRecipes, chapterPath, chapters } from "../lib/chapters";
+import coverBack from "../pic/cover/back.png";
+import coverFront from "../pic/cover/front.png";
+import { imageForRecipe } from "../lib/pageImages";
+import { socialCard } from "../lib/social";
+import { recipeImageAlt } from "../lib/recipes";
+import "../styles/global.css";
 
-const recipes = recipeData as Recipe[];
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const withBase = (path: string) => `${base}${path}`;
 
-function getRecipeImage(recipe: Recipe) {
+function getRecipeImage(recipe: (typeof allRecipes)[number]) {
 	return imageForRecipe(recipe);
 }
 
-const illustratedRecipes = recipes.flatMap((recipe) => {
+const illustratedRecipes = allRecipes.flatMap((recipe) => {
 	const image = getRecipeImage(recipe);
 	return image ? [{ recipe, image }] : [];
 });
-const blatt = illustratedRecipes[Math.floor(Math.random() * illustratedRecipes.length)];
-const recipeCount = recipes.length;
+const blatt =
+	illustratedRecipes[Math.floor(Math.random() * illustratedRecipes.length)];
+const recipeCount = allRecipes.length;
 const illustratedCount = illustratedRecipes.length;
-const canonicalPath = '/';
-const canonicalUrl = Astro.site ? new URL(withBase(canonicalPath), Astro.site).toString() : withBase(canonicalPath);
-const description = `Mittelalterlich inspirierter Kodex mit ${recipeCount} Rezepten zum Fermentieren – von Kimchi, Sauerkraut und Gurken bis zu weiteren lebendigen Fermenten.`;
-const absoluteUrl = (path: string) => Astro.site ? new URL(path, Astro.site).toString() : path;
+const knowledgeCount = chapters.reduce(
+	(total, chapter) => total + chapter.infos.length,
+	0,
+);
+const canonicalPath = "/";
+const canonicalUrl = Astro.site
+	? new URL(withBase(canonicalPath), Astro.site).toString()
+	: withBase(canonicalPath);
+const description = `Mittelalterlich inspirierter Kodex in ${chapters.length} Kapiteln mit ${recipeCount} Rezepten zum Fermentieren – von Kimchi, Sauerkraut und Gurken bis zu lebendigen Ginger-Bug-Limonaden.`;
+const absoluteUrl = (path: string) =>
+	Astro.site ? new URL(path, Astro.site).toString() : path;
 const cover = illustratedRecipes[0];
 const cardImage = await socialCard(
 	(options) => getImage({ ...options, src: cover.image }),
@@ -49,7 +55,7 @@ const cardImage = await socialCard(
 <html lang="de">
 	<head>
 		<SeoHead
-			title={`Das Ferment – ${recipeCount} Rezepte zum Fermentieren`}
+			title={`Das Ferment – ${recipeCount} Rezepte in ${chapters.length} Kapiteln`}
 			description={description}
 			canonicalUrl={canonicalUrl}
 			base={base}
@@ -66,17 +72,26 @@ const cardImage = await socialCard(
 						<p class="eyebrow">Ein lebendiges Rezeptbuch</p>
 						<h1 id="hero-title">Ein Buch vom <em>Warten.</em></h1>
 						<p class="hero__lead">
-							Öffne den Kodex und finde eingelegte, gesäuerte und langsam gereifte Speisen – von würzigen Gürkchen bis zu
-							farbstarken Wintervorräten.
+							Öffne den Kodex und finde eingelegte, gesäuerte und
+							langsam gereifte Speisen – von würzigen Gürkchen bis
+							zu farbstarken Wintervorräten.
 						</p>
 						<div class="hero__actions">
-							<a class="button" href="#rezepte">Kodex öffnen</a>
-							<a class="text-link" href="#ueber-den-codex">Einleitung lesen</a>
+							<a class="button" href="#kapitel">Kapitel öffnen</a>
+							<a class="text-link" href="#ueber-den-codex"
+								>Einleitung lesen</a
+							>
 						</div>
-						<p class="hero__footnote">{recipeCount} Rezepte, aufgeschrieben in {illustratedCount} illustrierten Blättern.</p>
+						<p class="hero__footnote">
+							{recipeCount} Rezepte und {knowledgeCount} Wissenseinträge,
+							aufgeschrieben in {chapters.length} Kapiteln.
+						</p>
 					</div>
 
-					<div class="hero__gallery" aria-label="Einband und ein Blatt aus dem Kodex">
+					<div
+						class="hero__gallery"
+						aria-label="Einband und ein Blatt aus dem Kodex"
+					>
 						<figure class="hero__folio hero__folio--main">
 							<Image
 								src={coverFront}
@@ -116,37 +131,88 @@ const cardImage = await socialCard(
 					</div>
 				</section>
 
-				<section class="repertoire" id="rezepte" aria-labelledby="rezepte-title">
+				<section
+					class="repertoire chapter-overview"
+					id="kapitel"
+					aria-labelledby="kapitel-title"
+				>
 					<header class="section-heading">
 						<div>
-							<p class="section-heading__kicker">Das Repertoire</p>
-							<h2 id="rezepte-title">Im Kodex verzeichnet</h2>
+							<p class="section-heading__kicker">
+								Das Repertoire
+							</p>
+							<h2 id="kapitel-title">Die Kapitel</h2>
 						</div>
 						<p class="section-heading__count">
-							{recipeCount} Einträge, nach den Namen ihrer Blätter geordnet. Wähle ein Rezept und folge seinem Gärweg.
+							{chapters.length} Wege in den Kodex. Jedes Kapitel versammelt
+							seine eigenen Rezepte und sein Wissen.
 						</p>
 					</header>
 
-					<div class="recipe-grid">
-						{recipes.map((recipe, index) => (
-							<RecipeCard
-								recipe={recipe}
-								image={getRecipeImage(recipe)}
-								index={index}
-								total={recipeCount}
-							/>
-						))}
+					<div class="chapter-grid">
+						{
+							chapters.map((chapter, index) => (
+								<a
+									class="chapter-card"
+									href={withBase(chapterPath(chapter))}
+								>
+									<div class="chapter-card__figure">
+										{chapter.image && (
+											<Image
+												class="chapter-card__image"
+												src={chapter.image}
+												alt={`Kapitelbild zu ${chapter.titel}`}
+												widths={[320, 480, 640, 780]}
+												sizes="(max-width: 780px) calc(100vw - 40px), 40vw"
+												format="webp"
+												quality={78}
+												loading={
+													index === 0
+														? "eager"
+														: "lazy"
+												}
+												decoding="async"
+											/>
+										)}
+										<span class="chapter-card__folio">
+											Kapitel{" "}
+											{String(index + 1).padStart(2, "0")}
+										</span>
+									</div>
+									<div class="chapter-card__body">
+										<h3>{chapter.titel}</h3>
+									</div>
+								</a>
+							))
+						}
 					</div>
 				</section>
 
-				<aside class="codex-note" id="ueber-den-codex" aria-label="Hinweis zum Kodex">
+				<aside
+					class="codex-note"
+					id="ueber-den-codex"
+					aria-label="Hinweis zum Kodex"
+				>
 					<span class="codex-note__mark" aria-hidden="true">
-						<svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-							<path d="M14 24V5m0 13c-4.4 0-6.8-2.4-7.6-6.2 4.4-.4 7.1 1.4 7.6 6.2Zm0-4.1c0-4.3 2.5-6.8 7-7 .1 4.2-2.2 6.7-7 7Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+						<svg
+							width="28"
+							height="28"
+							viewBox="0 0 28 28"
+							fill="none"
+						>
+							<path
+								d="M14 24V5m0 13c-4.4 0-6.8-2.4-7.6-6.2 4.4-.4 7.1 1.4 7.6 6.2Zm0-4.1c0-4.3 2.5-6.8 7-7 .1 4.2-2.2 6.7-7 7Z"
+								stroke="currentColor"
+								stroke-width="1.2"
+								stroke-linecap="round"
+								stroke-linejoin="round"></path>
 						</svg>
 					</span>
-					<p>Jeder Kodex-Titel führt zu einem vollständigen Rezept. So bleiben die alte Buchsprache und die klare Anleitung miteinander verbunden.</p>
-					<span class="codex-note__source">Aus der Sammlung</span>
+					<p>
+						Jedes Kapitel führt zu seinen eigenen Rezepten und
+						Wissensblättern. So bleiben die alte Buchsprache und die
+						klare Anleitung miteinander verbunden.
+					</p>
 				</aside>
 			</main>
 

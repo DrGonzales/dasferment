@@ -332,6 +332,35 @@ a {
 	text-indent: 0;
 }
 
+/* Das Kapitelblatt trägt Titel, Beschreibung und das Kapitelbild. Es steht auf
+   einer eigenen rechten Seite; die folgende Bildseite des ersten Rezepts behält
+   damit ihren festen Platz auf der Recto-Seite. */
+.book-chapter {
+	padding-top: 16mm;
+}
+
+.book-chapter .book-part__claim {
+	max-width: none;
+	margin-left: 0;
+	margin-right: auto;
+	font-style: normal;
+	text-align: left;
+	text-indent: 1.2em;
+}
+
+.book-chapter__image {
+	width: 82mm;
+	margin: 8mm auto 0;
+	break-inside: avoid;
+}
+
+.book-chapter__image img {
+	display: block;
+	width: 100%;
+	height: auto;
+	object-fit: contain;
+}
+
 /* Inhaltsverzeichnis */
 
 .book-contents {
@@ -629,28 +658,38 @@ a {
    Rückseite. Damit beginnt jedes Rezept mit einem reinen Bild; ein längerer
    Text läuft auf die nächste Seite weiter und der Umbruch schiebt eine Leerseite
    dazwischen, damit das Bild des nächsten Rezepts wieder rechts landet. */
+/* Das Bild füllt die ganze Seite einschließlich 3 mm Beschnitt: 154 × 216 mm.
+   Die Negativ-Ränder lösen den Satzspiegel einer Recto-Seite (13 mm links,
+   18 mm rechts, 15 mm oben und unten) plus Beschnitt auf; `calc` hebt die
+   Höhe des Inhaltkastens auf die Beschnittgröße. Die Seitenzahl im Mittenkasten
+   überlagert das Bild, das ist in dieser Ausgabe erlaubt. */
 .recipe-plate {
 	break-before: right;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	height: 100%;
+	height: calc(100% + 36mm);
+	margin: -18mm -21mm -18mm -16mm;
+	overflow: hidden;
 }
 
 .recipe-plate__frame {
 	margin: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
 	break-inside: avoid;
 }
 
-/* 113 mm Breite ergeben 169,5 mm Höhe und passen damit in den Satzspiegel von
-   117 × 180 mm. Die Quelle (1024 × 1536) behält ihr Seitenverhältnis. */
+/* Die Quelle (1024 × 1536, Verhältnis 2:3) ist proportional höher als die
+   Seite. `cover` füllt die Breite und schneidet oben und unten je rund 7,5 mm
+   ab. */
 .recipe-plate__frame img {
 	display: block;
-	width: 113mm;
-	height: auto;
-	max-width: 100%;
-	object-fit: contain;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
 
 .recipe__ingredients {

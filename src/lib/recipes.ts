@@ -12,6 +12,8 @@ export interface Recipe {
 	codex_titel: string;
 	codex_einleitung?: string;
 	ratgeber?: RecipeAdvisor;
+	/** Kapitel-Slug, gesetzt beim Laden aus `src/data/<kapitel>/Kapitel.json`. */
+	kapitel?: string;
 }
 
 export function slugify(value: string): string {
@@ -35,6 +37,20 @@ export function categorySlug(tag: string): string {
 
 export function categoryLabel(tag: string): string {
 	return tag;
+}
+
+/** Eine Kategorie bekommt erst ab dieser Zahl an Rezepten eine eigene Seite. */
+export const MIN_CATEGORY_RECIPES = 2;
+
+/** Rezepte je Kategorie-Slug; ein Tag zählt pro Rezept nur einmal. */
+export function categoryCounts(recipes: readonly Pick<Recipe, 'tags'>[]): Map<string, number> {
+	const counts = new Map<string, number>();
+	for (const recipe of recipes) {
+		for (const slug of new Set(recipe.tags.map(categorySlug))) {
+			counts.set(slug, (counts.get(slug) ?? 0) + 1);
+		}
+	}
+	return counts;
 }
 
 export const GENERAL_TAG_LABEL = 'Gemüse';

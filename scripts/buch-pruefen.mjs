@@ -30,7 +30,8 @@ const ohnePdf = process.argv.includes('--kein-pdf');
 
 // 117 mm Satzspiegel entsprechen 442 px im Umbruch.
 const PX_PRO_MM = 442 / 117;
-const BILDBREITE_MM = 113;
+// Bildseite füllt die ganze Seite inklusive 3 mm Beschnitt.
+const BILDBREITE_MM = 154;
 
 const MIME = {
 	'.css': 'text/css',

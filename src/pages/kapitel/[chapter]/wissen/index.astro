@@ -1,36 +1,56 @@
 ---
 import { Image } from 'astro:assets';
-import infoData from '../../data/das_ferment_infos.json';
-import Footer from '../../components/Footer.astro';
-import Header from '../../components/Header.astro';
-import SeoHead from '../../components/SeoHead.astro';
-import { codexListe, codexText, gruppiereInfos, type Info } from '../../lib/infos';
-import { slugify } from '../../lib/recipes';
-import { assignPortraits, SMALL_ACTOR_SIZE } from '../../lib/smallActors';
-import '../../styles/global.css';
+import ChapterNav from '../../../../components/ChapterNav.astro';
+import Footer from '../../../../components/Footer.astro';
+import Header from '../../../../components/Header.astro';
+import SeoHead from '../../../../components/SeoHead.astro';
+import {
+	chapterKnowledgePath,
+	chapterPath,
+	chapters,
+	type Chapter,
+} from '../../../../lib/chapters';
+import { codexListe, codexText, gruppiereInfos } from '../../../../lib/infos';
+import { slugify } from '../../../../lib/recipes';
+import { assignPortraits, SMALL_ACTOR_SIZE } from '../../../../lib/smallActors';
+import '../../../../styles/global.css';
 
-const infos = infoData.infos as Info[];
+export function getStaticPaths() {
+	return chapters.map((chapter) => ({
+		params: { chapter: chapter.slug },
+		props: { chapter },
+	}));
+}
+
+interface Props {
+	chapter: Chapter;
+}
+
+const { chapter } = Astro.props;
+const infos = chapter.infos;
 const gruppen = gruppiereInfos(infos);
-const portraits = assignPortraits(infos);
-const portraitById = new Map(infos.map((info, index) => [info.id, portraits[index]]));const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const portraits = assignPortraits(infos, chapter.slug);
+const portraitById = new Map(infos.map((info, index) => [info.id, portraits[index]]));
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const withBase = (path: string) => `${base}${path}`;
-const canonicalPath = '/wissen/';
+const canonicalPath = chapterKnowledgePath(chapter);
 const canonicalUrl = Astro.site
 	? new URL(withBase(canonicalPath), Astro.site).toString()
 	: withBase(canonicalPath);
-const description = `${infos.length} Tipps, Hinweise und Grundlagen rund um die Fermentation – von der Salzlake über Temperatur und Hygiene bis zu häufigen Fehlern, im Kodex formuliert.`;
+const description = `${infos.length} Tipps, Hinweise und Grundlagen aus dem Kapitel ${chapter.titel} – von der Salzlake über Temperatur und Hygiene bis zu häufigen Fehlern, im Kodex formuliert.`;
 ---
 
 <!doctype html>
 <html lang="de">
 	<head>
 		<SeoHead
-			title="Fermentation – Wissen & Grundlagen | Das Ferment"
+			title={`${chapter.titel}: Wissen & Grundlagen | Das Ferment`}
 			description={description}
 			canonicalUrl={canonicalUrl}
 			base={base}
 			breadcrumbs={[
-				{ name: 'Startseite', path: '/' },
+				{ name: 'Kapitelübersicht', path: '/' },
+				{ name: chapter.titel, path: chapterPath(chapter) },
 				{ name: 'Wissen', path: canonicalPath },
 			]}
 		/>
@@ -40,15 +60,11 @@ const description = `${infos.length} Tipps, Hinweise und Grundlagen rund um die 
 			<Header />
 
 			<main class="repertoire knowledge-page">
-				<nav class="breadcrumbs" aria-label="Brotkrümelnavigation">
-					<a href={withBase('/')}>Startseite</a>
-					<span aria-hidden="true">/</span>
-					<span aria-current="page">Wissen</span>
-				</nav>
+				<ChapterNav chapter={chapter} />
 
 				<header class="section-heading">
 					<div>
-						<p class="section-heading__kicker">Tips, Hinweise und Grundlagen</p>
+						<p class="section-heading__kicker">{chapter.titel}</p>
 						<h1 id="knowledge-title">Was die Geduld lehrt</h1>
 					</div>
 					<p class="section-heading__count">
@@ -158,9 +174,9 @@ const description = `${infos.length} Tipps, Hinweise und Grundlagen rund um die 
 												) : null}
 											</figure>
 										) : null}
-								</article>
-							);
-						})}
+									</article>
+								);
+							})}
 						</section>
 					))
 				}

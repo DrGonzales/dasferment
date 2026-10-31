@@ -1,56 +1,68 @@
 ---
 import type { ImageMetadata } from "astro";
 import { getImage, Image } from "astro:assets";
-import recipeData from "../../data/das_ferment.json";
-import Footer from "../../components/Footer.astro";
-import Header from "../../components/Header.astro";
-import SeoHead from "../../components/SeoHead.astro";
-import { imageForRecipe } from "../../lib/pageImages";
-import { actorImageFor } from "../../lib/actorImages";
-import { socialCard } from "../../lib/social";
-import { recipeDescription } from "../../lib/seo";
+import ChapterNav from "../../../../components/ChapterNav.astro";
+import Footer from "../../../../components/Footer.astro";
+import Header from "../../../../components/Header.astro";
+import SeoHead from "../../../../components/SeoHead.astro";
+import { actorImageFor } from "../../../../lib/actorImages";
 import {
+	allRecipes,
+	chapterPath,
+	chapterRecipesPath,
+	chapters,
+	recipePath,
+	type Chapter,
+} from "../../../../lib/chapters";
+import { imageForRecipe } from "../../../../lib/pageImages";
+import {
+	categoryCounts,
 	categorySlug,
 	GENERAL_TAG_LABEL,
 	hasGeneralTag,
+	MIN_CATEGORY_RECIPES,
 	recipeImageAlt,
 	relatedRecipes,
 	slugify,
 	totalTimeIso,
 	type Recipe,
-} from "../../lib/recipes";
-import "../../styles/global.css";
+} from "../../../../lib/recipes";
+import { recipeDescription } from "../../../../lib/seo";
+import { socialCard } from "../../../../lib/social";
+import "../../../../styles/global.css";
 
 export function getStaticPaths() {
-	const pathRecipes = recipeData as Recipe[];
-
-	return pathRecipes.map((recipe) => ({
-		params: { slug: slugify(recipe.titel) },
-		props: { recipe },
-	}));
+	return chapters.flatMap((chapter) =>
+		chapter.recipes.map((recipe) => ({
+			params: { chapter: chapter.slug, slug: slugify(recipe.titel) },
+			props: { chapter, recipe },
+		})),
+	);
 }
 
 interface Props {
+	chapter: Chapter;
 	recipe: Recipe;
 }
 
-const { recipe } = Astro.props;
+const { chapter, recipe } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const withBase = (path: string) => `${base}${path}`;
-const slug = slugify(recipe.titel);
-const canonicalPath = `/rezepte/${slug}/`;
+// Tags unter der Mindestzahl verlinken nicht, ihre Kategorieseiten baut getStaticPaths nicht.
+const categoryRecipeCounts = categoryCounts(allRecipes);
+const canonicalPath = recipePath(recipe);
 const canonicalUrl = Astro.site
 	? new URL(withBase(canonicalPath), Astro.site).toString()
 	: withBase(canonicalPath);
 const description = recipeDescription(recipe);
-const related = relatedRecipes(recipe, recipeData as Recipe[]);
+const related = relatedRecipes(recipe, chapter.recipes);
 // Ab etwa 60 Zeichen schneidet die Suche den Titel ab. Dann entfällt der
 // Markenzusatz, der Name steht ohnehin in den WebSite-Daten und im Kopf jeder Seite.
 const pageTitle = `${recipe.titel} | Das Ferment`;
 const title = pageTitle.length > 60 ? recipe.titel : pageTitle;
 const image = imageForRecipe(recipe);
 const advisorImage = recipe.ratgeber
-	? actorImageFor(recipe.ratgeber.sprecher)
+	? actorImageFor(recipe.ratgeber.sprecher, chapter.slug)
 	: undefined;
 const absoluteUrl = (path: string) =>
 	Astro.site ? new URL(path, Astro.site).toString() : path;
@@ -106,8 +118,9 @@ const recipeJsonLd = {
 	})),
 };
 const breadcrumbTrail = [
-	{ name: "Startseite", path: "/" },
-	{ name: "Rezepte", path: "/rezepte/" },
+	{ name: "Kapitelübersicht", path: "/" },
+	{ name: chapter.titel, path: chapterPath(chapter) },
+	{ name: "Rezepte", path: chapterRecipesPath(chapter) },
 	{ name: recipe.titel, path: canonicalPath },
 ];
 ---
@@ -131,13 +144,7 @@ const breadcrumbTrail = [
 			<Header />
 
 			<main class="recipe-main">
-				<nav class="breadcrumbs" aria-label="Brotkrümelnavigation">
-					<a href={withBase("/")}>Startseite</a>
-					<span aria-hidden="true">/</span>
-					<a href={withBase("/rezepte/")}>Rezepte</a>
-					<span aria-hidden="true">/</span>
-					<span aria-current="page">{recipe.titel}</span>
-				</nav>
+				<ChapterNav chapter={chapter} />
 
 				<article class="recipe-article">
 					<header class="recipe-intro">
@@ -163,13 +170,17 @@ const breadcrumbTrail = [
 								class="recipe-intro__tags"
 								aria-label="Rezeptkategorien"
 							>
-								{recipe.tags.map((tag) => (
-									<a
-										href={withBase(`/kategorien/${categorySlug(tag)}/`)}
-									>
-										{tag}
-									</a>
-								))}
+								{recipe.tags.map((tag) => {
+									const slug = categorySlug(tag);
+									const zahl = categoryRecipeCounts.get(slug) ?? 0;
+									return zahl >= MIN_CATEGORY_RECIPES ? (
+										<a href={withBase(`/kategorien/${slug}/`)}>
+											{tag}
+										</a>
+									) : (
+										<span>{tag}</span>
+									);
+								})}
 							</nav>
 						</div>
 
@@ -300,7 +311,7 @@ const breadcrumbTrail = [
 							>
 								<header class="recipe-section__header">
 									<p class="section-heading__kicker">
-										Weiter im Kodex
+										Weiter im Kapitel
 									</p>
 									<h2 id="verwandte-title">Verwandte Rezepte</h2>
 								</header>
@@ -310,7 +321,7 @@ const breadcrumbTrail = [
 										return (
 											<li>
 												<a
-													href={withBase(`/rezepte/${slugify(entry.titel)}/`)}
+													href={withBase(recipePath(entry))}
 												>
 													<div class="recipe-related__visual">
 														{relatedImage ? (

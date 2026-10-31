@@ -1,19 +1,18 @@
 ---
 import { getImage, Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
-import recipeData from '../../data/das_ferment.json';
 import epubIcon from '../../pic/icons/epub.png';
 import pdfIcon from '../../pic/icons/pdf.png';
-import kopfBild from '../../pic/smallactors/8.png';
+import kopfBild from '../../pic/smallactors/lactation/8.png';
 import Footer from '../../components/Footer.astro';
 import Header from '../../components/Header.astro';
 import SeoHead from '../../components/SeoHead.astro';
+import { allRecipes } from '../../lib/chapters';
 import { coverImageFor } from '../../lib/pageImages';
-import { type Recipe } from '../../lib/recipes';
 import { socialCard } from '../../lib/social';
 import '../../styles/global.css';
 
-const recipes = recipeData as Recipe[];
+const recipes = allRecipes;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const withBase = (path: string) => `${base}${path}`;
 const canonicalPath = '/buch/';

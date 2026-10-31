@@ -123,7 +123,7 @@ for (const eintrag of manifest) {
 	pruefe(eintrag.id !== '', 'Manifest-Eintrag ohne id');
 	pruefe(eintrag.typ !== '', `Manifest-Eintrag ${eintrag.id} ohne media-type`);
 	pruefe(
-		dateien.has(`${OCF_ROOT}/${eintrag.href}`),
+		dateien.has(decodeURIComponent(`${OCF_ROOT}/${eintrag.href}`)),
 		`Manifest nennt eine fehlende Datei: ${eintrag.href}`,
 	);
 }
@@ -185,7 +185,7 @@ for (const blatt of blaetter) {
 		if (/^(https?:|mailto:|data:)/.test(ziel)) continue;
 
 		const aufgeloest = ziel.startsWith('../')
-			? `${OCF_ROOT}/${ziel.slice('../'.length)}`
+			? decodeURIComponent(`${OCF_ROOT}/${ziel.slice('../'.length)}`)
 			: `${TEXT_DIR}/${ziel}`;
 
 		pruefe(dateien.has(aufgeloest), `${blatt} zeigt auf eine fehlende Datei: ${ziel}`);
@@ -195,7 +195,7 @@ for (const blatt of blaetter) {
 			if (!ids.includes(zielId)) toteAnker.add(`${blatt} → ${ziel}`);
 		}
 		if (ziel.startsWith('../assets/') || ziel.startsWith('../images/')) {
-			benutzteAssets.add(`${OCF_ROOT}/${ziel.slice('../'.length)}`);
+			benutzteAssets.add(aufgeloest);
 		}
 	}
 }
@@ -204,7 +204,7 @@ for (const blatt of blaetter) {
 // Gruppen tragen dasselbe Motiv mehrmals, das ist beabsichtigt und kein Fehler.
 for (const eintrag of manifest.filter((eintrag) => MEDIEN_BILD.test(eintrag.typ))) {
 	if (eintrag.id === 'cover-rueckseite') continue;
-	if (!benutzteAssets.has(`${OCF_ROOT}/${eintrag.href}`)) {
+	if (!benutzteAssets.has(decodeURIComponent(`${OCF_ROOT}/${eintrag.href}`))) {
 		fehler.push(`Bild im Manifest, das kein Blatt anzeigt: ${eintrag.href}`);
 	}
 }

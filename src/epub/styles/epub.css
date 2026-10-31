@@ -213,6 +213,23 @@ figcaption {
 	font-size: 0.95em;
 }
 
+.kapitel__bild {
+	margin: 1.4em 0;
+	text-align: center;
+}
+
+.kapitel__bild img {
+	width: 100%;
+	max-width: 22em;
+}
+
+.kapitel__umfang {
+	margin-top: 1.4em;
+	color: #8b745c;
+	font-size: 0.95em;
+	text-align: center;
+}
+
 /* Gestalten ----------------------------------------------------------- */
 
 .gestalt {
