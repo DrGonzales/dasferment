@@ -907,8 +907,6 @@ img {
 	gap: clamp(2.5rem, 7vw, 7rem);
 	align-items: center;
 	padding: clamp(1.5rem, 4vw, 3.5rem) 0;
-	border-top: 1px solid var(--line);
-	border-bottom: 1px solid var(--line);
 }
 
 .recipe-intro__copy {
@@ -1611,14 +1609,15 @@ img {
 		justify-items: center;
 	}
 
-	.prose-figure > div {
+	.prose-figure>div {
 		width: 100%;
 	}
 }
 
 .prose-link {
 	display: inline-flex;
-	align-items: baseline;	gap: 0.5rem;
+	align-items: baseline;
+	gap: 0.5rem;
 	max-width: 44rem;
 	color: var(--rust);
 	text-decoration: underline;
@@ -1982,7 +1981,7 @@ img {
 	line-height: 1.6;
 }
 
-.knowledge-page > .knowledge-group:last-child .knowledge-entry:last-child {
+.knowledge-page>.knowledge-group:last-child .knowledge-entry:last-child {
 	border-bottom: 0;
 	padding-bottom: 0;
 }
@@ -2104,6 +2103,7 @@ img {
 		font-size: 0.96rem;
 	}
 }
+
 .chapter-nav {
 	display: flex;
 	flex-wrap: wrap;

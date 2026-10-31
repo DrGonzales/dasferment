@@ -27,6 +27,14 @@ export default defineConfig({
 	base,
 	integrations: [
 		sitemap({
+			// Die alten `/rezepte/<slug>/`-Weiterleitungen sind keine Inhalte,
+			// sondern nur Kompatibilitätsblätter; sie gehören nicht in die Sitemap.
+			serialize(item) {
+				if (new URL(item.url).pathname.startsWith(`${basePath}rezepte/`)) {
+					return undefined;
+				}
+				return item;
+			},
 			chunks: {
 				rezepte: (item) => (sitemapChunk(item) === 'rezepte' ? item : undefined),
 				kategorien: (item) => (sitemapChunk(item) === 'kategorien' ? item : undefined),

@@ -70,7 +70,11 @@ const homeUrl = absoluteUrl(withBase("/"));
 const cardImage = await socialCard(
 	(options) => getImage({ ...options, src: image as ImageMetadata }),
 	image
-		? { width: image.width, height: image.height, alt: recipeImageAlt(recipe) }
+		? {
+				width: image.width,
+				height: image.height,
+				alt: recipeImageAlt(recipe),
+			}
 		: undefined,
 	absoluteUrl,
 );
@@ -158,7 +162,9 @@ const breadcrumbTrail = [
 							<h1>
 								{recipe.codex_titel}
 							</h1>
-							<p class="recipe-intro__recipe-title">{recipe.titel}</p>
+							<p class="recipe-intro__recipe-title">
+								{recipe.titel}
+							</p>
 							{
 								recipe.codex_einleitung && (
 									<p class="recipe-intro__lead">
@@ -170,17 +176,24 @@ const breadcrumbTrail = [
 								class="recipe-intro__tags"
 								aria-label="Rezeptkategorien"
 							>
-								{recipe.tags.map((tag) => {
-									const slug = categorySlug(tag);
-									const zahl = categoryRecipeCounts.get(slug) ?? 0;
-									return zahl >= MIN_CATEGORY_RECIPES ? (
-										<a href={withBase(`/kategorien/${slug}/`)}>
-											{tag}
-										</a>
-									) : (
-										<span>{tag}</span>
-									);
-								})}
+								{
+									recipe.tags.map((tag) => {
+										const slug = categorySlug(tag);
+										const zahl =
+											categoryRecipeCounts.get(slug) ?? 0;
+										return zahl >= MIN_CATEGORY_RECIPES ? (
+											<a
+												href={withBase(
+													`/kategorien/${slug}/`,
+												)}
+											>
+												{tag}
+											</a>
+										) : (
+											<span>{tag}</span>
+										);
+									})
+								}
 							</nav>
 						</div>
 
@@ -262,21 +275,19 @@ const breadcrumbTrail = [
 								aria-label={`Ratschlag von ${recipe.ratgeber.sprecher}`}
 							>
 								<div class="recipe-advisor__content">
-									{
-										advisorImage && (
-											<figure class="recipe-advisor__portrait">
-												<Image
-													src={advisorImage}
-													alt={`${recipe.ratgeber.sprecher} in der Schreibkammer`}
-													widths={[160, 320, 480]}
-													sizes="(max-width: 780px) 5.5rem, 8rem"
-													quality={80}
-													loading="lazy"
-													decoding="async"
-												/>
-											</figure>
-										)
-									}
+									{advisorImage && (
+										<figure class="recipe-advisor__portrait">
+											<Image
+												src={advisorImage}
+												alt={`${recipe.ratgeber.sprecher} in der Schreibkammer`}
+												widths={[160, 320, 480]}
+												sizes="(max-width: 780px) 5.5rem, 8rem"
+												quality={80}
+												loading="lazy"
+												decoding="async"
+											/>
+										</figure>
+									)}
 									<div class="recipe-advisor__text">
 										<div class="recipe-advisor__heading">
 											<span
@@ -286,7 +297,8 @@ const breadcrumbTrail = [
 												✦
 											</span>
 											<h2>
-												{recipe.ratgeber.sprecher}s Ratschlag
+												{recipe.ratgeber.sprecher}s
+												Ratschlag
 											</h2>
 											<span
 												class="recipe-advisor__ornament"
@@ -313,22 +325,34 @@ const breadcrumbTrail = [
 									<p class="section-heading__kicker">
 										Weiter im Kapitel
 									</p>
-									<h2 id="verwandte-title">Verwandte Rezepte</h2>
+									<h2 id="verwandte-title">
+										Verwandte Rezepte
+									</h2>
 								</header>
 								<ul class="recipe-related__list">
 									{related.map((entry) => {
-										const relatedImage = imageForRecipe(entry);
+										const relatedImage =
+											imageForRecipe(entry);
 										return (
 											<li>
 												<a
-													href={withBase(recipePath(entry))}
+													href={withBase(
+														recipePath(entry),
+													)}
 												>
 													<div class="recipe-related__visual">
 														{relatedImage ? (
 															<Image
-																src={relatedImage}
-																alt={recipeImageAlt(entry)}
-																widths={[220, 280, 360, 480]}
+																src={
+																	relatedImage
+																}
+																alt={recipeImageAlt(
+																	entry,
+																)}
+																widths={[
+																	220, 280,
+																	360, 480,
+																]}
 																sizes="(max-width: 520px) calc(100vw - 80px), (max-width: 880px) 44vw, 280px"
 																quality={74}
 																loading="lazy"

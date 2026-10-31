@@ -1,0 +1,34 @@
+---
+import { allRecipes, recipePath } from '../../lib/chapters';
+import { slugify } from '../../lib/recipes';
+
+// Alte Deep-Links von vor der Kapitelseite (`/rezepte/<slug>/`) bleiben erreichbar.
+// Die Weiterleitung entsteht statisch je Rezept; JavaScript im Browser braucht es
+// dafür nicht: `meta refresh` und ein sichtbarer Link genügen jedem Client.
+export function getStaticPaths() {
+	return allRecipes.map((recipe) => ({
+		params: { slug: slugify(recipe.titel) },
+		props: { ziel: recipePath(recipe) },
+	}));
+}
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const { ziel } = Astro.props;
+const zielUrl = new URL(`${base}${ziel}`, Astro.site ?? Astro.url).toString();
+---
+
+<!doctype html>
+<html lang="de">
+	<head>
+		<meta charset="utf-8" />
+		<title>Rezept umgezogen | Das Ferment</title>
+		<meta name="robots" content="noindex, follow" />
+		<meta http-equiv="refresh" content={`0;url=${base}${ziel}`} />
+		<link rel="canonical" href={zielUrl} />
+	</head>
+	<body>
+		<p>
+			Dieses Rezept hat eine neue Adresse: <a href={`${base}${ziel}`}>zum Rezept</a>.
+		</p>
+	</body>
+</html>

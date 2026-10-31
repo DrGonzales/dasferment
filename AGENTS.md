@@ -19,7 +19,7 @@ Manage the background server with `astro dev stop`, `astro dev status`, and `ast
 | Befehl | Wirkung |
 | --- | --- |
 | `npm run dev` | `astro dev --host 0.0.0.0` |
-| `npm run build` | statischer Build nach `dist/`, aktuell 86 Seiten |
+| `npm run build` | statischer Build nach `dist/`, aktuell 137 Seiten |
 | `npm run preview` | Build lokal ansehen |
 | `npx astro build` | Build ohne npm-Skript, wenn `npm` nicht verfügbar ist |
 | `npm run build:book` | Buch-Build nach `dist-book/`, eine Seite, aktuell 150 Druckseiten |
@@ -99,6 +99,7 @@ Regeln:
 | Start | `/` |
 | Kapitel | `/kapitel/<kapitel>/` |
 | Rezepte | `/kapitel/<kapitel>/rezepte/`, `/kapitel/<kapitel>/rezepte/<slug>/` |
+| Alte Rezept-Links | `/rezepte/<slug>/` leitet per `meta refresh` auf das Kapitelblatt — statische Blätter aus `src/pages/rezepte/[slug].astro`, nicht in der Sitemap, ausgelöst durch `serialize` in `astro.config.mjs` |
 | Kategorien | `/kategorien/`, `/kategorien/<kategorie>/` |
 | Wissen | `/kapitel/<kapitel>/wissen/` |
 | Buch | `/buch/` |
@@ -459,7 +460,7 @@ Diese Properties werden **nicht** erzeugt, weil die Datenquelle sie nicht hergib
 Das Rezeptbuch existiert als zweite Ausgabe: `astro.book.config.mjs` baut `src/book/` nach `dist-book/`, `scripts/make-pdf.mjs` rendert daraus mit Puppeteer und Paged.js das PDF. Der ausführliche Plan mit allen Entscheidungen, Messwerten und den Stolperfallen von Paged.js 0.4.3 liegt in `docs/buchdruck-plan.md`.
 
 * **Getrennte Ausgabe, gemeinsame Daten.** `src/data/` und `src/lib/` werden von beiden Ausgaben genutzt, `src/lib/book.ts` gehört zu beiden. Build, Layout-Hülle und Stylesheet sind getrennt.
-* Die Buchausgabe ändert **keine** der obigen Regeln. `global.css` bleibt das einzige Stylesheet der Website, `npm run build` bleibt bei 86 Seiten. Kein `@page`, kein Print-Stylesheet und keine Drucklogik gehören in die Website.
+* Die Buchausgabe ändert **keine** der obigen Regeln. `global.css` bleibt das einzige Stylesheet der Website, `npm run build` bleibt bei 137 Seiten. Kein `@page`, kein Print-Stylesheet und keine Drucklogik gehören in die Website.
 * Das PDF entsteht in einem Durchlauf. `make-pdf.mjs` schreibt Kolumnentitel, Inhaltsverzeichnis und Lesezeichen in das bereits umgebrochene DOM und ruft Paged.js nicht erneut auf.
 * Neue Rezepte oder Wissenseinträge brauchen im Buch nichts außer Daten: Reihenfolge, Anker, Kolumnentitel, Inhaltsverzeichnis und Register entstehen aus `src/lib/book.ts` und dem Template.
 * Geänderte Seitenzahlen sind normal. Nach jedem Umbruch neu bauen und die Seitenzahl im PDF prüfen, nicht im DOM.

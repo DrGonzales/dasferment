@@ -318,7 +318,7 @@ Nur `src/book/styles/book.css` wird geladen, nie `src/styles/global.css`.
 "make:pdf":   "npm run build:book && node scripts/make-pdf.mjs"
 ```
 
-`npm run build` bleibt unverändert bei 86 Seiten. Das PDF landet in `dist-book/` und
+`npm run build` bleibt unverändert bei 137 Seiten. Das PDF landet in `dist-book/` und
 **nicht** in `dist/` — es wird nicht mitdeployt.
 
 ### Aufbau des Buchs
@@ -465,7 +465,7 @@ Alles mit den Bordmitteln des Projekts nachprüfbar, `poppler-utils` vorausgeset
 | Rezeptpaare | `npm run check:book` | 51 Bildseiten 9 bis 129 auf Recto, je mit Text auf der Rückseite, eine Fortsetzungsseite, keine mit Kolumnentitel, Bild 113 mm breit und mittig |
 | Blattsatz | `npm run check:book` | kein Element steht im Blocksatz: `text-align: left` im Body und kein Überschriften-, Kicker- oder Claim-Element erbt `text-align-last: justify` |
 | Anker | `dist-book/index.html` | keine doppelte `id`, keine tote Sprungmarke |
-| Website | `npm run build` | 86 Seiten, unverändert |
+| Website | `npm run build` | 137 Seiten, unverändert |
 
 `scripts/buch-pruefen.mjs` macht diese Prüfungen. Sie misst den fertigen Paged.js-Umbruch
 im Browser und das fertige PDF mit `pdfinfo`, `pdftotext` und `pdfimages`. Aufruf über
