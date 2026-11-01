@@ -1,5 +1,42 @@
 [
     {
+        "titel": "Der Ginger Bug – Die lebendige Ingwer-Mutter",
+        "tags": [
+            "Getränke",
+            "Ginger Bug",
+            "Starterkultur",
+            "Grundrezept",
+            "Fermentationsstarter"
+        ],
+        "zutaten": [
+            "500 ml sauberes Trinkwasser",
+            "30 g frischer Ingwer, ungeschält und fein gerieben",
+            "30 g weißer Haushaltszucker",
+            "Für die tägliche Fütterung: jeweils 10 g frisch geriebener Ingwer",
+            "Für die tägliche Fütterung: jeweils 10 g Zucker"
+        ],
+        "zubereitung": [
+            "Ein sauberes Glasgefäß mit etwa 750 ml Fassungsvermögen vorbereiten. Ingwer gründlich unter fließendem Wasser reinigen und fein reiben.",
+            "500 ml Trinkwasser in das Glas geben. 30 g Zucker darin vollständig auflösen und anschließend 30 g geriebenen Ingwer einrühren.",
+            "Das Gefäß mit einem geeigneten Gäraufsatz oder einem locker aufgelegten Deckel versehen. Es darf kein gefährlicher Druck entstehen. Bei einem locker aufgelegten Deckel vor Verunreinigungen schützen.",
+            "Das Glas an einem warmen, vor direkter Sonne geschützten Ort bei ungefähr 20–26 °C aufstellen.",
+            "Ab dem folgenden Tag täglich 10 g frisch geriebenen Ingwer und 10 g Zucker hinzufügen. Mit einem sauberen Löffel umrühren.",
+            "Die tägliche Fütterung fortsetzen und den Ansatz beobachten. Kleine Bläschen, aufsteigende Gasblasen und eine zunehmende Aktivität nach dem Füttern können auf eine aktive Gärung hinweisen.",
+            "Nach einigen Tagen kann sich eine lebendige Kultur entwickeln. Entscheidend ist nicht die Anzahl der Tage, sondern eine wiederholt erkennbare Aktivität nach der Fütterung. Der Geruch soll würzig und angenehm säuerlich sein.",
+            "Sobald der Ginger Bug zuverlässig aktiv ist, kann ein Teil der Flüssigkeit als Starter für fermentierte Getränke entnommen werden. Vor der Entnahme umrühren und die gewünschte Menge durch ein feines Sieb geben.",
+            "Nach jeder Entnahme den Starter mit frischem Trinkwasser, Ingwer und Zucker wieder auffüllen beziehungsweise füttern. Die entnommene Flüssigkeit und das Fütterungsschema sollten so abgestimmt sein, dass die Mutterkultur ausreichend erhalten bleibt.",
+            "Wird der Starter regelmäßig verwendet, kann er bei Raumtemperatur weitergeführt und täglich gefüttert werden. Bei längeren Pausen kann er gekühlt und in größeren Abständen aufgefrischt werden. Vor der nächsten Verwendung sollte er wiederholt aktiv werden.",
+            "Bei flauschigem Schimmel, farbigen Schimmelstellen oder fauligem Geruch den gesamten Ansatz entsorgen. Nicht probieren und nicht durch weiteres Füttern zu retten versuchen."
+        ],
+        "picture": "gingerbug.png",
+        "codex_titel_zeitung": "Vom Entstehen der Ingwer-Mutter und den wundersamen Gärgeistern im Glase",
+        "codex_einleitung": "So ward denn der erste lebendige Ingwertrank bereitet, aus welchem in der Folge gar manch köstliches Gebräu hervorgehen soll. Ingwer, weißer Zucker und reines Wasser werden hier in trauter Eintracht vereinet, auf dass die kleinen, dem bloßen Auge unsichtbaren Helfer ihr heimliches Werk beginnen. Durch tägliche Labsal und milde Zimmermerwärme erwächst aus diesem Anfang eine stattliche Mutterkultur, welche dem kundigen Freund des Gärungs-Handwerks reiche Früchte tragen wird.",
+        "ratgeber": {
+            "sprecher": "Connie",
+            "text": "Pflegen Sie Ihre Ingwer-Mutter mit gebührender Sorgfalt, mein guter Freund, und verabsäumen Sie ja nicht ihre tägliche Speisung! Denn aus diesem unscheinbaren Glase sollen dereinst noch manch spritziger Himbeertrank, heitere Waldlimonade und andere erlesene Köstlichkeiten hervorgehen. Die Katze im Übrigen lässt mich wissen, sie vernehme bereits den unverkennbaren Duft eines neuen Abenteuers!"
+        }
+    },
+    {
         "titel": "Himbeer-Zitronen-Limonade mit Ginger Bug",
         "tags": [
             "Getränke",

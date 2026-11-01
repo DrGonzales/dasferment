@@ -4,8 +4,6 @@ import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import SeoHead from "../components/SeoHead.astro";
 import { allRecipes, chapterPath, chapters } from "../lib/chapters";
-import coverBack from "../pic/cover/back.png";
-import coverFront from "../pic/cover/front.png";
 import { imageForRecipe } from "../lib/pageImages";
 import { socialCard } from "../lib/social";
 import { recipeImageAlt } from "../lib/recipes";
@@ -22,8 +20,15 @@ const illustratedRecipes = allRecipes.flatMap((recipe) => {
 	const image = getRecipeImage(recipe);
 	return image ? [{ recipe, image }] : [];
 });
-const blatt =
-	illustratedRecipes[Math.floor(Math.random() * illustratedRecipes.length)];
+const heroSheets = [...illustratedRecipes];
+for (let index = heroSheets.length - 1; index > 0; index -= 1) {
+	const swapIndex = Math.floor(Math.random() * (index + 1));
+	[heroSheets[index], heroSheets[swapIndex]] = [
+		heroSheets[swapIndex],
+		heroSheets[index],
+	];
+}
+const [heroMain, heroSecond, heroThird] = heroSheets;
 const recipeCount = allRecipes.length;
 const illustratedCount = illustratedRecipes.length;
 const knowledgeCount = chapters.reduce(
@@ -90,12 +95,12 @@ const cardImage = await socialCard(
 
 					<div
 						class="hero__gallery"
-						aria-label="Einband und ein Blatt aus dem Kodex"
+						aria-label="Drei Blätter aus dem Kodex"
 					>
 						<figure class="hero__folio hero__folio--main">
 							<Image
-								src={coverFront}
-								alt="Vorderseite des Einbands von Das Ferment"
+								src={heroMain.image}
+								alt={recipeImageAlt(heroMain.recipe)}
 								widths={[320, 480, 640, 780, 1024]}
 								sizes="(max-width: 560px) 52vw, (max-width: 780px) 48vw, (max-width: 1440px) 23vw, 340px"
 								format="webp"
@@ -106,8 +111,8 @@ const cardImage = await socialCard(
 						</figure>
 						<figure class="hero__folio hero__folio--second">
 							<Image
-								src={coverBack}
-								alt="Rückseite des Einbands von Das Ferment"
+								src={heroSecond.image}
+								alt={recipeImageAlt(heroSecond.recipe)}
 								widths={[160, 240, 320, 480]}
 								sizes="(max-width: 560px) 32vw, (max-width: 780px) 33vw, (max-width: 1440px) 15.5vw, 230px"
 								format="webp"
@@ -118,8 +123,8 @@ const cardImage = await socialCard(
 						</figure>
 						<figure class="hero__folio hero__folio--third">
 							<Image
-								src={blatt.image}
-								alt={recipeImageAlt(blatt.recipe)}
+								src={heroThird.image}
+								alt={recipeImageAlt(heroThird.recipe)}
 								widths={[160, 240, 320, 480]}
 								sizes="(max-width: 560px) 30vw, 210px"
 								format="webp"

@@ -307,7 +307,7 @@ a {
 
 .book-part__title {
 	font-family: var(--display);
-	font-size: 20pt;
+	font-size: 18pt;
 	line-height: 1.15;
 	letter-spacing: 0.05em;
 	color: var(--ink);
@@ -325,7 +325,7 @@ a {
 }
 
 .book-part__ornament {
-	margin: 8mm 0 0;
+	margin: 5mm 0 0;
 	font-size: 12pt;
 	color: var(--gold);
 	text-align: center;
@@ -341,16 +341,19 @@ a {
 
 .book-chapter .book-part__claim {
 	max-width: none;
-	margin-left: 0;
+	margin: 4mm 0 0;
 	margin-right: auto;
+	font-size: 8.6pt;
 	font-style: normal;
 	text-align: left;
 	text-indent: 1.2em;
 }
 
+/* 52 mm Breite: Titel, Bild, Ornament und Einleitung passen so gemeinsam auf das
+   Kapitelblatt, bei 82 mm lief der Einleitungstext auf die Rückseite über. */
 .book-chapter__image {
-	width: 82mm;
-	margin: 8mm auto 0;
+	width: 52mm;
+	margin: 6mm auto 0;
 	break-inside: avoid;
 }
 
