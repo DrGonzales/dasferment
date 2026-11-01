@@ -1,0 +1,361 @@
+[
+    {
+        "titel": "Der Ginger Bug – Die lebendige Ingwer-Mutter",
+        "tags": [
+            "Getränke",
+            "Ginger Bug",
+            "Starterkultur",
+            "Grundrezept",
+            "Fermentationsstarter"
+        ],
+        "zutaten": [
+            "500 ml sauberes Trinkwasser",
+            "30 g frischer Ingwer, ungeschält und fein gerieben",
+            "30 g weißer Haushaltszucker",
+            "Für die tägliche Fütterung: jeweils 10 g frisch geriebener Ingwer",
+            "Für die tägliche Fütterung: jeweils 10 g Zucker"
+        ],
+        "zubereitung": [
+            "Ein sauberes Glasgefäß mit etwa 750 ml Fassungsvermögen vorbereiten. Ingwer gründlich unter fließendem Wasser reinigen und fein reiben.",
+            "500 ml Trinkwasser in das Glas geben. 30 g Zucker darin vollständig auflösen und anschließend 30 g geriebenen Ingwer einrühren.",
+            "Das Gefäß mit einem geeigneten Gäraufsatz oder einem locker aufgelegten Deckel versehen. Es darf kein gefährlicher Druck entstehen. Bei einem locker aufgelegten Deckel vor Verunreinigungen schützen.",
+            "Das Glas an einem warmen, vor direkter Sonne geschützten Ort bei ungefähr 20–26 °C aufstellen.",
+            "Ab dem folgenden Tag täglich 10 g frisch geriebenen Ingwer und 10 g Zucker hinzufügen. Mit einem sauberen Löffel umrühren.",
+            "Die tägliche Fütterung fortsetzen und den Ansatz beobachten. Kleine Bläschen, aufsteigende Gasblasen und eine zunehmende Aktivität nach dem Füttern können auf eine aktive Gärung hinweisen.",
+            "Nach einigen Tagen kann sich eine lebendige Kultur entwickeln. Entscheidend ist nicht die Anzahl der Tage, sondern eine wiederholt erkennbare Aktivität nach der Fütterung. Der Geruch soll würzig und angenehm säuerlich sein.",
+            "Sobald der Ginger Bug zuverlässig aktiv ist, kann ein Teil der Flüssigkeit als Starter für fermentierte Getränke entnommen werden. Vor der Entnahme umrühren und die gewünschte Menge durch ein feines Sieb geben.",
+            "Nach jeder Entnahme den Starter mit frischem Trinkwasser, Ingwer und Zucker wieder auffüllen beziehungsweise füttern. Die entnommene Flüssigkeit und das Fütterungsschema sollten so abgestimmt sein, dass die Mutterkultur ausreichend erhalten bleibt.",
+            "Wird der Starter regelmäßig verwendet, kann er bei Raumtemperatur weitergeführt und täglich gefüttert werden. Bei längeren Pausen kann er gekühlt und in größeren Abständen aufgefrischt werden. Vor der nächsten Verwendung sollte er wiederholt aktiv werden.",
+            "Bei flauschigem Schimmel, farbigen Schimmelstellen oder fauligem Geruch den gesamten Ansatz entsorgen. Nicht probieren und nicht durch weiteres Füttern zu retten versuchen."
+        ],
+        "picture": "gingerbug.png",
+        "codex_titel_zeitung": "Vom Entstehen der Ingwer-Mutter und den wundersamen Gärgeistern im Glase",
+        "codex_einleitung": "So ward denn der erste lebendige Ingwertrank bereitet, aus welchem in der Folge gar manch köstliches Gebräu hervorgehen soll. Ingwer, weißer Zucker und reines Wasser werden hier in trauter Eintracht vereinet, auf dass die kleinen, dem bloßen Auge unsichtbaren Helfer ihr heimliches Werk beginnen. Durch tägliche Labsal und milde Zimmermerwärme erwächst aus diesem Anfang eine stattliche Mutterkultur, welche dem kundigen Freund des Gärungs-Handwerks reiche Früchte tragen wird.",
+        "ratgeber": {
+            "sprecher": "Connie",
+            "text": "Pflegen Sie Ihre Ingwer-Mutter mit gebührender Sorgfalt, mein guter Freund, und verabsäumen Sie ja nicht ihre tägliche Speisung! Denn aus diesem unscheinbaren Glase sollen dereinst noch manch spritziger Himbeertrank, heitere Waldlimonade und andere erlesene Köstlichkeiten hervorgehen. Die Katze im Übrigen lässt mich wissen, sie vernehme bereits den unverkennbaren Duft eines neuen Abenteuers!"
+        }
+    },
+    {
+        "titel": "Himbeer-Zitronen-Limonade mit Ginger Bug",
+        "tags": [
+            "Getränke",
+            "Ginger Bug",
+            "Beeren",
+            "Himbeere"
+        ],
+        "zutaten": [
+            "150 g tiefgekühlte Himbeeren",
+            "50 g Zucker",
+            "100 ml aktiver Ginger Bug, abgesiebt",
+            "750–800 ml Wasser",
+            "Saft einer halben Zitrone"
+        ],
+        "zubereitung": [
+            "Die Himbeeren mit etwas Wasser und dem Zucker in einen Topf geben. Unter Rühren aufkochen und etwa 3–5 Minuten sanft köcheln lassen.",
+            "Den Fruchtansatz abgedeckt vollständig abkühlen lassen. Anschließend durch ein feines Sieb streichen, wenn eine klare Limonade gewünscht ist.",
+            "Zitronensaft und Ginger Bug einrühren. Mit Wasser auf ungefähr einen Liter auffüllen.",
+            "In ein sauberes Gärgefäß mit Gäraufsatz füllen und bei Raumtemperatur die Gärung beobachten.",
+            "Sobald die gewünschte Spritzigkeit erreicht ist, in geeignete druckfeste Flaschen füllen oder unmittelbar kühlen. Bei der Flaschengärung den Druck regelmäßig kontrollieren."
+        ],
+        "picture": "scarlet_raspberries.png",
+        "codex_titel_zeitung": "DAS GEHEIMNIS DER PURPURNEN BEERE! – Ein bemerkenswertes Experiment über die treibende Kraft des Ingwer-Ferments",
+        "codex_titel_englisch": "On the Properties of Scarlet Raspberries and Aerated Effervescence",
+        "codex_einleitung": "Wir befassen uns hier mit der systematischen Kuration eines scharlachroten Fruchtextrakts, bei welchem die scharfe Säure der Zitrone und eine lebhafte, chemische Gärung eine überaus harmonische Verbindung eingehen.",
+        "ratgeber": {
+            "sprecher": "Connie",
+            "text": "Es bedarf akribischer Beobachtungsgabe, mein lieber Freund! Das Elixier färbt sich rasch rubinfarben; hüten Sie sich jedoch vor Trägheit bei der Abfüllung. Die unsichtbaren Gärgase entwickeln in den Glasflaschen eine geradezu explosive Spannkraft."
+        }
+    },
+    {
+        "titel": "Blaubeer-Zitronen-Limonade mit Ginger Bug",
+        "tags": [
+            "Getränke",
+            "Ginger Bug",
+            "Beeren",
+            "Blaubeere"
+        ],
+        "zutaten": [
+            "150 g tiefgekühlte Blaubeeren",
+            "50 g Zucker",
+            "100 ml aktiver Ginger Bug, abgesiebt",
+            "750–800 ml Wasser",
+            "Saft einer halben Zitrone"
+        ],
+        "zubereitung": [
+            "Blaubeeren, Zucker und etwa 150 ml Wasser in einen Topf geben und 3–5 Minuten sanft köcheln lassen.",
+            "Die Beeren leicht zerdrücken und den Ansatz abgedeckt vollständig abkühlen lassen.",
+            "Nach Wunsch durch ein feines Sieb geben. Zitronensaft und Ginger Bug einrühren und mit Wasser auf ungefähr einen Liter auffüllen.",
+            "In einem sauberen Gärgefäß mit Gäraufsatz bei Raumtemperatur fermentieren lassen. Die Aktivität und den Geruch regelmäßig prüfen.",
+            "Bei gewünschter Spritzigkeit die Gärung durch Kühlen verlangsamen. Druckfeste Flaschen verwenden und den Druck während einer Nachgärung regelmäßig kontrollieren."
+        ],
+        "picture": "blaubeer.png",
+        "codex_titel_zeitung": "DIE RAETSELHAFTE TIEFENBLAUE TINKTUR! – Wie Exotik und heimische Waldfrüchte im Laboratorium harmonieren",
+        "codex_titel_englisch": "An Inquiry into the Nature of the Dark Woodland Berry and Acidic Citrus",
+        "codex_einleitung": "Es ist eine unumstößliche Tatsache, dass diese dunklen Waldfrüchte dem Dekokt eine bemerkenswert tiefe Opazität verleihen, während die Essenz der Zitrone die dringend benötigte Frische beisteuert.",
+        "ratgeber": {
+            "sprecher": "Connie",
+            "text": "Eine bloße Nuance von Zitrone genügt, um die lethargischen Beeren zu beleben. Doch ich rate zu wissenschaftlicher Skepsis: Vertrauen Sie niemals blindlings einer bestrickenden äußeren Farbgebung, sondern konsultieren Sie stets Ihren Gaumen."
+        }
+    },
+    {
+        "titel": "Brombeer-Limetten-Limonade mit Ginger Bug",
+        "tags": [
+            "Getränke",
+            "Ginger Bug",
+            "Beeren",
+            "Brombeere",
+            "Limette"
+        ],
+        "zutaten": [
+            "150 g tiefgekühlte Brombeeren",
+            "50 g Zucker",
+            "100 ml aktiver Ginger Bug, abgesiebt",
+            "750–800 ml Wasser",
+            "Saft einer halben Limette"
+        ],
+        "zubereitung": [
+            "Brombeeren mit Zucker und etwa 150 ml Wasser aufkochen und 3–5 Minuten sanft köcheln lassen.",
+            "Die Früchte leicht zerdrücken und den Ansatz abgedeckt vollständig abkühlen lassen.",
+            "Durch ein feines Sieb geben, um Kerne zu entfernen. Limettensaft und Ginger Bug einrühren.",
+            "Mit Wasser auf ungefähr einen Liter auffüllen und in ein sauberes Gärgefäß mit Gäraufsatz geben.",
+            "Bei Raumtemperatur fermentieren lassen und die Entwicklung beobachten. Bei ausreichender Spritzigkeit kühlen. Für eine Nachgärung nur druckgeeignete Flaschen verwenden und regelmäßig den Druck prüfen."
+        ],
+        "picture": "blackberry.png",
+        "codex_titel_zeitung": "EINE SENSATIONELLE ENTDECKUNG IN DEN HEGEREITEN! – Die fabelhafte Symbiose aus wilder Brombeere und westindischer Limette",
+        "codex_titel_englisch": "Observations on the Melancholic Blackberry and the Fragrant Lime",
+        "codex_einleitung": "Aus den finsteren Gestrüppen der Natur und der duftenden Limette der Kolonien gewinnen wir ein kräftiges Tonikum von erlesener, fruchtiger Säure.",
+        "ratgeber": {
+            "sprecher": "Katze",
+            "text": "Die wilde Brombeere besitzt einen ungezähmten Charakter. Wenn Sie nicht wünschen, die lästigen Samen während des Genusses zwischen den Zähnen zu spüren, ist die Nutzung eines feinmaschigen Haarsiebs eine logische Notwendigkeit."
+        }
+    },
+    {
+        "titel": "Erdbeer-Basilikum-Limonade mit Ginger Bug",
+        "tags": [
+            "Getränke",
+            "Ginger Bug",
+            "Beeren",
+            "Erdbeere",
+            "Kräuter"
+        ],
+        "zutaten": [
+            "200 g tiefgekühlte Erdbeeren",
+            "50 g Zucker",
+            "100 ml aktiver Ginger Bug, abgesiebt",
+            "700–750 ml Wasser",
+            "6–8 frische Basilikumblätter",
+            "Saft einer halben Zitrone"
+        ],
+        "zubereitung": [
+            "Erdbeeren mit Zucker und etwa 150 ml Wasser aufkochen und 3–5 Minuten sanft köcheln lassen.",
+            "Den Ansatz abgedeckt vollständig abkühlen lassen und anschließend durch ein feines Sieb geben.",
+            "Basilikumblätter gründlich waschen, leicht andrücken und mit Zitronensaft in den abgekühlten Fruchtansatz geben. Etwa 10 Minuten ziehen lassen und die Blätter wieder entfernen.",
+            "Ginger Bug einrühren und mit Wasser auf ungefähr einen Liter auffüllen.",
+            "In einem sauberen Gärgefäß mit Gäraufsatz fermentieren lassen. Bei gewünschter Spritzigkeit kühlen und die Gärung nicht unbeaufsichtigt in verschlossenen Flaschen fortsetzen."
+        ],
+        "picture": "strawberry.png",
+        "codex_titel_zeitung": "EINE HOECHST UNGEWOEHNLICHE ALLIANZ! – Wie die süße Garten-Erdbeere eine pikante Verbindung mit fremdländischen Kräutern eingeht",
+        "codex_titel_englisch": "Of the Luscious Strawberry and the Aromatic Properties of Basil",
+        "codex_einleitung": "Süße Erdbeeren und das hochkarätige Aroma des Basilikums fusionieren zu einem sommerlichen Erfrischungsgetränk, welches Eleganz und Würze in sich vereint.",
+        "ratgeber": {
+            "sprecher": "Connie",
+            "text": "Das Basilikum verhält sich wie ein hochadeliger Gast im Salon: Wenige Blätter genügen vollauf. Andernfalls riskieren Sie, dass Ihr Gebräu die unangenehme Note einer halbgaren Tinktur aus der Apothekersgasse annimmt."
+        }
+    },
+    {
+        "titel": "Johannisbeer-Hibiskus-Limonade mit Ginger Bug",
+        "tags": [
+            "Getränke",
+            "Ginger Bug",
+            "Beeren",
+            "Johannisbeere",
+            "Hibiskus"
+        ],
+        "zutaten": [
+            "150 g tiefgekühlte rote Johannisbeeren",
+            "50 g Zucker",
+            "100 ml aktiver Ginger Bug, abgesiebt",
+            "750 ml Wasser",
+            "5 g getrocknete Hibiskusblüten",
+            "Optional: 1 TL Zitronensaft"
+        ],
+        "zubereitung": [
+            "Johannisbeeren mit Zucker und etwa 200 ml Wasser aufkochen und 3–5 Minuten sanft köcheln lassen.",
+            "Hibiskusblüten in den heißen Ansatz geben und abgedeckt 5 Minuten ziehen lassen.",
+            "Den Ansatz durch ein feines Sieb geben und vollständig abkühlen lassen.",
+            "Ginger Bug und nach Wunsch Zitronensaft einrühren. Mit Wasser auf ungefähr einen Liter auffüllen.",
+            "In einem sauberen Gärgefäß mit Gäraufsatz fermentieren lassen. Bei gewünschter Spritzigkeit kühlen und bei einer Flaschengärung ausschließlich druckgeeignete Flaschen verwenden."
+        ],
+        "picture": "johannisbeere.png",
+        "codex_titel_zeitung": "DER RUBINROTE TRANK AUS DER KOLONIAL-EFFEKTEN-HANDLUNG! – Die herbe Ribsel gepaart mit den prachtvollen Blüten des fernen Ostens",
+        "codex_titel_englisch": "On the Virtues of the Currant Infusion and the Floral Essence of Hibiscus",
+        "codex_einleitung": "Die rote Johannisbeere steuert ihre noble, herbe Fruchtnote bei, während der getrocknete Hibiskus dem Trank eine fabelhafte Färbung und eine feine Säure verleiht.",
+        "ratgeber": {
+            "sprecher": "Katze",
+            "text": "Dieses Fluidum leuchtet wahrlich wie ein kostbarer Edelstein in der Vitrine eines Juweliers. Lassen Sie sich jedoch nicht von diesem royalen Prachtgewand täuschen: Die Säure besitzt eine Intensität, die den unvorbereiteten Gaumen zutiefst erschüttern kann."
+        }
+    },
+    {
+        "titel": "Ananas-Minz-Limonade mit Ginger Bug",
+        "tags": [
+            "Getränke",
+            "Ginger Bug",
+            "Ananas",
+            "Minze"
+        ],
+        "zutaten": [
+            "200 g Ananas, frisch oder tiefgekühlt",
+            "40–50 g Zucker",
+            "100 ml aktiver Ginger Bug, abgesiebt",
+            "700–750 ml Wasser",
+            "8–10 Minzblätter",
+            "Saft einer halben Limette"
+        ],
+        "zubereitung": [
+            "Ananas klein schneiden und mit Zucker sowie etwa 200 ml Wasser 5 Minuten sanft köcheln lassen.",
+            "Den Fruchtansatz abgedeckt vollständig abkühlen lassen und anschließend fein pürieren oder durch ein Sieb geben.",
+            "Minzblätter waschen, leicht andrücken und mit Limettensaft 10 Minuten im abgekühlten Ansatz ziehen lassen. Danach die Blätter entfernen.",
+            "Ginger Bug einrühren und mit Wasser auf ungefähr einen Liter auffüllen.",
+            "In einem sauberen Gärgefäß mit Gäraufsatz fermentieren lassen. Bei ausreichender Spritzigkeit kühlen und die Gärung bei verschlossenen Flaschen sorgfältig kontrollieren."
+        ],
+        "picture": "ananas.png",
+        "codex_titel_zeitung": "CORRESPONDENZ AUS DEN TROPEN! – Die fabelhafte Ankunft der goldenen Südfrucht im Bunde mit englischer Gartenminze",
+        "codex_titel_englisch": "Regarding the Golden Fruit of the Southern Seas and the Refreshing Quality of Mint",
+        "codex_einleitung": "Die kostbare Ananas transportiert die aromatische Pracht ferner Überseegebiete direkt in unsere Breitengrade, während Minze und Limettenextrakt eine belebende Frische beisteuern.",
+        "ratgeber": {
+            "sprecher": "Katze",
+            "text": "Ein Dekokt von beinahe imperialer Pracht! Doch walten Sie mit Mäßigung bezüglich der Minze; sie ist als dezenter Begleiter der Ananas gedacht und darf den rechtmäßigen Throninhaber dieses Trankes keinesfalls usurpieren."
+        }
+    },
+    {
+        "titel": "Mango-Maracuja-Limonade mit Ginger Bug",
+        "tags": [
+            "Getränke",
+            "Ginger Bug",
+            "Mango",
+            "Maracuja"
+        ],
+        "zutaten": [
+            "150 g Mangofruchtfleisch, frisch oder tiefgekühlt",
+            "50 g Maracujafruchtfleisch",
+            "40 g Zucker",
+            "100 ml aktiver Ginger Bug, abgesiebt",
+            "700–750 ml Wasser"
+        ],
+        "zubereitung": [
+            "Mango klein schneiden und mit Zucker sowie etwa 150 ml Wasser 5 Minuten sanft köcheln lassen.",
+            "Den Ansatz abgedeckt vollständig abkühlen lassen und fein pürieren.",
+            "Maracujafruchtfleisch einrühren. Nach Wunsch durch ein Sieb geben, um die Kerne zu entfernen.",
+            "Ginger Bug einrühren und mit Wasser auf ungefähr einen Liter auffüllen.",
+            "In einem sauberen Gärgefäß mit Gäraufsatz fermentieren lassen. Die Spritzigkeit beobachten und bei gewünschter Kohlensäure kühlen. Druckaufbau in verschlossenen Flaschen regelmäßig kontrollieren."
+        ],
+        "picture": "mango.png",
+        "codex_titel_zeitung": "EINE EXOTISCHE AVANTGARDE! – Die beispiellose Liaison von indischer Mango und der resoluten Passionsfrucht",
+        "codex_titel_englisch": "A Treatises on the Saccharine Mango and the Acidic Passiflora",
+        "codex_einleitung": "Die opulente Süße der Mango und das hochprozentige Aroma der Passionsfrucht verleihen dieser Rezeptur einen ausgesprochen weltmännischen und gehaltvollen Charakter.",
+        "ratgeber": {
+            "sprecher": "Connie",
+            "text": "Die Mango fungiert hier als Spenderin nobler Süße, wohingegen die Passionsfrucht einen resoluten Gegenpart einnimmt. Ich empfehle eine sorgsame Degustation des Rohansatzes, bevor Sie voreilig entscheiden, ob die Zugabe von weiterem Saccharose-Granulat vonnöten ist."
+        }
+    },
+    {
+        "titel": "Gurke-Limette-Minze-Limonade mit Ginger Bug",
+        "tags": [
+            "Getränke",
+            "Ginger Bug",
+            "Gurke",
+            "Limette",
+            "Minze"
+        ],
+        "zutaten": [
+            "150 g Salatgurke",
+            "Saft einer Limette",
+            "Abrieb einer halben unbehandelten Limette",
+            "8–10 Minzblätter",
+            "50 g Zucker",
+            "100 ml aktiver Ginger Bug, abgesiebt",
+            "Wasser zum Auffüllen auf ungefähr 1 Liter"
+        ],
+        "zubereitung": [
+            "Die Gurke gründlich unter fließendem Wasser waschen, klein schneiden und mit 200 ml Wasser fein pürieren.",
+            "Den Gurkenansatz aufkochen und 2 Minuten sanft köcheln lassen. Abgedeckt vollständig abkühlen lassen und durch ein feines Sieb geben.",
+            "Zucker, Limettensaft und den fein abgeriebenen Limettenschalenanteil einrühren.",
+            "Minzblätter waschen, leicht andrücken und 5–10 Minuten ziehen lassen. Anschließend entfernen.",
+            "Ginger Bug einrühren und mit Wasser auf ungefähr einen Liter auffüllen. In einem sauberen Gärgefäß mit Gäraufsatz fermentieren lassen. Bei gewünschter Spritzigkeit kühlen und die Gärung in verschlossenen Flaschen sorgfältig überwachen."
+        ],
+        "picture": "gurke.png",
+        "codex_titel_zeitung": "DIE RENAISSANCE DES LUNCH-GETRAENKS! – Über die ungemein erfrischenden Eigenschaften von Gurken-Essenz und Feldminze",
+        "codex_titel_englisch": "An Analytical Discourse on the Garden Cucumber, Lime, and Mint Infusions",
+        "codex_einleitung": "Es handelt sich hierbei um ein überaus dezentes, smaragdgrünes Elixier, in welchem Feldgurke, Limette und die Blätter der Minze ihre vitalisierenden Wirkstoffe bündeln.",
+        "ratgeber": {
+            "sprecher": "Connie",
+            "text": "Dieses Tonikum präsentiert sich so flüchtig und leicht wie eine frische Brise im Hyde Park. Bedenken Sie jedoch analytisch: Die Gurke offeriert den Gärstoffen kaum Nährsalze oder Zucker; überwachen Sie den chemischen Prozess daher penibel und erwarten Sie keineswegs die stürmische Dynamik zuckerreicher Früchte."
+        }
+    },
+    {
+        "titel": "Blutorangen-Rosmarin-Limonade mit Ginger Bug",
+        "tags": [
+            "Getränke",
+            "Ginger Bug",
+            "Zitrusfrüchte",
+            "Blutorange",
+            "Rosmarin"
+        ],
+        "zutaten": [
+            "250 ml frisch gepresster Blutorangensaft",
+            "40 g Zucker",
+            "100 ml aktiver Ginger Bug, abgesiebt",
+            "650–700 ml Wasser",
+            "1 kleiner Zweig Rosmarin",
+            "Optional: 1 TL Zitronensaft"
+        ],
+        "zubereitung": [
+            "Blutorangensaft, Zucker und etwa 150 ml Wasser in einen Topf geben und kurz aufkochen.",
+            "Den Rosmarinzweig in den heißen Ansatz legen und abgedeckt 5 Minuten ziehen lassen. Anschließend entfernen.",
+            "Den Ansatz abgedeckt vollständig abkühlen lassen.",
+            "Ginger Bug und nach Wunsch Zitronensaft einrühren. Mit Wasser auf ungefähr einen Liter auffüllen.",
+            "In einem sauberen Gärgefäß mit Gäraufsatz fermentieren lassen. Bei gewünschter Spritzigkeit kühlen und eine etwaige Nachgärung in druckgeeigneten Flaschen regelmäßig kontrollieren."
+        ],
+        "picture": "blutorange.png",
+        "codex_titel_zeitung": "CORNER-NEWS AUS SÜDEUROPA! – Die blutrote Malta-Orange im pikanten Dialog mit mediterranen Gewürzen",
+        "codex_titel_englisch": "Observations touching the Blood-Orange and the Piquant Scent of Rosemary",
+        "codex_einleitung": "Die Blutorange steuert eine noble, fruchtige Süße nebst einer aparten Bitternote bei, während der Rosmarin ein betörendes, ätherisches Bouquet beibringt.",
+        "ratgeber": {
+            "sprecher": "Katze",
+            "text": "Der Rosmarin erweist sich als ein überaus dominanter Würzmeister. Ein winziges Zweiglein ist vollauf ausreichend, damit das zarte Aroma der Orange nicht gänzlich unter seiner rigorosen Herrschaft begraben wird."
+        }
+    },
+    {
+        "titel": "Apfel-Holunderblüten-Limonade mit Ginger Bug",
+        "tags": [
+            "Getränke",
+            "Ginger Bug",
+            "Apfel",
+            "Holunderblüte"
+        ],
+        "zutaten": [
+            "300 ml pasteurisierter Apfelsaft",
+            "30–40 g Zucker",
+            "100 ml aktiver Ginger Bug, abgesiebt",
+            "500–550 ml Wasser",
+            "2–3 g getrocknete Holunderblüten in Lebensmittelqualität",
+            "Optional: 1 TL Zitronensaft"
+        ],
+        "zubereitung": [
+            "Wasser und Zucker in einem Topf erhitzen, bis sich der Zucker aufgelöst hat.",
+            "Holunderblüten in das heiße Zuckerwasser geben und abgedeckt 5–10 Minuten ziehen lassen. Anschließend sorgfältig abseihen.",
+            "Den Blütenansatz vollständig abkühlen lassen. Apfelsaft und nach Wunsch Zitronensaft einrühren.",
+            "Ginger Bug hinzufügen und mit Wasser auf ungefähr einen Liter auffüllen.",
+            "In einem sauberen Gärgefäß mit Gäraufsatz fermentieren lassen. Die Aktivität beobachten und bei gewünschter Spritzigkeit kühlen. Bei Flaschengärung nur druckgeeignete Flaschen nutzen und den Druck kontrollieren."
+        ],
+        "picture": "holunderundapfels.png",
+        "codex_titel_zeitung": "IDYLLEN AUS KENT! – Die harmonische Konjunktion des heimischen Obstgartens mit den weißen Blüten der Hecken",
+        "codex_titel_englisch": "On the Properties of Orchard Apples and the Fragrant Blossom of the Elder",
+        "codex_einleitung": "Kernobst und die feinen Blüten des Holunderstrauchs verschmelzen hier zu einem überaus milden, floralen Trank, welcher Erinnerungen an einen englischen Garten im Frühsommer heraufbeschwört.",
+        "ratgeber": {
+            "sprecher": "Katze",
+            "text": "Wählen Sie das botanische Material mit äußerster Vorsicht und beziehen Sie es ausschließlich aus einer verifizierten, für den Verzehr freigegebenen Drogeriehandlung. Nicht jede Blüte, die dem Spaziergänger einen lieblichen Duft vorgaukelt, ist für das menschliche Abdomen zuträglich."
+        }
+    }
+]

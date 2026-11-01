@@ -14,7 +14,9 @@ const basePath = `${base.replace(/\/$/, '')}/`;
 // sitemap-pages-0.xml ab.
 const sitemapChunk = (page) => {
 	const { pathname } = new URL(page.url);
-	if (pathname.startsWith(`${basePath}rezepte/`)) return 'rezepte';
+	if (pathname.startsWith(`${basePath}kapitel/`) && pathname.includes('/rezepte/')) {
+		return 'rezepte';
+	}
 	if (pathname.startsWith(`${basePath}kategorien/`)) return 'kategorien';
 	return undefined;
 };
@@ -25,6 +27,14 @@ export default defineConfig({
 	base,
 	integrations: [
 		sitemap({
+			// Die alten `/rezepte/<slug>/`-Weiterleitungen sind keine Inhalte,
+			// sondern nur Kompatibilitätsblätter; sie gehören nicht in die Sitemap.
+			serialize(item) {
+				if (new URL(item.url).pathname.startsWith(`${basePath}rezepte/`)) {
+					return undefined;
+				}
+				return item;
+			},
 			chunks: {
 				rezepte: (item) => (sitemapChunk(item) === 'rezepte' ? item : undefined),
 				kategorien: (item) => (sitemapChunk(item) === 'kategorien' ? item : undefined),

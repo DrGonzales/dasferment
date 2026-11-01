@@ -26,7 +26,7 @@ const OPF_FILE = `${OCF_ROOT}/content.opf`;
 // Jeder Verweis aus einem Blatt, der auf eine von sharp erzeugte Bilddatei zeigt.
 // Das Cover und seine Rückseite sind hier nicht gemeint, die liegen unverändert in
 // `src/pic/cover/` und werden weiter unten einzeln eingetragen.
-const VERWEIS_AUF_ASSET = /\.\.\/assets\/[\w.-]+/g;
+const VERWEIS_AUF_ASSET = /\.\.\/assets\/[^\s"'<>]+/g;
 
 // Der Einband und seine Rückseite liegen als PNG im Repository. Sie haben keinen
 // transparenten Grund, und als PNG wiegen die beiden über 6 MB, mehr als der Rest
@@ -120,7 +120,7 @@ function navigation(teile, gruppenKoepfe) {
 	for (const teil of teile) {
 		for (const kopf of gruppenKoepfe) {
 			if (kopf.slugErsterEintrag === teil.slug) {
-				eintraege.push({ titel: kopf.label, slug: teil.slug, ebene: 1 });
+				eintraege.push({ titel: kopf.label, slug: teil.slug, ebene: kopf.ebene });
 			}
 		}
 		eintraege.push({ titel: teil.titel, slug: teil.slug, ebene: teil.ebene });
@@ -432,9 +432,13 @@ for (const blatt of blaetter.sort((a, b) => a.slug.localeCompare(b.slug))) {
 }
 
 for (const href of assetHrefs) {
+	// Der Verweis im Blatt ist eine URL und trägt Leerzeichen als `%20`. Im ZIP
+	// liegt die Datei unter ihrem echten Namen, deshalb wird der Pfad hier
+	// zurückübersetzt. Das OPF behält den kodierten Verweis.
+	const name = decodeURIComponent(href);
 	eintraege.push({
-		name: href,
-		daten: await readFile(join(buildDir, href.replace(`${OCF_ROOT}/`, ''))),
+		name,
+		daten: await readFile(join(buildDir, name.replace(`${OCF_ROOT}/`, ''))),
 	});
 }
 

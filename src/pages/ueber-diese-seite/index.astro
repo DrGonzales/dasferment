@@ -1,25 +1,26 @@
 ---
-import { Image } from 'astro:assets';
-import recipeData from '../../data/das_ferment.json';
-import Footer from '../../components/Footer.astro';
-import Header from '../../components/Header.astro';
-import SeoHead from '../../components/SeoHead.astro';
-import { actorImageFor } from '../../lib/actorImages';
-import { FIGUREN } from '../../lib/figuren';
-import { type Recipe } from '../../lib/recipes';
-import '../../styles/global.css';
+import { Image } from "astro:assets";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import SeoHead from "../../components/SeoHead.astro";
+import { actorImageFor } from "../../lib/actorImages";
+import { allRecipes, chapters } from "../../lib/chapters";
+import { FIGUREN } from "../../lib/figuren";
+import "../../styles/global.css";
 
-const recipes = recipeData as Recipe[];
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const recipes = allRecipes;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const withBase = (path: string) => `${base}${path}`;
 const illustratedCount = recipes.filter((recipe) => recipe.picture).length;
 const categoryCount = new Set(recipes.flatMap((recipe) => recipe.tags)).size;
 const figuren = FIGUREN.map((figur) => ({
 	...figur,
-	image: actorImageFor(figur.sprecher),
+	image: actorImageFor(figur.sprecher, chapters[0]?.slug),
 }));
-const canonicalPath = '/ueber-diese-seite/';
-const canonicalUrl = Astro.site ? new URL(withBase(canonicalPath), Astro.site).toString() : withBase(canonicalPath);
+const canonicalPath = "/ueber-diese-seite/";
+const canonicalUrl = Astro.site
+	? new URL(withBase(canonicalPath), Astro.site).toString()
+	: withBase(canonicalPath);
 const description = `Lerne das statische Rezeptbuch Das Ferment und seine ${recipes.length} Rezepte im Kodex kennen.`;
 ---
 
@@ -32,8 +33,8 @@ const description = `Lerne das statische Rezeptbuch Das Ferment und seine ${reci
 			canonicalUrl={canonicalUrl}
 			base={base}
 			breadcrumbs={[
-				{ name: 'Startseite', path: '/' },
-				{ name: 'Über diese Seite', path: canonicalPath },
+				{ name: "Startseite", path: "/" },
+				{ name: "Über diese Seite", path: canonicalPath },
 			]}
 		/>
 	</head>
@@ -43,7 +44,7 @@ const description = `Lerne das statische Rezeptbuch Das Ferment und seine ${reci
 
 			<main class="recipe-main prose-page">
 				<nav class="breadcrumbs" aria-label="Brotkrümelnavigation">
-					<a href={withBase('/')}>Startseite</a>
+					<a href={withBase("/")}>Startseite</a>
 					<span aria-hidden="true">/</span>
 					<span aria-current="page">Über diese Seite</span>
 				</nav>
@@ -52,13 +53,21 @@ const description = `Lerne das statische Rezeptbuch Das Ferment und seine ${reci
 					<header class="prose-intro">
 						<p class="section-heading__kicker">Ein Wort zum Haus</p>
 						<h1>Über diese Seite</h1>
-						<p class="prose-intro__lead">Ein spielerischer Fermentations-Kodex, erzählt von Connie und Katze.</p>
+						<p class="prose-intro__lead">
+							Ein spielerischer Fermentations-Kodex, erzählt von
+							Connie und Katze.
+						</p>
 					</header>
 
 					{
 						figuren.map((figur) => (
-							<section class="prose-section" aria-labelledby={`${figur.id}-titel`}>
-								<p class="section-heading__kicker">{figur.kicker}</p>
+							<section
+								class="prose-section"
+								aria-labelledby={`${figur.id}-titel`}
+							>
+								<p class="section-heading__kicker">
+									{figur.kicker}
+								</p>
 								<h2 id={`${figur.id}-titel`}>{figur.name}</h2>
 								<div class="prose-figure">
 									{figur.image && (
@@ -86,12 +95,33 @@ const description = `Lerne das statische Rezeptbuch Das Ferment und seine ${reci
 
 					<section class="prose-section" aria-labelledby="werk-title">
 						<p class="section-heading__kicker">Der Kodex</p>
-						<h2 id="werk-title">Das Werk</h2>
+						<h2 id="werk-title">Das Ferment</h2>
 						<p>
-							Das Werk ist ein spielerischer Fermentations-Kodex, der traditionelle und moderne Gemüsefermente in einer mittelalterlich anmutenden Welt präsentiert. Grundlage bildet eine Sammlung von {recipes.length} Rezepten für fermentiertes Gemüse, von klassischen Salzgurken und Sauerkraut über Kimchi bis hin zu Fermenten aus Karotten, Roter Bete, Paprika, Zwiebeln, Fenchel, Sellerie, Kohlrabi, Zucchini und Kürbis.
+							Das Ferment ist ein fröhlich verspielter
+							Fermentations-Kodex, in welchem Connie und Katze die
+							wundersame Kunst des Haltbarmachens erkunden. In
+							einer Welt, die an die prachtvollen Handschriften
+							und reich verzierten Kräuterbücher des Mittelalters
+							erinnert, begegnen sich althergebrachtes Wissen,
+							neue Entdeckungen und so manches blubbernde
+							Abenteuer. Mit Pergament, kunstvollen Buchmalereien,
+							verschnörkelten Initialen und einer Prise alter
+							Chronikensprache wird die Kunst des Fermentierens
+							auf ganz eigene Weise lebendig. Die Grundlage dieses
+							Werkes bilden {recipes.length} Rezepte, versammelt in
+							{chapters.length} Kapiteln – von klassischen Salzgurken
+							und würzigem Sauerkraut über allerlei Kimchi bis hin zu
+							spritzigen Gärgetränken mit Ginger Bug.
 						</p>
 						<p>
-							{illustratedCount} der {recipes.length} Rezepte sind mit einer Buchmalerei versehen. Die {categoryCount} Kategorien geben einen weiteren Weg durch das Repertoire.
+							{illustratedCount} der {recipes.length} Rezepte sind mit
+							liebevollen, von mittelalterlicher Buchmalerei inspirierten
+							Illustrationen geschmückt, die Connie und Katze bei ihren
+							kulinarischen Experimenten begleiten. Die {
+								categoryCount
+							} Kategorien weisen Euch den Weg durch dieses reichhaltige
+							Repertoire an Köstlichkeiten und Gärkunst. Möge das Blubbern
+							beginnen!
 						</p>
 					</section>
 

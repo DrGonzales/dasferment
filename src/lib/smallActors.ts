@@ -2,23 +2,41 @@ import type { ImageMetadata } from 'astro';
 
 type ImageModule = { default: ImageMetadata };
 
-const imageModules = import.meta.glob<ImageModule>('../pic/smallactors/*.png', {
+const imageModules = import.meta.glob<ImageModule>('../pic/smallactors/**/*.png', {
 	eager: true,
 });
 
-export const smallActors: { name: string; image: ImageMetadata }[] = Object.entries(
-	imageModules,
-)
-	.map(([path, imageModule]) => ({
-		name: path.split('/').pop() ?? '',
-		image: imageModule.default,
-	}))
-	.sort((a, b) => a.name.localeCompare(b.name, 'de', { numeric: true }));
+export const smallActors: {
+	name: string;
+	chapter: string;
+	image: ImageMetadata;
+}[] = Object.entries(imageModules)
+	.map(([path, imageModule]) => {
+		const parts = path.split('/');
+		return {
+			name: parts.pop() ?? '',
+			chapter: parts.pop() ?? '',
+			image: imageModule.default,
+		};
+	})
+	.sort(
+		(a, b) =>
+			a.chapter.localeCompare(b.chapter, 'de') ||
+			a.name.localeCompare(b.name, 'de', { numeric: true }),
+	);
 
 export const SMALL_ACTOR_SIZE = 128;
 
-export function smallActorImage(name: string): ImageMetadata | undefined {
-	return smallActors.find((actor) => actor.name === `${name.trim()}.png`)?.image;
+export function smallActorImage(
+	name: string,
+	chapter?: string,
+): ImageMetadata | undefined {
+	const filename = `${name.trim()}.png`;
+	return smallActors.find(
+		(actor) =>
+			actor.name === filename &&
+			(chapter === undefined || actor.chapter === chapter),
+	)?.image;
 }
 
 function hash(value: string): number {
@@ -45,13 +63,17 @@ function shuffled<T>(values: T[], seed: string): T[] {
 
 export function assignPortraits<T extends { id: string }>(
 	items: T[],
+	chapter?: string,
 ): (ImageMetadata | undefined)[] {
-	if (smallActors.length === 0) return items.map(() => undefined);
+	const pool = chapter
+		? smallActors.filter((actor) => actor.chapter === chapter)
+		: smallActors;
+	if (pool.length === 0) return items.map(() => undefined);
 
-	const fingerprint = items.map((item) => item.id).join('|');
+	const fingerprint = `${chapter ?? 'alle'}|${items.map((item) => item.id).join('|')}`;
 	const deck = [
-		...shuffled(smallActors, fingerprint),
-		...shuffled(smallActors, `${fingerprint}#2`),
+		...shuffled(pool, fingerprint),
+		...shuffled(pool, `${fingerprint}#2`),
 	];
 
 	let previous = '';

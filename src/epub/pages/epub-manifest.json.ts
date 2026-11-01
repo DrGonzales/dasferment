@@ -1,15 +1,9 @@
-import recipeData from '../../data/das_ferment.json';
-import infoData from '../../data/das_ferment_infos.json';
 import { BOOK_SUBTITLE, BOOK_TITLE } from '../../lib/book';
+import { allRecipes as rezepte, chapters as chapterConfigs } from '../../lib/chapters';
 import { epubGruppenKoepfe, epubRegister, epubTeile } from '../../lib/epub';
 import { FIGUREN } from '../../lib/figuren';
-import type { Info } from '../../lib/infos';
-import type { Recipe } from '../../lib/recipes';
 
-const rezepte = recipeData as Recipe[];
-const infos = infoData.infos as Info[];
-
-const teile = epubTeile(rezepte, infos);
+const teile = epubTeile(chapterConfigs);
 const rezeptSlugNachAnker = new Map(
 	teile.filter((teil) => teil.art === 'rezept').map((teil) => [teil.anker, teil.slug]),
 );

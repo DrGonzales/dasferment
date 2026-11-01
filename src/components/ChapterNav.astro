@@ -1,0 +1,39 @@
+---
+import {
+	chapterKnowledgePath,
+	chapterPath,
+	chapterRecipesPath,
+	type Chapter,
+} from '../lib/chapters';
+
+interface Props {
+	chapter: Chapter;
+}
+
+const { chapter } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const withBase = (path: string) => `${base}${path}`;
+const pathname = Astro.url.pathname;
+---
+
+<nav class="chapter-nav" aria-label="Kapitelnavigation">
+	<a class="chapter-nav__overview" href={withBase('/')}>Kapitelübersicht</a>
+	<a
+		href={withBase(chapterPath(chapter))}
+		aria-current={pathname === withBase(chapterPath(chapter)) ? 'page' : undefined}
+	>
+		{chapter.titel}
+	</a>
+	<a
+		href={withBase(chapterRecipesPath(chapter))}
+		aria-current={pathname.startsWith(withBase(chapterRecipesPath(chapter))) ? 'page' : undefined}
+	>
+		Rezepte
+	</a>
+	<a
+		href={withBase(chapterKnowledgePath(chapter))}
+		aria-current={pathname.startsWith(withBase(chapterKnowledgePath(chapter))) ? 'page' : undefined}
+	>
+		Wissen
+	</a>
+</nav>

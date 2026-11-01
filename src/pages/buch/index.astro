@@ -1,32 +1,49 @@
 ---
-import { getImage, Image } from 'astro:assets';
-import type { ImageMetadata } from 'astro';
-import recipeData from '../../data/das_ferment.json';
-import epubIcon from '../../pic/icons/epub.png';
-import pdfIcon from '../../pic/icons/pdf.png';
-import kopfBild from '../../pic/smallactors/8.png';
-import Footer from '../../components/Footer.astro';
-import Header from '../../components/Header.astro';
-import SeoHead from '../../components/SeoHead.astro';
-import { coverImageFor } from '../../lib/pageImages';
-import { type Recipe } from '../../lib/recipes';
-import { socialCard } from '../../lib/social';
-import '../../styles/global.css';
+import { getImage, Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import epubIcon from "../../pic/icons/epub.png";
+import pdfIcon from "../../pic/icons/pdf.png";
+import buchIcon from "../../pic/icons/buch.png";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import SeoHead from "../../components/SeoHead.astro";
+import { allRecipes } from "../../lib/chapters";
+import { coverImageFor } from "../../lib/pageImages";
+import { socialCard } from "../../lib/social";
+import "../../styles/global.css";
 
-const recipes = recipeData as Recipe[];
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const recipes = allRecipes;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const withBase = (path: string) => `${base}${path}`;
-const canonicalPath = '/buch/';
-const canonicalUrl = Astro.site ? new URL(withBase(canonicalPath), Astro.site).toString() : withBase(canonicalPath);
-const absoluteUrl = (path: string) => (Astro.site ? new URL(path, Astro.site).toString() : path);
+const canonicalPath = "/buch/";
+const canonicalUrl = Astro.site
+	? new URL(withBase(canonicalPath), Astro.site).toString()
+	: withBase(canonicalPath);
+const absoluteUrl = (path: string) =>
+	Astro.site ? new URL(path, Astro.site).toString() : path;
 const description = `Das Ferment als PDF und E-Book (EPUB) – mit den ${recipes.length} Rezepten und Illustrationen aus dem Kodex.`;
 
 // Die Dateien werden in .github/workflows/buch-pdf.yml gebaut und liegen im
 // Release „buch“. Sie gehören nicht ins Repository und nicht in den Site-Build.
-const releaseUrl = 'https://github.com/DrGonzales/dasferment/releases/download/buch';
+const releaseUrl =
+	"https://github.com/DrGonzales/dasferment/releases/download/buch";
 const downloads = [
-	{ href: `${releaseUrl}/das-ferment.pdf`, label: 'PDF herunterladen', icon: pdfIcon, event: 'pdf-download' },
-	{ href: `${releaseUrl}/das-ferment.epub`, label: 'EPUB herunterladen', icon: epubIcon, event: 'epub-download' },
+	{
+		href: `${releaseUrl}/das-ferment.pdf`,
+		label: "PDF herunterladen",
+		format: "PDF",
+		note: "Für Druck und Archiv",
+		icon: pdfIcon,
+		event: "pdf-download",
+	},
+	{
+		href: `${releaseUrl}/das-ferment.epub`,
+		label: "EPUB herunterladen",
+		format: "EPUB",
+		note: "Für E-Reader und unterwegs",
+		icon: epubIcon,
+		event: "epub-download",
+	},
 ];
 
 const cover = coverImageFor(recipes);
@@ -36,7 +53,7 @@ const cardImage = await socialCard(
 		? {
 				width: cover.width,
 				height: cover.height,
-				alt: 'Buchmalerei aus dem Kodex von Das Ferment',
+				alt: "Buchmalerei aus dem Kodex von Das Ferment",
 			}
 		: undefined,
 	absoluteUrl,
@@ -47,14 +64,14 @@ const cardImage = await socialCard(
 <html lang="de">
 	<head>
 		<SeoHead
-			title="Das Ferment als Buch – PDF und EPUB"
+			title="Von Büchern, Pergament und großer Fermentierlust"
 			description={description}
 			canonicalUrl={canonicalUrl}
 			base={base}
 			image={cardImage}
 			breadcrumbs={[
-				{ name: 'Startseite', path: '/' },
-				{ name: 'Buch', path: canonicalPath },
+				{ name: "Startseite", path: "/" },
+				{ name: "Buch", path: canonicalPath },
 			]}
 		/>
 	</head>
@@ -62,9 +79,9 @@ const cardImage = await socialCard(
 		<div class="site-shell">
 			<Header />
 
-			<main class="recipe-main prose-page">
+			<main class="recipe-main prose-page book-page">
 				<nav class="breadcrumbs" aria-label="Brotkrümelnavigation">
-					<a href={withBase('/')}>Startseite</a>
+					<a href={withBase("/")}>Startseite</a>
 					<span aria-hidden="true">/</span>
 					<span aria-current="page">Buch</span>
 				</nav>
@@ -73,7 +90,7 @@ const cardImage = await socialCard(
 					<header class="prose-intro book-intro">
 						<figure class="book-intro__motiv">
 							<Image
-								src={kopfBild}
+								src={buchIcon}
 								alt=""
 								aria-hidden="true"
 								width={384}
@@ -83,15 +100,34 @@ const cardImage = await socialCard(
 								decoding="async"
 							/>
 						</figure>
-						<h1>Das Ferment als Buch</h1>
-						<p class="prose-intro__lead">
-							Du möchtest den Codex lieber in Ruhe auf Papier lesen oder unterwegs dabei haben?
-						</p>
+						<h1>Von Büchern und Pergament</h1>
 					</header>
 
 					<div class="prose-section">
-						<p>Das Ferment gibt es auch als PDF und E-Book (EPUB) – mit den Rezepten und Illustrationen aus dem Codex.</p>
-						<p>Für den Bildschirm, den E-Reader oder zum Selbstausdrucken.</p>
+						<p class="prose-intro__lead">
+							Wohlan, liebe Freunde der gärenden Köstlichkeiten!
+							Wer Das Ferment nicht allein auf dem Bildschirm
+							bestaunen, sondern auch fernab der Schreibstube in
+							Händen halten oder auf Reisen mit sich führen
+							möchte, dem sei frohe Kunde verkündet!
+						</p>
+						<p>
+							Connie und Katze haben mit großer Freude und manch
+							blubberndem Abenteuer ihre Rezepte und Erkenntnisse
+							in diesem Werke zusammengetragen. Und damit kein
+							Liebhaber der edlen Gärkunst darben muss, gibt es
+							Das Ferment auch als PDF und E-Book (EPUB).
+						</p>
+						<p>
+							Ob auf dem Bildschirm, im E-Reader oder fein
+							säuberlich ausgedruckt auf Papier – so möget Ihr
+							jederzeit in die wundersame Welt der Fermente
+							eintauchen.
+						</p>
+						<p>
+							Connie und Katze wünschen Euch viel Freude beim
+							Schmökern, Rühren, Würzen und fröhlichen Blubbern!
+						</p>
 
 						<div class="download-list">
 							{
@@ -108,11 +144,22 @@ const cardImage = await socialCard(
 											src={download.icon}
 											alt=""
 											aria-hidden="true"
-											width={256}
+											width={192}
+											quality={80}
 											loading="lazy"
 											decoding="async"
 										/>
-										<span class="download__label">{download.label}</span>
+										<span class="download__body">
+											<span class="download__format">
+												{download.format}
+											</span>
+											<span class="download__label">
+												{download.label}
+											</span>
+											<span class="download__note">
+												{download.note}
+											</span>
+										</span>
 									</a>
 								))
 							}

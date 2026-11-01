@@ -14,13 +14,14 @@ const { recipe, image, index, total } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const withBase = (path: string) => `${base}${path}`;
 const slug = slugify(recipe.titel);
+const chapter = recipe.kapitel ?? '';
 const folio = String(index + 1).padStart(2, '0');
 const totalFolios = String(total).padStart(2, '0');
 const visibleTags = recipe.tags.filter((tag) => !isGeneralTag(tag)).slice(0, 2);
 ---
 
 <article class="recipe-card">
-	<a class="recipe-card__link" href={withBase(`/rezepte/${slug}/`)}>
+	<a class="recipe-card__link" href={withBase(`/kapitel/${chapter}/rezepte/${slug}/`)}>
 		<div class="recipe-card__visual">
 			{image ? (
 				<Image

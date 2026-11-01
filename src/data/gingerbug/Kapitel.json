@@ -1,0 +1,13 @@
+{
+  "titel": "Die Ginger-Bug-Chronik",
+  "beschreibung": "Es begab sich einst, dass findige Menschen in den fernen Landen des Orients und später auch in den Küchen Englands die wundersame Kraft des Ingwers entdeckten.\n\nMit Wasser, Zucker und ein wenig Geduld erschufen sie einen lebendigen Trank, dessen geheimnisvolle Bläschen von fleißigen Hefen und kleinen Bakterien hervorgebracht wurden. So ward der Ginger Bug geboren, ein gar munterer Gärgeist, der bis heute die Grundlage manch köstlichen Ginger Beers bildet.\n\nNicht allein vermag diese natürliche Gärung den Getränken eine feine Spritzigkeit und ein vielschichtiges Aroma zu verleihen, sie macht auch den Zucker teilweise zu Kohlensäure und anderen Gärungsprodukten. Die lebendigen Kulturen sind ein faszinierendes Schauspiel der Natur, wenngleich man ihre Wirkung auf die Gesundheit nicht gar zu hoch preisen sollte.\n\nUnd so begaben sich auch Connie und ihre treue Gefährtin Katze auf ein gar sonderbares Abenteuer. Sie fütterten den kleinen Ingwergeist mit Zucker und frischem Ingwer, lauschten dem leisen Zischen seiner Bläschen und harrten voller Ungeduld seiner Reife. Bald schon schäumten die Gläser, bisweilen gar zur Unzeit, und so mancher Versuch endete mit einer klebrigen Überraschung auf dem Küchentische.\n\nDoch aus jedem Missgeschick ward neue Erkenntnis gewonnen. Denn wer mit Geduld, Neugier und einer Prise Wagemut zu Werke geht, dem offenbart sich die wundersame Kunst, aus wenigen Zutaten ein Getränk voller Leben und Geschmack zu erschaffen.",
+  "rezepte": "das_ferment_ginger_bug.json",
+  "wissen": "das_ferment_ginger_bug_infos.json",
+  "bilder": {
+    "actors": "../../pic/actors/gingerbug",
+    "smallactors": "../../pic/smallactors/gingerbug",
+    "kapitel": [
+      "../../pic/chapters/gingerbug.png"
+    ]
+  }
+}

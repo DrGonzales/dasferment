@@ -1,0 +1,13 @@
+{
+  "titel": "Von den wundersamen Künsten der Gemüse-Gärung",
+  "beschreibung": "Seit uralten Zeiten wussten die Menschen, dass sich Kraut, Wurzeln und Früchte mit Salz und Zeit auf wundersame Weise verwandeln lassen. Schon lange bevor Kühlschränke und moderne Vorratskammern erfunden waren, bewahrte man auf diese Weise die Ernte für die langen Wintertage. Von fernen Landen bis in die Küchen unserer Vorfahren ward diese Kunst gepflegt und von Generation zu Generation weitergegeben.\n\nDoch nicht allein im Bewahren der Ernte liegt ihr größter Schatz! Durch die Kraft der kleinen, unsichtbaren Helferlein, die im Gemüse wirken, entstehen neue Aromen und bekömmliche Speisen. Zudem können die lebendigen Köstlichkeiten unserer Verdauung und unserem Wohlbefinden gar zuträglich sein.\n\nSo begeben sich auch Connie und Katze auf eine Reise in die geheimnisvolle Welt der Gärung. Mit allerlei Kraut, Wurzeln, Salz und Gewürzen füllen sie ihre Gläser, ersinnen kühne Mischungen und lauschen dem fröhlichen Blubbern der kleinen Gärgeister. Mal wird es herrlich würzig, mal überraschend sauer und bisweilen gar ein Abenteuer voller seltsamer Überraschungen! Doch aus jedem Glase erwächst neue Erkenntnis – und die Freude daran, mit Geduld, Neugier und ein wenig Zauberei aus schlichtem Gemüse wahre Köstlichkeiten zu erschaffen.\n\nWohlan, lasset die Gläser blubbern und die Abenteuer beginnen!",
+  "rezepte": "das_ferment.json",
+  "wissen": "das_ferment_infos.json",
+  "bilder": {
+    "actors": "../../pic/actors/lactation",
+    "smallactors": "../../pic/smallactors/lactation",
+    "kapitel": [
+      "../../pic/chapters/lactation.png"
+    ]
+  }
+}
