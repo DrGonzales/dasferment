@@ -1,6 +1,7 @@
 {
   "reihenfolge": [
     "lactation/Kapitel.json",
-    "gingerbug/Kapitel.json"
+    "gingerbug/Kapitel.json",
+    "milchkefir/Kapitel.json"
   ]
 }

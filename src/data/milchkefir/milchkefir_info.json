@@ -1,0 +1,392 @@
+{
+    "infos": [
+        {
+            "id": "milchkefir-grundlagen",
+            "titel": "Was ist Milchkefir?",
+            "codex_titel": "Von der weißen Milch und ihrer wundersamen Verwandlung",
+            "kategorie": "grundlagen",
+            "intro": "Milchkefir ist ein fermentiertes Milchgetränk, das mithilfe lebender Kefirknollen hergestellt wird. Während der Fermentation wandeln verschiedene Bakterien und Hefen Bestandteile der Milch um. Dabei entstehen unter anderem Milchsäure, Kohlendioxid und geringe Mengen Alkohol. Der Geschmack wird säuerlich und die Konsistenz häufig cremiger.",
+            "codex_intro": "Siehe da, wie die weiße Milch durch das Wirken kleiner unsichtbarer Wesen eine gar wundersame Wandlung erfährt! Was einst süßlich und mild war, wird säuerlich, lebendig und bisweilen gar ein wenig prickelnd. So entsteht der Milchkefir, ein Trank, dessen Geheimnis in den kleinen weißen Knollen verborgen lieget.",
+            "abschnitte": [
+                {
+                    "titel": "Ein lebendiges Milchferment",
+                    "codex_titel": "Von der Milch, die zum Leben erwacht",
+                    "text": "Im Gegensatz zu Joghurt wird Milchkefir mithilfe einer komplexen Gemeinschaft aus Milchsäurebakterien und Hefen hergestellt. Diese leben gemeinsam in den Kefirknollen und fermentieren die Milch. Das Ergebnis ist ein Getränk mit einem vielfältigen Aroma.",
+                    "codex_text": "Nicht ein einzelnes Wesen verrichtet hier sein Werk, sondern eine ganze Gemeinschaft. Bakterien und Hefen leben in Eintracht beisammen und verwandeln die Milch in einen säuerlichen Trank von gar besonderem Wesen."
+                },
+                {
+                    "titel": "Was entsteht bei der Fermentation?",
+                    "codex_titel": "Von Säure, Bläschen und anderen Gaben",
+                    "text": "Während der Gärung wird Milchzucker teilweise abgebaut. Es entstehen Milchsäure, Kohlendioxid, Aromastoffe und geringe Mengen Ethanol. Das Verhältnis dieser Stoffe hängt von der Kultur, der Milch, der Temperatur und der Reifezeit ab.",
+                    "codex_text": "Die kleinen Gärwesen nähren sich vom Zucker der Milch und hinterlassen dabei ihre Gaben: eine angenehme Säure, feine Bläschen und allerlei Duft und Geschmack. Auch ein wenig geistiger Stoff mag entstehen, doch sei dieser nicht mit einem starken Trunke zu verwechseln."
+                }
+            ]
+        },
+        {
+            "id": "kefirknollen",
+            "titel": "Was sind Kefirknollen?",
+            "codex_titel": "Von den weißen Knollen und ihrem geheimen Bunde",
+            "kategorie": "kefirknollen",
+            "intro": "Kefirknollen sind keine Pflanzen und auch keine einzelnen Pilze. Sie bestehen aus einer komplexen Gemeinschaft von Bakterien und Hefen, die in einer natürlichen Matrix aus sogenannten Kefiranen und weiteren Bestandteilen zusammenleben. Die Knollen besitzen eine weiche, elastische und blumenkohlähnliche Struktur.",
+            "codex_intro": "Die weißen Knollen sind weder Wurzel noch Frucht, weder Tier noch Pflanze. Sie sind ein gar wundersamer Bund aus winzigen Lebewesen, die in einem gemeinsamen Gefüge hausen. So klein sie auch scheinen mögen, so groß ist doch ihr Werk in der Milch.",
+            "abschnitte": [
+                {
+                    "titel": "Der Aufbau der Knollen",
+                    "codex_titel": "Vom Leibe der weißen Knollen",
+                    "text": "Die Knollen besitzen eine gelartige Struktur, die unter anderem durch das von bestimmten Bakterien gebildete Polysaccharid Kefiran geprägt wird. In dieser Matrix leben unterschiedliche Mikroorganismen eng miteinander verbunden.",
+                    "codex_text": "Ein gar eigentümliches Gefüge ist es, das diese Knollen zusammenhält. Wie ein schützendes Haus umgibt es die kleinen Bewohner und lässt sie gemeinsam ihr Werk verrichten."
+                },
+                {
+                    "titel": "Eine Gemeinschaft aus Bakterien und Hefen",
+                    "codex_titel": "Von den kleinen Bewohnern der Knollen",
+                    "text": "In Kefirkulturen finden sich verschiedene Milchsäurebakterien, Essigsäurebakterien und Hefen. Die genaue Zusammensetzung kann je nach Herkunft und Pflege der Kultur unterschiedlich sein. Die Mikroorganismen beeinflussen sich gegenseitig und tragen gemeinsam zur Entwicklung des Kefirs bei.",
+                    "codex_text": "Manch einer der kleinen Bewohner bringt Säure hervor, ein anderer kümmert sich um die Gase, und wieder ein anderer schenkt dem Tranke seinen besonderen Duft. Nicht alle Knollen sind gleich, doch jede gute Gemeinschaft verrichtet ihr eigenes Werk."
+                },
+                {
+                    "titel": "Die Knollen wachsen",
+                    "codex_titel": "Von der Mehrung der weißen Gefährten",
+                    "text": "Bei regelmäßiger Versorgung mit geeigneter Milch können Kefirknollen wachsen und sich vermehren. Dabei entstehen neue Knollenstücke und bestehende Knollen werden größer. Die Geschwindigkeit der Vermehrung ist unterschiedlich und hängt von Kultur, Milch und Umgebungsbedingungen ab.",
+                    "codex_text": "Wer die Knollen wohl mit Milch versorget und ihnen rechte Bedingungen gibt, der mag erleben, wie ihre Schar wächst. Aus wenigen kleinen Gesellen kann mit der Zeit eine stattliche Gemeinschaft werden."
+                }
+            ]
+        },
+        {
+            "id": "milch-fuer-kefir",
+            "titel": "Welche Milch eignet sich für Milchkefir?",
+            "codex_titel": "Von der rechten Milch für die weißen Knollen",
+            "kategorie": "zutaten",
+            "intro": "Milchkefir lässt sich mit verschiedenen Milchsorten herstellen. Besonders unkompliziert ist die Verwendung von pasteurisierter Kuhmilch. Fettgehalt, Wärmebehandlung und Zusammensetzung der Milch beeinflussen Geschmack und Konsistenz des fertigen Kefirs.",
+            "codex_intro": "Die Knollen sind nicht wählerisch wie ein verwöhnter Fürst, doch verlangen sie nach guter Speisung. Ob die Milch frisch oder aus dem Vorratsschrank kommet, ob sie fettreich oder mager sei, all dies mag dem fertigen Tranke sein eigenes Gepräge geben.",
+            "abschnitte": [
+                {
+                    "titel": "Vollmilch",
+                    "codex_titel": "Von der fettreichen Milch",
+                    "text": "Pasteurisierte Vollmilch mit etwa 3,5 Prozent Fett ist eine gute Wahl für den klassischen Milchkefir. Sie ergibt häufig ein angenehm cremiges Getränk und eignet sich gut für die regelmäßige Pflege der Kefirkultur.",
+                    "codex_text": "Die Vollmilch sei dem Anfänger besonders empfohlen. Sie schenkt dem Kefir einen feinen, cremigen Leib und lässt die kleinen Knollen wohl gedeihen."
+                },
+                {
+                    "titel": "H-Milch und fettarme Milch",
+                    "codex_titel": "Von der Milch aus dem Vorratsgefäße",
+                    "text": "H-Milch kann ebenfalls für Milchkefir verwendet werden. Fettarme Milch funktioniert auch, ergibt jedoch häufig einen dünneren Kefir. Die Ergebnisse können je nach Milchprodukt und Kultur variieren.",
+                    "codex_text": "Auch die Milch aus dem Vorratsgefäße vermag gute Dienste zu tun. Wer aber eine besonders cremige Speise begehret, greife lieber zur Vollmilch und lasse die magere Milch den anderen über."
+                },
+                {
+                    "titel": "Rohmilch",
+                    "codex_titel": "Von der unbehandelten Milch und ihrer Gefahr",
+                    "text": "Rohmilch kann krankheitserregende Mikroorganismen enthalten. Für die häusliche Kefirherstellung ist pasteurisierte Milch die sicherere Wahl. Eine Fermentation macht möglicherweise vorhandene Krankheitserreger nicht zuverlässig unschädlich.",
+                    "codex_text": "Die unbehandelte Milch mag mancherlei natürliche Bewohner mit sich führen, doch nicht alle davon sind dem Menschen wohlgesonnen. Darum sei dem häuslichen Fermentierer die pasteurisierte Milch angeraten."
+                },
+                {
+                    "titel": "Pflanzliche Milchalternativen",
+                    "codex_titel": "Von der Milch, die keine Milch ist",
+                    "text": "Hafer-, Mandel- oder Sojadrinks besitzen eine andere Zusammensetzung als Kuhmilch. Sie können nicht ohne Weiteres als dauerhafter Ersatz für Milch bei der Pflege klassischer Milchkefirknollen dienen. Für solche Ansätze sind gegebenenfalls spezielle Kulturen erforderlich.",
+                    "codex_text": "Was aus Hafer, Mandeln oder Sojabohnen bereitet ward, ist nicht dasselbe wie die Milch der Kuh. Die weißen Knollen mögen solche Getränke bisweilen kosten, doch gedeihen sie darin auf Dauer nicht verlässlich."
+                }
+            ]
+        },
+        {
+            "id": "kefir-temperatur-reifezeit",
+            "titel": "Temperatur und Reifezeit beim Milchkefir",
+            "codex_titel": "Von der rechten Wärme und der Geduld der Gärung",
+            "kategorie": "grundlagen",
+            "intro": "Die Temperatur beeinflusst die Geschwindigkeit der Kefirfermentation. Bei etwa 20 bis 24 °C dauert ein gewöhnlicher Ansatz häufig 18 bis 24 Stunden. Je nach Kultur, Milchmenge und Knollenverhältnis kann die Reifezeit abweichen.",
+            "codex_intro": "Wie bei manchem guten Werke kommt es auch hier auf die rechte Wärme und Geduld an. Ist es gar kalt, so schlafen die kleinen Wesen beinahe ein. Ist es aber zu warm, so eilen sie dahin, als jage sie der Teufel persönlich.",
+            "tabelle": {
+                "titel": "Temperatur und Wirkung",
+                "codex_titel": "Tafel von der rechten Wärme",
+                "spalten": [
+                    "Temperatur",
+                    "Wirkung"
+                ],
+                "zeilen": [
+                    [
+                        "Unter 15 °C",
+                        "Sehr langsame Fermentation"
+                    ],
+                    [
+                        "15–18 °C",
+                        "Langsame Fermentation"
+                    ],
+                    [
+                        "20–24 °C",
+                        "Üblicher Bereich für die häusliche Kefirbereitung"
+                    ],
+                    [
+                        "25–28 °C",
+                        "Schnellere Fermentation und stärkere Säureentwicklung möglich"
+                    ],
+                    [
+                        "Über 28 °C",
+                        "Deutlich veränderte Fermentationsbedingungen; besondere Vorsicht"
+                    ]
+                ]
+            },
+            "abschnitte": [
+                {
+                    "titel": "Die Reifezeit",
+                    "codex_titel": "Wie lange die Milch ruhen soll",
+                    "text": "Ein klassischer Ansatz benötigt häufig etwa 18 bis 24 Stunden. Entscheidend ist jedoch nicht allein die Uhr, sondern die Entwicklung von Geschmack und Konsistenz. Der fertige Kefir ist meist leicht dickflüssig und angenehm säuerlich.",
+                    "codex_text": "Lasse der Milch ihre gebührende Zeit. Nach einem Tage mag sie schon wohl geraten sein, doch prüfe mit Auge und Nase, ob sie die rechte Säure und den gewünschten Leib erlanget hat."
+                },
+                {
+                    "titel": "Einfluss der Knollenmenge",
+                    "codex_titel": "Von der Zahl der kleinen Arbeiter",
+                    "text": "Je mehr aktive Kefirknollen im Verhältnis zur Milchmenge verwendet werden, desto schneller kann die Fermentation verlaufen. Bei zu wenig Milch im Verhältnis zu den Knollen kann der Kefir sehr schnell sauer werden.",
+                    "codex_text": "Sind viele Knollen im Gefäße, so arbeiten auch viele kleine Gesellen zugleich. Gib ihnen nicht zu wenig Milch, sonst wird der Trank gar schnell sauer und die Knollen müssen sich um ihr Mahl streiten."
+                },
+                {
+                    "titel": "Die Konsistenz beobachten",
+                    "codex_titel": "Woran man den rechten Zeitpunkt erkennet",
+                    "text": "Während der Fermentation wird die Milch zunehmend dickflüssiger. Eine leichte Molkeabsonderung kann auftreten. Bei stärkerer Trennung ist der Ansatz bereits weit fortgeschritten.",
+                    "codex_text": "Wird die Milch allmählich dick und zeigt sich ein wenig gelbliche Molke, so ist das Werk bereits weit gediehen. Warte nicht unnötig lange, wenn dir der Geschmack schon wohlgefällt."
+                }
+            ]
+        },
+        {
+            "id": "kefirknollen-pflege-vermehrung",
+            "titel": "Pflege und Vermehrung der Kefirknollen",
+            "codex_titel": "Von der Pflege und Mehrung der weißen Knollenschar",
+            "kategorie": "kefirknollen",
+            "intro": "Milchkefirknollen benötigen eine regelmäßige Versorgung mit frischer Milch. Nach jeder Fermentation werden sie durch ein Sieb vom fertigen Kefir getrennt und können unmittelbar erneut angesetzt werden. Bei guter Pflege wachsen die Knollen und lassen sich vermehren oder weitergeben.",
+            "codex_intro": "Die weißen Knollen sind treue Gefährten, doch wollen sie regelmäßig gespeiset sein. Gib ihnen frische Milch, halte ihre Behausung rein und lasse sie nicht vergessen, dass auch die kleinsten Wesen ihre Mahlzeit begehren.",
+            "abschnitte": [
+                {
+                    "titel": "Knollen nach dem Ansatz versorgen",
+                    "codex_titel": "Von der täglichen Speisung",
+                    "text": "Nach dem Abseihen werden die Knollen mit frischer Milch neu angesetzt. Ein regelmäßiger Wechsel der Milch unterstützt eine stabile Kultur. Die Knollen müssen zwischen den Ansätzen normalerweise nicht abgespült werden.",
+                    "codex_text": "Wenn der Kefir durch das Sieb gelaufen ist, so gib den Knollen alsbald neue Milch. Ein Waschen ist gemeinhin nicht vonnöten. Sie sind keine schmutzigen Stalltiere, sondern deine fleißigen Küchengehilfen."
+                },
+                {
+                    "titel": "Knollen vermehren",
+                    "codex_titel": "Von der wundersamen Mehrung",
+                    "text": "Bei regelmäßiger Versorgung können die Knollen wachsen und neue Knollenstücke bilden. Sobald ausreichend Kultur vorhanden ist, kann ein Teil für weitere Ansätze verwendet oder an andere Fermentierfreunde abgegeben werden.",
+                    "codex_text": "Höret und staunet, ihr Leute! Aus wenigen Knöllchen mag ein ganzer Schwarm erwachsen, sofern man ihn wohl mit Milch versorget. Und wächst die Knollenschar über alle Maßen, so sei nicht geizig wie ein Drachenhorter! Gebet einen Teil an Freunde und Nachbarn weiter. Wer noch keine Knollen sein Eigen nennt, der mag sie kaufen, in der Nachbarschaft danach fragen oder auf dem großen Marktplatz der Kleinanzeigen Ausschau halten."
+                },
+                {
+                    "titel": "Knollen vorübergehend aufbewahren",
+                    "codex_titel": "Von der Ruhezeit im kühlen Gemache",
+                    "text": "Wenn eine Pause benötigt wird, können die Knollen vorübergehend in frischer Milch im Kühlschrank aufbewahrt werden. Die Kälte verlangsamt ihre Aktivität. Für längere Pausen ist eine regelmäßige Kontrolle und Erneuerung der Milch sinnvoll. Nach der Ruhezeit können mehrere Auffrischungsansätze erforderlich sein.",
+                    "codex_text": "Muss der Fermentierer für einige Tage verreisen oder seine Ruhe haben, so mögen die Knollen in frischer Milch an einem kühlen Orte verweilen. Doch lasse sie nicht auf unbestimmte Zeit sich selbst über. Auch im Kühlschrank bedürfen sie gelegentlich neuer Speisung."
+                },
+                {
+                    "titel": "Die Knollen teilen und weitergeben",
+                    "codex_titel": "Von der Gabe an Freunde und Nachbarn",
+                    "text": "Überschüssige Kefirknollen können geteilt und an andere weitergegeben werden. Für die Weitergabe sollten sie frisch und sauber sein und möglichst in etwas frischer Milch transportiert werden. Empfänger sollten Herkunft und bisherige Pflege kennen.",
+                    "codex_text": "Hat sich die Knollenschar gar sehr gemehret, so teile man den Schatz mit Freunden, Nachbarn und anderen Liebhabern der Gärkunst. Gib ihnen ein wenig Milch mit auf den Weg, auf dass sie nicht hungrig in der Fremde ankommen."
+                }
+            ]
+        },
+        {
+            "id": "kefir-zweite-fermentation",
+            "titel": "Die zweite Fermentation",
+            "codex_titel": "Von der zweiten Gärung und den neuen Geschmäckern",
+            "kategorie": "zubereitung",
+            "intro": "Nach dem Abseihen der Kefirknollen kann der fertige Milchkefir ein zweites Mal fermentieren. Dabei werden Früchte, Gewürze oder andere Aromazutaten hinzugegeben. Die zweite Fermentation verändert Geschmack und Konsistenz und kann zusätzliche Kohlensäure erzeugen.",
+            "codex_intro": "Ist der erste Trank bereitet, so mag der kundige Fermentierer ein weiteres Werk beginnen. Früchte, Gewürze und allerlei duftende Gaben dürfen hinzutreten und dem Kefir neue Geschmäcker schenken.",
+            "abschnitte": [
+                {
+                    "titel": "Früchte und Gewürze",
+                    "codex_titel": "Von den Gaben des Gartens",
+                    "text": "Für eine zweite Fermentation können beispielsweise Erdbeeren, Himbeeren, Heidelbeeren, Mango, Vanille oder Zimt verwendet werden. Die Zutaten werden dem bereits von den Knollen getrennten Kefir beigegeben.",
+                    "codex_text": "Erdbeeren und Beeren aus dem Walde, süße Mango und duftende Gewürze mögen dem Tranke beigegeben werden. So erhält der Kefir ein neues Kleid und einen Geschmack, der selbst den müdesten Wanderer erfreuen mag."
+                },
+                {
+                    "titel": "Die Dauer der zweiten Fermentation",
+                    "codex_titel": "Von der Geduld nach dem ersten Werke",
+                    "text": "Die zweite Fermentation kann je nach Rezept und gewünschtem Geschmack einige Stunden bis zu etwa einem Tag dauern. Temperatur und Zutaten beeinflussen den Verlauf. Anschließend sollte der Kefir gekühlt werden.",
+                    "codex_text": "Lasse den Trank nach seiner neuen Würzung noch eine Weile ruhen. Doch behalte ihn im Auge, denn die kleinen Gärwesen verrichten ihr Werk weiterhin und kennen keine Uhr."
+                },
+                {
+                    "titel": "Druckentwicklung beachten",
+                    "codex_titel": "Von den gefährlichen Kräften im verschlossenen Gefäße",
+                    "text": "Bei einer zweiten Fermentation in verschlossenen Flaschen kann Kohlendioxid entstehen. Dadurch baut sich Druck auf. Nur geeignete druckfeste Flaschen verwenden, regelmäßig kontrollieren und vor dem Öffnen gut kühlen. Überdruck kann zu gefährlichen Verletzungen führen.",
+                    "codex_text": "Hüte dich vor dem allzu fest verschlossenen Gefäße! Die Gärung vermag Gase hervorzubringen, welche den Druck im Glase mehren. Verwende nur dafür geeignete Flaschen und halte sie unter Wacht. Ein platzendes Gefäß ist weder ein Fest noch ein guter Küchenstreich."
+                }
+            ]
+        },
+        {
+            "id": "kefir-molke",
+            "titel": "Molke beim Milchkefir",
+            "codex_titel": "Von der gelblichen Molke und ihrem verborgenen Nutzen",
+            "kategorie": "verarbeitung",
+            "intro": "Bei der Fermentation kann sich der Milchkefir in eine festere Masse und eine gelbliche Flüssigkeit trennen. Diese Flüssigkeit ist Molke. Sie enthält unter anderem Wasser, Mineralstoffe, Milchzucker und lösliche Eiweiße. Die Absonderung ist häufig eine Folge fortgeschrittener Säuerung.",
+            "codex_intro": "Bisweilen scheidet sich vom weißen Tranke eine gelbliche Flüssigkeit ab. Für den Unerfahrenen mag dies wie ein Missgeschick erscheinen, doch ist es die Molke, ein weiterer Schatz der Milch, der in der Küche noch manch gute Dienste leisten kann.",
+            "abschnitte": [
+                {
+                    "titel": "Warum entsteht Molke?",
+                    "codex_titel": "Wie sich die Milch in zwei Teile scheidet",
+                    "text": "Durch die Säuerung verändert sich die Struktur der Milcheiweiße. Insbesondere das Casein bildet eine festere Masse, während sich die flüssige Molke absondert. Eine stärkere Trennung kann durch längere Reifezeit oder höhere Temperatur begünstigt werden.",
+                    "codex_text": "Je weiter die Säure voranschreitet, desto mehr verändert sich das Gefüge der Milch. Das Weiße sammelt sich zu einer festeren Masse, während die gelbliche Molke ihren eigenen Weg nimmt."
+                },
+                {
+                    "titel": "Molke in der Küche verwenden",
+                    "codex_titel": "Von der vielseitigen Küchenmolke",
+                    "text": "Kefirmolke kann in geeigneten Rezepten zum Beispiel für Pfannkuchen, Brot, Teige oder Dressings verwendet werden. Ihr säuerlicher Geschmack beeinflusst das jeweilige Gericht. Sie sollte hygienisch aufgefangen und gekühlt aufbewahrt werden.",
+                    "codex_text": "Wirf die Molke nicht achtlos hinweg! Sie mag in Brotteigen, Pfannkuchen und allerlei anderen Speisen ihren Platz finden. Doch halte sie kühl und rein, auf dass sie nicht vorzeitig verderbe."
+                },
+                {
+                    "titel": "Molke beim Frischkäse",
+                    "codex_titel": "Vom Käse, der seine Molke ziehen lässt",
+                    "text": "Bei der Herstellung von Kefir-Frischkäse wird der fermentierte Kefir durch ein Tuch abgetropft. Die feste Masse bleibt im Tuch zurück, während die Molke in einem Gefäß aufgefangen wird.",
+                    "codex_text": "Wenn der Kefir im Tuche ruhet, rinnt die Molke langsam davon. Zurück bleibt ein feiner Frischkäse, und die aufgefangene Flüssigkeit wartet auf ihre nächste Aufgabe."
+                }
+            ]
+        },
+        {
+            "id": "kefir-hygiene-lagerung",
+            "titel": "Hygiene und Aufbewahrung von Milchkefir",
+            "codex_titel": "Von Reinlichkeit und kühler Lagerstatt",
+            "kategorie": "hygiene",
+            "intro": "Saubere Arbeitsgeräte, Gefäße und Hände sind bei der Herstellung von Milchkefir wichtig. Fertiger Kefir sollte gekühlt aufbewahrt werden. Die Kühlung verlangsamt die weitere Fermentation, beendet sie aber nicht vollständig.",
+            "codex_intro": "Ein gutes Ferment beginnt mit Reinlichkeit. Gefäß, Sieb und Hände sollen wohl gereinigt sein, und der fertige Trank finde seinen Platz in der kühlen Lagerstatt. Denn auch die kleinen Gärwesen vermögen in der Wärme gar eifrig weiterzuarbeiten.",
+            "abschnitte": [
+                {
+                    "titel": "Saubere Gerätschaften",
+                    "codex_titel": "Von wohl gereinigtem Werkzeuge",
+                    "text": "Gläser, Siebe, Löffel und andere Arbeitsgeräte sollten vor dem Gebrauch gründlich gereinigt werden. Auch die Hände müssen sauber sein. Beschädigte oder stark verschmutzte Gefäße sind nicht geeignet.",
+                    "codex_text": "Reinige das Glas, das Sieb und den Löffel wohl, ehe du dein Werk beginnest. Auch die Hände sollen sauber sein. Denn ein guter Fermentierer achtet nicht allein auf die Knollen, sondern ebenso auf seine Gerätschaft."
+                },
+                {
+                    "titel": "Fertigen Kefir kühlen",
+                    "codex_titel": "Von der kalten Kammer",
+                    "text": "Nach Erreichen des gewünschten Geschmacks wird der Kefir im Kühlschrank aufbewahrt. Eine Temperatur von etwa 4 °C ist hierfür geeignet. Die weitere Säuerung wird dadurch verlangsamt, kann aber weiterhin langsam stattfinden.",
+                    "codex_text": "Hat der Trank seine rechte Säure erlanget, so bringe ihn in die kalte Kammer. Dort ruhen die kleinen Gärwesen ein wenig, doch gänzlich schlafen werden sie nicht."
+                },
+                {
+                    "titel": "Wie lange ist Kefir haltbar?",
+                    "codex_titel": "Von der Zeit, die dem Tranke bleibt",
+                    "text": "Die Haltbarkeit hängt von Herstellung, Hygiene, Temperatur und Ausgangsqualität ab. Für selbst hergestellten Milchkefir empfiehlt sich eine zeitnahe Verwendung und eine durchgehende Kühlung. Bei ungewöhnlichem Geruch, Verfärbungen, Schimmel oder anderen Verderbzeichen sollte er entsorgt werden.",
+                    "codex_text": "Der selbst bereitete Trank ist kein ewiger Schatz. Bewahre ihn kühl und verbrauche ihn zeitnah. Zeigt er einen üblen Geruch, fremde Farben oder gar Schimmel, so sei nicht neugierig und koste nicht davon."
+                }
+            ]
+        },
+        {
+            "id": "kefir-fehler-erkennen",
+            "titel": "Häufige Probleme bei Milchkefir",
+            "codex_titel": "Von den Missgeschicken bei der weißen Gärung",
+            "kategorie": "probleme",
+            "intro": "Bei der Kefirherstellung können Veränderungen in Geschmack, Konsistenz und Aussehen auftreten. Viele davon sind normale Folgen der Fermentation. Eine zu lange Reifezeit, hohe Temperaturen oder ein ungünstiges Verhältnis von Knollen zu Milch können jedoch zu unerwünschten Ergebnissen führen.",
+            "codex_intro": "Nicht jeder ungewöhnliche Anblick ist ein Unglück, doch mancherlei Missgeschick mag dem unerfahrenen Kefirmeister widerfahren. Wer die Zeichen der Gärung zu deuten weiß, der kann vielen Plagen vorbeugen.",
+            "tabelle": {
+                "titel": "Häufige Probleme und ihre Ursachen",
+                "codex_titel": "Tafel der kefirischen Missgeschicke",
+                "spalten": [
+                    "Beobachtung",
+                    "Mögliche Ursache",
+                    "Was hilft?"
+                ],
+                "codex_spalten": [
+                    "Was sich zeiget",
+                    "Woher es kommen mag",
+                    "Was zu tun sei"
+                ],
+                "zeilen": [
+                    [
+                        "Kefir ist sehr sauer",
+                        "Zu lange Reifezeit, zu hohe Temperatur oder zu viele Knollen im Verhältnis zur Milch",
+                        "Reifezeit verkürzen oder Milchmenge anpassen"
+                    ],
+                    [
+                        "Kefir bleibt sehr dünn",
+                        "Kurze Reifezeit, niedrige Temperatur oder geringe Aktivität der Kultur",
+                        "Etwas länger fermentieren lassen und Kultur beobachten"
+                    ],
+                    [
+                        "Milch und Molke trennen sich stark",
+                        "Fortgeschrittene Fermentation oder zu hohe Temperatur",
+                        "Früher abseihen und Temperatur überprüfen"
+                    ],
+                    [
+                        "Kaum Veränderung nach einem Tag",
+                        "Niedrige Temperatur oder wenig aktive Knollen",
+                        "Temperatur kontrollieren und Kultur weiter beobachten"
+                    ],
+                    [
+                        "Sehr hefiger Geruch",
+                        "Kulturzusammensetzung oder Fermentationsbedingungen",
+                        "Ansatz und Kultur beobachten; bei eindeutig unangenehmem Geruch entsorgen"
+                    ],
+                    [
+                        "Rosa, orange oder pelziger Belag",
+                        "Mögliche Verunreinigung oder Schimmel",
+                        "Gesamten Ansatz einschließlich Knollen entsorgen"
+                    ]
+                ],
+                "codex_zeilen": [
+                    [
+                        "Der Trank ward gar sauer",
+                        "Die kleinen Gesellen arbeiteten zu lange oder in allzu großer Wärme.",
+                        "Gib ihnen weniger Zeit oder mehr Milch."
+                    ],
+                    [
+                        "Der Kefir bleibt dünn wie Wasser",
+                        "Die Gärung schreitet nur langsam voran.",
+                        "Prüfe die Wärme und gib dem Werke noch etwas Zeit."
+                    ],
+                    [
+                        "Die Molke scheidet sich stark",
+                        "Die Gärung ist weit vorangeschritten.",
+                        "Sei beim nächsten Male etwas schneller mit dem Siebe."
+                    ],
+                    [
+                        "Die Milch rühret sich kaum",
+                        "Die kleinen Knollen sind vielleicht müde oder frieren.",
+                        "Sorge für rechte Wärme und frische Milch."
+                    ],
+                    [
+                        "Der Trank riechet gar sonderbar",
+                        "Die Gemeinschaft mag aus dem rechten Gleichgewicht geraten sein.",
+                        "Prüfe den Ansatz mit Vorsicht und wirf ihn bei Verdacht auf Verderb fort."
+                    ],
+                    [
+                        "Fremde Farben oder pelziger Bewuchs",
+                        "Ein unerwünschter Gast hat sich im Gefäße niedergelassen.",
+                        "Wirf den ganzen Ansatz samt Knollen hinweg. Keine Experimente!"
+                    ]
+                ]
+            },
+            "abschnitte": [
+                {
+                    "titel": "Starke Säuerung",
+                    "codex_titel": "Wenn der Kefir zu sauer gerät",
+                    "text": "Ein sehr saurer Kefir entsteht häufig durch eine lange Reifezeit, hohe Temperatur oder ein großes Verhältnis von Knollen zu Milch. Die nächste Charge kann mit kürzerer Reifezeit oder mehr Milch angesetzt werden.",
+                    "codex_text": "Hat der Trank eine Säure erlanget, die selbst einem Drachen die Tränen in die Augen treibt, so verkürze beim nächsten Ansatze die Zeit oder gönne den Knollen mehr Milch."
+                },
+                {
+                    "titel": "Ungewöhnliche Beläge",
+                    "codex_titel": "Von den fremden Gästen im Glase",
+                    "text": "Rosa, orange, grüne, blaue oder schwarze Verfärbungen sowie pelziger Bewuchs sind Warnzeichen. Der gesamte Ansatz einschließlich der Kefirknollen sollte entsorgt werden. Nicht probieren und nicht versuchen, nur den sichtbaren Belag zu entfernen.",
+                    "codex_text": "Zeigt sich ein fremder pelziger Bewuchs oder eine sonderbare Farbe, so sei nicht mutig wie ein Ritter im Drachenkampf. Wirf den ganzen Ansatz hinweg und beginne mit einer frischen Kultur."
+                }
+            ]
+        },
+        {
+            "id": "milchkefir-vertraeglichkeit",
+            "titel": "Milchkefir und seine Verträglichkeit",
+            "codex_titel": "Von der Bekömmlichkeit des weißen Trankes",
+            "kategorie": "wissen",
+            "intro": "Milchkefir enthält lebende Mikroorganismen und ist ein fermentiertes Milchprodukt. Während der Fermentation wird ein Teil des Milchzuckers abgebaut. Der verbleibende Laktosegehalt ist jedoch unterschiedlich und Milchkefir ist nicht automatisch laktosefrei. Menschen mit Milchproteinallergie sollten ihn meiden.",
+            "codex_intro": "Manch einer verträgt den weißen Trank wohl, ein anderer mag mit ihm nicht Freund werden. Die Gärung verändert zwar die Milch, doch mache man sich nicht vor, dass dadurch alle ihre ursprünglichen Eigenschaften verschwinden.",
+            "abschnitte": [
+                {
+                    "titel": "Laktose in Milchkefir",
+                    "codex_titel": "Vom Milchzucker, der sich vermindert",
+                    "text": "Milchsäurebakterien und Hefen bauen während der Fermentation einen Teil des Milchzuckers ab. Wie viel Laktose verbleibt, hängt unter anderem von Kultur, Milch und Reifezeit ab. Milchkefir ist deshalb nicht grundsätzlich laktosefrei.",
+                    "codex_text": "Die kleinen Gärwesen verzehren einen Teil des Milchzuckers, doch nicht alles verschwindet. Wer den Trank wegen seiner Laktose meidet, soll nicht glauben, dass die Gärung alle Sorge hinwegzaubert."
+                },
+                {
+                    "titel": "Milchproteinallergie",
+                    "codex_titel": "Von der Milch, die nicht jedem wohl bekommt",
+                    "text": "Bei einer Allergie gegen Milcheiweiß ist Milchkefir nicht geeignet. Die Fermentation beseitigt die allergenen Milchproteine nicht zuverlässig.",
+                    "codex_text": "Wer mit einer Milchproteinallergie geschlagen ist, soll den Kefir nicht für eine sichere Speise halten. Die Gärung macht aus der Milch kein anderes Wesen."
+                },
+                {
+                    "titel": "Alkohol im Milchkefir",
+                    "codex_titel": "Von dem kleinen Geiste im weißen Tranke",
+                    "text": "Bei der Fermentation können Hefen geringe Mengen Ethanol bilden. Der Alkoholgehalt hängt von Kultur, Reifezeit, Temperatur und weiteren Bedingungen ab und kann variieren. Milchkefir sollte deshalb nicht pauschal als alkoholfrei bezeichnet werden.",
+                    "codex_text": "Auch die Hefen verrichten ihr Werk und mögen einen kleinen Anteil geistigen Stoffes hervorbringen. Der Trank ist darum nicht mit einem starken Weine zu vergleichen, doch sei er auch nicht ohne Weiteres als gänzlich alkoholfrei zu preisen."
+                }
+            ]
+        }
+    ]
+}
