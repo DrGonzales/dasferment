@@ -36,7 +36,7 @@ Datenfeld) und gewinnt nichts zusätzlich.
 | --- | --- |
 | **Buch als Route im Site-Build** (`src/pages/buch/`) | `global.css` wird geladen: 54 `clamp(...vw...)` brechen, Viewport-Media-Queries treffen falsch, `.site-shell` mit `overflow: hidden` und `position: fixed` stört Paged.js, `base: /dasferment` bricht `file://`. |
 | **Buch komplett aus Astro herausholen** (reines Node-Skript mit Hand-HTML) | Markup-Duplizierung ohne Gegenwert, kein `astro:assets`/`getImage`, Bilder müssten vorgerendert werden. |
-| **Astro Container API** (`experimental_AstroContainer.renderToString()`) | Technisch passend, aber laut Astro-Doku *„experimental and subject to breaking changes, even in minor or patch releases"*. `package.json` pinnt `astro: ^7.3.5` — ein Minor-Update könnte den Buchbau still brechen. |
+| **Astro Container API** (`experimental_AstroContainer.renderToString()`) | Technisch passend, aber laut Astro-Doku *„experimental and subject to breaking changes, even in minor or patch releases"*. `package.json` pinnt `astro: ^7.4.13` — ein Minor-Update könnte den Buchbau still brechen. |
 
 ## 3. Recherche: Stand von Paged.js
 
@@ -49,7 +49,7 @@ Verifiziert über die npm-Registry und den Quellcode, nicht über Sekundärquell
 | `pagedjs` `latest` | **0.4.3, veröffentlicht 2023-07-06** |
 | `pagedjs` `beta` | 0.5.0-beta.2, 2024-10-04 |
 | `pagedjs-cli` | 0.4.3, 2023-07-20, Abhängigkeit `puppeteer ^20.9.0` |
-| `puppeteer` | 25.12.0, wird direkt benutzt, nicht die CLI |
+| `puppeteer` | 25.18.1, wird direkt benutzt, nicht die CLI |
 | Repository | von GitLab nach GitHub umgezogen (Jan 2026), Commits bis 2026-09-28, aber **kein Release seit v0.4.3** |
 | Offene Issues | 236 |
 | Lizenz | MIT |
@@ -500,7 +500,7 @@ drucken will, streicht `break-before: page` bei `.knowledge-group`.
 | 1 | **Zielformat?** | **148 × 210 mm (A5)** | Satzspiegel ca. 113 mm, Bilder mit ~230 dpi. Kleinere Formate bringen keinen Gewinn mehr, größere werden weich. |
 | 2 | **Umfang?** | **Ein PDF mit allen 39 Rezepten** | Ein Durchlauf, ein fertiges Band. Aufteilung nach Kategorien bleibt der Rückfallpfad, falls der Speicherbedarf kippt. |
 | 3 | **Schriften?** | **Ja, EB Garamond für den Fließtext, Cinzel als Display** | OFL, selbst gehostet in `src/book/fonts/`. Website-Stylesheet bleibt unverändert. |
-| 4 | **Abhängigkeiten?** | **Ja, `pagedjs` und `puppeteer` als devDependencies, exakt gepinnt** | `pagedjs` 0.4.3, `puppeteer` 25.12.0. Die CLI wird nicht benutzt, sie setzt den Viewport nicht und kennt keine Silbentrennung. |
+| 4 | **Abhängigkeiten?** | **Ja, `pagedjs` und `puppeteer` als devDependencies, exakt gepinnt** | `pagedjs` 0.4.3, `puppeteer` 25.18.1. Die CLI wird nicht benutzt, sie setzt den Viewport nicht und kennt keine Silbentrennung. |
 | 5 | **PDF-Ablage?** | **Nur lokal in `dist-book/`, kein Deploy** | Kein Eingriff in den Website-Deploy. Veröffentlichen kann später als eigener Schritt dazukommen. |
 | 6 | **CI-Form?** | **Eigener Job, unabhängig vom Website-Deploy** | Ein Buchfehler blockiert die Website nicht. |
 
@@ -564,7 +564,7 @@ Unverändert offen, unabhängig von Stufe 1:
 | `overflow: hidden` auf `.site-shell` | Seitenboxen abgeschnitten | Buchinhalt außerhalb der Site-Shell |
 | 1024 px Quellbilder | matschiger Offset-Druck | kleines Format wählen oder Bildmaterial neu anliefern |
 | 150 Seiten in einem Chromium | Speicher / Zeit | Läuft mit 18,2 MB stabil durch, Kategorie-PDFs bleiben der Rückfallpfad |
-| `astro: ^7.3.5` und `@page`-Semantik | Minor-Update bricht Buchbau | Build des Buchs separat, Site-Build bleibt unberührt |
+| `astro: ^7.4.13` und `@page`-Semantik | Minor-Update bricht Buchbau | Build des Buchs separat, Site-Build bleibt unberührt |
 | `publicDir: false` in Astro 7 | Book-Build scheitert an einer Typprüfung | Ordner weglassen statt auf `false` setzen |
 | `string-set` in Paged.js 0.4.3 | Kolumnentitel bleiben leer | Variable in `make-pdf.mjs` selbst setzen, Vor Upgrade prüfen |
 

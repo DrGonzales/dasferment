@@ -19,21 +19,21 @@
 		"check": "npm run build && npm run make:pdf && npm run check:book && npm run make:epub && npm run check:epub"
 	},
 	"dependencies": {
-		"astro": "^7.3.5"
+		"astro": "^7.4.13"
 	},
 	"allowScripts": {
 		"esbuild": true
 	},
 	"devDependencies": {
-		"@astrojs/sitemap": "3.7.4",
-		"dom-serializer": "2.0.0",
+		"@astrojs/sitemap": "3.7.6",
+		"dom-serializer": "3.1.1",
 		"epub-check": "0.3.0",
-		"htmlparser2": "9.1.0",
+		"htmlparser2": "12.0.0",
 		"hyphenation.de": "0.2.1",
 		"hypher": "0.2.5",
 		"pagedjs": "0.4.3",
 		"pdf-lib": "1.17.1",
-		"puppeteer": "25.12.0",
-		"sharp": "0.35.4"
+		"puppeteer": "25.18.1",
+		"sharp": "0.35.5"
 	}
 }
