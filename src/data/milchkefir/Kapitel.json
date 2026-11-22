@@ -4,8 +4,8 @@
   "rezepte": "milchkefir.json",
   "wissen": "milchkefir_info.json",
   "bilder": {
-    "actors": "../../pic/actors/lactation",
-    "smallactors": "../../pic/smallactors/lactation",
+    "actors": "../../pic/actors/milchkefir",
+    "smallactors": "../../pic/smallactors/milchkefir",
     "kapitel": [
       "../../pic/chapters/milchkefir.png"
     ]
