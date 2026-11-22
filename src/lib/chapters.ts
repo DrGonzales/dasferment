@@ -81,6 +81,14 @@ export const chapters: Chapter[] = orderData.reihenfolge.map((reference) => {
 export const allRecipes: Recipe[] = chapters.flatMap((chapter) => chapter.recipes);
 export const allInfos: Info[] = chapters.flatMap((chapter) => chapter.infos);
 
+/** Leerzeilen in `beschreibung` trennen Absätze; Metatexte brauchen sie als Fließtext. */
+export function descriptionParagraphs(description: string): string[] {
+	return description
+		.split(/\n\s*\n/)
+		.map((paragraph) => paragraph.trim())
+		.filter(Boolean);
+}
+
 export function chapterPath(chapter: Pick<Chapter, 'slug'>): string {
 	return `/kapitel/${chapter.slug}/`;
 }

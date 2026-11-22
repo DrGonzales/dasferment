@@ -1,35 +1,31 @@
-FROM mcr.microsoft.com/devcontainers/typescript-node:22
+FROM mcr.microsoft.com/devcontainers/typescript-node:22-trixie
 
-# poppler-utils liefert pdftotext, pdfinfo und pdfimages. Das Skript scripts/buch-pruefen.mjs
-# braucht sie, um den fertigen Buchumbruch am PDF zu messen statt am DOM.
-#
-# default-jre-headless liefert die Laufzeit für epubcheck. Das Programm selbst steckt
-# in node_modules/epub-check, aber es ist ein Java-Programm. Ohne die Laufzeit prüft
-# scripts/epub-pruefen.mjs nur die eigene Struktur und meldet sich nicht als bestanden.
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends poppler-utils default-jre-headless && \
-    rm -rf /var/lib/apt/lists/*
-
-# Chrome für scripts/make-pdf.mjs. Die Bibliotheken kommen aus apt, das Browser-Binary
-# aus dem Puppeteer-CLI: so hängt die Chrome-Version an der gepinnten puppeteer-Version in
-# package.json, und arm64 bekommt dieselbe Quelle wie amd64. Das apt-Paket
-# google-chrome-stable wäre hier falsch, weil es die Bibliotheksversionen mitbringt und
-# arm64 nicht in jedem Mirror liegt.
 ENV PUPPETEER_CACHE_DIR=/home/node/.cache/puppeteer
 
-# Achtung: die puppeteer-Version muss der devDependency in package.json entsprechen,
-# sonst installiert der Cache ein Chrome, das nicht zur gepinnten Puppeteer-Version passt.
+# poppler-utils liefert pdftotext, pdfinfo und pdfimages für scripts/buch-pruefen.mjs.
+# default-jre-headless ist die Laufzeit für epubcheck aus node_modules/epub-check.
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-        libasound2 \
-        libatk-bridge2.0-0 \
-        libatk1.0-0 \
-        libatspi2.0-0 \
-        libcups2 \
+        default-jre-headless \
+        poppler-utils && \
+    rm -rf /var/lib/apt/lists/*
+
+# Chrome für scripts/make-pdf.mjs. Debian trixie kennt mehrere Bibliotheken nur noch
+# unter *t64, die Namen aus bookworm gibt es hier nicht mehr. Die Version kommt aus
+# der gepinnten puppeteer-Version in package.json, damit sie zur Bibliothek passt.
+COPY package.json /tmp/package.json
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        fonts-liberation \
+        libasound2t64 \
+        libatk-bridge2.0-0t64 \
+        libatk1.0-0t64 \
+        libatspi2.0-0t64 \
+        libcups2t64 \
         libdbus-1-3 \
         libdrm2 \
         libgbm1 \
-        libgtk-3-0 \
+        libgtk-3-0t64 \
         libnspr4 \
         libnss3 \
         libpango-1.0-0 \
@@ -41,20 +37,17 @@ RUN apt-get update && \
         libxfixes3 \
         libxkbcommon0 \
         libxrandr2 \
-        xdg-utils \
-        fonts-liberation && \
+        xdg-utils && \
     rm -rf /var/lib/apt/lists/* && \
-    npx --yes puppeteer@25.12.0 browsers install chrome && \
-    rm -rf /root/.npm/_npx && \
+    PUPPETEER_VERSION=$(node -p "require('/tmp/package.json').devDependencies.puppeteer") && \
+    npx --yes "puppeteer@${PUPPETEER_VERSION}" browsers install chrome && \
+    rm -rf /root/.npm/_npx /tmp/package.json && \
     chown -R node:node /home/node/.cache
 
-# Install OpenCode: fetch the latest release from GitHub and install to /usr/local/bin
-RUN ARCH=$(uname -m | sed 's/x86_64/x64/;s/aarch64/arm64/') && \
-    VERSION=$(curl -fsSL https://api.github.com/repos/anomalyco/opencode/releases/latest | grep '"tag_name"' | sed 's/.*"v\([^"]*\)".*/\1/') && \
-    curl -fsSL "https://github.com/anomalyco/opencode/releases/download/v${VERSION}/opencode-linux-${ARCH}.tar.gz" \
-        | tar -xz -C /usr/local/bin opencode && \
-    chmod +x /usr/local/bin/opencode
+# Feste Version statt GitHub releases/latest: dort liegt aktuell v1, während das
+# offizielle npm-Paket v2 für amd64 und arm64 ausliefert.
+ARG OPENCODE_VERSION=2.3.2
+RUN npm install -g "@opencode/cli@${OPENCODE_VERSION}"
 
-# Pre-create XDG state/share dirs so the node user can write to them at runtime
 RUN mkdir -p /home/node/.local/state /home/node/.local/share && \
     chown -R node:node /home/node/.local

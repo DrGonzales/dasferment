@@ -10,6 +10,7 @@ import {
 	chapterPath,
 	chapterRecipesPath,
 	chapters,
+	descriptionParagraphs,
 	type Chapter,
 } from '../../../lib/chapters';
 import { socialCard } from '../../../lib/social';
@@ -33,7 +34,8 @@ const canonicalPath = chapterPath(chapter);
 const canonicalUrl = Astro.site
 	? new URL(withBase(canonicalPath), Astro.site).toString()
 	: withBase(canonicalPath);
-const description = chapter.beschreibung;
+const paragraphs = descriptionParagraphs(chapter.beschreibung);
+const description = paragraphs.join(' ');
 const absoluteUrl = (path: string) =>
 	Astro.site ? new URL(path, Astro.site).toString() : path;
 const cardImage = chapter.image
@@ -94,7 +96,11 @@ const cardImage = chapter.image
 					<div class="chapter-intro__copy">
 						<p class="section-heading__kicker">Kapitel im Kodex</p>
 						<h1 id="chapter-title">{chapter.titel}</h1>
-						<p class="chapter-intro__lead">{chapter.beschreibung}</p>
+						{
+							paragraphs.map((paragraph) => (
+								<p class="chapter-intro__lead">{paragraph}</p>
+							))
+						}
 						<p class="chapter-intro__count">
 							{chapter.recipes.length} Rezepte und {chapter.infos.length} Wissenseinträge.
 						</p>

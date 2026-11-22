@@ -1,42 +1,28 @@
 {
 	"name": "dasFerment",
-	// Use a Dockerfile so we can pin --platform=linux/arm64 at build time and install OpenCode.
-	// JetBrains does not propagate runArgs platform constraints through its
-	// feature layer build, causing amd64/arm64 mismatches at container start.
+	// Dockerfile statt Feature-Layer, damit die Chrome-Bibliotheken auf amd64 und arm64 passen.
 	"build": {
-		"dockerfile": "Dockerfile"
+		"dockerfile": "Dockerfile",
+		"context": ".."
 	},
-	// Forward the dev server port and the OpenCode web server port.
-	// Port 4096 is used by `opencode web` — allows `opencode attach http://localhost:4096`
-	// from the host to connect to the container's OpenCode server.
+	// 4321 ist der Astro-Server, 4096 ein manuell gestartetes `opencode serve --port 4096`.
 	"forwardPorts": [
-		5173,
-		4096,
-		4321
+		4321,
+		4096
 	],
-	// Install project dependencies after the container is created.
-	//"postCreateCommand": "npm install && npx skills experimental_install",
-	// Start the OpenCode web server on every container start so it is always reachable
-	// from the host via `opencode attach http://localhost:4096`.
-	// Runs in the background; logs go to /tmp/opencode-web.log for debugging.
-	"postCreateCommand": "grep -qxF 'source /home/node/.config/opencode/aliases.sh' /home/node/.bashrc || echo 'source /home/node/.config/opencode/aliases.sh' >> /home/node/.bashrc",
-	// Bind-mount host OpenCode config and auth into the container so the container
-	// shares the same provider credentials and settings as the host.
-	// This is required for the `opencode attach` workflow to use host API keys.
+	"postCreateCommand": "npm ci && if [ -f /home/node/.config/opencode/aliases.sh ]; then grep -qxF 'source /home/node/.config/opencode/aliases.sh' /home/node/.bashrc || echo 'source /home/node/.config/opencode/aliases.sh' >> /home/node/.bashrc; fi",
+	// Host-Konfiguration teilt Opencode-Einstellungen und Git-Zugang mit dem Container.
 	"mounts": [
 		"source=${localEnv:HOME}/.config/opencode,target=/home/node/.config/opencode,type=bind,consistency=cached",
 		"source=${localEnv:HOME}/.gitconfig,target=/home/node/.gitconfig,type=bind,readonly",
 		"source=${localEnv:HOME}/.ssh,target=/home/node/.ssh,type=bind,readonly"
-		//"source=${localEnv:HOME}/.local/share/opencode,target=/home/node/.local/share/opencode,type=bind,consistency=cached"
 	],
-	// Configure tool-specific properties.
 	"customizations": {
 		"vscode": {
 			"extensions": [
+				"astro-build.astro-vscode",
 				"eamodio.gitlens",
-				"redhat.vscode-yaml",
-				"svelte.svelte-vscode",
-				"astro-build.astro-vscode"
+				"redhat.vscode-yaml"
 			]
 		}
 	},

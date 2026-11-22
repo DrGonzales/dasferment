@@ -349,6 +349,11 @@ a {
 	text-indent: 1.2em;
 }
 
+/* Nur der erste Absatz trägt den großen Abstand zum Ornament. */
+.book-part__claim + .book-part__claim {
+	margin: 0 0 0.6em;
+}
+
 /* 52 mm Breite: Titel, Bild, Ornament und Einleitung passen so gemeinsam auf das
    Kapitelblatt, bei 82 mm lief der Einleitungstext auf die Rückseite über. */
 .book-chapter__image {

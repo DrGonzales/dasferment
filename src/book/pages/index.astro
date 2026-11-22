@@ -14,7 +14,12 @@ import {
 	prefaceAnchor,
 	registerAnchor,
 } from '../../lib/book';
-import { allInfos as infos, allRecipes as recipes, chapters as chapterConfigs } from '../../lib/chapters';
+import {
+	allInfos as infos,
+	allRecipes as recipes,
+	chapters as chapterConfigs,
+	descriptionParagraphs,
+} from '../../lib/chapters';
 import { FIGUREN } from '../../lib/figuren';
 import { codexListe, codexText } from '../../lib/infos';
 import { imageForRecipe } from '../../lib/pageImages';
@@ -282,9 +287,9 @@ const contents = [
 								</figure>
 							)}
 							<p class="book-part__ornament" aria-hidden="true">❦</p>
-							<p class="book-part__claim">
-								{hyphenate(section.config.beschreibung)}
-							</p>
+							{descriptionParagraphs(section.config.beschreibung).map((paragraph) => (
+								<p class="book-part__claim">{hyphenate(paragraph)}</p>
+							))}
 						</section>
 
 						{section.recipes.map((folio) => (

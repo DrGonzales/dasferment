@@ -2378,6 +2378,10 @@ img {
 	line-height: 1.65;
 }
 
+.chapter-intro__lead + .chapter-intro__lead {
+	margin-top: 0.85rem;
+}
+
 .chapter-intro__count {
 	margin: 1.1rem 0 0;
 	color: var(--ink-faint);
