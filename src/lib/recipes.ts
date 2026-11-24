@@ -6,6 +6,8 @@ export interface RecipeAdvisor {
 export interface Recipe {
 	titel: string;
 	tags: string[];
+	/** Jahreszeiten für saisonale Einstiegsseiten; Werte aus `src/data/Einstiegsseiten.json`. */
+	saison?: string[];
 	zutaten: string[];
 	zubereitung: string[];
 	picture: string | null;

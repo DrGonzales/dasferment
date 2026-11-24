@@ -6,7 +6,13 @@ import RecipeCard from '../../components/RecipeCard.astro';
 import Footer from '../../components/Footer.astro';
 import Header from '../../components/Header.astro';
 import SeoHead from '../../components/SeoHead.astro';
-import { allRecipes, recipePath } from '../../lib/chapters';
+import { allRecipes, infoPath, recipePath } from '../../lib/chapters';
+import {
+	landingInfos,
+	landingPageForRoute,
+	orderedRecipes,
+	withCount,
+} from '../../lib/landingPages';
 import { coverImageFor, imageForRecipe } from '../../lib/pageImages';
 import { socialCard } from '../../lib/social';
 import { categoryLabel, categorySlug, MIN_CATEGORY_RECIPES, recipeImageAlt, type Recipe } from '../../lib/recipes';
@@ -49,9 +55,18 @@ const withBase = (path: string) => `${base}${path}`;
 const canonicalPath = `/kategorien/${category}/`;
 const canonicalUrl = Astro.site ? new URL(withBase(canonicalPath), Astro.site).toString() : withBase(canonicalPath);
 const recipeWord = recipes.length === 1 ? 'Rezept' : 'Rezepte';
-const title = `${categoryTitle} fermentieren – ${recipes.length} ${recipeWord} | Das Ferment`;
-const description = `${recipes.length} ${recipeWord} zum Fermentieren mit ${categoryTitle} – mit Zutaten, Zubereitung und Buchmalereien aus dem Kodex von Das Ferment.`;
-const recipeItems = recipes.map((recipe) => ({
+const landing = landingPageForRoute(canonicalPath);
+const displayedRecipes = landing ? orderedRecipes(recipes, landing.reihenfolge) : recipes;
+const title = landing
+	? withCount(landing.title, recipes.length)
+	: `${categoryTitle} fermentieren – ${recipes.length} ${recipeWord} | Das Ferment`;
+const description = landing
+	? withCount(landing.description, recipes.length)
+	: `${recipes.length} ${recipeWord} zum Fermentieren mit ${categoryTitle} – mit Zutaten, Zubereitung und Buchmalereien aus dem Kodex von Das Ferment.`;
+const pageKicker = landing?.kicker ?? 'Kategorie im Kodex';
+const pageTitle = landing?.h1 ?? categoryTitle;
+const wissen = landing ? landingInfos(landing) : [];
+const recipeItems = displayedRecipes.map((recipe) => ({
 	name: recipe.titel,
 	path: recipePath(recipe),
 }));
@@ -83,7 +98,7 @@ const cardImage = await socialCard(
 			breadcrumbs={[
 				{ name: 'Startseite', path: '/' },
 				{ name: 'Kategorien', path: '/kategorien/' },
-				{ name: categoryTitle, path: canonicalPath },
+				{ name: pageTitle, path: canonicalPath },
 			]}
 			itemList={{ name: `Rezepte in ${categoryTitle}`, items: recipeItems }}
 		/>
@@ -99,21 +114,42 @@ const cardImage = await socialCard(
 					<span aria-hidden="true">/</span>
 					<a href={withBase('/kategorien/')}>Kategorien</a>
 					<span aria-hidden="true">/</span>
-					<span aria-current="page">{categoryTitle}</span>
+					<span aria-current="page">{pageTitle}</span>
 				</nav>
 
 				<header class="section-heading">
 					<div>
-						<p class="section-heading__kicker">Kategorie im Kodex</p>
-						<h1 id="category-title">{categoryTitle}</h1>
+						<p class="section-heading__kicker">{pageKicker}</p>
+						<h1 id="category-title">{pageTitle}</h1>
 					</div>
 					<p class="section-heading__count">
 						{recipes.length} {recipes.length === 1 ? 'Rezept' : 'Rezepte'} mit diesem Thema.
 					</p>
 				</header>
 
+				{landing && (
+					<div class="landing-intro">
+						<p>{landing.lead}</p>
+						{wissen.length > 0 && (
+							<nav class="landing-wissen" aria-label="Wissen zur Einstiegsseite">
+								<p class="section-heading__kicker">Aus dem Wissensteil</p>
+								<ul>
+									{wissen.map((info) => (
+										<li>
+											<a class="prose-link" href={withBase(infoPath(info))}>
+												{info.titel}
+												<span class="prose-link__arrow" aria-hidden="true">↗</span>
+											</a>
+										</li>
+									))}
+								</ul>
+							</nav>
+						)}
+					</div>
+				)}
+
 				<div class="recipe-grid" aria-labelledby="category-title">
-					{recipes.map((recipe, index) => (
+					{displayedRecipes.map((recipe, index) => (
 						<RecipeCard
 							recipe={recipe}
 							image={imageForRecipe(recipe)}

@@ -377,6 +377,9 @@
       "Obst",
       "Apfel"
     ],
+    "saison": [
+      "Herbst"
+    ],
     "zutaten": [
       "800 g Hokkaido-Kürbis (mit Schale, in feine Spalten oder Stifte geschnitten)",
       "1 fester Apfel (in feine Stifte geschnitten)",
@@ -522,7 +525,11 @@
     "tags": [
       "Gemüse",
       "Kohl",
-      "Rotkohl"
+      "Rotkohl",
+      "Sauerkraut"
+    ],
+    "saison": [
+      "Winter"
     ],
     "zutaten": [
       "1 kg Rotkohl",
@@ -591,6 +598,9 @@
     "tags": [
       "Gemüse",
       "Kohl"
+    ],
+    "saison": [
+      "Winter"
     ],
     "zutaten": [
       "1 kg Weißkohl",
@@ -762,6 +772,10 @@
     "tags": [
       "Gemüse",
       "Rote Bete"
+    ],
+    "saison": [
+      "Herbst",
+      "Winter"
     ],
     "zutaten": [
       "1 kg Rote Bete",
@@ -1244,6 +1258,10 @@
       "Gemüse",
       "Kürbis"
     ],
+    "saison": [
+      "Herbst",
+      "Winter"
+    ],
     "zutaten": [
       "1 kg Hokkaido-Kürbis",
       "1 Liter Wasser",
@@ -1311,6 +1329,9 @@
     "tags": [
       "Gemüse",
       "Wurzelgemüse"
+    ],
+    "saison": [
+      "Winter"
     ],
     "zutaten": [
       "300 g Möhren",

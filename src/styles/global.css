@@ -1452,8 +1452,51 @@ img {
 }
 
 .category-index,
-.category-page {
+.category-page,
+.saison-page {
 	min-height: 40vh;
+}
+
+.landing-intro {
+	max-width: 46rem;
+	margin: 0 0 clamp(2rem, 4vw, 3rem);
+}
+
+.landing-intro > p {
+	margin: 0 0 1.4rem;
+	font-size: clamp(1rem, 1.6vw, 1.12rem);
+	line-height: 1.65;
+}
+
+.landing-wissen {
+	padding-top: 1rem;
+	border-top: 1px solid var(--line);
+}
+
+.saison-page .landing-wissen {
+	margin-top: clamp(2rem, 4vw, 3rem);
+}
+
+.landing-wissen ul,
+.landing-links__list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.7rem 1.6rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.landing-links {
+	margin: 0 0 clamp(2rem, 4vw, 3rem);
+}
+
+.landing-links--chapter {
+	margin-top: 0;
+}
+
+.recipe-intro__saison {
+	margin: 1rem 0 0;
 }
 
 .category-grid {

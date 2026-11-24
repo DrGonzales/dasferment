@@ -7,6 +7,7 @@ import Header from '../../components/Header.astro';
 import SeoHead from '../../components/SeoHead.astro';
 import { allRecipes } from '../../lib/chapters';
 import { categoryImageFor } from '../../lib/categoryImages';
+import { landingPages } from '../../lib/landingPages';
 import { coverImageFor } from '../../lib/pageImages';
 import { socialCard } from '../../lib/social';
 import { categoryLabel, categorySlug, MIN_CATEGORY_RECIPES } from '../../lib/recipes';
@@ -99,6 +100,23 @@ const cardImage = await socialCard(
 						{categories.length} Kategorien führen durch das Repertoire.
 					</p>
 				</header>
+
+				<section class="landing-links" aria-labelledby="landing-links-title">
+					<header class="recipe-section__header">
+						<p class="section-heading__kicker">Für den Einstieg</p>
+						<h2 id="landing-links-title">Einstiegsseiten</h2>
+					</header>
+					<ul class="landing-links__list">
+						{landingPages.map((page) => (
+							<li>
+								<a class="prose-link" href={withBase(page.route)}>
+									{page.h1}
+									<span class="prose-link__arrow" aria-hidden="true">↗</span>
+								</a>
+							</li>
+						))}
+					</ul>
+				</section>
 
 				<div class="category-grid" aria-labelledby="category-title">
 					{categories.map((category) => (

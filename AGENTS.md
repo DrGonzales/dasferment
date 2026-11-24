@@ -19,7 +19,7 @@ Manage the background server with `astro dev stop`, `astro dev status`, and `ast
 | Befehl | Wirkung |
 | --- | --- |
 | `npm run dev` | `astro dev --host 0.0.0.0` |
-| `npm run build` | statischer Build nach `dist/`, aktuell 193 Seiten |
+| `npm run build` | statischer Build nach `dist/`, aktuell 194 Seiten |
 | `npm run preview` | Build lokal ansehen |
 | `npx astro build` | Build ohne npm-Skript, wenn `npm` nicht verfügbar ist |
 | `npm run build:book` | Buch-Build nach `dist-book/`, eine Seite, aktuell 174 Druckseiten |
@@ -56,9 +56,9 @@ das apt-Paket `google-chrome-stable` nachzieht und dafür das Google-Repository 
 ```text
 src/
 ├── components/        Header.astro, Footer.astro, ChapterNav.astro, RecipeCard.astro, SeoHead.astro, Analytics.astro, SkipLink.astro
-├── data/              Kapitel.json, lactation/ und gingerbug/ mit je Kapitel.json, Rezepten und Wissen
-├── lib/               chapters.ts, recipes.ts, infos.ts, pageImages.ts, actorImages.ts, smallActors.ts, categoryImages.ts, social.ts, seo.ts, book.ts, epub.ts, figuren.ts
-├── pages/             index, kapitel (mit wissen/[info].astro), kategorien, rezepte (alt-Kompat-Links), buch, ueber-diese-seite, kontakt, datenschutz, impressum, 404.astro, robots.txt.ts
+├── data/              Kapitel.json, Einstiegsseiten.json, lactation/ und gingerbug/ mit je Kapitel.json, Rezepten und Wissen
+├── lib/               chapters.ts, recipes.ts, infos.ts, landingPages.ts, pageImages.ts, actorImages.ts, smallActors.ts, categoryImages.ts, social.ts, seo.ts, book.ts, epub.ts, figuren.ts
+├── pages/             index, kapitel (mit wissen/[info].astro), kategorien, saison, rezepte (alt-Kompat-Links), buch, ueber-diese-seite, kontakt, datenschutz, impressum, 404.astro, robots.txt.ts
 ├── pic/               pages/ (Rezeptillustrationen), actors/<kapitel>/ (Ratschlag-Portraits), smallactors/<kapitel>/ (Wissensseite), chapters/ (Kapitelbilder), categories/ (Kategorieseite), cover/ (Einband), icons/ (Download-Symbole)
 ├── styles/            global.css
 ├── book/              nur Buchausgabe, siehe Abschnitt Buchdruck
@@ -101,6 +101,8 @@ Regeln:
 | Rezepte | `/kapitel/<kapitel>/rezepte/`, `/kapitel/<kapitel>/rezepte/<slug>/` |
 | Alte Rezept-Links | `/rezepte/<slug>/` leitet per `meta refresh` auf das Kapitelblatt — statische Blätter aus `src/pages/rezepte/[slug].astro`, nicht in der Sitemap, ausgelöst durch `serialize` in `astro.config.mjs` |
 | Kategorien | `/kategorien/`, `/kategorien/<kategorie>/` |
+| Einstiegsseiten | `/kategorien/ginger-bug/`, `/kategorien/kimchi/`, `/kategorien/sauerkraut/`, `/saison/herbst-winter/` |
+| Saison | `/saison/<saison>/` aus `src/pages/saison/[saison].astro`, ohne eigene Indexseite |
 | Wissen | `/kapitel/<kapitel>/wissen/`, `/kapitel/<kapitel>/wissen/<info>/` |
 | Buch | `/buch/` |
 | Über diese Seite | `/ueber-diese-seite/` |
@@ -360,6 +362,17 @@ Die Kategorien entstehen **allein** aus den `tags` der Rezepte. Es gibt keine ei
 * Das Ober-Tag `Gemüse` trägt für Leser, interne Verlinkung und JSON-LD nichts. Es wird auf Rezeptkarten ausgeblendet und liefert nur `recipeCategory`. Rezepte ohne Ober-Tag, etwa die Obstfermente, bekommen deshalb kein `recipeCategory`. Das ist gewollt.
 * Wer einen Tag hinzufügt, braucht ein Bild in `src/pic/categories/<slug>.png`. Fehlt es, rendert die Kachel ohne Bild. Umgekehrt ist ein Bild ohne Slug ein Waisenbild und gehört gelöscht, weil die Quelldatei im Repository liegen bleibt. Seit `MIN_CATEGORY_RECIPES` gilt das auch für Bilder von Kategorien mit nur einem Rezept: sie werden nirgends gezeigt. Aktuell ungenutzt: `Exotische Früchte.png` (kein Slug, Verstoß gegen die Namensregel) und die Bilder der 11 Kategorien unter der Grenze; in `src/pic/pages/` liegt `gingerbug.png` als Waise ohne Rezeptreferenz.
 
+### Einstiegsseiten
+
+Vier Suchintentionen haben je eine kanonische Seite. Die 55 Rezeptblätter werden dafür nicht umgeschrieben.
+
+* `src/data/Einstiegsseiten.json` ist die einzige Quelle für H1, `<title>`, Description, Lead, Kicker, Wissens-IDs, Kartenreihenfolge und Saison-Werte. Diese Texte stehen nicht als Literale in `.astro`-Templates; `src/lib/landingPages.ts` ist der einzige Zugriff darauf.
+* `{anzahl}` in `title` und `description` wird zur Build-Zeit durch die tatsächliche Rezeptzahl ersetzt. Ein fehlender Platzhalter, ein unbekanntes Rezept in `reihenfolge`, eine unbekannte Saison oder eine tote Wissens-ID ist ein Build-Fehler, kein leerer Platz.
+* Ginger Bug, Kimchi und Sauerkraut bleiben bestehende Kategorieseiten mit eigenem, datengesteuertem Text. `/saison/herbst-winter/` ist die einzige neue Route. `/kapitel/gingerbug/rezepte/` bleibt ein Kapitelregister mit eigenem Titel und verweist auf die Einstiegsseite; es gibt keinen zweiten „Ginger Bug Rezept"-Titel.
+* Jede Einstiegsseite ist sichtbar verlinkt: über `/kategorien/`, die passenden Kapitel-Rezeptlisten und bei der Saison über die Hauptnavigation sowie die betroffenen Rezeptblätter. Kategorien ohne Eintrag behalten die bisherige schematische Erzeugung.
+* `saison: string[]` ist ein optionales Rezeptfeld; die erlaubten Werte stehen in `Einstiegsseiten.json`. In den Einstiegsseiten stehen keine Tag- oder Rezeptnamen als Literale.
+* `SeoHead.astro` und die Sitemap-Konfiguration bleiben unverändert; die Sitemap folgt den gebauten Routen.
+
 ## SEO
 
 Jede Seite rendert ihre Meta-Tags über `src/components/SeoHead.astro`. Meta-Tags nicht von Hand duplizieren.
@@ -491,7 +504,7 @@ Diese Properties werden **nicht** erzeugt, weil die Datenquelle sie nicht hergib
 Das Rezeptbuch existiert als zweite Ausgabe: `astro.book.config.mjs` baut `src/book/` nach `dist-book/`, `scripts/make-pdf.mjs` rendert daraus mit Puppeteer und Paged.js das PDF. Der ausführliche Plan mit allen Entscheidungen, Messwerten und den Stolperfallen von Paged.js 0.4.3 liegt in `docs/buchdruck-plan.md`.
 
 * **Getrennte Ausgabe, gemeinsame Daten.** `src/data/` und `src/lib/` werden von beiden Ausgaben genutzt, `src/lib/book.ts` gehört zu beiden. Build, Layout-Hülle und Stylesheet sind getrennt.
-* Die Buchausgabe ändert **keine** der obigen Regeln. `global.css` bleibt das einzige Stylesheet der Website, `npm run build` bleibt bei 193 Seiten. Kein `@page`, kein Print-Stylesheet und keine Drucklogik gehören in die Website.
+* Die Buchausgabe ändert **keine** der obigen Regeln. `global.css` bleibt das einzige Stylesheet der Website, `npm run build` bleibt bei 194 Seiten. Kein `@page`, kein Print-Stylesheet und keine Drucklogik gehören in die Website.
 * Das PDF entsteht in einem Durchlauf. `make-pdf.mjs` schreibt Kolumnentitel, Inhaltsverzeichnis und Lesezeichen in das bereits umgebrochene DOM und ruft Paged.js nicht erneut auf.
 * Neue Rezepte oder Wissenseinträge brauchen im Buch nichts außer Daten: Reihenfolge, Anker, Kolumnentitel, Inhaltsverzeichnis und Register entstehen aus `src/lib/book.ts` und dem Template.
 * Geänderte Seitenzahlen sind normal. Nach jedem Umbruch neu bauen und die Seitenzahl im PDF prüfen, nicht im DOM.
@@ -542,7 +555,7 @@ Das Buch hat eine dritte Ausgabe: `astro.epub.config.mjs` baut `src/epub/` nach 
 
 ## Vor dem Abschluss prüfen
 
-1. `npm run build` läuft fehlerfrei durch, die Seitenzahl stimmt (aktuell 193).
+1. `npm run build` läuft fehlerfrei durch, die Seitenzahl stimmt (aktuell 194).
 2. Keine doppelten `id`-Attribute und keine toten Sprungmarken.
 3. Keine erfundenen Rezept- oder Kontaktangaben; alles stammt aus der Datenquelle.
 4. Neue Bilder laufen über `astro:assets` und haben Alt-Text beziehungsweise sind als dekorativ markiert.

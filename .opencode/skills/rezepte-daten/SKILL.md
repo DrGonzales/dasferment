@@ -1,6 +1,6 @@
 ---
 name: rezepte-daten
-description: Rezepte und Wissenseiten in src/data/das_ferment.json und das_ferment_infos.json ändern, Codex-Texte, Ratgeber und Pflichtfelder
+description: Rezepte und Wissenseiten in src/data/*/*.json ändern, Codex-Texte, Ratgeber, Pflichtfelder und Einstiegsseiten in src/data/Einstiegsseiten.json
 license: MIT
 compatibility: opencode
 metadata:
@@ -35,6 +35,22 @@ künstlicher Ratgeber erzeugt.
 Rezepttitel: Klassische Salzgurken (Milchsäuregärung)
 Kodex-Titel: Von den gesalzenen Gürkchen und ihrer milden Gärung
 ```
+
+## Einstiegsseiten und Saison
+
+Vier Suchintentionen haben je eine kanonische Seite: Ginger Bug, Kimchi und
+Sauerkraut auf bestehenden Kategorieseiten, Fermentieren im Herbst/Winter auf
+`/saison/herbst-winter/`. Die 55 Rezeptblätter bleiben inhaltlich unberührt.
+
+`src/data/Einstiegsseiten.json` enthält H1, `<title>`, Description, Lead, Kicker,
+Wissens-IDs, Kartenreihenfolge und Saison-Werte. Diese Texte gehören nicht in
+Templates; `src/lib/landingPages.ts` ist der einzige Zugriff. `title` und
+`description` dürfen `{anzahl}` enthalten, das zur Build-Zeit ersetzt wird.
+
+`saison: string[]` ist ein optionales Rezeptfeld. Erlaubte Werte kommen aus
+`Einstiegsseiten.json`, nicht aus einem Tag-Vergleich im Code. Ein unbekanntes
+Rezept in `reihenfolge`, eine unbekannte Saison oder eine tote Wissens-ID ist
+ein Build-Fehler.
 
 ## Ratgeber
 
@@ -75,5 +91,8 @@ Nach einer Änderung an der Zahl der Einträge gehört das neu verteilt.
 * Jede Sprungmarke muss existieren, doppelte `id` sind Fehler.
 * Nichts an `src/lib/recipes.ts` anpassen, was schon aus den Daten kommt.
 * Bilder laufen über `astro:assets` und haben Alt-Text oder sind als dekorativ markiert.
-* Fällt ein Rezept oder Wissenseite an, gilt zusätzlich der Skill `buch-umbruch`:
-  `npm run check` bauen Website, Buch und PDF neu und prüft den Umbruch.
+* Fällt ein Rezept oder eine Wissenseite an, gilt zusätzlich der Skill `buch-umbruch`:
+  `npm run check` baut Website, Buch, PDF und EPUB neu und prüft alle Ausgaben.
+* Ändern sich nur ein Tag oder ein `saison`-Feld, bleiben Buch und EPUB inhaltlich
+  gleich; `npm run make:pdf && npm run check:book` und
+  `npm run make:epub && npm run check:epub` bestätigen das.

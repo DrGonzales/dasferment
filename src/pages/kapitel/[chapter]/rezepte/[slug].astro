@@ -17,6 +17,7 @@ import {
 	type Chapter,
 } from "../../../../lib/chapters";
 import { infoKategorieLabel, relatedInfos } from "../../../../lib/infos";
+import { landingsForSaison } from "../../../../lib/landingPages";
 import { imageForRecipe } from "../../../../lib/pageImages";
 import {
 	categoryCounts,
@@ -60,6 +61,9 @@ const canonicalUrl = Astro.site
 const description = recipeDescription(recipe);
 const related = relatedRecipes(recipe, chapter.recipes);
 const wissen = relatedInfos(recipe, chapter.infos);
+const saisonLandings = [
+	...new Set((recipe.saison ?? []).flatMap((saison) => landingsForSaison(saison))),
+];
 // Ab etwa 60 Zeichen schneidet die Suche den Titel ab. Dann entfällt der
 // Markenzusatz, der Name steht ohnehin in den WebSite-Daten und im Kopf jeder Seite.
 const pageTitle = `${recipe.titel} | Das Ferment`;
@@ -200,6 +204,18 @@ const breadcrumbTrail = [
 									})
 								}
 							</nav>
+							{
+								saisonLandings.length > 0 && (
+									<p class="recipe-intro__saison">
+										{saisonLandings.map((page) => (
+											<a class="prose-link" href={withBase(page.route)}>
+												{page.h1}
+												<span class="prose-link__arrow" aria-hidden="true">↗</span>
+											</a>
+										))}
+									</p>
+								)
+							}
 						</div>
 
 						<div class="recipe-intro__image">

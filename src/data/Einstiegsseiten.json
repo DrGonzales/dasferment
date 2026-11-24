@@ -1,0 +1,73 @@
+{
+  "eintraege": [
+    {
+      "slug": "ginger-bug",
+      "typ": "kategorie",
+      "route": "/kategorien/ginger-bug/",
+      "kapitel": ["gingerbug"],
+      "h1": "Ginger Bug Rezept",
+      "title": "Ginger Bug Rezept – {anzahl} Rezepte | Das Ferment",
+      "description": "Ginger Bug Rezept: Ingwer-Mutter ansetzen, füttern und {anzahl} Limonaden fermentieren – mit Buchmalereien aus dem Kodex.",
+      "kicker": "Der lebendige Ansatz",
+      "lead": "Aus Ingwer, Wasser und Zucker entsteht eine lebendige Kultur für fermentierte Limonaden. Hier stehen der Ansatz und alle Blätter, die daraus hervorgehen – mit den Buchmalereien des Kodex.",
+      "reihenfolge": ["Der Ginger Bug – Die lebendige Ingwer-Mutter"],
+      "wissen": ["ginger-bug-ansetzen-und-fuettern"]
+    },
+    {
+      "slug": "kimchi",
+      "typ": "kategorie",
+      "route": "/kategorien/kimchi/",
+      "kapitel": ["lactation"],
+      "h1": "Kimchi Grundrezept und Varianten",
+      "title": "Kimchi Grundrezept – {anzahl} Varianten | Das Ferment",
+      "description": "Kimchi Grundrezept und Varianten: Baechu, Kakkdugi, Oi-Sobagi und Nabak – mit Salz, Gärdauer und Buchmalereien.",
+      "kicker": "Aus dem Kodex der Gemüsegärung",
+      "lead": "Vom klassischen Baechu bis zur milden Wasser-Gärung zeigen diese Blätter, wie vielseitig Kimchi geraten kann. Salz und Gärdauer stehen in den verlinkten Wissenseinträgen.",
+      "reihenfolge": [
+        "Klassisches Baechu-Kimchi (Chinakohl-Kimchi)",
+        "Kakkdugi (Rettich-Kimchi)",
+        "Oi-Sobagi (Gefülltes Gurken-Kimchi)",
+        "Nabak-Kimchi (Mildes Wasser-Kimchi)"
+      ],
+      "wissen": ["salzlaken", "fermentationsdauer"]
+    },
+    {
+      "slug": "sauerkraut",
+      "typ": "kategorie",
+      "route": "/kategorien/sauerkraut/",
+      "kapitel": ["lactation"],
+      "h1": "Sauerkraut richtig fermentieren",
+      "title": "Sauerkraut richtig fermentieren | Das Ferment",
+      "description": "Sauerkraut richtig fermentieren: {anzahl} Rezepte, Salz und Gärdauer aus dem Wissensteil – mit Buchmalereien aus dem Kodex.",
+      "kicker": "Kohl, Salz und Geduld",
+      "lead": "Weißkohl und Rotkohl, mit Salz und Zeit verwandelt: hier stehen die Sauerkraut-Blätter des Kodex. Wie viel Salz benötigt wird und wie lange gegoren wird, erklären die verlinkten Wissenseinträge.",
+      "reihenfolge": [
+        "Klassisches Sauerkraut mit Kümmel",
+        "Rotes Sauerkraut mit Apfel",
+        "Sauerkraut mit Karotte und Ingwer"
+      ],
+      "wissen": ["salzlaken", "trocken-salzen", "fermentationsdauer"]
+    },
+    {
+      "slug": "herbst-winter",
+      "typ": "saison",
+      "route": "/saison/herbst-winter/",
+      "saisons": ["Herbst", "Winter"],
+      "navLabel": "Saison",
+      "h1": "Fermentieren im Herbst/Winter",
+      "title": "Fermentieren im Herbst/Winter | Das Ferment",
+      "description": "Fermentieren im Herbst und Winter: Kürbis, Wurzelgemüse, Kohl und Apfel – {anzahl} Rezepte plus Wissen zu Lagerung und Temperatur.",
+      "kicker": "Vorrat für die kalte Zeit",
+      "lead": "Kürbis, Wurzelwerk, Kohl und Äpfel tragen die Farben der kühlen Monate. Die Blätter dieser Seite sind nach Jahreszeit ausgewählt; Temperatur und Lagerung erklären die verlinkten Wissenseinträge.",
+      "reihenfolge": [
+        "Herbstliches Kürbis-Apfel-Kimchi",
+        "Fermentierter Kürbis mit Chili und Ingwer",
+        "Winterliches Wurzelgemüse-Ferment",
+        "Fermentierte Rote Bete mit Meerrettich",
+        "Rotes Sauerkraut mit Apfel",
+        "Mildes Weißkohl-Pfeffer-Ferment"
+      ],
+      "wissen": ["temperatur", "lagerung"]
+    }
+  ]
+}
