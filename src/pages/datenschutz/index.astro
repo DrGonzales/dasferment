@@ -1,0 +1,180 @@
+---
+import SkipLink from '../../components/SkipLink.astro';
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import SeoHead from "../../components/SeoHead.astro";
+import "../../styles/global.css";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const withBase = (path: string) => `${base}${path}`;
+const canonicalPath = "/datenschutz/";
+const canonicalUrl = Astro.site
+	? new URL(withBase(canonicalPath), Astro.site).toString()
+	: withBase(canonicalPath);
+const description =
+	"Datenschutzerklärung für Das Ferment: Reichweitenmessung mit Umami und Kontaktformular mit Web3Forms.";
+const contactMail = "amkaltenpolar71@gmail.com";
+---
+
+<!doctype html>
+<html lang="de">
+	<head>
+		<SeoHead
+			title="Datenschutz | Das Ferment"
+			description={description}
+			canonicalUrl={canonicalUrl}
+			base={base}
+			breadcrumbs={[
+				{ name: "Startseite", path: "/" },
+				{ name: "Datenschutz", path: canonicalPath },
+			]}
+		/>
+	</head>
+	<body>
+		<SkipLink />
+		<div class="site-shell">
+			<Header />
+
+			<main id="main" class="recipe-main prose-page">
+				<nav class="breadcrumbs" aria-label="Brotkrümelnavigation">
+					<a href={withBase("/")}>Startseite</a>
+					<span aria-hidden="true">/</span>
+					<span aria-current="page">Datenschutz</span>
+				</nav>
+
+				<article class="prose-article legal-page">
+					<header class="prose-intro">
+						<p class="section-heading__kicker">Umgang mit Daten</p>
+						<h1>Datenschutz</h1>
+						<p class="prose-intro__lead">
+							Was beim Besuch dieser Website und bei der Nutzung des
+							Kontaktformulars mit deinen Daten geschieht.
+						</p>
+					</header>
+
+					<section class="prose-section" aria-labelledby="verantwortlich-title">
+						<p class="section-heading__kicker">Verantwortlicher</p>
+						<h2 id="verantwortlich-title">Verantwortliche Stelle</h2>
+						<p>
+							Verantwortlich für die Datenverarbeitung auf dieser
+							Website ist Hans Anthes. Anschrift und Kontakt stehen im
+							<a href={withBase("/impressum/")}>Impressum</a>.
+						</p>
+					</section>
+
+					<section class="prose-section" aria-labelledby="aufruf-title">
+						<p class="section-heading__kicker">Technisch notwendig</p>
+						<h2 id="aufruf-title">Aufruf der Website</h2>
+						<p>
+							Beim Aufruf verarbeitet der Hosting-Anbieter technisch
+							notwendige Verbindungsdaten, dazu gehören IP-Adresse,
+							Zeitpunkt und abgerufene Seite. Das ist erforderlich, um
+							die Website auszuliefern und den Betrieb sicher zu
+							stellen. Rechtsgrundlage ist das berechtigte Interesse
+							nach Art. 6 Abs. 1 lit. f DSGVO. Wie lange der Anbieter
+							diese Verbindungsdaten speichert, richtet sich nach seinen
+							eigenen Vorgaben.
+						</p>
+						<p>
+							Die Website setzt selbst keine Cookies. Rezepte, Bilder
+							und Texte können ohne JavaScript gelesen werden.
+						</p>
+					</section>
+
+					<section class="prose-section" aria-labelledby="umami-title">
+						<p class="section-heading__kicker">Reichweitenmessung</p>
+						<h2 id="umami-title">Umami Cloud</h2>
+						<p>
+							Zur Reichweitenmessung wird Umami Cloud eingebunden.
+							Erfasst werden Seitenaufrufe und Klicks auf die Downloads
+							von PDF und EPUB, damit erkennbar bleibt, welche Blätter
+							gelesen werden. Umami verarbeitet diese Daten als
+							Auftragsverarbeiter für uns.
+							Rechtsgrundlage ist unser berechtigtes Interesse nach
+							Art. 6 Abs. 1 lit. f DSGVO.
+						</p>
+						<p>
+							Umamis Standardmessung speichert die IP-Adresse nicht als
+							Feld in den Messdaten; sie wird nur vorübergehend zur
+							Zustellung und zur Bestimmung des ungefähren Standorts
+							verarbeitet. Es werden keine Nutzerprofile gebildet, keine
+							Werbenetzwerke eingebunden und keine Cookies gesetzt. Ist
+							im Browser Do Not Track aktiviert, unterbleibt die
+							Messung. Die Messung ist auf die Domain dieser Website
+							begrenzt.
+						</p>
+						<p>
+							Wir speichern die Messdaten nicht zusätzlich auf eigenen
+							Systemen. Wie lange Umami Cloud sie vorhält, ergibt sich
+							aus der
+							<a
+								href="https://umami.is/privacy"
+								rel="noopener noreferrer">Datenschutzerklärung von Umami</a
+							>. Werbeblocker können das Skript blockieren; dann werden
+							keine Daten übertragen.
+						</p>
+					</section>
+
+					<section class="prose-section" aria-labelledby="web3forms-title">
+						<p class="section-heading__kicker">Kontaktformular</p>
+						<h2 id="web3forms-title">Web3Forms</h2>
+						<p>
+							Das Kontaktformular versendet deine Angaben über
+							Web3Forms. Verarbeitet werden Name, E-Mail-Adresse und
+							der Text deiner Nachricht. Zweck ist allein, deine
+							Anfrage zu beantworten. Rechtsgrundlage ist Art. 6 Abs. 1
+							lit. a DSGVO, bei Anfragen zu dieser Website zusätzlich
+							Art. 6 Abs. 1 lit. b DSGVO.
+						</p>
+						<p>
+							Web3Forms beziehungsweise Web3Creative verarbeitet die
+							Übermittlung als Auftragsverarbeiter und leitet die
+							Nachricht an unser Postfach weiter. Zur
+							Spamabwehr können IP-Adresse und E-Mail-Adresse an die
+							Dienste CleanTalk und Akismet übermittelt werden.
+							Näheres steht in der
+							<a
+								href="https://web3forms.com/privacy"
+								rel="noopener noreferrer">Datenschutzerklärung von Web3Forms</a
+							>.
+						</p>
+						<p>
+							Wir löschen deine Nachricht, sobald sie bearbeitet ist und
+							keine gesetzliche Aufbewahrungspflicht entgegensteht. Bei
+							Web3Forms werden Formulareingaben nach eigenen Angaben
+							längstens drei Jahre aufbewahrt und dann automatisch
+							gelöscht; eine frühere Löschung ist möglich.
+						</p>
+					</section>
+
+					<section class="prose-section" aria-labelledby="rechte-title">
+						<p class="section-heading__kicker">Deine Rechte</p>
+						<h2 id="rechte-title">Rechte und Widerruf</h2>
+						<p>
+							Du hast das Recht auf Auskunft, Berichtigung, Löschung
+							und Einschränkung der Verarbeitung sowie auf
+							Datenübertragbarkeit und Widerspruch. Eine Einwilligung
+							kannst du jederzeit mit Wirkung für die Zukunft
+							widerrufen; die Rechtmäßigkeit der Verarbeitung bis zum
+							Widerruf bleibt davon unberührt.
+						</p>
+						<p>
+							Schreib uns dazu an
+							<a href={`mailto:${contactMail}`}
+								>amkaltenpolar71(at)gmail.com</a
+							>. Außerdem kannst du dich bei einer Datenschutz-Aufsichtsbehörde
+							beschweren.
+						</p>
+					</section>
+
+					<aside class="prose-note">
+						<span aria-hidden="true">❦</span>
+						<p>Weniger Daten, mehr Blubbern.</p>
+					</aside>
+				</article>
+			</main>
+
+			<Footer />
+		</div>
+	</body>
+</html>

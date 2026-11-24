@@ -1,4 +1,5 @@
 ---
+import SkipLink from '../../components/SkipLink.astro';
 import { Image } from 'astro:assets';
 import Footer from '../../components/Footer.astro';
 import Header from '../../components/Header.astro';
@@ -38,10 +39,11 @@ const contactMail = 'amkaltenpolar71@gmail.com';
 		/>
 	</head>
 	<body>
+		<SkipLink />
 		<div class="site-shell">
 			<Header />
 
-			<main class="recipe-main prose-page">
+			<main id="main" class="recipe-main prose-page">
 				<nav class="breadcrumbs" aria-label="Brotkrümelnavigation">
 					<a href={withBase('/')}>Startseite</a>
 					<span aria-hidden="true">/</span>
@@ -75,6 +77,13 @@ const contactMail = 'amkaltenpolar71@gmail.com';
 							Die Felder Name, E-Mail und Nachricht genügen. Nach dem
 							Absenden landet die Nachricht direkt im Postfach des
 							Kochs, und du erhältst eine Bestätigung von Web3Forms.
+						</p>
+						<p class="contact-form__hint">
+							Deine Angaben werden über Web3Forms verarbeitet, um
+							deine Anfrage zu beantworten. Zweck, Speicherdauer und
+							Widerruf stehen in der
+							<a href={withBase('/datenschutz/')}>Datenschutzerklärung</a
+							>.
 						</p>
 
 						<form

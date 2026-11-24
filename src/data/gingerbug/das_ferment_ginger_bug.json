@@ -34,7 +34,12 @@
         "ratgeber": {
             "sprecher": "Connie",
             "text": "Pflegen Sie Ihre Ingwer-Mutter mit gebührender Sorgfalt, mein guter Freund, und verabsäumen Sie ja nicht ihre tägliche Speisung! Denn aus diesem unscheinbaren Glase sollen dereinst noch manch spritziger Himbeertrank, heitere Waldlimonade und andere erlesene Köstlichkeiten hervorgehen. Die Katze im Übrigen lässt mich wissen, sie vernehme bereits den unverkennbaren Duft eines neuen Abenteuers!"
-        }
+        },
+        "wissen": [
+            "ginger-bug-grundlagen",
+            "ginger-bug-ansetzen-und-fuettern",
+            "ginger-bug-temperatur-und-gaerung"
+        ]
     },
     {
         "titel": "Himbeer-Zitronen-Limonade mit Ginger Bug",
@@ -65,7 +70,12 @@
         "ratgeber": {
             "sprecher": "Connie",
             "text": "Es bedarf akribischer Beobachtungsgabe, mein lieber Freund! Das Elixier färbt sich rasch rubinfarben; hüten Sie sich jedoch vor Trägheit bei der Abfüllung. Die unsichtbaren Gärgase entwickeln in den Glasflaschen eine geradezu explosive Spannkraft."
-        }
+        },
+        "wissen": [
+            "ginger-bug-fruechte-und-aromen",
+            "ginger-bug-flaschen-und-druck",
+            "ginger-bug-lagerung-und-haltbarkeit"
+        ]
     },
     {
         "titel": "Blaubeer-Zitronen-Limonade mit Ginger Bug",
@@ -96,7 +106,12 @@
         "ratgeber": {
             "sprecher": "Connie",
             "text": "Eine bloße Nuance von Zitrone genügt, um die lethargischen Beeren zu beleben. Doch ich rate zu wissenschaftlicher Skepsis: Vertrauen Sie niemals blindlings einer bestrickenden äußeren Farbgebung, sondern konsultieren Sie stets Ihren Gaumen."
-        }
+        },
+        "wissen": [
+            "ginger-bug-fruechte-und-aromen",
+            "ginger-bug-flaschen-und-druck",
+            "ginger-bug-lagerung-und-haltbarkeit"
+        ]
     },
     {
         "titel": "Brombeer-Limetten-Limonade mit Ginger Bug",
@@ -128,7 +143,12 @@
         "ratgeber": {
             "sprecher": "Katze",
             "text": "Die wilde Brombeere besitzt einen ungezähmten Charakter. Wenn Sie nicht wünschen, die lästigen Samen während des Genusses zwischen den Zähnen zu spüren, ist die Nutzung eines feinmaschigen Haarsiebs eine logische Notwendigkeit."
-        }
+        },
+        "wissen": [
+            "ginger-bug-fruechte-und-aromen",
+            "ginger-bug-flaschen-und-druck",
+            "ginger-bug-lagerung-und-haltbarkeit"
+        ]
     },
     {
         "titel": "Erdbeer-Basilikum-Limonade mit Ginger Bug",
@@ -161,7 +181,12 @@
         "ratgeber": {
             "sprecher": "Connie",
             "text": "Das Basilikum verhält sich wie ein hochadeliger Gast im Salon: Wenige Blätter genügen vollauf. Andernfalls riskieren Sie, dass Ihr Gebräu die unangenehme Note einer halbgaren Tinktur aus der Apothekersgasse annimmt."
-        }
+        },
+        "wissen": [
+            "ginger-bug-fruechte-und-aromen",
+            "ginger-bug-flaschen-und-druck",
+            "ginger-bug-lagerung-und-haltbarkeit"
+        ]
     },
     {
         "titel": "Johannisbeer-Hibiskus-Limonade mit Ginger Bug",
@@ -194,7 +219,12 @@
         "ratgeber": {
             "sprecher": "Katze",
             "text": "Dieses Fluidum leuchtet wahrlich wie ein kostbarer Edelstein in der Vitrine eines Juweliers. Lassen Sie sich jedoch nicht von diesem royalen Prachtgewand täuschen: Die Säure besitzt eine Intensität, die den unvorbereiteten Gaumen zutiefst erschüttern kann."
-        }
+        },
+        "wissen": [
+            "ginger-bug-fruechte-und-aromen",
+            "ginger-bug-flaschen-und-druck",
+            "ginger-bug-lagerung-und-haltbarkeit"
+        ]
     },
     {
         "titel": "Ananas-Minz-Limonade mit Ginger Bug",
@@ -226,7 +256,12 @@
         "ratgeber": {
             "sprecher": "Katze",
             "text": "Ein Dekokt von beinahe imperialer Pracht! Doch walten Sie mit Mäßigung bezüglich der Minze; sie ist als dezenter Begleiter der Ananas gedacht und darf den rechtmäßigen Throninhaber dieses Trankes keinesfalls usurpieren."
-        }
+        },
+        "wissen": [
+            "ginger-bug-fruechte-und-aromen",
+            "ginger-bug-flaschen-und-druck",
+            "ginger-bug-lagerung-und-haltbarkeit"
+        ]
     },
     {
         "titel": "Mango-Maracuja-Limonade mit Ginger Bug",
@@ -257,7 +292,12 @@
         "ratgeber": {
             "sprecher": "Connie",
             "text": "Die Mango fungiert hier als Spenderin nobler Süße, wohingegen die Passionsfrucht einen resoluten Gegenpart einnimmt. Ich empfehle eine sorgsame Degustation des Rohansatzes, bevor Sie voreilig entscheiden, ob die Zugabe von weiterem Saccharose-Granulat vonnöten ist."
-        }
+        },
+        "wissen": [
+            "ginger-bug-fruechte-und-aromen",
+            "ginger-bug-flaschen-und-druck",
+            "ginger-bug-lagerung-und-haltbarkeit"
+        ]
     },
     {
         "titel": "Gurke-Limette-Minze-Limonade mit Ginger Bug",
@@ -291,7 +331,12 @@
         "ratgeber": {
             "sprecher": "Connie",
             "text": "Dieses Tonikum präsentiert sich so flüchtig und leicht wie eine frische Brise im Hyde Park. Bedenken Sie jedoch analytisch: Die Gurke offeriert den Gärstoffen kaum Nährsalze oder Zucker; überwachen Sie den chemischen Prozess daher penibel und erwarten Sie keineswegs die stürmische Dynamik zuckerreicher Früchte."
-        }
+        },
+        "wissen": [
+            "ginger-bug-fruechte-und-aromen",
+            "ginger-bug-flaschen-und-druck",
+            "alkohol-bei-ginger-bug-getraenken"
+        ]
     },
     {
         "titel": "Blutorangen-Rosmarin-Limonade mit Ginger Bug",
@@ -324,7 +369,12 @@
         "ratgeber": {
             "sprecher": "Katze",
             "text": "Der Rosmarin erweist sich als ein überaus dominanter Würzmeister. Ein winziges Zweiglein ist vollauf ausreichend, damit das zarte Aroma der Orange nicht gänzlich unter seiner rigorosen Herrschaft begraben wird."
-        }
+        },
+        "wissen": [
+            "ginger-bug-fruechte-und-aromen",
+            "ginger-bug-flaschen-und-druck",
+            "ginger-bug-lagerung-und-haltbarkeit"
+        ]
     },
     {
         "titel": "Apfel-Holunderblüten-Limonade mit Ginger Bug",
@@ -356,6 +406,11 @@
         "ratgeber": {
             "sprecher": "Katze",
             "text": "Wählen Sie das botanische Material mit äußerster Vorsicht und beziehen Sie es ausschließlich aus einer verifizierten, für den Verzehr freigegebenen Drogeriehandlung. Nicht jede Blüte, die dem Spaziergänger einen lieblichen Duft vorgaukelt, ist für das menschliche Abdomen zuträglich."
-        }
+        },
+        "wissen": [
+            "ginger-bug-fruechte-und-aromen",
+            "ginger-bug-flaschen-und-druck",
+            "ginger-bug-lagerung-und-haltbarkeit"
+        ]
     }
 ]

@@ -1,4 +1,5 @@
 ---
+import SkipLink from '../../components/SkipLink.astro';
 import { getImage, Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import epubIcon from "../../pic/icons/epub.png";
@@ -76,10 +77,11 @@ const cardImage = await socialCard(
 		/>
 	</head>
 	<body>
+		<SkipLink />
 		<div class="site-shell">
 			<Header />
 
-			<main class="recipe-main prose-page book-page">
+			<main id="main" class="recipe-main prose-page book-page">
 				<nav class="breadcrumbs" aria-label="Brotkrümelnavigation">
 					<a href={withBase("/")}>Startseite</a>
 					<span aria-hidden="true">/</span>

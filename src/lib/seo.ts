@@ -27,6 +27,24 @@ export function recipeDescription(recipe: Pick<Recipe, 'titel' | 'codex_einleitu
 	return shorten(einleitung ? `${recipe.titel} – ${einleitung}` : recipe.titel);
 }
 
+export const AUTHOR_NAME = 'Hans Anthes';
+
+/** Autor ohne erfundenes Foto und ohne unbelegte Profile. */
+export function personObject(aboutUrl: string): object {
+	return {
+		'@type': 'Person',
+		name: AUTHOR_NAME,
+		url: aboutUrl,
+	};
+}
+
+export function authorObject(aboutUrl: string): object {
+	return {
+		'@context': 'https://schema.org',
+		...personObject(aboutUrl),
+	};
+}
+
 export function siteObjects(homeUrl: string): object[] {
 	return [
 		{

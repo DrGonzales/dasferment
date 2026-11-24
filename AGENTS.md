@@ -19,13 +19,13 @@ Manage the background server with `astro dev stop`, `astro dev status`, and `ast
 | Befehl | Wirkung |
 | --- | --- |
 | `npm run dev` | `astro dev --host 0.0.0.0` |
-| `npm run build` | statischer Build nach `dist/`, aktuell 139 Seiten |
+| `npm run build` | statischer Build nach `dist/`, aktuell 193 Seiten |
 | `npm run preview` | Build lokal ansehen |
 | `npx astro build` | Build ohne npm-Skript, wenn `npm` nicht verfügbar ist |
-| `npm run build:book` | Buch-Build nach `dist-book/`, eine Seite, aktuell 150 Druckseiten |
+| `npm run build:book` | Buch-Build nach `dist-book/`, eine Seite, aktuell 174 Druckseiten |
 | `npm run make:pdf` | Buch-Build plus `dist-book/das-ferment.pdf` |
 | `npm run check:book` | prüft den fertigen Umbruch im Browser und das PDF, siehe `scripts/buch-pruefen.mjs` |
-| `npm run build:epub` | EPUB-Build nach `dist-epub/`, 89 Blätter als `.xhtml` |
+| `npm run build:epub` | EPUB-Build nach `dist-epub/`, 104 Blätter als `.xhtml` |
 | `npm run make:epub` | EPUB-Build plus `dist-epub/das-ferment.epub` |
 | `npm run check:epub` | prüft das fertige Archiv und ruft epubcheck auf, siehe `scripts/epub-pruefen.mjs` |
 | `npm run check` | Website, Buch, PDF, Buchprüfung, EPUB und EPUB-Prüfung in einem Durchlauf |
@@ -55,10 +55,10 @@ das apt-Paket `google-chrome-stable` nachzieht und dafür das Google-Repository 
 
 ```text
 src/
-├── components/        Header.astro, Footer.astro, ChapterNav.astro, RecipeCard.astro, SeoHead.astro, Analytics.astro
+├── components/        Header.astro, Footer.astro, ChapterNav.astro, RecipeCard.astro, SeoHead.astro, Analytics.astro, SkipLink.astro
 ├── data/              Kapitel.json, lactation/ und gingerbug/ mit je Kapitel.json, Rezepten und Wissen
 ├── lib/               chapters.ts, recipes.ts, infos.ts, pageImages.ts, actorImages.ts, smallActors.ts, categoryImages.ts, social.ts, seo.ts, book.ts, epub.ts, figuren.ts
-├── pages/             index, kapitel, kategorien, rezepte (alt-Kompat-Links), buch, ueber-diese-seite, kontakt, impressum, 404.astro, robots.txt.ts
+├── pages/             index, kapitel (mit wissen/[info].astro), kategorien, rezepte (alt-Kompat-Links), buch, ueber-diese-seite, kontakt, datenschutz, impressum, 404.astro, robots.txt.ts
 ├── pic/               pages/ (Rezeptillustrationen), actors/<kapitel>/ (Ratschlag-Portraits), smallactors/<kapitel>/ (Wissensseite), chapters/ (Kapitelbilder), categories/ (Kategorieseite), cover/ (Einband), icons/ (Download-Symbole)
 ├── styles/            global.css
 ├── book/              nur Buchausgabe, siehe Abschnitt Buchdruck
@@ -80,9 +80,9 @@ Verwendet werden Astro, TypeScript (`astro/tsconfigs/strict`), HTML, CSS, JSON. 
 
 Die JSON-Dateien der Kapitel sind Single Source of Truth:
 
-* `src/data/Kapitel.json` — Reihenfolge der Kapitel über ihre Manifestpfade
+* `src/data/Kapitel.json` — Reihenfolge der Kapitel über ihre Manifestpfade und `stand`, das feste Änderungsdatum der Inhalte
 * `src/data/<kapitel>/Kapitel.json` — Titel, Beschreibung, Dateien für Rezepte und Wissen, Bildpfade
-* `src/data/<kapitel>/…` — 52 Rezepte und 32 Wissenseinträge in zwei Kapiteln
+* `src/data/<kapitel>/…` — 55 Rezepte und 42 Wissenseinträge in drei Kapiteln
 
 Regeln:
 
@@ -101,10 +101,11 @@ Regeln:
 | Rezepte | `/kapitel/<kapitel>/rezepte/`, `/kapitel/<kapitel>/rezepte/<slug>/` |
 | Alte Rezept-Links | `/rezepte/<slug>/` leitet per `meta refresh` auf das Kapitelblatt — statische Blätter aus `src/pages/rezepte/[slug].astro`, nicht in der Sitemap, ausgelöst durch `serialize` in `astro.config.mjs` |
 | Kategorien | `/kategorien/`, `/kategorien/<kategorie>/` |
-| Wissen | `/kapitel/<kapitel>/wissen/` |
+| Wissen | `/kapitel/<kapitel>/wissen/`, `/kapitel/<kapitel>/wissen/<info>/` |
 | Buch | `/buch/` |
 | Über diese Seite | `/ueber-diese-seite/` |
 | Kontakt | `/kontakt/` |
+| Datenschutz | `/datenschutz/` |
 | Impressum | `/impressum/` |
 | Hilfsdateien | `/sitemap-index.xml`, `/sitemap-rezepte-0.xml`, `/sitemap-kategorien-0.xml`, `/sitemap-pages-0.xml`, `/robots.txt` |
 | Fehlerseite | `/404.html` — GitHub Pages liefert sie mit Status 404 aus, sie steht auf `noindex` und nicht in der Sitemap |
@@ -114,7 +115,7 @@ Die Site liegt unter `base: /dasferment` auf GitHub Pages. Konsequenzen:
 * Jeder interne Link wird über `import.meta.env.BASE_URL` gebildet, niemals als hartkodierter absoluter Pfad.
 * Die Sitemap schreibt `@astrojs/sitemap` in `astro.config.mjs`, nicht `src/pages/`. Deshalb braucht eine neue öffentliche Seite dort keinen Eintrag.
 * `robots.txt` entsteht als Route aus `src/pages/robots.txt.ts`, nicht als Datei in `public/`. Eine Datei `public/robots.txt` überschattet die Route still, der Build warnt und lässt sie aus.
-* Neue öffentliche Seite in `Header.astro` verlinken.
+* Neue öffentliche Seite in `Header.astro` verlinken; rechtliche Seiten wie `/datenschutz/` gehören in den `Footer.astro`.
 
 ### Sitemap
 
@@ -130,7 +131,9 @@ Die Sitemap entsteht beim Build aus den gebauten Routen, aufgeteilt in drei Date
 * Die Aufteilung entsteht aus `chunks` in `astro.config.mjs`. Der Rest landet ohne Zutun der Integration in `sitemap-pages-0.xml`, deshalb heißt kein eigenes Chunk `pages`.
 * Ein Chunk entscheidet über den Pfad, nicht über einen Tag. Ein neues Tag, eine neue Kategorie oder ein neues Rezept braucht deshalb keinen Code, um in der Sitemap zu erscheinen.
 * Die Integration liest `site` und `base` aus der Konfiguration. Absolute URLs entstehen von selbst, es gibt keine hartkodierte Domain.
-* `lastmod` bleibt leer, weil die Datenquelle kein Änderungsdatum liefert. Die Integration setzt es nur, wenn `lastmod` in der Option steht.
+* `lastmod` kommt aus `stand` in `src/data/Kapitel.json` und wird in `serialize()` in `astro.config.mjs` gesetzt. Ein Build-Datum wäre falsch, weil es bei jedem Build alle URLs als neu melden würde.
+* Rezept-URLs bekommen zusätzlich `<image:image>` aus den gebauten `og:image`- und `og:image:alt`-Meta-Tags. `serialize()` liest dafür das fertige `dist/`-HTML; die Integration deklariert das Bild im Namespace, ihre Typen kennen es aber nicht, deshalb ist der Eintrag dort als `any` markiert.
+* Die alten `/rezepte/<slug>/`-Weiterleitungen fallen in `serialize()` heraus und stehen nicht in der Sitemap.
 * Endpoints wie `robots.txt` und die Sitemap-Dateien selbst sind keine Seiten und stehen deshalb nicht in der Sitemap.
 * Die Buch- und EPUB-Ausgabe bauen mit eigenen Konfigurationen ohne `site`. Sie bekommen deshalb keine Sitemap.
 
@@ -236,7 +239,7 @@ Aktuell `34rem` Text plus `2 × (8.6rem + 1.5rem)`, also `@container (max-width:
 
 ## Wissensseite
 
-Alle Wissenseinträge eines Kapitels stehen auf **einer** Seite: `/kapitel/<kapitel>/wissen/`. Sie ist über die Kapitelnavigation erreichbar.
+Alle Wissenseinträge eines Kapitels stehen gebündelt auf `/kapitel/<kapitel>/wissen/`. Zusätzlich hat jeder Eintrag eine eigene Seite `/kapitel/<kapitel>/wissen/<info>/` mit vollständigem Text, `Article`-JSON-LD und passenden Rezepten. Die Sammelseite verlinkt jeden Eintrag über „Eigene Seite", die alten `id`-Anker bleiben erhalten. Der Pfad entsteht über `infoPath(info)` in `src/lib/chapters.ts`; die Route ist `src/pages/kapitel/[chapter]/wissen/[info].astro`. Beide Seiten sind über die Kapitelnavigation erreichbar.
 
 Aufbau: Breadcrumbs, Überschrift mit Anzahlen, Sprungmarken-Navigation zu allen Gruppen, pro Gruppe ein `<section>`, pro Eintrag ein `<article>` mit `id={info.id}`. Gruppen-IDs erhalten das Präfix `gruppe-`, damit sie sich nicht mit einer `info.id` überschneiden. Ab 961 px steht die Sprungmarken-Navigation als klebende Seitenspalte rechts neben den Gruppen; darunter steht sie wieder als Block über dem Inhalt.
 
@@ -267,6 +270,7 @@ Weitere Regeln:
 * `tabelle` ist optional. Tabellen werden mit `<caption>` und `scope` ausgegeben.
 * Gruppen werden nach Anzahl der Einträge absteigend sortiert, bei Gleichstand alphabetisch.
 * Jede Sprungmarke im Inhaltsverzeichnis muss auch existieren. Tote Anker und doppelte IDs sind Fehler.
+* Jedes Rezept nennt in `wissen: string[]` drei Info-IDs. `relatedInfos()` in `src/lib/infos.ts` und `relatedRecipesForInfo()` in `src/lib/recipes.ts` bauen die Querverweise in beide Richtungen. Unbekannte IDs sind ein Fehler, kein stiller Verweis ins Leere.
 
 ### Portraits auf der Wissensseite
 
@@ -302,13 +306,15 @@ Der Kopf der Startseite zeigt in `.hero__gallery` genau drei Motive:
 
 Alle Bilder werden über `astro:assets` mit `Image` oder `getImage()` ausgeliefert, nie als Originaldatei referenziert. Responsive, optimiert, semantisch korrekt, mit sinnvollem Alt-Text.
 
+Ein Konzept für die Erzeugung der Motive mit einem lokal betriebenen KI-Modell liegt in `docs/bilderzeugung-plan.md`. Die Erzeugung ist ein Entwicklungsschritt außerhalb des Builds.
+
 | Ordner | Inhalt | Maße | Einsatz |
 | --- | --- | --- | --- |
-| `src/pic/pages/` | 52 Rezeptillustrationen, referenziert über das Feld `picture` der Rezeptdaten | 1024 × 1536 | Rezeptbild, Karten, Social Card |
+| `src/pic/pages/` | 55 Rezeptillustrationen, referenziert über das Feld `picture` der Rezeptdaten | 1024 × 1536 | Rezeptbild, Karten, Social Card |
 | `src/pic/chapters/` | `lactation.png`, `gingerbug.png` | quadratisch | Kapitelblatt in Website, Buch und EPUB |
 | `src/pic/actors/<kapitel>/` | `connie.png`, `katze.png` je Kapitel | 1024 × 1536 | Portrait im Ratschlag |
 | `src/pic/smallactors/<kapitel>/` | 18 Motive, je Kapitel neun | 640 × 640 | Portrait auf der Wissensseite |
-| `src/pic/categories/` | 34 Dateien, eine je Kategorie-Slug; genutzt werden die 22 Kategorien ab `MIN_CATEGORY_RECIPES` | 1254 × 1254 | Kachel auf `/kategorien/` |
+| `src/pic/categories/` | 36 Dateien, eine je Kategorie-Slug; genutzt werden die 24 Kategorien ab `MIN_CATEGORY_RECIPES` | 1254 × 1254 | Kachel auf `/kategorien/` |
 | `src/pic/icons/` | `buch.png`, `pdf.png`, `epub.png` | 1254 × 1254, 1293 × 1217, 1254 × 1254 | Kopfbild und einziges Motiv der Download-Karten auf `/buch/` |
 | `src/pic/cover/` | `front.png`, `back.png` (Einband), `print.png` (Druckfassung) | 1055 × 1491, 1308 × 945 | Einband im EPUB |
 
@@ -330,7 +336,7 @@ Jedes `<Image>` mit `widths` braucht ein `sizes`, das die **gemessene** Layout-B
 Am Ende jeder Rezeptseite stehen drei verwandte Blätter in `.recipe-related`, nach dem Ratgeber.
 
 * Auswahl über `relatedRecipes()` aus `src/lib/recipes.ts`: geteilte `tags`, das Ober-Tag `Gemüse` zählt nicht, sonst hängt hinter jedem Blatt dasselbe Blatt. Bei Gleichstand entscheidet `titel` alphabetisch — die Reihenfolge ist fest und nicht zufällig.
-* Alle 52 Rezepte haben verwandte Blätter. Fehlen sie dennoch, bleibt die Sektion aus, statt leere Links zu zeigen.
+* Alle 55 Rezepte haben verwandte Blätter. Fehlen sie dennoch, bleibt die Sektion aus, statt leere Links zu zeigen.
 * Der Link zeigt `codex_titel` und darunter den sachlichen `titel` als Fließtext, kein `aria-label` — der sichtbare Text ist der zugängliche Name. Das `aria-label` der Karte war entbehrlich, weil Kodex- und Rezepttitel ohnehin im Linktext stehen; Lighthouse meldete es als `label-content-name-mismatch`, weil es den sichtbaren Text „Rezept öffnen" nicht enthielt.
 
 ### Kategorieseite
@@ -347,9 +353,9 @@ Am Ende jeder Rezeptseite stehen drei verwandte Blätter in `.recipe-related`, n
 
 Die Kategorien entstehen **allein** aus den `tags` der Rezepte. Es gibt keine eigene Kategorienliste im Code und keine festen Seiten pro Kategorie.
 
-* Der Slug ist `categorySlug(tag)`, also `slugify(tag)`. Der Anzeigename ist der Tag selbst. Zwei Tags dürfen nie denselben Slug ergeben, sonst entstehen zwei Seiten mit identischem Titel. Aktuell 47 Tags, 47 Slugs, keine Kollision.
+* Der Slug ist `categorySlug(tag)`, also `slugify(tag)`. Der Anzeigename ist der Tag selbst. Zwei Tags dürfen nie denselben Slug ergeben, sonst entstehen zwei Seiten mit identischem Titel. Aktuell 56 Tags, 56 Slugs, keine Kollision.
 * Kategorien mit weniger als `MIN_CATEGORY_RECIPES` (2) Rezepten bekommen keine eigene Seite. Die Grenze steht nur in `src/lib/recipes.ts`; `kategorien/index.astro` filtert die Kacheln, `kategorien/[category].astro` die Routen, und die Tag-Chips der Rezeptseite verlinken solche Tags nur als Text (`span`) statt als `a`.
-* **Kein Tag-Literal in Templates.** Tags in `src/data/*.json` sind Anzeigenamen mit Umlaut und dürfen umbenannt werden. Wer ein bestimmtes Tag in Code prüft, nimmt `isGeneralTag(tag)` beziehungsweise `hasGeneralTag(recipe)` aus `src/lib/recipes.ts` und vergleicht über `slugify`. Ein hart verdrahtetes `"gemuese"` hat `recipeCategory` auf allen 52 Rezeptseiten und den Chipfilter auf allen 52 Karten stillschweigend abgeschaltet, nachdem das Tag in den Daten zu `"Gemüse"` umbenannt wurde.
+* **Kein Tag-Literal in Templates.** Tags in `src/data/*.json` sind Anzeigenamen mit Umlaut und dürfen umbenannt werden. Wer ein bestimmtes Tag in Code prüft, nimmt `isGeneralTag(tag)` beziehungsweise `hasGeneralTag(recipe)` aus `src/lib/recipes.ts` und vergleicht über `slugify`. Ein hart verdrahtetes `"gemuese"` hat `recipeCategory` auf allen 55 Rezeptseiten und den Chipfilter auf allen 55 Karten stillschweigend abgeschaltet, nachdem das Tag in den Daten zu `"Gemüse"` umbenannt wurde.
 * Ein Tag darf in einem Rezept nicht doppelt stehen. `kategorien/index.astro` zählt Tag-Vorkommen statt Rezepte, `kategorien/[category].astro` schiebt das Rezept sonst zweimal in die Liste.
 * Das Ober-Tag `Gemüse` trägt für Leser, interne Verlinkung und JSON-LD nichts. Es wird auf Rezeptkarten ausgeblendet und liefert nur `recipeCategory`. Rezepte ohne Ober-Tag, etwa die Obstfermente, bekommen deshalb kein `recipeCategory`. Das ist gewollt.
 * Wer einen Tag hinzufügt, braucht ein Bild in `src/pic/categories/<slug>.png`. Fehlt es, rendert die Kachel ohne Bild. Umgekehrt ist ein Bild ohne Slug ein Waisenbild und gehört gelöscht, weil die Quelldatei im Repository liegen bleibt. Seit `MIN_CATEGORY_RECIPES` gilt das auch für Bilder von Kategorien mit nur einem Rezept: sie werden nirgends gezeigt. Aktuell ungenutzt: `Exotische Früchte.png` (kein Slug, Verstoß gegen die Namensregel) und die Bilder der 11 Kategorien unter der Grenze; in `src/pic/pages/` liegt `gingerbug.png` als Waise ohne Rezeptreferenz.
@@ -386,7 +392,7 @@ Weitere Regeln:
 
 * `title` bleibt unter etwa 60 Zeichen, die Meta Description unter 155. Läuft ein Rezept-Titel darüber, entfällt der Markenzusatz `| Das Ferment`, weil die Marke ohnehin in `WebSite` steht.
 * Die Meta Description einer Rezeptseite ist `recipeDescription()`: sachlicher `titel`, danach die Kodex-Einleitung, am Wortende gekürzt. Ein eigenes Verfassen von Beschreibungen für Rezepte gibt es nicht.
-* Der sachliche `titel` steht sichtbar als `.recipe-intro__recipe-title` unter dem Kodex-`h1`. Er gehört zur sachlichen Ebene und wird deshalb nicht in die Überschrift gemischt.
+* Der sachliche `titel` ist die `<h1>` der Rezeptseite. Der `codex_titel` steht darunter als `.recipe-intro__codex-title` und behält die große Kodex-Typografie. Damit trägt die Überschrift den Suchbegriff, ohne die Gestaltung zu ändern. Buch und EPUB behalten ihre eigene Überschrift.
 * Die Tags der Rezeptseite verlinken ihre Kategorieseiten über `categorySlug()`. Tags in `RecipeCard.astro` bleiben Text, weil die Karte von einem einzigen Anker umschlossen ist und ein zweiter Anker darin ungültiges HTML ergäbe.
 * Die Fehlerseite steht auf `noindex` und taucht nicht in der Sitemap auf. Die Sitemap-Integration schließt sie von selbst aus, weil sie kein Verzeichnis-Routenblatt ist; nach einem Build einmal nachsehen.
 
@@ -399,14 +405,15 @@ Weitere Regeln:
 | `image` | `picture`, zwei Breiten (800 px und 1200 px) als `ImageObject` |
 | `inLanguage` | `"de"` |
 | `url`, `mainEntityOfPage` | Canonical URL der Seite |
-| `author`, `publisher` | Organization „Das Ferment“ |
+| `author` | `Person` aus `personObject()` in `src/lib/seo.ts`: `AUTHOR_NAME`, URL `/ueber-diese-seite/` |
+| `publisher` | Organization „Das Ferment“ |
 | `totalTime` | aus `zubereitung` abgeleitet |
 | `recipeCategory` | `hasGeneralTag(recipe) ? GENERAL_TAG_LABEL : undefined` |
 | `keywords` | `tags` |
 | `recipeIngredient` | `zutaten` |
 | `recipeInstructions` | `zubereitung` als `HowToStep` |
 
-Zusätzlich ein `BreadcrumbList` für die vorhandene Brotkrümelnavigation: `Startseite → Rezepte → <Rezepttitel>`.
+Zusätzlich ein `BreadcrumbList` für die vorhandene Brotkrümelnavigation: `Startseite → Rezepte → <Rezepttitel>`. `SeoHead.astro` legt die `Person` außerdem auf jeder Seite als eigenes JSON-LD-Objekt ab; die Wissensdetailseiten übernehmen sie als `author` ihres `Article`. Beim Autor gibt es bewusst kein `image` und kein `sameAs`, solange kein Foto und keine belegten Profile vorliegen. Erfundene Angaben gehören nicht ins strukturierte Datenmaterial.
 
 * URLs in JSON-LD sind absolut und enthalten den `base`-Pfad.
 * Unbekannte Werte werden weggelassen, nicht geraten. `undefined` fällt beim Serialisieren automatisch weg.
@@ -434,7 +441,14 @@ Diese Properties werden **nicht** erzeugt, weil die Datenquelle sie nicht hergib
 
 * Die E-Mail wird sichtbar in der Form `amkaltenpolar71(at)gmail.com` ausgegeben, verlinkt aber als echtes `mailto:amkaltenpolar71@gmail.com`, damit sie anklickbar bleibt.
 * Der Bildrechtshinweis ist ein eigener Abschnitt mit eigenem Kicker und wird wortgleich wiedergegeben, nicht zusammengefasst.
+* Der Abschnitt „Hinweis zur KI-Unterstützung" steht zwischen Bildrechten und Reichweitenmessung: Die Buchmalereien entstehen mit einem lokal betriebenen KI-Modell, ohne Cloud-Dienst. Der Abschnitt „Bildrechte und Nutzung" bleibt davon unberührt und wird nicht umformuliert.
 * Zusätzlich verlinkt die Seite auf das Impressum von am-kalten-polar.blogspot.com für fortlaufend aktualisierte Angaben.
+
+## Kontaktformular und Datenschutz
+
+`/kontakt/` verschickt die Nachricht als HTML-`POST` an `https://api.web3forms.com/submit`. Der Access-Key steht bewusst als verstecktes Feld im ausgelieferten HTML, so wie die öffentliche Umami-Kennung: Web3Forms ist ein reiner Formulardienst, der Key ist kein Geheimnis. Der Schutz liegt in der im Web3Forms-Dashboard festgelegten Domain-Einschränkung; der Absender erhält zusätzlich eine Bestätigungsmail. Das versteckte Feld `botcheck` ist ein Honeypot und bleibt für Menschen leer. Neue Felder gehören ins Formular, nicht in ein clientseitiges Skript.
+
+`/datenschutz/` ist die zentrale Erklärung und verlinkt von Kontaktformular, Impressum und Footer. Sie beschreibt Hosting, Umami Cloud und Web3Forms mit Zweck, Speicherdauer und Widerruf. Wer einen dieser Dienste austauscht, prüft alle drei Stellen: Formularhinweis, Impressum-Abschnitt „Reichweitenmessung" und Datenschutzseite.
 
 ## Buch-Download
 
@@ -477,7 +491,7 @@ Diese Properties werden **nicht** erzeugt, weil die Datenquelle sie nicht hergib
 Das Rezeptbuch existiert als zweite Ausgabe: `astro.book.config.mjs` baut `src/book/` nach `dist-book/`, `scripts/make-pdf.mjs` rendert daraus mit Puppeteer und Paged.js das PDF. Der ausführliche Plan mit allen Entscheidungen, Messwerten und den Stolperfallen von Paged.js 0.4.3 liegt in `docs/buchdruck-plan.md`.
 
 * **Getrennte Ausgabe, gemeinsame Daten.** `src/data/` und `src/lib/` werden von beiden Ausgaben genutzt, `src/lib/book.ts` gehört zu beiden. Build, Layout-Hülle und Stylesheet sind getrennt.
-* Die Buchausgabe ändert **keine** der obigen Regeln. `global.css` bleibt das einzige Stylesheet der Website, `npm run build` bleibt bei 139 Seiten. Kein `@page`, kein Print-Stylesheet und keine Drucklogik gehören in die Website.
+* Die Buchausgabe ändert **keine** der obigen Regeln. `global.css` bleibt das einzige Stylesheet der Website, `npm run build` bleibt bei 193 Seiten. Kein `@page`, kein Print-Stylesheet und keine Drucklogik gehören in die Website.
 * Das PDF entsteht in einem Durchlauf. `make-pdf.mjs` schreibt Kolumnentitel, Inhaltsverzeichnis und Lesezeichen in das bereits umgebrochene DOM und ruft Paged.js nicht erneut auf.
 * Neue Rezepte oder Wissenseinträge brauchen im Buch nichts außer Daten: Reihenfolge, Anker, Kolumnentitel, Inhaltsverzeichnis und Register entstehen aus `src/lib/book.ts` und dem Template.
 * Geänderte Seitenzahlen sind normal. Nach jedem Umbruch neu bauen und die Seitenzahl im PDF prüfen, nicht im DOM.
@@ -492,7 +506,7 @@ Das Rezeptbuch existiert als zweite Ausgabe: `astro.book.config.mjs` baut `src/b
 * Jedes Rezept ist ein Blatt: Das Bild steht auf der rechten Seite (Recto), der Rezepttext beginnt auf der Rückseite (Verso). Wird der Text länger als eine Seite, läuft er auf der nächsten Seite weiter; der Umbruch schiebt dann eine Leerseite dazwischen, damit das Bild des nächsten Rezepts wieder rechts steht.
 * Überschrift: nur `codex_titel`, groß. Der sachliche `titel` steht nicht im Buch.
 * Kein Header, Footer, keine Brotkrümelnavigation, keine Site-Shell.
-* Kategorien im Buch kommen aus denselben `tags` wie auf der Website und folgen denselben Regeln: `isGeneralTag()` und `universalTags()` aus `src/lib/book.ts` halten das Ober-Tag und alle gemeinsamen Nenner aus den Blättern und aus dem Register. `universalTags()` zählt **Rezepte**, nicht Tag-Vorkommen, sonst macht ein doppeltes Tag in einem Rezept ein seltenes Tag zum scheinbar gemeinsamen. Das Blatt „Fermentierte Schlehen“ trägt `Obst`, `Wildobst`, `Schlehe` und `Beeren` statt `Gemüse`; ohne den Rezeptzähler stünde `Gemüse` danach auf 39 von 52 Blättern.
+* Kategorien im Buch kommen aus denselben `tags` wie auf der Website und folgen denselben Regeln: `isGeneralTag()` und `universalTags()` aus `src/lib/book.ts` halten das Ober-Tag und alle gemeinsamen Nenner aus den Blättern und aus dem Register. `universalTags()` zählt **Rezepte**, nicht Tag-Vorkommen, sonst macht ein doppeltes Tag in einem Rezept ein seltenes Tag zum scheinbar gemeinsamen. Das Blatt „Fermentierte Schlehen“ trägt `Obst`, `Wildobst`, `Schlehe` und `Beeren` statt `Gemüse`; ohne den Rezeptzähler stünde `Gemüse` danach auf 39 von 55 Blättern.
 * Bild und Text getrennt: `.recipe-plate` steht im Markup vor `.recipe`, `break-before: right` auf `.recipe-plate`, `break-before: left` auf `.recipe`. Leerseiten entstehen aus dieser Regel, nicht aus festen Seiten.
 * Die Bildseite trägt nur das Bild: keine Bildunterschrift und keinen Kolumnentitel. `data-book-ref` steht deshalb nur am Text, damit das Inhaltsverzeichnis nicht auf eine Bildseite zeigt.
 * Typografie in `pt`, keine Media Queries, kein `vw`, keine Container Queries.
@@ -528,7 +542,7 @@ Das Buch hat eine dritte Ausgabe: `astro.epub.config.mjs` baut `src/epub/` nach 
 
 ## Vor dem Abschluss prüfen
 
-1. `npm run build` läuft fehlerfrei durch, die Seitenzahl stimmt.
+1. `npm run build` läuft fehlerfrei durch, die Seitenzahl stimmt (aktuell 193).
 2. Keine doppelten `id`-Attribute und keine toten Sprungmarken.
 3. Keine erfundenen Rezept- oder Kontaktangaben; alles stammt aus der Datenquelle.
 4. Neue Bilder laufen über `astro:assets` und haben Alt-Text beziehungsweise sind als dekorativ markiert.
@@ -538,6 +552,9 @@ Das Buch hat eine dritte Ausgabe: `astro.epub.config.mjs` baut `src/epub/` nach 
 8. Geänderte Seitenzahlen im Buch kommen in `docs/buchdruck-plan.md`, Abschnitt „Stand nach der Umsetzung“, nach.
 9. Bei Änderungen an `src/data/`, `src/lib/epub.ts` oder `src/epub/` zusätzlich `npm run make:epub` und `npm run check:epub`. Das Skript prüft mimetype zuerst, Manifest gegen Archiv, doppelte `id`, tote Verweise, nicht referenzierte Bilder und Schriften ohne Stylesheet und ruft epubcheck darüber hinaus auf.
 10. Bei Änderungen an `Analytics.astro`, `SeoHead.astro` oder den Download-Links: `npm run build`, dann hat jede Seite genau ein Umami-Script-Tag, `dist-book/` und `dist-epub/` haben keins, die Download-Links tragen `data-umami-event`, und der Impressum-Abschnitt „Reichweitenmessung“ passt zur Messung.
+11. Neue oder geänderte Wissenseinträge: Sammelseite und Detailseiten bauen, `wissen`-Arrays der Rezepte stimmen, keine toten Verweise in „Mehr dazu" und „Passende Rezepte".
+12. Bei Änderungen an `astro.config.mjs` oder `src/data/Kapitel.json`: Sitemap prüfen — `<lastmod>` aus `stand`, `<image:image>` bei Rezepten, `/datenschutz/` und alle Wissensdetail-URLs enthalten, `/404.html` und alte `/rezepte/`-Weiterleitungen nicht.
+13. Jede echte Seite hat genau ein `<h1>`, einen Skip-Link und ein `<main id="main">`; die Weiterleitungsblätter unter `/rezepte/` sind die Ausnahme.
 
 ## Skills und Commands
 

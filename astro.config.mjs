@@ -1,6 +1,21 @@
 // @ts-check
+import { existsSync, readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+
+// `stand` ist das feste Änderungsdatum der Inhalte. Ein Build-Datum würde bei
+// jedem Build alle URLs als neu melden, auch wenn sich kein Rezept geändert hat.
+const { stand } = JSON.parse(
+	readFileSync(fileURLToPath(new URL('./src/data/Kapitel.json', import.meta.url)), 'utf8'),
+);
+
+function metaContent(html, property) {
+	const match = html.match(
+		new RegExp(`<meta property="${property}" content="([^"]+)"`),
+	);
+	return match?.[1].replaceAll('&amp;', '&').replaceAll('&quot;', '"');
+}
 
 // GitHub Pages serves this repository at https://drgonzales.github.io/dasferment/.
 // The environment variables keep local and hosted builds configurable.
@@ -30,10 +45,34 @@ export default defineConfig({
 			// Die alten `/rezepte/<slug>/`-Weiterleitungen sind keine Inhalte,
 			// sondern nur Kompatibilitätsblätter; sie gehören nicht in die Sitemap.
 			serialize(item) {
-				if (new URL(item.url).pathname.startsWith(`${basePath}rezepte/`)) {
+				const { pathname } = new URL(item.url);
+				if (pathname.startsWith(`${basePath}rezepte/`)) {
 					return undefined;
 				}
-				return item;
+
+				// Der Stream kennt `img`, der Typ der Integration ist enger.
+				const result = /** @type {any} */ (item);
+				result.lastmod = stand;
+
+				const relative = decodeURIComponent(pathname.slice(basePath.length));
+				const htmlPath = fileURLToPath(
+					new URL(`./dist/${relative}index.html`, import.meta.url),
+				);
+				if (pathname.includes('/rezepte/') && existsSync(htmlPath)) {
+					const html = readFileSync(htmlPath, 'utf8');
+					const loc = metaContent(html, 'og:image');
+					const alt = metaContent(html, 'og:image:alt');
+					if (loc && alt) {
+						result.img = [
+							{
+								url: loc,
+								title: alt,
+								caption: alt,
+							},
+						];
+					}
+				}
+				return result;
 			},
 			chunks: {
 				rezepte: (item) => (sitemapChunk(item) === 'rezepte' ? item : undefined),

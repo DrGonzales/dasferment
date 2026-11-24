@@ -1,4 +1,5 @@
 ---
+import SkipLink from '../../../../components/SkipLink.astro';
 import type { ImageMetadata } from "astro";
 import { getImage, Image } from "astro:assets";
 import ChapterNav from "../../../../components/ChapterNav.astro";
@@ -11,9 +12,11 @@ import {
 	chapterPath,
 	chapterRecipesPath,
 	chapters,
+	infoPath,
 	recipePath,
 	type Chapter,
 } from "../../../../lib/chapters";
+import { infoKategorieLabel, relatedInfos } from "../../../../lib/infos";
 import { imageForRecipe } from "../../../../lib/pageImages";
 import {
 	categoryCounts,
@@ -27,7 +30,7 @@ import {
 	totalTimeIso,
 	type Recipe,
 } from "../../../../lib/recipes";
-import { recipeDescription } from "../../../../lib/seo";
+import { personObject, recipeDescription } from "../../../../lib/seo";
 import { socialCard } from "../../../../lib/social";
 import "../../../../styles/global.css";
 
@@ -56,6 +59,7 @@ const canonicalUrl = Astro.site
 	: withBase(canonicalPath);
 const description = recipeDescription(recipe);
 const related = relatedRecipes(recipe, chapter.recipes);
+const wissen = relatedInfos(recipe, chapter.infos);
 // Ab etwa 60 Zeichen schneidet die Suche den Titel ab. Dann entfällt der
 // Markenzusatz, der Name steht ohnehin in den WebSite-Daten und im Kopf jeder Seite.
 const pageTitle = `${recipe.titel} | Das Ferment`;
@@ -110,7 +114,7 @@ const recipeJsonLd = {
 	inLanguage: "de",
 	url: canonicalUrl,
 	mainEntityOfPage: { "@type": "WebPage", "@id": canonicalUrl },
-	author: siteOrganization,
+	author: personObject(absoluteUrl(withBase("/ueber-diese-seite/"))),
 	publisher: siteOrganization,
 	totalTime: totalTimeIso(recipe),
 	recipeCategory: hasGeneralTag(recipe) ? GENERAL_TAG_LABEL : undefined,
@@ -144,10 +148,11 @@ const breadcrumbTrail = [
 		/>
 	</head>
 	<body>
+		<SkipLink />
 		<div class="site-shell">
 			<Header />
 
-			<main class="recipe-main">
+			<main id="main" class="recipe-main">
 				<ChapterNav chapter={chapter} />
 
 				<article class="recipe-article">
@@ -160,10 +165,10 @@ const breadcrumbTrail = [
 							</div>
 
 							<h1>
-								{recipe.codex_titel}
-							</h1>
-							<p class="recipe-intro__recipe-title">
 								{recipe.titel}
+							</h1>
+							<p class="recipe-intro__codex-title">
+								{recipe.codex_titel}
 							</p>
 							{
 								recipe.codex_einleitung && (
@@ -375,6 +380,35 @@ const breadcrumbTrail = [
 											</li>
 										);
 									})}
+								</ul>
+							</section>
+						)
+					}
+					{
+						wissen.length > 0 && (
+							<section
+								class="recipe-related recipe-related--knowledge"
+								aria-labelledby="mehr-dazu-title"
+							>
+								<header class="recipe-section__header">
+									<p class="section-heading__kicker">
+										Aus dem Wissensteil
+									</p>
+									<h2 id="mehr-dazu-title">Mehr dazu</h2>
+								</header>
+								<ul class="recipe-related__list">
+									{wissen.map((info) => (
+										<li>
+											<a href={withBase(infoPath(info))}>
+												<span class="recipe-related__codex">
+													{info.titel}
+												</span>
+												<span class="recipe-related__plain">
+													{infoKategorieLabel(info.kategorie)}
+												</span>
+											</a>
+										</li>
+									))}
 								</ul>
 							</section>
 						)

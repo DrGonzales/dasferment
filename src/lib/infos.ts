@@ -61,6 +61,21 @@ export function codexListe(codex?: string[], plain?: string[]): string[] {
 	return codex ?? plain ?? [];
 }
 
+/** Wissenseinträge eines Rezepts; unbekannte IDs sind ein Datenfehler. */
+export function relatedInfos(
+	recipe: { titel?: string; wissen?: string[] },
+	infos: readonly Info[],
+): Info[] {
+	const available = new Map(infos.map((info) => [info.id, info]));
+	const missing = (recipe.wissen ?? []).filter((id) => !available.has(id));
+	if (missing.length > 0) {
+		throw new Error(
+			`Unbekannte Wissens-IDs in „${recipe.titel ?? 'Rezept'}": ${missing.join(', ')}`,
+		);
+	}
+	return (recipe.wissen ?? []).map((id) => available.get(id)!);
+}
+
 export function gruppiereInfos(infos: Info[]): InfoGruppe[] {
 	const map = new Map<string, InfoGruppe>();
 

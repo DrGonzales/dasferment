@@ -1,0 +1,227 @@
+---
+import SkipLink from '../../../../components/SkipLink.astro';
+import { Image } from 'astro:assets';
+import ChapterNav from '../../../../components/ChapterNav.astro';
+import Footer from '../../../../components/Footer.astro';
+import Header from '../../../../components/Header.astro';
+import SeoHead from '../../../../components/SeoHead.astro';
+import {
+	chapterKnowledgePath,
+	chapterPath,
+	chapters,
+	recipePath,
+	type Chapter,
+} from '../../../../lib/chapters';
+import {
+	codexListe,
+	codexText,
+	infoKategorieLabel,
+	type Info,
+} from '../../../../lib/infos';
+import { relatedRecipesForInfo, slugify } from '../../../../lib/recipes';
+import { personObject, shorten } from '../../../../lib/seo';
+import { assignPortraits, SMALL_ACTOR_SIZE } from '../../../../lib/smallActors';
+import '../../../../styles/global.css';
+
+export function getStaticPaths() {
+	return chapters.flatMap((chapter) =>
+		chapter.infos.map((info) => ({
+			params: { chapter: chapter.slug, info: info.id },
+			props: { chapter, info },
+		})),
+	);
+}
+
+interface Props {
+	chapter: Chapter;
+	info: Info;
+}
+
+const { chapter, info } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const withBase = (path: string) => `${base}${path}`;
+const canonicalPath = `${chapterKnowledgePath(chapter)}${info.id}/`;
+const canonicalUrl = Astro.site
+	? new URL(withBase(canonicalPath), Astro.site).toString()
+	: withBase(canonicalPath);
+const description = shorten(`${info.titel} – ${codexText(info.codex_intro, info.intro)}`);
+const passendeRezepte = relatedRecipesForInfo(info, chapter.recipes);
+const portraits = assignPortraits(chapter.infos, chapter.slug);
+const portrait = portraits[chapter.infos.findIndex((entry) => entry.id === info.id)];
+const homeUrl = Astro.site ? new URL(withBase('/'), Astro.site).toString() : withBase('/');
+const aboutUrl = Astro.site
+	? new URL(withBase('/ueber-diese-seite/'), Astro.site).toString()
+	: withBase('/ueber-diese-seite/');
+const organization = { '@type': 'Organization', name: 'Das Ferment', url: homeUrl };
+const articleJsonLd = [
+	{
+		'@type': 'Article',
+		headline: info.titel,
+		description,
+		inLanguage: 'de',
+		url: canonicalUrl,
+		mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalUrl },
+		author: personObject(aboutUrl),
+		publisher: organization,
+	},
+];
+---
+
+<!doctype html>
+<html lang="de">
+	<head>
+		<SeoHead
+			title={`${info.titel} | Das Ferment`}
+			description={description}
+			canonicalUrl={canonicalUrl}
+			base={base}
+			type="article"
+			breadcrumbs={[
+				{ name: 'Startseite', path: '/' },
+				{ name: chapter.titel, path: chapterPath(chapter) },
+				{ name: 'Wissen', path: chapterKnowledgePath(chapter) },
+				{ name: info.titel, path: canonicalPath },
+			]}
+			jsonLd={articleJsonLd}
+		/>
+	</head>
+	<body>
+		<SkipLink />
+		<div class="site-shell">
+			<Header />
+
+			<main id="main" class="repertoire knowledge-page">
+				<ChapterNav chapter={chapter} />
+
+				<nav class="breadcrumbs" aria-label="Brotkrümelnavigation">
+					<a href={withBase('/')}>Startseite</a>
+					<span aria-hidden="true">/</span>
+					<a href={withBase(chapterPath(chapter))}>{chapter.titel}</a>
+					<span aria-hidden="true">/</span>
+					<a href={withBase(chapterKnowledgePath(chapter))}>Wissen</a>
+					<span aria-hidden="true">/</span>
+					<span aria-current="page">{info.titel}</span>
+				</nav>
+
+				<article class="knowledge-entry info-detail" aria-labelledby="info-title">
+					{portrait && (
+						<Image
+							class="knowledge-portrait"
+							src={portrait}
+							alt=""
+							aria-hidden="true"
+							width={SMALL_ACTOR_SIZE}
+							height={SMALL_ACTOR_SIZE}
+							quality={80}
+							loading="lazy"
+							decoding="async"
+						/>
+					)}
+					<div class="codex-kicker">
+						<span>{infoKategorieLabel(info.kategorie)}</span>
+					</div>
+					<h1 id="info-title">{info.titel}</h1>
+					<p class="info-detail__codex-title">
+						{codexText(info.codex_titel, info.titel)}
+					</p>
+					<p class="knowledge-entry__intro">
+						{codexText(info.codex_intro, info.intro)}
+					</p>
+
+					{info.abschnitte?.map((abschnitt) => (
+						<section
+							class="knowledge-entry__section"
+							aria-labelledby={`${info.id}-${slugify(abschnitt.titel)}`}
+						>
+							<h2 id={`${info.id}-${slugify(abschnitt.titel)}`}>
+								{codexText(abschnitt.codex_titel, abschnitt.titel)}
+							</h2>
+							{abschnitt.text || abschnitt.codex_text ? (
+								<p>{codexText(abschnitt.codex_text, abschnitt.text)}</p>
+							) : null}
+							{codexListe(abschnitt.codex_liste, abschnitt.liste).length > 0 ? (
+								<ul>
+									{codexListe(abschnitt.codex_liste, abschnitt.liste).map((punkt) => (
+										<li>{punkt}</li>
+									))}
+								</ul>
+							) : null}
+						</section>
+					))}
+
+					{info.tabelle ? (
+						<figure class="knowledge-table">
+							<table>
+								<caption>
+									{codexText(info.tabelle.codex_titel, info.tabelle.titel)}
+								</caption>
+								<thead>
+									<tr>
+										{info.tabelle.spalten.map((spalte) => (
+											<th scope="col">{spalte}</th>
+										))}
+									</tr>
+								</thead>
+								<tbody>
+									{info.tabelle.zeilen.map((zeile) => (
+										<tr>
+											{zeile.map((zelle, index) =>
+												index === 0 ? (
+													<th scope="row">{zelle}</th>
+												) : (
+													<td>{zelle}</td>
+												),
+											)}
+										</tr>
+									))}
+								</tbody>
+							</table>
+							{info.tabelle.hinweis || info.tabelle.codex_hinweis ? (
+								<figcaption>
+									{codexText(info.tabelle.codex_hinweis, info.tabelle.hinweis)}
+								</figcaption>
+							) : null}
+						</figure>
+					) : null}
+
+					{passendeRezepte.length > 0 && (
+						<section
+							class="recipe-related recipe-related--knowledge"
+							aria-labelledby="passende-rezepte-title"
+						>
+							<header class="recipe-section__header">
+								<p class="section-heading__kicker">Zurück in die Rezepte</p>
+								<h2 id="passende-rezepte-title">Passende Rezepte</h2>
+							</header>
+							<ul class="recipe-related__list">
+								{passendeRezepte.map((recipe) => (
+									<li>
+										<a href={withBase(recipePath(recipe))}>
+											<span class="recipe-related__codex">
+												{recipe.titel}
+											</span>
+											<span class="recipe-related__plain">
+												{recipe.codex_titel}
+											</span>
+										</a>
+									</li>
+								))}
+							</ul>
+						</section>
+					)}
+
+					<p class="info-detail__nav">
+						<a class="prose-link" href={withBase(chapterKnowledgePath(chapter))}>
+							Alle Wissenseinträge dieses Kapitels<span
+								class="prose-link__arrow"
+								aria-hidden="true">↗</span
+							>
+						</a>
+					</p>
+				</article>
+			</main>
+
+			<Footer />
+		</div>
+	</body>
+</html>

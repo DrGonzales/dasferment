@@ -8,19 +8,19 @@
     "zutaten": [
       "1 kg kleine Einlegegurken",
       "1 Liter Wasser",
-      "30–35 g Meersalz",
+      "50 g Meersalz",
       "3 Zehen Knoblauch",
       "1 Bund Dill mit Blüten",
       "1 TL Senfkörner",
       "1 TL schwarze Pfefferkörner",
-      "2–3 Eichen- oder Weinblätter (für den Knack)"
+      "2–3 Eichen- oder Weinblätter (unbehandelt, Lebensmittelqualität, für den Knack)"
     ],
     "zubereitung": [
       "Wasser und Salz aufkochen, bis sich das Salz komplett auflöst. Die Salzlake vollständig abkühlen lassen.",
       "Gurken gründlich waschen und etwa 1 Stunde in eiskaltes Wasser legen. Die Blütenansätze vorsichtig entfernen.",
-      "Gewürze, Knoblauch und Kräuter auf den Boden eines sterilen Fermentationsglases geben. Die Gurken möglichst dicht stehend darauf schichten.",
+      "Gewürze, Knoblauch und Kräuter auf den Boden eines sauberen, heiß ausgespülten Fermentationsglases geben. Die Gurken möglichst dicht stehend darauf schichten.",
       "Die kalte Salzlake eingießen, sodass alle Gurken vollständig bedeckt sind. Ein Fermentiergewicht auflegen.",
-      "Das Glas verschließen und 3 bis 5 Tage bei Raumtemperatur fermentieren lassen, danach kühl stellen (z. B. im Kühlschrank oder Keller), um die Gärung zu verlangsamen."
+      "Das Glas mit einem Gäraufsatz verschließen oder den Deckel locker auflegen, damit die Gärgase entweichen können, und 3 bis 5 Tage bei Raumtemperatur fermentieren lassen. Danach kühl stellen (z. B. im Kühlschrank oder Keller), um die Gärung zu verlangsamen."
     ],
     "picture": "1.png",
     "codex_titel": "Von den gesalzenen Gürkchen und ihrer milden Gärung",
@@ -28,7 +28,12 @@
     "ratgeber": {
       "sprecher": "Connie",
       "text": "Nimm dich der Gürkchen an, doch vergiss nicht: Die kleinen grünen Gesellen sind geduldig – und die Gärung noch geduldiger."
-    }
+    },
+    "wissen": [
+      "salzlaken",
+      "knackigkeit",
+      "verschliessen-der-glaeser"
+    ]
   },
   {
     "titel": "Würzige Knoblauch-Chili-Gurken",
@@ -51,7 +56,7 @@
       "Gurken waschen, 1 Stunde eiskalt wässern und die Blütenansätze abschneiden.",
       "Knoblauch, Chilischoten, Koriander und Pfeffer im Fermentationsglas verteilen. Gurken stramm darüber einschichten.",
       "Mit der abgekühlten Salzlake auffüllen, bis alles bedeckt ist. Mit Eichenblättern und einem Gewicht beschweren.",
-      "Das Glas verschließen und 5 bis 7 Tage bei Raumtemperatur reifen lassen, bevor es zur Lagerung kühl gestellt wird."
+      "Das Glas mit einem Gäraufsatz verschließen oder den Deckel locker auflegen und 5 bis 7 Tage bei Raumtemperatur reifen lassen, bevor es zur Lagerung kühl gestellt wird."
     ],
     "picture": "2.png",
     "codex_titel": "Von scharfem Knoblauch und feurigen Gürkchen",
@@ -59,7 +64,12 @@
     "ratgeber": {
       "sprecher": "Katze",
       "text": "Hier walten Knoblauch und Chili gemeinsam. Wer der Schärfe nicht gewachsen ist, der halte den Löffel fern vom Munde."
-    }
+    },
+    "wissen": [
+      "salzlaken",
+      "knackigkeit",
+      "verschliessen-der-glaeser"
+    ]
   },
   {
     "titel": "Russische Gurken mit Meerrettich und Johannisbeerblättern",
@@ -82,7 +92,7 @@
       "Gurken gründlich reinigen, 1 Stunde in kaltem Wasser wässern und die Blütenansätze entfernen.",
       "Die Hälfte der Blätter, Meerrettich, Knoblauch und Dill auf den Glasboden legen. Die Gurken dicht einschichten und mit den restlichen Blättern abdecken.",
       "Mit der kalten Salzlake gänzlich übergießen und ein Fermentiergewicht aufsetzen.",
-      "Verschlossen 4 bis 6 Tage bei Raumtemperatur anfermentieren und anschließend kühl lagern."
+      "Mit Gäraufsatz oder lockerem Deckel 4 bis 6 Tage bei Raumtemperatur anfermentieren und anschließend kühl lagern."
     ],
     "picture": "3.png",
     "codex_titel": "Russische Gürkchen mit Meerrettich und Blättern der Schwarzen Johannisbeere",
@@ -90,7 +100,12 @@
     "ratgeber": {
       "sprecher": "Connie",
       "text": "Meerrettich ist ein listiger Geselle. Gib ihm Raum, doch wundere dich nicht, wenn er kräftiger erscheint als gedacht."
-    }
+    },
+    "wissen": [
+      "salzlaken",
+      "eichenlaub-textur",
+      "verschliessen-der-glaeser"
+    ]
   },
   {
     "titel": "Asiatisch inspirierte Sesam-Ingwer-Gurken",
@@ -113,7 +128,7 @@
       "Gurken waschen, 1 Stunde in eiskaltem Wasser wässern und die Blütenansätze abschneiden.",
       "Ingwer, Knoblauch, Sesamsamen, Pfefferkörner und Chili im Fermentationsglas verteilen.",
       "Gurken eng im Glas anordnen und mit der abgekühlten Salzlake übergießen.",
-      "Mit einem Fermentiergewicht beschweren, verschließen und 3 bis 5 Tage bei Raumtemperatur gären lassen, danach kühl aufbewahren."
+      "Mit einem Fermentiergewicht beschweren und mit Gäraufsatz oder lockerem Deckel 3 bis 5 Tage bei Raumtemperatur gären lassen, danach kühl aufbewahren."
     ],
     "picture": "4.png",
     "codex_titel": "Von Gürkchen mit Ingwer, Sesam und fernöstlicher Würze",
@@ -121,7 +136,12 @@
     "ratgeber": {
       "sprecher": "Connie",
       "text": "Sesam und Ingwer mögen fremd erscheinen, doch im Gärtopf finden auch weit gereiste Gewürze ein Zuhause."
-    }
+    },
+    "wissen": [
+      "salzlaken",
+      "knackigkeit",
+      "verschliessen-der-glaeser"
+    ]
   },
   {
     "titel": "Gurken-Pickles nach New-York-Deli-Art (Half Sour)",
@@ -143,7 +163,7 @@
       "Gurken gründlich säubern, 1 Stunde in Eiswasser legen und die Blütenenden entfernen.",
       "Pickling-Gewürze, Knoblauch und Dill auf dem Boden des Glases auslegen und die Gurken dicht daraufstapeln.",
       "Die Salzlake über die Gurken gießen, bis alles vollständig bedeckt ist, und die Weinblätter obenauf legen.",
-      "Gewicht aufsetzen, Glas verschließen und für eine sanfte Fermentation („Half Sour) nur 2 bis 3 Tage bei Raumtemperatur stehen lassen, dann sofort in den Kühlschrank stellen."
+      "Gewicht aufsetzen und das Glas mit Gäraufsatz oder lockerem Deckel für eine sanfte Fermentation („Half Sour“) nur 2 bis 3 Tage bei Raumtemperatur stehen lassen, dann sofort in den Kühlschrank stellen."
     ],
     "picture": "5.png",
     "codex_titel": "Die halbsauren Gürkchen nach Art der Schenken am Hudson",
@@ -151,7 +171,12 @@
     "ratgeber": {
       "sprecher": "Katze",
       "text": "Halbsauer heißt nicht halb fertig. Diese Gürkchen verlangen nur nach kürzerer Zeit und kühler Rast."
-    }
+    },
+    "wissen": [
+      "salzlaken",
+      "knackigkeit",
+      "verschliessen-der-glaeser"
+    ]
   },
   {
     "titel": "Klassisches Baechu-Kimchi (Chinakohl-Kimchi)",
@@ -185,7 +210,12 @@
     "ratgeber": {
       "sprecher": "Connie",
       "text": "Vor dem Gochugaru sei Respekt. Die rote Würze sieht freundlich aus, doch sie hat Feuer im Herzen."
-    }
+    },
+    "wissen": [
+      "salzlaken",
+      "gasbildung",
+      "gemuese-unter-lake"
+    ]
   },
   {
     "titel": "Kakkdugi (Rettich-Kimchi)",
@@ -217,7 +247,12 @@
     "ratgeber": {
       "sprecher": "Katze",
       "text": "Rettichwürfel sind leicht zu zählen. Wie viele Chiliflocken hineingehören, darüber streiten wir besser nicht."
-    }
+    },
+    "wissen": [
+      "salzlaken",
+      "gasbildung",
+      "gemuese-unter-lake"
+    ]
   },
   {
     "titel": "Oi-Sobagi (Gefülltes Gurken-Kimchi)",
@@ -250,7 +285,12 @@
     "ratgeber": {
       "sprecher": "Connie",
       "text": "Fülle die Gürkchen mit Bedacht, sonst fällt beim ersten Biss mehr heraus als vorgesehen."
-    }
+    },
+    "wissen": [
+      "salzlaken",
+      "gasbildung",
+      "gemuese-unter-lake"
+    ]
   },
   {
     "titel": "Nabak-Kimchi (Mildes Wasser-Kimchi)",
@@ -284,7 +324,12 @@
     "ratgeber": {
       "sprecher": "Katze",
       "text": "Mildes Kimchi ist eine gute Sache. Besonders für jene, die nach dem scharfen Kimchi noch Zunge haben wollen."
-    }
+    },
+    "wissen": [
+      "salzlaken",
+      "gasbildung",
+      "gemuese-unter-lake"
+    ]
   },
   {
     "titel": "Aromatisches Fenchel-Orangen-Kimchi",
@@ -308,7 +353,7 @@
       "Gochugaru, Knoblauch, Ingwer, Sojasauce sowie Orangenabrieb und -saft zu einer Würzpaste verrühren.",
       "Das Fenchelgrün grob hacken und zusammen mit der Paste kräftig unter das gesalzene Gemüse kneten.",
       "Das Gemüse fest in ein Fermentationsglas pressen, sodass es vollständig vom eigenen Saft bedeckt ist.",
-      "Mit einem Gewicht beschweren, verschließen und 4 bis 6 Tage bei Raumtemperatur fermentieren lassen, danach kühl aufbewahren."
+      "Mit einem Gewicht beschweren und mit Gäraufsatz oder lockerem Deckel 4 bis 6 Tage bei Raumtemperatur fermentieren lassen, danach kühl aufbewahren."
     ],
     "picture": "10.png",
     "codex_titel": "Fenchel-Orangen-Kimchi mit Würze aus fernen Landen",
@@ -316,7 +361,12 @@
     "ratgeber": {
       "sprecher": "Connie",
       "text": "Orange und Fenchel scheinen aus zwei Welten zu stammen. Im Gärtopf werden sie zu einem erstaunlich guten Bund."
-    }
+    },
+    "wissen": [
+      "salzlaken",
+      "gasbildung",
+      "gemuese-unter-lake"
+    ]
   },
   {
     "titel": "Herbstliches Kürbis-Apfel-Kimchi",
@@ -351,7 +401,12 @@
     "ratgeber": {
       "sprecher": "Katze",
       "text": "Der Herbst bringt Kürbis und Apfel. Ob beide in den Gärtopf gehören? Ich habe es geprüft. Ja."
-    }
+    },
+    "wissen": [
+      "salzlaken",
+      "gasbildung",
+      "gemuese-unter-lake"
+    ]
   },
   {
     "titel": "Knackiges Blumenkohl-Brokkoli-Kimchi",
@@ -377,7 +432,7 @@
       "Gochugaru, Knoblauch, Ingwer und Sojasauce miteinander zu einer Paste vermengen.",
       "Die Gemüseröschen und den Schnittlauch vorsichtig mit der Paste massieren, bis alle Teile gleichmäßig bedeckt sind.",
       "Das gewürzte Gemüse dicht in ein Fermentationsglas füllen und gut festdrücken.",
-      "Ein Gewicht auflegen, das Glas verschließen und 4 bis 6 Tage bei Raumtemperatur fermentieren lassen, bevor es kühl gelagert wird."
+      "Ein Gewicht auflegen und das Glas mit Gäraufsatz oder lockerem Deckel 4 bis 6 Tage bei Raumtemperatur fermentieren lassen, bevor es kühl gelagert wird."
     ],
     "picture": "12.png",
     "codex_titel": "Knackiges Kimchi von Blumenkohl und Brokkoli",
@@ -385,7 +440,12 @@
     "ratgeber": {
       "sprecher": "Connie",
       "text": "Blumenkohl und Brokkoli mögen es knackig. Stampfe sie fest, aber behandle die Röschen nicht wie einen Rammbock."
-    }
+    },
+    "wissen": [
+      "salzlaken",
+      "gasbildung",
+      "gemuese-unter-lake"
+    ]
   },
   {
     "titel": "Möhren-Ingwer-Kimchi",
@@ -408,7 +468,7 @@
       "Geraspelte Möhren mit dem Meersalz in einer Schüssel kräftig durchkneten, bis spürbar Pflanzensaft austritt.",
       "Gochugaru, Knoblauch, Ingwer, Frühlingszwiebeln, Sojasauce und Ahornsirup zugeben.",
       "Alle Zutaten gründlich miteinander vermengen und die Masse fest in ein Fermentationsglas stampfen, sodass das Gemüse komplett von eigenem Saft bedeckt ist.",
-      "Mit einem Fermentiergewicht beschweren und das Glas verschließen.",
+      "Mit einem Fermentiergewicht beschweren und das Glas mit Gäraufsatz oder lockerem Deckel versehen.",
       "4 bis 6 Tage bei Raumtemperatur fermentieren lassen, bis der gewünschte Säuregrad erreicht ist, danach im Kühlschrank lagern."
     ],
     "picture": "13.png",
@@ -417,7 +477,12 @@
     "ratgeber": {
       "sprecher": "Katze",
       "text": "Vegan ist dieses Ferment ohnehin. Die Möhren werden dadurch nicht weniger würzig."
-    }
+    },
+    "wissen": [
+      "salzlaken",
+      "gasbildung",
+      "gemuese-unter-lake"
+    ]
   },
   {
     "titel": "Klassisches Sauerkraut mit Kümmel",
@@ -437,7 +502,7 @@
       "Kohl mit dem Meersalz vermengen und kräftig kneten, bis reichlich Pflanzensaft austritt.",
       "Kümmel und Wacholderbeeren unterheben.",
       "Das Kraut portionsweise in ein Fermentationsglas geben und fest andrücken, bis der Kohl vollständig vom eigenen Saft bedeckt ist.",
-      "Mit einem Fermentiergewicht beschweren, verschließen und 7 bis 14 Tage bei Raumtemperatur fermentieren lassen. Anschließend kühl lagern."
+      "Mit einem Fermentiergewicht beschweren und mit Gäraufsatz oder lockerem Deckel 7 bis 14 Tage bei Raumtemperatur fermentieren lassen. Anschließend kühl lagern."
     ],
     "picture": "14.png",
     "codex_titel": "Das klassische Sauerkraut mit Kümmel und Wacholder",
@@ -445,7 +510,12 @@
     "ratgeber": {
       "sprecher": "Connie",
       "text": "Kohl will geknetet werden. Spare nicht an der Handarbeit, denn der Saft ist der Schatz dieses Krautes."
-    }
+    },
+    "wissen": [
+      "trocken-salzen",
+      "temperatur",
+      "fermentationsdauer"
+    ]
   },
   {
     "titel": "Rotes Sauerkraut mit Apfel",
@@ -474,7 +544,12 @@
     "ratgeber": {
       "sprecher": "Katze",
       "text": "Das rote Kraut färbt alles, was ihm zu nahe kommt. Auch Pfoten. Ich spreche aus Erfahrung."
-    }
+    },
+    "wissen": [
+      "trocken-salzen",
+      "temperatur",
+      "fermentationsdauer"
+    ]
   },
   {
     "titel": "Sauerkraut mit Karotte und Ingwer",
@@ -504,7 +579,12 @@
     "ratgeber": {
       "sprecher": "Connie",
       "text": "Ingwer gibt dem Kraut einen frischen Schlag. Doch übertreibe es nicht, sonst wird aus dem Sauerkraut ein Gewürzbrei."
-    }
+    },
+    "wissen": [
+      "trocken-salzen",
+      "temperatur",
+      "fermentationsdauer"
+    ]
   },
   {
     "titel": "Mildes Weißkohl-Pfeffer-Ferment",
@@ -532,7 +612,12 @@
     "ratgeber": {
       "sprecher": "Katze",
       "text": "Mild heißt: angenehm. Nicht: langweilig."
-    }
+    },
+    "wissen": [
+      "trocken-salzen",
+      "temperatur",
+      "fermentationsdauer"
+    ]
   },
   {
     "titel": "Fermentierte Möhren mit Ingwer",
@@ -561,7 +646,12 @@
     "ratgeber": {
       "sprecher": "Connie",
       "text": "Möhren lieben Ingwer. Und Ingwer liebt den Gärtopf. So einfach ist die Alchemie."
-    }
+    },
+    "wissen": [
+      "salz-in-der-fermentation",
+      "gemuese-unter-lake",
+      "fermentation-erkennen"
+    ]
   },
   {
     "titel": "Möhren mit Kreuzkümmel und Orange",
@@ -590,7 +680,12 @@
     "ratgeber": {
       "sprecher": "Katze",
       "text": "Die Orange soll duften, nicht den ganzen Gärtopf beherrschen."
-    }
+    },
+    "wissen": [
+      "salz-in-der-fermentation",
+      "gemuese-unter-lake",
+      "fermentation-erkennen"
+    ]
   },
   {
     "titel": "Fermentierte Radieschen mit Dill",
@@ -620,7 +715,12 @@
     "ratgeber": {
       "sprecher": "Connie",
       "text": "Radieschen verlieren etwas von ihrer Schärfe und gewinnen dafür eine feine Säure."
-    }
+    },
+    "wissen": [
+      "salz-in-der-fermentation",
+      "gemuese-unter-lake",
+      "fermentation-erkennen"
+    ]
   },
   {
     "titel": "Fermentierter Rettich mit Chili",
@@ -650,7 +750,12 @@
     "ratgeber": {
       "sprecher": "Katze",
       "text": "Rettich und Chili sind alte Bekannte. Halte Wasser bereit."
-    }
+    },
+    "wissen": [
+      "salz-in-der-fermentation",
+      "gemuese-unter-lake",
+      "fermentation-erkennen"
+    ]
   },
   {
     "titel": "Fermentierte Rote Bete mit Meerrettich",
@@ -679,7 +784,12 @@
     "ratgeber": {
       "sprecher": "Connie",
       "text": "Die rote Bete färbt die Lake wie Tinte. Das ist kein Zauber – sieht aber danach aus."
-    }
+    },
+    "wissen": [
+      "salz-in-der-fermentation",
+      "gemuese-unter-lake",
+      "fermentation-erkennen"
+    ]
   },
   {
     "titel": "Rote Bete mit Apfel und Ingwer",
@@ -709,7 +819,12 @@
     "ratgeber": {
       "sprecher": "Katze",
       "text": "Apfel und Rote Bete vertragen sich besser, als man beim ersten Blick vermuten könnte."
-    }
+    },
+    "wissen": [
+      "salz-in-der-fermentation",
+      "hygiene",
+      "lagerung"
+    ]
   },
   {
     "titel": "Fermentierte grüne Bohnen mit Knoblauch",
@@ -739,7 +854,12 @@
     "ratgeber": {
       "sprecher": "Connie",
       "text": "Bohnen sollen unter der Lake bleiben. Was aus der Lake herausragt, macht gern Unfug."
-    }
+    },
+    "wissen": [
+      "salz-in-der-fermentation",
+      "gemuese-unter-lake",
+      "fermentation-erkennen"
+    ]
   },
   {
     "titel": "Fermentierte Paprika mit Knoblauch",
@@ -768,7 +888,12 @@
     "ratgeber": {
       "sprecher": "Katze",
       "text": "Paprika ist mild. Die kleine rote Chili im Glas hat allerdings andere Pläne."
-    }
+    },
+    "wissen": [
+      "salz-in-der-fermentation",
+      "gemuese-unter-lake",
+      "fermentation-erkennen"
+    ]
   },
   {
     "titel": "Paprika-Chili-Ferment",
@@ -798,7 +923,12 @@
     "ratgeber": {
       "sprecher": "Connie",
       "text": "Bei diesem Ferment entscheidet die Menge der Chili, ob du speisest oder eine Mutprobe ablegst."
-    }
+    },
+    "wissen": [
+      "salz-in-der-fermentation",
+      "gemuese-unter-lake",
+      "fermentation-erkennen"
+    ]
   },
   {
     "titel": "Fermentierte rote Zwiebeln",
@@ -827,7 +957,12 @@
     "ratgeber": {
       "sprecher": "Katze",
       "text": "Zwiebeln können beim Schneiden weinen. Nach der Gärung weinen sie nicht mehr – dafür vielleicht du."
-    }
+    },
+    "wissen": [
+      "salz-in-der-fermentation",
+      "gemuese-unter-lake",
+      "fermentation-erkennen"
+    ]
   },
   {
     "titel": "Fermentierte Perlzwiebeln mit Thymian",
@@ -856,7 +991,12 @@
     "ratgeber": {
       "sprecher": "Connie",
       "text": "Perlzwiebeln sind klein, aber zahlreich. Geduld beim Schälen ist eine Tugend."
-    }
+    },
+    "wissen": [
+      "salz-in-der-fermentation",
+      "gemuese-unter-lake",
+      "fermentation-erkennen"
+    ]
   },
   {
     "titel": "Fermentierter Knoblauch mit Chili",
@@ -885,7 +1025,12 @@
     "ratgeber": {
       "sprecher": "Katze",
       "text": "Knoblauch ist ein treuer Begleiter. Gib ihm Chili und er wird noch treuer – und deutlich lauter im Aroma."
-    }
+    },
+    "wissen": [
+      "salz-in-der-fermentation",
+      "gemuese-unter-lake",
+      "fermentation-erkennen"
+    ]
   },
   {
     "titel": "Fermentierter Blumenkohl mit Curry",
@@ -915,7 +1060,12 @@
     "ratgeber": {
       "sprecher": "Connie",
       "text": "Curry und Chili sind keine schüchternen Gewürze. Beginne lieber mit Ehrfurcht."
-    }
+    },
+    "wissen": [
+      "salz-in-der-fermentation",
+      "gemuese-unter-lake",
+      "fermentation-erkennen"
+    ]
   },
   {
     "titel": "Fermentierter Brokkoli mit Zitrone",
@@ -944,7 +1094,12 @@
     "ratgeber": {
       "sprecher": "Katze",
       "text": "Zitrone bringt Frische in den Gärtopf. Die Schale nur fein verwenden, sonst wird es bitter."
-    }
+    },
+    "wissen": [
+      "salz-in-der-fermentation",
+      "gemuese-unter-lake",
+      "fermentation-erkennen"
+    ]
   },
   {
     "titel": "Fermentierter Fenchel mit Zitrone und Dill",
@@ -973,7 +1128,12 @@
     "ratgeber": {
       "sprecher": "Connie",
       "text": "Fenchel, Dill und Zitrone: ein Bund, der selbst im tiefsten Gärkeller nach Sommer riecht."
-    }
+    },
+    "wissen": [
+      "salz-in-der-fermentation",
+      "gemuese-unter-lake",
+      "fermentation-erkennen"
+    ]
   },
   {
     "titel": "Fermentierter Sellerie mit Wacholder",
@@ -1002,7 +1162,12 @@
     "ratgeber": {
       "sprecher": "Katze",
       "text": "Wacholder erinnert an den Wald. Sellerie erinnert daran, dass der Wald nicht im Gärglas wohnt."
-    }
+    },
+    "wissen": [
+      "salz-in-der-fermentation",
+      "gemuese-unter-lake",
+      "fermentation-erkennen"
+    ]
   },
   {
     "titel": "Fermentierte Kohlrabi mit Dill",
@@ -1031,7 +1196,12 @@
     "ratgeber": {
       "sprecher": "Connie",
       "text": "Kohlrabi wird knackig, wenn du ihm die rechte Lake und etwas Zeit gönnst."
-    }
+    },
+    "wissen": [
+      "salz-in-der-fermentation",
+      "gemuese-unter-lake",
+      "fermentation-erkennen"
+    ]
   },
   {
     "titel": "Fermentierte Zucchini mit Knoblauch und Kräutern",
@@ -1061,7 +1231,12 @@
     "ratgeber": {
       "sprecher": "Katze",
       "text": "Zucchini sind weichere Gesellen. Beobachte sie gut und lass sie nicht unnötig lange gären."
-    }
+    },
+    "wissen": [
+      "salz-in-der-fermentation",
+      "gemuese-unter-lake",
+      "fermentation-erkennen"
+    ]
   },
   {
     "titel": "Fermentierter Kürbis mit Chili und Ingwer",
@@ -1091,7 +1266,12 @@
     "ratgeber": {
       "sprecher": "Connie",
       "text": "Kürbis, Ingwer und Chili: ein Trio, das selbst im Winter für Feuer sorgt."
-    }
+    },
+    "wissen": [
+      "salz-in-der-fermentation",
+      "gemuese-unter-lake",
+      "fermentation-erkennen"
+    ]
   },
   {
     "titel": "Gemischtes Bauernferment",
@@ -1119,7 +1299,12 @@
     "ratgeber": {
       "sprecher": "Katze",
       "text": "Das Bauernferment nimmt, was der Garten hergibt. Genau darin liegt sein Charme."
-    }
+    },
+    "wissen": [
+      "salz-in-der-fermentation",
+      "gemuese-unter-lake",
+      "fermentation-erkennen"
+    ]
   },
   {
     "titel": "Winterliches Wurzelgemüse-Ferment",
@@ -1149,7 +1334,12 @@
     "ratgeber": {
       "sprecher": "Connie",
       "text": "Wenn der Winter naht, wandert das Wurzelwerk in den Gärtopf. Kümmel und Lorbeer weisen ihm den Weg."
-    }
+    },
+    "wissen": [
+      "salz-in-der-fermentation",
+      "gemuese-unter-lake",
+      "fermentation-erkennen"
+    ]
   },
   {
     "titel": "Karotten-Rettich-Ferment mit Sesam",
@@ -1179,7 +1369,12 @@
     "ratgeber": {
       "sprecher": "Katze",
       "text": "Sesam wird geröstet, bevor er ins Ferment kommt. Kleine Mühe, großer Duft."
-    }
+    },
+    "wissen": [
+      "salz-in-der-fermentation",
+      "gemuese-unter-lake",
+      "fermentation-erkennen"
+    ]
   },
   {
     "titel": "Fermentierte Schlehen – falsche Oliven (Milchsäuregärung)",
@@ -1212,7 +1407,12 @@
     "ratgeber": {
       "sprecher": "Connie",
       "text": "Nimm die Schlehen wohl zur Hand und gib ihnen ihr rechtes Maß an Salz. Sie brauchen ihre Zeit, bis aus ihrer herben Art ein säuerlicher und olivenähnlicher Geschmack geworden ist. Und hüte dich: Die Früchte mögen klein sein, doch ihre Kerne sind nichts zum Zerbeißen."
-    }
+    },
+    "wissen": [
+      "salz-in-der-fermentation",
+      "hygiene",
+      "lagerung"
+    ]
   },
   {
     "titel": "Fermentierte Weißdornbeeren (Wilde Würze)",
@@ -1234,9 +1434,9 @@
     "zubereitung": [
       "Wasser und Salz in einem Topf erwärmen oder verrühren, bis sich das Salz vollständig aufgelöst hat. Die Salzlake auf Raumtemperatur abkühlen lassen.",
       "Die Weißdornbeeren gründlich waschen, von kleinen Stielen befreien und beschädigte Früchte aussortieren.",
-      "Gewürze und Knoblauch auf den Boden eines sterilen Fermentationsglases geben, danach die vorbereiteten Beeren einfüllen.",
+      "Gewürze und Knoblauch auf den Boden eines sauberen, heiß ausgespülten Fermentationsglases geben, danach die vorbereiteten Beeren einfüllen.",
       "Die abgekühlte Salzlake über die Beeren gießen, sodass alle Früchte vollständig bedeckt sind. Ein Fermentiergewicht auflegen, damit keine Beere an der Oberfläche schwimmt.",
-      "Das Glas verschließen und 7 bis 14 Tage bei Raumtemperatur stehen lassen. Bei Gläsern ohne Gärventil täglich kurz den Druck entweichen lassen.",
+      "Das Glas mit einem Gäraufsatz verschließen oder den Deckel locker auflegen und 7 bis 14 Tage bei Raumtemperatur stehen lassen. Bei Gläsern ohne Gärventil täglich kurz den Druck entweichen lassen.",
       "Sobald die Beeren eine angenehm säuerlich-herbe Note entwickelt haben, im Kühlschrank oder kühlen Keller lagern, um die Fermentation zu verlangsamen."
     ],
     "picture": "41.png",
@@ -1245,6 +1445,11 @@
     "ratgeber": {
       "sprecher": "Katze",
       "text": "Nimm dich der kleinen roten Beeren des Weißdorns an. Wenn du ihnen Zeit und gutes Salz schenkst, verwandeln sie sich von mehligen Waldfrüchten in eine kräftige Würze für den Winter."
-    }
+    },
+    "wissen": [
+      "salz-in-der-fermentation",
+      "hygiene",
+      "lagerung"
+    ]
   }
 ]

@@ -1,4 +1,5 @@
 ---
+import SkipLink from '../../components/SkipLink.astro';
 import { Image } from "astro:assets";
 import Footer from "../../components/Footer.astro";
 import Header from "../../components/Header.astro";
@@ -6,13 +7,17 @@ import SeoHead from "../../components/SeoHead.astro";
 import { actorImageFor } from "../../lib/actorImages";
 import { allRecipes, chapters } from "../../lib/chapters";
 import { FIGUREN } from "../../lib/figuren";
+import { categoryCounts, MIN_CATEGORY_RECIPES } from "../../lib/recipes";
 import "../../styles/global.css";
 
 const recipes = allRecipes;
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const withBase = (path: string) => `${base}${path}`;
 const illustratedCount = recipes.filter((recipe) => recipe.picture).length;
-const categoryCount = new Set(recipes.flatMap((recipe) => recipe.tags)).size;
+const tagCount = new Set(recipes.flatMap((recipe) => recipe.tags)).size;
+const categoryPageCount = [...categoryCounts(recipes).values()].filter(
+	(count) => count >= MIN_CATEGORY_RECIPES,
+).length;
 const figuren = FIGUREN.map((figur) => ({
 	...figur,
 	image: actorImageFor(figur.sprecher, chapters[0]?.slug),
@@ -39,10 +44,11 @@ const description = `Lerne das statische Rezeptbuch Das Ferment und seine ${reci
 		/>
 	</head>
 	<body>
+		<SkipLink />
 		<div class="site-shell">
 			<Header />
 
-			<main class="recipe-main prose-page">
+			<main id="main" class="recipe-main prose-page">
 				<nav class="breadcrumbs" aria-label="Brotkrümelnavigation">
 					<a href={withBase("/")}>Startseite</a>
 					<span aria-hidden="true">/</span>
@@ -108,7 +114,7 @@ const description = `Lerne das statische Rezeptbuch Das Ferment und seine ${reci
 							verschnörkelten Initialen und einer Prise alter
 							Chronikensprache wird die Kunst des Fermentierens
 							auf ganz eigene Weise lebendig. Die Grundlage dieses
-							Werkes bilden {recipes.length} Rezepte, versammelt in
+							Werkes bilden {recipes.length} Rezepte, versammelt in{' '}
 							{chapters.length} Kapiteln – von klassischen Salzgurken
 							und würzigem Sauerkraut über allerlei Kimchi bis hin zu
 							spritzigen Gärgetränken mit Ginger Bug.
@@ -117,9 +123,9 @@ const description = `Lerne das statische Rezeptbuch Das Ferment und seine ${reci
 							{illustratedCount} der {recipes.length} Rezepte sind mit
 							liebevollen, von mittelalterlicher Buchmalerei inspirierten
 							Illustrationen geschmückt, die Connie und Katze bei ihren
-							kulinarischen Experimenten begleiten. Die {
-								categoryCount
-							} Kategorien weisen Euch den Weg durch dieses reichhaltige
+							kulinarischen Experimenten begleiten. Die {tagCount}{' '}
+							Schlagworte, davon {categoryPageCount} Kategorien mit eigener
+							Seite, weisen Euch den Weg durch dieses reichhaltige
 							Repertoire an Köstlichkeiten und Gärkunst. Möge das Blubbern
 							beginnen!
 						</p>

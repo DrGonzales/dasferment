@@ -1,4 +1,5 @@
 ---
+import SkipLink from '../components/SkipLink.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import SeoHead from '../components/SeoHead.astro';
@@ -24,10 +25,11 @@ const description =
 		/>
 	</head>
 	<body>
+		<SkipLink />
 		<div class="site-shell">
 			<Header />
 
-			<main class="recipe-main prose-page">
+			<main id="main" class="recipe-main prose-page">
 				<article class="prose-article">
 					<header class="prose-intro">
 						<p class="section-heading__kicker">Verirrt im Kodex</p>
