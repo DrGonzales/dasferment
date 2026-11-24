@@ -29,6 +29,12 @@ künstlicher Ratgeber erzeugt.
 * **Kodex:** alles mit dem Präfix `codex_`. Mittelalterlicher Klang, aber verständlich,
   kurze Einleitungen, über alle Rezepte hinweg gleich stilistisch.
 
+`order: number` ist optional und steuert die Reihenfolge in Website, Buch und EPUB.
+Rezepte mit Wert stehen aufsteigend zuerst, Rezepte ohne Wert behalten die
+Reihenfolge der JSON-Datei. `sortByOrder()` aus `src/lib/recipes.ts` ist die
+einzige Stelle für diese Sortierung. `reihenfolge` in `Einstiegsseiten.json`
+bleibt davon getrennt und bestimmt nur die ersten Karten der Einstiegsseiten.
+
 `codex_titel` ist bewusst nicht `titel`:
 
 ```text

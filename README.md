@@ -108,6 +108,7 @@ src/data/<kapitel>/*.json
 `src/data/Kapitel.json` legt die Reihenfolge der Kapitel fest, jedes `Kapitel.json` listet seine Rezept- und Wissensdateien und Bildpfade. Rezeptangaben werden nicht in Astro-Templates dupliziert. Die wichtigsten Rezeptfelder sind:
 
 - `titel`: sachlicher Rezeptname für SEO, Übersichten und Navigation
+- `order`: optionale Sortierposition; ohne Wert bleibt die Reihenfolge der JSON-Datei
 - `tags`: Schlagworte, aus denen die Kategorien entstehen
 - `zutaten`: Zutatenliste
 - `zubereitung`: geordnete Zubereitungsschritte

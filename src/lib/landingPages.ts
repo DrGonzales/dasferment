@@ -1,7 +1,7 @@
 import landingData from '../data/Einstiegsseiten.json';
 import { allInfos, allRecipes } from './chapters';
 import { relatedInfos, type Info } from './infos';
-import type { Recipe } from './recipes';
+import { sortByOrder, type Recipe } from './recipes';
 
 export interface LandingPage {
 	slug: string;
@@ -55,7 +55,7 @@ export function withCount(text: string, count: number): string {
 	return result;
 }
 
-/** Genannte Rezepte zuerst in Datenreihenfolge, den Rest alphabetisch. */
+/** Genannte Rezepte zuerst in Datenreihenfolge, den Rest nach `order`. */
 export function orderedRecipes(recipes: Recipe[], names: string[]): Recipe[] {
 	const byTitle = new Map(recipes.map((recipe) => [recipe.titel, recipe]));
 	const missing = names.filter((name) => !byTitle.has(name));
@@ -63,9 +63,7 @@ export function orderedRecipes(recipes: Recipe[], names: string[]): Recipe[] {
 		throw new Error(`Fehlende Rezepte in Einstiegsseiten.json: ${missing.join(', ')}`);
 	}
 	const head = names.map((name) => byTitle.get(name)!);
-	const tail = recipes
-		.filter((recipe) => !names.includes(recipe.titel))
-		.sort((a, b) => a.titel.localeCompare(b.titel, 'de'));
+	const tail = sortByOrder(recipes.filter((recipe) => !names.includes(recipe.titel)));
 	return [...head, ...tail];
 }
 

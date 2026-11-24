@@ -1,6 +1,6 @@
 import type { Chapter } from './chapters';
 import { gruppiereInfos, type InfoGruppe } from './infos';
-import { categoryLabel, isGeneralTag, slugify, type Recipe } from './recipes';
+import { categoryLabel, isGeneralTag, slugify, sortByOrder, type Recipe } from './recipes';
 
 export const BOOK_TITLE = 'Das Ferment';
 export const BOOK_SUBTITLE = 'Aus der Küche der Geduld';
@@ -91,15 +91,13 @@ function isBookCategory(tag: string, universal: Set<string>): boolean {
 export function bookChapters(recipes: Recipe[]): BookChapter[] {
 	const universal = universalTags(recipes);
 
-	return [...recipes]
-		.sort((a, b) => a.titel.localeCompare(b.titel, 'de'))
-		.map((recipe) => ({
-			recipe,
-			anchor: recipeAnchor(recipe),
-			categories: recipe.tags
-				.filter((tag) => isBookCategory(tag, universal))
-				.map(categoryLabel),
-		}));
+	return sortByOrder(recipes).map((recipe) => ({
+		recipe,
+		anchor: recipeAnchor(recipe),
+		categories: recipe.tags
+			.filter((tag) => isBookCategory(tag, universal))
+			.map(categoryLabel),
+	}));
 }
 
 export function bookSections(chapters: Chapter[]): BookSection[] {

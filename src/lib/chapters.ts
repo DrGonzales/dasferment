@@ -1,6 +1,6 @@
 import type { ImageMetadata } from 'astro';
 import type { Info } from './infos';
-import { slugify, type Recipe } from './recipes';
+import { slugify, sortByOrder, type Recipe } from './recipes';
 import orderData from '../data/Kapitel.json';
 
 type RawRecipe = Omit<Recipe, 'codex_titel'> & {
@@ -56,15 +56,17 @@ export const chapters: Chapter[] = orderData.reihenfolge.map((reference) => {
 	const config = dataAt<KapitelDatei>(path);
 	const directory = path.slice(0, path.lastIndexOf('/'));
 	const slug = reference.split('/')[0];
-	const recipes = dataAt<RawRecipe[]>(`${directory}/${config.rezepte}`).map((recipe) => ({
-		...recipe,
-		codex_titel:
-			recipe.codex_titel ??
-			recipe.codex_titel_zeitung ??
-			recipe.codex_titel_englisch ??
-			recipe.titel,
-		kapitel: slug,
-	}));
+	const recipes = sortByOrder(
+		dataAt<RawRecipe[]>(`${directory}/${config.rezepte}`).map((recipe) => ({
+			...recipe,
+			codex_titel:
+				recipe.codex_titel ??
+				recipe.codex_titel_zeitung ??
+				recipe.codex_titel_englisch ??
+				recipe.titel,
+			kapitel: slug,
+		})),
+	);
 	const infos = dataAt<{ infos: Info[] }>(`${directory}/${config.wissen}`).infos.map(
 		(info) => ({ ...info, kapitel: slug }),
 	);

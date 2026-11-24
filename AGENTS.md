@@ -91,6 +91,7 @@ Regeln:
 * Jedes Rezept nutzt dasselbe Template. Keine individuellen Seiten pro Rezept.
 * Unterschiede zwischen Rezepten kommen aus den Daten.
 * Die Rezeptseite darf nicht davon abhängen, dass JavaScript im Browser zuerst eine JSON-Datei lädt.
+* Das optionale Rezeptfeld `order` steuert die Reihenfolge in Website, Buch und EPUB: Rezepte mit `order` stehen aufsteigend nach Wert zuerst, alle ohne `order` behalten die Reihenfolge ihrer JSON-Datei. `sortByOrder()` in `src/lib/recipes.ts` ist die einzige Sortierung dafür; `reihenfolge` in `Einstiegsseiten.json` bleibt davon unabhängig und stellt nur die ersten Treffer der Einstiegsseiten nach vorn.
 
 ## URLs
 
@@ -515,7 +516,7 @@ Das Rezeptbuch existiert als zweite Ausgabe: `astro.book.config.mjs` baut `src/b
 * A5 mit 3 mm Beschnitt, `marks: crop`, Satzspiegel 117 × 180 mm, Seitenzahl außen, Kolumnentitel außen.
 * Reihenfolge: Titel, Inhalt, Vorwort, Gestalten, dann je Kapitel ein Kapitelblatt mit Beschreibung und Bild, gefolgt von den Rezepten und dem Wissen des Kapitels. Am Ende steht das Register.
 * Die Gestalten Connie und Katze stehen im Buch nach dem Vorwort und auf der Website unter `/ueber-diese-seite/`. Beide Ausgaben lesen `FIGUREN` aus `src/lib/figuren.ts`, die Texte stehen nirgends im Template.
-* Ein Rezept je Blatt, innerhalb seines Kapitels alphabetisch nach `titel`, Register der Rezepte am Ende, darin alphabetisch nach Zutat. Ohne Anzahl der Rezepte je Zutat, die Rezepte zweispaltig mit `codex_titel` und Seitenzahl.
+* Ein Rezept je Blatt, innerhalb seines Kapitels nach `order` und JSON-Reihenfolge, Register der Rezepte am Ende, darin alphabetisch nach Zutat. Ohne Anzahl der Rezepte je Zutat, die Rezepte zweispaltig mit `codex_titel` und Seitenzahl.
 * Jedes Rezept ist ein Blatt: Das Bild steht auf der rechten Seite (Recto), der Rezepttext beginnt auf der Rückseite (Verso). Wird der Text länger als eine Seite, läuft er auf der nächsten Seite weiter; der Umbruch schiebt dann eine Leerseite dazwischen, damit das Bild des nächsten Rezepts wieder rechts steht.
 * Überschrift: nur `codex_titel`, groß. Der sachliche `titel` steht nicht im Buch.
 * Kein Header, Footer, keine Brotkrümelnavigation, keine Site-Shell.

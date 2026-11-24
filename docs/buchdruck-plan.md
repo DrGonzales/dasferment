@@ -342,9 +342,10 @@ auch auf `/ueber-diese-seite/` stehen und dort nicht doppelt im Template gepfleg
 dürfen. Beide Portraits stammen aus `src/pic/actors/` und laufen als JPEG.
 
 **Kapitel vor Rezepten und Wissen.** Jedes Kapitel beginnt mit einem eigenen Blatt aus
-Titel, Beschreibung und Kapitelbild. Danach folgen seine Rezepte, alphabetisch nach
-`titel`, und zuletzt sein Wissen. Die Kapitelreihenfolge kommt aus
-`src/data/Kapitel.json`; keine Ausgabe sortiert selbst. Die Rezepte tragen 22
+Titel, Beschreibung und Kapitelbild. Danach folgen seine Rezepte nach dem optionalen
+`order` und, ohne diesen Wert, in der Reihenfolge der JSON-Datei; zuletzt kommt das
+Wissen. Die Kapitelreihenfolge kommt aus `src/data/Kapitel.json`; Buch und EPUB
+nutzen dieselbe Rezeptsortierung aus `sortByOrder()` in `src/lib/recipes.ts`. Die Rezepte tragen 22
 Zutaten-Tags, aber im Schnitt nur wenige Rezepte je Kategorie. Eine Gruppierung nach
 Kategorie zerfällt deshalb in kleine Gruppen. Stattdessen beginnt jedes Rezept auf einer
 neuen Seite und nennt seine Kategorien als Kicker. Die Kategorien werden im **Register
@@ -506,9 +507,9 @@ drucken will, streicht `break-before: page` bei `.knowledge-group`.
 
 Dazu zwei Festlegungen aus der Umsetzungsvorbereitung:
 
-* **Reihenfolge:** je Kapitel erst die Rezepte alphabetisch nach `titel`, dann das Wissen;
-  am Ende das Register der Rezepte, darin alphabetisch nach Zutat.
-  Die Sortierung bleibt nach `titel`, auch wenn die Überschrift `codex_titel` ist.
+* **Reihenfolge:** je Kapitel erst die Rezepte nach `order` und JSON-Reihenfolge, dann das
+  Wissen; am Ende das Register der Rezepte, darin alphabetisch nach Zutat.
+  Die Überschrift bleibt `codex_titel`, auch wenn die Sortierung nicht mehr alphabetisch ist.
 * **Rezeptüberschrift:** nur `codex_titel`, groß, mit den Kategorien als Kicker darüber.
 
 ### Lokale Voraussetzungen für den PDF-Lauf

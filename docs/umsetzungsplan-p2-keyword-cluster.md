@@ -24,7 +24,7 @@
 | Kanonische URL je Suchintention | Die Kategorieseite ist jeweils die kanonische Einstiegsseite; `/saison/herbst-winter/` die vierte. | Eine URL pro Suchbegriff, wie in der Review gefordert. |
 | `/kapitel/gingerbug/rezepte/` | Bleibt als eigenständiges Kapitelregister erhalten, behält seinen eigenen `<title>` und seine H1 „Die Rezepte" und verlinkt auf die Einstiegsseite. Kein zweiter „Ginger Bug Rezept"-Titel, kein übergreifendes `rel=canonical`. | Zwei konkurrierende Titel für denselben Suchbegriff wären Duplicate Content; ein fremdes Canonical würde eine nützliche Seite aus der Indexierung nehmen. |
 | Rezepte verlinken | Die vorhandenen Tag-Chips auf Rezeptseiten verlinken Ginger Bug, Kimchi und Sauerkraut bereits auf die Kategorieseiten. Für die Saison-Seite kommen datengesteuerte Verweise hinzu, zusätzlich zum Eintrag in `/kategorien/`. | Jede neue Seite hat mindestens einen sichtbaren Link von einer bestehenden Seite. |
-| Reihenfolge der Karten | Ein Datenfeld `reihenfolge` in `Einstiegsseiten.json` stellt die genannten Blätter nach vorn; alle übrigen Rezepte folgen alphabetisch nach `titel`. Fehlt ein genannter Titel im Ergebnis, ist das ein Build-Fehler. | Der „erste Treffer" ist steuerbar, ohne Tags oder Templates zu ändern; Daten drift fällt beim Build auf. |
+| Reihenfolge der Karten | Ein Datenfeld `reihenfolge` in `Einstiegsseiten.json` stellt die genannten Blätter nach vorn; alle übrigen Rezepte folgen dem optionalen `order` beziehungsweise der JSON-Reihenfolge. Fehlt ein genannter Titel im Ergebnis, ist das ein Build-Fehler. | Der „erste Treffer" ist steuerbar, ohne Tags oder Templates zu ändern; Daten drift fällt beim Build auf. |
 | Zahlen in Texten | `title` und `description` dürfen `{anzahl}` enthalten; ein Helfer ersetzt das mit der tatsächlichen Rezeptzahl. | Die Review nennt 11/8/3/6 Rezepte. Wird ein Tag geändert, soll der Text nicht still veralten. |
 | Salzmenge und Gärdauer | Keine Zahlen auf der Landingsseite erfinden. Die Seite nennt die Themen und verlinkt die vorhandenen Wissenseinträge `salzlaken/` und `fermentationsdauer/` (sowie `trocken-salzen/`, wo es passt). | Die Wissenseinträge sind die fachliche Quelle; die Einstiegsseite ist ein Wegweiser, kein zweites Fachbuch. |
 | Saison-Auswahl | Neues optionales Rezeptfeld `saison: string[]` mit Werten aus `Einstiegsseiten.json`. Keine hart verdrahteten Tags, kein `tag === "Kürbis"`. | Die Auswahl bleibt in den Daten und ist auch für künftige Saison-Seiten wiederverwendbar. |
@@ -123,7 +123,7 @@ Neues Modul, das `Einstiegsseiten.json` lädt und die Datenquelle für alle Clus
 - `landingsForChapter(slug)`: filtert über `kapitel`, für die Verweise auf Kapitel-Rezeptseiten.
 - `landingsForSaison(saison)`: filtert über `saisons` beziehungsweise die Verwendungen in den Rezeptdaten; liefert die Saison-Seite für ein Rezept.
 - `withCount(text, count)`: ersetzt `{anzahl}` und wirft, wenn danach noch ein Platzhalter steht.
-- `orderedRecipes(recipes, names)`: stellt die genannten Titel in der angegebenen Reihenfolge nach vorn, sortiert den Rest alphabetisch nach `titel` und wirft bei einem unbekannten Namen. Damit ist ein umbenanntes Rezept ein sichtbarer Datenfehler, kein leerer Platz.
+- `orderedRecipes(recipes, names)`: stellt die genannten Titel in der angegebenen Reihenfolge nach vorn, sortiert den Rest über `sortByOrder()` nach `order` und JSON-Reihenfolge und wirft bei einem unbekannten Namen. Damit ist ein umbenanntes Rezept ein sichtbarer Datenfehler, kein leerer Platz.
 - `seasonalRecipes(saisons)`: filtert `allRecipes` über `recipe.saison` und gibt die Resultate durch `orderedRecipes()`.
 - Wissens-IDs werden nicht neu validiert; `relatedInfos({ titel: landing.h1, wissen: landing.wissen }, allInfos)` aus `src/lib/infos.ts` übernimmt das schon inklusive Fehlermeldung bei toter ID.
 
@@ -181,7 +181,7 @@ Neues Modul, das `Einstiegsseiten.json` lädt und die Datenquelle für alle Clus
 2. Rezeptdaten ändern (Tag + sechs `saison`-Felder).
 3. Kategorieseiten auf Eintragsdaten umstellen; andere Kategorien unverändert lassen.
 4. Neue Saisonroute bauen.
-5. Sichtbare Verweise: `/kategorien/`, Kapitel-Rezeptlisten, Header, optional Rezeptseiten.
+5. Sichtbare Verweise: `/kategorien/`, Kapitel-Rezeptlisten und die betroffenen Rezeptblätter; kein Saison-Punkt im Header.
 6. `AGENTS.md` und Skill nachziehen.
 7. `npm run build`, Sitemap- und HTML-Prüfung, danach Buch- und EPUB-Kette.
 8. Commit und Pull Request.
@@ -203,6 +203,8 @@ Builds und Prüfungen am 24.11.2026:
 Die im Plan zuerst prognostizierten 140/141 Sitemap-URLs waren zu hoch; der Stand vor der Änderung waren 137 URLs, danach 138.
 
 Nachtrag: Der zunächst geplante Saison-Link in der Hauptnavigation wurde auf Wunsch entfernt. `Header.astro` und das Feld `navLabel` sind dadurch unverändert beziehungsweise entfallen; die Seite bleibt über `/kategorien/` und die betroffenen Rezeptblätter verlinkt.
+
+Nachtrag zur Sortierung: Die Rezept-JSONs kennen jetzt das optionale Feld `order`. `sortByOrder()` in `src/lib/recipes.ts` gilt für die Website-Listen (Kapitel, Kategorien, Einstiegsseiten) sowie für Buch und EPUB; Rezepte ohne Wert behalten die Reihenfolge ihrer JSON-Datei. `reihenfolge` in `Einstiegsseiten.json` bleibt bestehen und stellt nur die ersten Treffer der vier Suchintentionen nach vorn. Die beiden vorhandenen `order: 1`-Werte gehören zu „Der Ginger Bug" und „Milchkefirknollen vermehren" und stehen bereits an erster Stelle ihrer Dateien; die sichtbare Reihenfolge ändert sich dadurch nicht.
 
 ## Bewusst nicht in diesem Plan
 

@@ -5,6 +5,8 @@ export interface RecipeAdvisor {
 
 export interface Recipe {
 	titel: string;
+	/** Optionale Sortierposition; ohne Wert bleibt die Reihenfolge der JSON-Datei. */
+	order?: number;
 	tags: string[];
 	/** Jahreszeiten für saisonale Einstiegsseiten; Werte aus `src/data/Einstiegsseiten.json`. */
 	saison?: string[];
@@ -33,6 +35,32 @@ export function slugify(value: string): string {
 
 export function recipeImageAlt(recipe: Pick<Recipe, 'titel'>): string {
 	return `Buchmalerei zum Rezept „${recipe.titel}“`;
+}
+
+/**
+ * Rezepte mit `order` zuerst aufsteigend nach Wert, danach alle übrigen in der
+ * Reihenfolge ihrer JSON-Datei. Ein fehlender Wert schiebt also nichts nach vorn,
+ * sondern bewahrt die Datenreihenfolge.
+ */
+export function sortByOrder<T extends { order?: number; titel: string }>(
+	recipes: readonly T[],
+): T[] {
+	const ordered: T[] = [];
+	const rest: T[] = [];
+
+	for (const recipe of recipes) {
+		if (recipe.order === undefined) {
+			rest.push(recipe);
+			continue;
+		}
+		if (!Number.isFinite(recipe.order)) {
+			throw new Error(`Ungültiger order-Wert in „${recipe.titel}": ${recipe.order}`);
+		}
+		ordered.push(recipe);
+	}
+
+	ordered.sort((a, b) => a.order! - b.order!);
+	return [...ordered, ...rest];
 }
 
 export function categorySlug(tag: string): string {
