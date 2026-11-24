@@ -117,7 +117,7 @@ Die Site liegt unter `base: /dasferment` auf GitHub Pages. Konsequenzen:
 * Jeder interne Link wird über `import.meta.env.BASE_URL` gebildet, niemals als hartkodierter absoluter Pfad.
 * Die Sitemap schreibt `@astrojs/sitemap` in `astro.config.mjs`, nicht `src/pages/`. Deshalb braucht eine neue öffentliche Seite dort keinen Eintrag.
 * `robots.txt` entsteht als Route aus `src/pages/robots.txt.ts`, nicht als Datei in `public/`. Eine Datei `public/robots.txt` überschattet die Route still, der Build warnt und lässt sie aus.
-* Neue öffentliche Seite in `Header.astro` verlinken; rechtliche Seiten wie `/datenschutz/` gehören in den `Footer.astro`.
+* Neue öffentliche Seite in `Header.astro` verlinken; rechtliche Seiten wie `/datenschutz/` gehören in den `Footer.astro`. Die Saison-Einstiegsseite ist bewusst die Ausnahme: sie bleibt aus der Hauptnavigation und wird über `/kategorien/` sowie die betroffenen Rezeptblätter verlinkt.
 
 ### Sitemap
 
@@ -369,7 +369,7 @@ Vier Suchintentionen haben je eine kanonische Seite. Die 55 Rezeptblätter werde
 * `src/data/Einstiegsseiten.json` ist die einzige Quelle für H1, `<title>`, Description, Lead, Kicker, Wissens-IDs, Kartenreihenfolge und Saison-Werte. Diese Texte stehen nicht als Literale in `.astro`-Templates; `src/lib/landingPages.ts` ist der einzige Zugriff darauf.
 * `{anzahl}` in `title` und `description` wird zur Build-Zeit durch die tatsächliche Rezeptzahl ersetzt. Ein fehlender Platzhalter, ein unbekanntes Rezept in `reihenfolge`, eine unbekannte Saison oder eine tote Wissens-ID ist ein Build-Fehler, kein leerer Platz.
 * Ginger Bug, Kimchi und Sauerkraut bleiben bestehende Kategorieseiten mit eigenem, datengesteuertem Text. `/saison/herbst-winter/` ist die einzige neue Route. `/kapitel/gingerbug/rezepte/` bleibt ein Kapitelregister mit eigenem Titel und verweist auf die Einstiegsseite; es gibt keinen zweiten „Ginger Bug Rezept"-Titel.
-* Jede Einstiegsseite ist sichtbar verlinkt: über `/kategorien/`, die passenden Kapitel-Rezeptlisten und bei der Saison über die Hauptnavigation sowie die betroffenen Rezeptblätter. Kategorien ohne Eintrag behalten die bisherige schematische Erzeugung.
+* Jede Einstiegsseite ist sichtbar verlinkt: über `/kategorien/` und die passenden Kapitel-Rezeptlisten; die Saison-Seite zusätzlich über die betroffenen Rezeptblätter. Die Hauptnavigation bleibt ohne Saison-Punkt. Kategorien ohne Eintrag behalten die bisherige schematische Erzeugung.
 * `saison: string[]` ist ein optionales Rezeptfeld; die erlaubten Werte stehen in `Einstiegsseiten.json`. In den Einstiegsseiten stehen keine Tag- oder Rezeptnamen als Literale.
 * `SeoHead.astro` und die Sitemap-Konfiguration bleiben unverändert; die Sitemap folgt den gebauten Routen.
 

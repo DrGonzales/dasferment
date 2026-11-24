@@ -9,7 +9,6 @@ export interface LandingPage {
 	route: string;
 	kapitel?: string[];
 	saisons?: string[];
-	navLabel?: string;
 	h1: string;
 	title: string;
 	description: string;

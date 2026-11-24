@@ -81,7 +81,7 @@ Die Längen unten sind die des fertigen `<title>` nach Ersetzung von `{anzahl}`:
 | `sauerkraut` | `kategorie` → `/kategorien/sauerkraut/` | Sauerkraut richtig fermentieren | Sauerkraut richtig fermentieren \| Das Ferment (45 Zeichen) | `salzlaken`, `trocken-salzen`, `fermentationsdauer` |
 | `herbst-winter` | `saison` → `/saison/herbst-winter/` | Fermentieren im Herbst/Winter | Fermentieren im Herbst/Winter \| Das Ferment (43 Zeichen) | `temperatur`, `lagerung` |
 
-Der `saison`-Eintrag enthält zusätzlich `saisons: ["Herbst", "Winter"]` als Filterwert und `navLabel: "Saison"` für die Hauptnavigation; die `kategorie`-Einträge brauchen diese Felder nicht. `lead` ist je Eintrag ein kurzer, eigener Absatz (zwei bis drei Sätze) im bestehenden Mittelalter-Ton, sachlich korrekt und ohne neue Zahlen. `reihenfolge` nennt nur Rezept-Titel zur Sortierung:
+Der `saison`-Eintrag enthält zusätzlich `saisons: ["Herbst", "Winter"]` als Filterwert; die `kategorie`-Einträge brauchen dieses Feld nicht. Die Saison-Seite wird nicht in die Hauptnavigation aufgenommen. `lead` ist je Eintrag ein kurzer, eigener Absatz (zwei bis drei Sätze) im bestehenden Mittelalter-Ton, sachlich korrekt und ohne neue Zahlen. `reihenfolge` nennt nur Rezept-Titel zur Sortierung:
 
 | Eintrag | `reihenfolge` |
 | --- | --- |
@@ -141,7 +141,7 @@ Neues Modul, das `Einstiegsseiten.json` lädt und die Datenquelle für alle Clus
 
 - `src/pages/kategorien/index.astro`: vor oder über dem Kategorie-Raster ein Abschnitt „Einstiegsseiten" mit allen vier `landingPages` als Link auf `withBase(landing.route)`, Linktext `landing.h1`. Damit hat jede neue beziehungsweise umgeschriebene URL mindestens einen festen internen Verweis.
 - `src/pages/kapitel/[chapter]/rezepte/index.astro`: für Kapitel mit Treffern aus `landingsForChapter(chapter.slug)` eine kleine Linkzeile zu den Einstiegsseiten, mit vorhandenen Klassen (`.prose-link`). Für `gingerbug` verweist sie auf `/kategorien/ginger-bug/`, für `lactation` auf Kimchi und Sauerkraut. Der Kapitel-`<title>` bleibt unverändert.
-- `src/components/Header.astro`: die Saison-Seite ist eine neue öffentliche Seite und bekommt einen Navigationspunkt mit `landing.navLabel`. Ziel und Label kommen aus dem `saison`-Eintrag der `landingPages`, nicht aus einem hart verdrahteten Pfad. `isCurrent()` funktioniert mit dem vollen Pfad ohne Anpassung.
+- `src/components/Header.astro`: bleibt unverändert. Die Saison-Seite wird bewusst nicht in die Hauptnavigation aufgenommen; sie ist über `/kategorien/`, die Kapitel-Rezeptlisten und die betroffenen Rezeptblätter erreichbar.
 - `src/pages/kapitel/[chapter]/rezepte/[slug].astro`: optional, aber empfohlen – die sechs Rezepte mit `saison` erhalten unter `.recipe-intro__tags` einen dezenten `prose-link` zur Saison-Seite. Die Tag-Chips selbst bleiben unverändert.
 
 ### 6. Neue Route: `src/pages/saison/[saison].astro`
@@ -195,12 +195,14 @@ Builds und Prüfungen am 24.11.2026:
 | Website | `npm run build` fehlerfrei, 194 Seiten |
 | Sitemap | 138 URLs (58 Rezept- und Rezeptlisten-URLs, 25 Kategorie-URLs, 55 übrige), alle mit `<lastmod>2026-11-24T00:00:00.000Z`, 58 `<image:image>`; die vier Cluster-URLs genau einmal, `/404.html` und alte `/rezepte/`-Weiterleitungen nicht |
 | Textlängen | Titel 44/46/45/43 Zeichen, Descriptions 115/111/116/123 Zeichen, kein `{anzahl}` im HTML |
-| Verweise | Von `/kategorien/` gehen Links auf alle vier Seiten; die Kapitel-Rezeptlisten und die Hauptnavigation verlinkt; die sechs Rezepte mit `saison` verweisen auf die Saison-Seite |
+| Verweise | Von `/kategorien/` gehen Links auf alle vier Seiten; die Kapitel-Rezeptlisten verlinkt; die sechs Rezepte mit `saison` verweisen auf die Saison-Seite; kein Saison-Punkt in der Hauptnavigation |
 | Struktur | Genau ein `<h1>` je echter Seite, Skip-Link und `<main id="main">`, keine doppelten `id`, OG-/Twitter-Tags und JSON-LD vorhanden |
 | Buch | 174 Druckseiten, `npm run check:book` bestanden |
 | EPUB | 104 Blätter, `npm run check:epub` bestanden, epubcheck ohne Fehler und Warnungen (vier `INFO(CSS-007)`) |
 
 Die im Plan zuerst prognostizierten 140/141 Sitemap-URLs waren zu hoch; der Stand vor der Änderung waren 137 URLs, danach 138.
+
+Nachtrag: Der zunächst geplante Saison-Link in der Hauptnavigation wurde auf Wunsch entfernt. `Header.astro` und das Feld `navLabel` sind dadurch unverändert beziehungsweise entfallen; die Seite bleibt über `/kategorien/` und die betroffenen Rezeptblätter verlinkt.
 
 ## Bewusst nicht in diesem Plan
 
