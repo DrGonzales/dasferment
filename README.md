@@ -4,24 +4,25 @@ Eine statische, mittelalterlich inspirierte Rezept-Website für Fermente, Kimchi
 
 ## Projektstatus
 
-- **39 Rezepte** aus einer zentralen JSON-Datei
-- **26 Kategorien** als statische Unterseiten
-- **22 lokale Buchmalereien** für die illustrierten Rezeptblätter
+- **55 Rezepte** und **42 Wissenseinträge** in **3 Kapiteln**
+- **56 Schlagworte**, davon **24 Kategorien mit eigener Seite** (mindestens 2 Rezepte je Kategorie)
+- **55 lokale Buchmalereien** für die illustrierten Rezeptblätter
 - Statische HTML-Ausgabe mit Astro Static Site Generation
 - Responsive Layout für Desktop, Tablet und Smartphone
-- Recipe-JSON-LD, Canonicals, Sitemap und `robots.txt`
-- Keine interaktive Client-Seitenschicht; die Website funktioniert ohne JavaScript im Browser
+- Recipe-JSON-LD, Canonicals, aufgeteilte Sitemap und `robots.txt`
+- Keine clientseitige JavaScript-Anwendung; die einzige Ausnahme ist das externe Umami-Skript
+
+Die ausführlichen Projektregeln stehen in [`AGENTS.md`](AGENTS.md). Sie sind die single Source für Konventionen, Befehle und Architekturentscheidungen.
 
 ## Technologien
 
 - [Astro](https://astro.build/) 7
-- TypeScript
-- HTML
-- CSS
-- JSON
+- TypeScript (`astro/tsconfigs/strict`)
+- HTML und CSS
+- JSON als Datenquelle
 - Astro Assets für responsive, optimierte WebP-Bilder
 
-Es werden keine React-, Vue-, Svelte- oder sonstigen UI-Frameworks benötigt. Das einzige Script in den Rezeptseiten ist das nicht ausführbare JSON-LD für Suchmaschinen.
+Es werden keine React-, Vue-, Svelte- oder sonstigen UI-Frameworks benötigt.
 
 ## Schnellstart
 
@@ -61,108 +62,102 @@ Der Build erzeugt die statische Website in `dist/`.
 npm run preview
 ```
 
+### Weitere Ausgaben und Prüfungen
+
+```sh
+npm run make:pdf     # Buch-Build und PDF in dist-book/
+npm run make:epub    # EPUB-Build und Archiv in dist-epub/
+npm run check        # Website, Buch, PDF und EPUB in einem Durchlauf
+```
+
+`npm run check:book` braucht `poppler-utils`, `npm run check:epub` eine Java-Laufzeit und `npm run make:pdf` Chrome für Puppeteer. Die Abhängigkeiten sind in `.devcontainer/Dockerfile` installiert.
+
 ## Seitenstruktur
 
 | Route | Beschreibung |
 | --- | --- |
-| `/` | Startseite mit Hero, Kodex-Einstieg und vollständiger Rezeptübersicht |
-| `/rezepte/` | Alphabetisch bzw. in der Datenreihenfolge sortierte Rezeptübersicht |
-| `/rezepte/<slug>/` | Statische Detailseite eines Rezepts |
-| `/kategorien/` | Übersicht aller Kategorien |
-| `/kategorien/<category>/` | Statische Detailseite einer Kategorie |
-| `/ueber-diese-seite/` | Informationen zum Kodex und zur Website |
-| `/impressum/` | Impressumsseite |
-| `/sitemap-index.xml` | Index der XML-Sitemaps, zeigt auf die drei Dateien darunter |
-| `/sitemap-rezepte-0.xml` | Rezepteübersicht und alle Rezepte |
+| `/` | Startseite mit Hero, Kapitelübersicht und Rezeptgalerie |
+| `/kapitel/<kapitel>/` | Kapitelblatt mit Beschreibung und Navigation |
+| `/kapitel/<kapitel>/rezepte/` | Rezeptliste des Kapitels |
+| `/kapitel/<kapitel>/rezepte/<slug>/` | Statische Rezeptseite |
+| `/kapitel/<kapitel>/wissen/` | Alle Wissenseinträge des Kapitels auf einer Seite |
+| `/kategorien/` | Kacheln aller Kategorien mit eigener Seite |
+| `/kategorien/<category>/` | Statische Kategorieseite |
+| `/buch/` | Download von PDF und EPUB aus dem GitHub-Release `buch` |
+| `/ueber-diese-seite/`, `/kontakt/`, `/impressum/` | Redaktionelle Seiten |
+| `/rezepte/<slug>/` | Alte Rezept-Links, leiten per `meta refresh` zum Kapitel weiter, nicht in der Sitemap |
+| `/sitemap-index.xml` | Index, zeigt auf die drei Dateien darunter |
+| `/sitemap-rezepte-0.xml` | Rezeptlisten und Rezepte unter `/kapitel/.../rezepte/` |
 | `/sitemap-kategorien-0.xml` | Kategorienübersicht und alle Kategorien |
 | `/sitemap-pages-0.xml` | alle übrigen Seiten |
 | `/robots.txt` | robots-Datei mit Verweis auf den Sitemap-Index |
+| `/404.html` | Fehlerseite, `noindex`, nicht in der Sitemap |
 
-Rezept-Slugs werden aus dem jeweiligen Rezeptfeld `titel` abgeleitet. Die Seiten werden über `getStaticPaths()` in `src/pages/rezepte/[slug].astro` erzeugt; sie hängen nicht von einem späteren JSON-Ladeprozess im Browser ab.
+Rezept-Slugs werden aus dem `titel` der Daten abgeleitet. Die Seiten entstehen über `getStaticPaths()`; sie hängen nicht von einem späteren JSON-Ladeprozess im Browser ab.
 
 ## Datenquelle
 
-Die zentrale und einzige Rezeptdatenquelle ist:
+Die Kapitel-JSON-Dateien sind die Single Source of Truth:
 
 ```text
-src/data/das_ferment.json
+src/data/Kapitel.json
+src/data/<kapitel>/Kapitel.json
+src/data/<kapitel>/*.json
 ```
 
-Die JSON-Datei ist die **Single Source of Truth**. Rezeptinformationen werden nicht in Astro-Templates dupliziert. Die wichtigsten Felder sind:
+`src/data/Kapitel.json` legt die Reihenfolge der Kapitel fest, jedes `Kapitel.json` listet seine Rezept- und Wissensdateien und Bildpfade. Rezeptangaben werden nicht in Astro-Templates dupliziert. Die wichtigsten Rezeptfelder sind:
 
 - `titel`: sachlicher Rezeptname für SEO, Übersichten und Navigation
-- `tags`: Kategorien und Schlagworte
+- `tags`: Schlagworte, aus denen die Kategorien entstehen
 - `zutaten`: Zutatenliste
 - `zubereitung`: geordnete Zubereitungsschritte
 - `picture`: Dateiname einer Illustration, zum Beispiel `1.png`
-- `codex_titel`: redaktionelle, historisch klingende Überschrift
-- `codex_einleitung`: kurze Kodex-Einleitung
+- `codex_titel`, `codex_einleitung`: redaktionelle Kodex-Ebene
 - `ratgeber`: optionaler persönlicher Ratschlag mit `sprecher` und `text`
 
-Die Kodex-Felder sind bewusst eine zweite redaktionelle Ebene. Der normale Rezepttitel bleibt der primäre Name für SEO und Navigation, während `codex_titel` die gestalterische Einleitung auf der Detailseite übernimmt.
+Wissenseinträge liegen in den `*_infos.json`-Dateien der Kapitel und nutzen dieselbe Kodex-Ebene mit `codex_titel`, `codex_intro`, `codex_text` und `codex_liste`.
 
 ## Bilder
 
-Lokale Illustrationen liegen in:
+Lokale Illustrationen liegen unter `src/pic/`:
 
-```text
-src/pic/pages/
-```
+| Ordner | Inhalt |
+| --- | --- |
+| `pages/` | Rezeptillustrationen, referenziert über `picture` |
+| `chapters/` | Kapitelbilder |
+| `actors/<kapitel>/` | Portraits im Ratgeber |
+| `smallactors/<kapitel>/` | Quadratische Motive auf den Wissensseiten |
+| `categories/` | Kacheln der Kategorien, Dateiname ist der Kategorie-Slug |
+| `icons/`, `cover/` | Download-Karten und Einband |
 
-Aktuell sind dort die Dateien `1.png` bis `22.png` vorhanden. Die Zuordnung zwischen Rezepten und Bildern erfolgt zentral über `src/lib/pageImages.ts` anhand des `picture`-Feldes.
+Die Zuordnung übernehmen die Helfer in `src/lib/`. Alle Bilder laufen über `astro:assets`; Originaldateien werden nie direkt referenziert. Ein Konzept für die lokale KI-Bilderzeugung liegt in [`docs/bilderzeugung-plan.md`](docs/bilderzeugung-plan.md).
 
-Die Detail- und Kartenbilder werden mit Astros `Image`-Komponente und passenden `widths`/`sizes` erzeugt. Die Darstellung verwendet proportionale Skalierung mit `object-fit: contain`, sodass die vollständige Illustration sichtbar bleibt und nicht zugeschnitten wird. Für Rezepte ohne Bild gibt es einen gestalteten Kodex-Platzhalter.
-
-## Projektstruktur
+## Projektstruktur (Auszug)
 
 ```text
 .
-├── public/
-│   ├── favicon.ico
-│   └── favicon.svg
 ├── src/
-│   ├── components/
-│   │   ├── Footer.astro
-│   │   ├── Header.astro
-│   │   └── RecipeCard.astro
-│   ├── data/
-│   │   └── das_ferment.json
-│   ├── lib/
-│   │   ├── pageImages.ts
-│   │   └── recipes.ts
-│   ├── pages/
-│   │   ├── index.astro
-│   │   ├── kategorien/
-│   │   │   ├── [category].astro
-│   │   │   └── index.astro
-│   │   ├── rezepte/
-│   │   │   ├── [slug].astro
-│   │   │   └── index.astro
-│   │   ├── impressum/index.astro
-│   │   ├── ueber-diese-seite/index.astro
-│   │   └── robots.txt.ts
-│   ├── pic/pages/
-│   │   └── 1.png … 22.png
-│   └── styles/
-│       └── global.css
-├── astro.config.mjs
-├── package.json
-├── tsconfig.json
-└── AGENTS.md
+│   ├── components/        Header, Footer, ChapterNav, RecipeCard, SeoHead, Analytics
+│   ├── data/              Kapitel.json und die Kapitelordner mit Rezepten und Wissen
+│   ├── lib/               chapters, recipes, infos, seo, book, epub, …
+│   ├── pages/             Website-Routen
+│   ├── book/, epub/       eigene Ausgaben mit eigenem Stylesheet
+│   ├── pic/               alle Bildmotive
+│   └── styles/global.css  einziges Stylesheet der Website
+├── scripts/               PDF-, EPUB- und Prüfskripte
+├── docs/                  Pläne und Konzepte
+└── AGENTS.md              Projektregeln
 ```
 
 ## SEO und statische Ausgabe
 
-Jede Rezeptseite enthält:
+`src/components/SeoHead.astro` erzeugt Meta-Tags und JSON-LD für jede Seite. Rezeptseiten liefern einen eindeutigen Titel, eine Meta-Beschreibung, eine Canonical URL, semantisches HTML, `Recipe`-JSON-LD und sinnvolle Bild-Alt-Texte.
 
-- einen eindeutigen HTML-`<title>` mit dem sachlichen Rezeptnamen
-- eine Meta Description aus den vorhandenen Kodex-Daten
-- eine Canonical URL
-- semantisches HTML mit Brotkrümelnavigation, Zutaten- und Zubereitungsliste
-- ein `Recipe`-JSON-LD-Objekt mit Name, Beschreibung, Bild, Zutaten und Schritten
-- sinnvolle Bild-Alt-Texte aus der Bildzuordnung
+`@astrojs/sitemap` in `astro.config.mjs` und `src/pages/robots.txt.ts` erzeugen die technischen SEO-Dateien. Die Sitemap entsteht beim Build aus den gebauten Routen und ist in drei Dateien aufgeteilt; `sitemap-index.xml` verweist auf alle und ist die einzige Sitemap, die `robots.txt` nennt. Eine neue öffentliche Seite braucht deshalb keinen Sitemap-Eintrag.
 
-`@astrojs/sitemap` in `astro.config.mjs` und `src/pages/robots.txt.ts` erzeugen die technischen SEO-Dateien. Die Sitemap entsteht beim Build aus den gebauten Routen, aufgeteilt in `sitemap-rezepte-0.xml`, `sitemap-kategorien-0.xml` und `sitemap-pages-0.xml`; `sitemap-index.xml` verweist auf alle drei und ist die einzige Sitemap, die `robots.txt` nennt. Eine neue Seite braucht deshalb keinen Sitemap-Eintrag. Die Website wird vollständig in statisches HTML und optimierte Assets übersetzt; es gibt keine nachträgliche Rezeptdarstellung im Browser.
+## Webanalyse
+
+`src/components/Analytics.astro` bindet Umami Cloud ein; es ist die einzige Ausnahme vom JavaScript-Verbot. Die Kennung ist öffentlich und steht im Bauteil. Buch und EPUB bleiben ohne Messung. Werbeblocker können Skript und Sende-Endpunkt blockieren; die Zahlen sind deshalb eine Stichprobe. Der Abschnitt „Reichweitenmessung" im Impressum beschreibt die Messung.
 
 ## Produktions-URL und Basispfad konfigurieren
 
@@ -177,38 +172,22 @@ Ohne Umgebungsvariablen verwendet die Konfiguration die Standardwerte für GitHu
 - `PUBLIC_SITE_URL=https://drgonzales.github.io`
 - `PUBLIC_BASE_PATH=/dasferment`
 
-Damit liegt die lokale bzw. veröffentlichte Website unter `https://drgonzales.github.io/dasferment/`. Für eine eigene Domain im Hauptverzeichnis kann der Basispfad mit `PUBLIC_BASE_PATH=/` überschrieben werden. Die Konfiguration befindet sich in `astro.config.mjs`.
+Damit liegt die Website unter `https://drgonzales.github.io/dasferment/`. Die Konfiguration steht in `astro.config.mjs`.
 
 ## Deployment
 
-1. Abhängigkeiten installieren:
-
-   ```sh
-   npm ci
-   ```
-
-2. Den statischen Build erzeugen:
-
-   ```sh
-   npm run build
-   ```
-
-3. Den Inhalt von `dist/` auf einen statischen Hosting-Anbieter hochladen oder die von Astro unterstützte Plattformintegration verwenden.
-
-Ein Push auf `main` wird durch `.github/workflows/deploy.yml` automatisch als GitHub-Pages-Deployment unter `https://drgonzales.github.io/dasferment/` veröffentlicht. Bei einer eigenen Domain werden `PUBLIC_SITE_URL` und gegebenenfalls `PUBLIC_BASE_PATH` im Deployment-Build gesetzt.
+Ein Push auf `main` wird durch `.github/workflows/deploy.yml` als GitHub-Pages-Deployment veröffentlicht. `.github/workflows/buch-pdf.yml` baut PDF und EPUB und legt sie im GitHub-Release `buch` ab; die Download-Seite verweist auf dieses Release. Für eine eigene Domain werden `PUBLIC_SITE_URL` und gegebenenfalls `PUBLIC_BASE_PATH` im Deployment-Build gesetzt.
 
 ## Rezeptdaten ändern
 
-Für ein neues oder geändertes Rezept:
-
-1. `src/data/das_ferment.json` bearbeiten.
-2. Bei einer Illustration den passenden Dateinamen in `picture` eintragen.
+1. Die passende JSON-Datei unter `src/data/<kapitel>/` bearbeiten.
+2. Bei einer Illustration den Dateinamen in `picture` eintragen.
 3. Optional `codex_titel`, `codex_einleitung` und `ratgeber` ergänzen.
-4. `npm run build` ausführen.
-5. Die betroffene statische Seite unter `dist/rezepte/<slug>/` prüfen.
+4. `npm run build` ausführen und die betroffene Seite unter `dist/` prüfen.
+5. Bei Datenänderungen zusätzlich `npm run make:pdf`, `npm run check:book`, `npm run make:epub` und `npm run check:epub` ausführen; geänderte Buchseitenzahlen in `docs/buchdruck-plan.md` nachtragen.
 
-Rezepttexte, Zutaten und Zubereitungsschritte dürfen nicht in den Templates dupliziert oder durch Darstellungscode erfunden werden.
+Rezepttexte, Zutaten und Zubereitungsschritte dürfen nicht in Templates dupliziert oder durch Darstellungscode erfunden werden.
 
 ## Vor der Veröffentlichung
 
-Die Impressumsseite enthält derzeit bewusst einen Platzhalter. Vor einer öffentlichen Veröffentlichung müssen die tatsächlichen Angaben zu Anbieter, Kontakt und Verantwortlichkeit ergänzt werden. Außerdem sollte `PUBLIC_SITE_URL` auf die finale Domain gesetzt werden.
+Das Impressum enthält die tatsächlichen Anbieterangaben inklusive Anschrift sowie einen Transparenzhinweis zu den mit lokalem KI-Modell erzeugten Illustrationen. Vor einer eigenen Domain `PUBLIC_SITE_URL` auf die finale Domain setzen und die Sitemap in Google Search Console und Bing Webmaster einreichen.

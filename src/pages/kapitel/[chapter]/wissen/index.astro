@@ -1,4 +1,5 @@
 ---
+import SkipLink from '../../../../components/SkipLink.astro';
 import { Image } from 'astro:assets';
 import ChapterNav from '../../../../components/ChapterNav.astro';
 import Footer from '../../../../components/Footer.astro';
@@ -8,6 +9,7 @@ import {
 	chapterKnowledgePath,
 	chapterPath,
 	chapters,
+	infoPath,
 	type Chapter,
 } from '../../../../lib/chapters';
 import { codexListe, codexText, gruppiereInfos } from '../../../../lib/infos';
@@ -56,10 +58,11 @@ const description = `${infos.length} Tipps, Hinweise und Grundlagen aus dem Kapi
 		/>
 	</head>
 	<body>
+		<SkipLink />
 		<div class="site-shell">
 			<Header />
 
-			<main class="repertoire knowledge-page">
+			<main id="main" class="repertoire knowledge-page">
 				<ChapterNav chapter={chapter} />
 
 				<header class="section-heading">
@@ -126,6 +129,12 @@ const description = `${infos.length} Tipps, Hinweise und Grundlagen aus dem Kapi
 											</div>
 											<h3 id={`${info.id}-title`}>{codexText(info.codex_titel, info.titel)}</h3>
 											<p class="knowledge-entry__intro">{codexText(info.codex_intro, info.intro)}</p>
+											<a
+												class="prose-link knowledge-entry__detail"
+												href={withBase(infoPath(info))}
+											>
+												Eigene Seite<span class="prose-link__arrow" aria-hidden="true">↗</span>
+											</a>
 
 											{info.abschnitte?.map((abschnitt) => (
 												<section class="knowledge-entry__section" aria-labelledby={`${info.id}-${slugify(abschnitt.titel)}`}>

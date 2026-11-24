@@ -12,6 +12,8 @@ export interface Recipe {
 	codex_titel: string;
 	codex_einleitung?: string;
 	ratgeber?: RecipeAdvisor;
+	/** Info-IDs aus demselben Kapitel für das Modul „Mehr dazu". */
+	wissen?: string[];
 	/** Kapitel-Slug, gesetzt beim Laden aus `src/data/<kapitel>/Kapitel.json`. */
 	kapitel?: string;
 }
@@ -95,6 +97,18 @@ export function relatedRecipes(
 		.map((entry) => entry.candidate);
 
 	return candidates.slice(0, limit);
+}
+
+/** Rezepte, die einen Wissenseintrag ausdrücklich verlinken. */
+export function relatedRecipesForInfo(
+	info: { id: string },
+	all: Recipe[],
+	limit = 3,
+): Recipe[] {
+	return all
+		.filter((recipe) => recipe.wissen?.includes(info.id))
+		.sort((a, b) => a.titel.localeCompare(b.titel, 'de'))
+		.slice(0, limit);
 }
 
 const DURATION_UNITS: Record<string, number> = {

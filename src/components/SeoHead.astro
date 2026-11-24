@@ -1,7 +1,13 @@
 ---
 import Analytics from './Analytics.astro';
 import { SITE_NAME, type SocialImage } from '../lib/social';
-import { breadcrumbObjects, itemListObject, siteObjects, type TrailEntry } from '../lib/seo';
+import {
+	authorObject,
+	breadcrumbObjects,
+	itemListObject,
+	siteObjects,
+	type TrailEntry,
+} from '../lib/seo';
 
 interface Props {
 	title: string;
@@ -53,6 +59,7 @@ const trail = breadcrumbs ? withUrls(breadcrumbs) : undefined;
 const list = itemList ? withUrls(itemList.items) : undefined;
 const structuredData = [
 	...(origin ? siteObjects(absolute('/')) : []),
+	...(origin ? [authorObject(absolute('/ueber-diese-seite/'))] : []),
 	...(trail ? [breadcrumbObjects(trail)] : []),
 	...(list && itemList ? [itemListObject(itemList.name, list)] : []),
 	...jsonLd,

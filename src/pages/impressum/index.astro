@@ -1,4 +1,5 @@
 ---
+import SkipLink from '../../components/SkipLink.astro';
 import Footer from "../../components/Footer.astro";
 import Header from "../../components/Header.astro";
 import SeoHead from "../../components/SeoHead.astro";
@@ -33,10 +34,11 @@ const contactMail = "amkaltenpolar71@gmail.com";
 		/>
 	</head>
 	<body>
+		<SkipLink />
 		<div class="site-shell">
 			<Header />
 
-			<main class="recipe-main prose-page">
+			<main id="main" class="recipe-main prose-page">
 				<nav class="breadcrumbs" aria-label="Brotkrümelnavigation">
 					<a href={withBase("/")}>Startseite</a>
 					<span aria-hidden="true">/</span>
@@ -87,6 +89,22 @@ const contactMail = "amkaltenpolar71@gmail.com";
 
 					<section
 						class="prose-section"
+						aria-labelledby="ki-title"
+					>
+						<p class="section-heading__kicker">Illustrationen</p>
+						<h2 id="ki-title">
+							Hinweis zur KI-Unterstützung
+						</h2>
+						<p>
+							Die Buchmalereien dieser Website wurden mit
+							Unterstützung eines lokal betriebenen KI-Modells
+							erzeugt. Die Motive liegen als lokale Dateien vor; bei
+							der Erzeugung wurde kein Cloud-Dienst verwendet.
+						</p>
+					</section>
+
+					<section
+						class="prose-section"
 						aria-labelledby="analyse-title"
 					>
 						<p class="section-heading__kicker">
@@ -111,7 +129,9 @@ const contactMail = "amkaltenpolar71@gmail.com";
 							Do-Not-Track-Signal gesetzt, wird nicht gezählt.
 						</p>
 						<p>
-							Weitere Angaben zum Umgang mit Daten stehen in der
+							Weitere Angaben zum Umgang mit Daten stehen in unserer
+							<a href={withBase("/datenschutz/")}>Datenschutzerklärung</a
+							> und in der
 							<a
 								href="https://umami.is/privacy"
 								rel="noopener noreferrer">Datenschutzerklärung von Umami</a

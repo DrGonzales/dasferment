@@ -1,4 +1,5 @@
 ---
+import SkipLink from '../components/SkipLink.astro';
 import { getImage, Image } from "astro:assets";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
@@ -68,10 +69,11 @@ const cardImage = await socialCard(
 		/>
 	</head>
 	<body>
+		<SkipLink />
 		<div class="site-shell">
 			<Header />
 
-			<main>
+			<main id="main">
 				<section class="hero" aria-labelledby="hero-title">
 					<div class="hero__copy">
 						<p class="eyebrow">Ein lebendiges Rezeptbuch</p>

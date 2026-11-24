@@ -104,3 +104,7 @@ export function chapterKnowledgePath(chapter: Pick<Chapter, 'slug'>): string {
 export function recipePath(recipe: Pick<Recipe, 'titel' | 'kapitel'>): string {
 	return `/kapitel/${recipe.kapitel}/rezepte/${slugify(recipe.titel)}/`;
 }
+
+export function infoPath(info: Pick<Info, 'id' | 'kapitel'>): string {
+	return `${chapterKnowledgePath({ slug: info.kapitel ?? '' })}${info.id}/`;
+}

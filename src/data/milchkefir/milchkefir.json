@@ -25,7 +25,12 @@
         "ratgeber": {
             "sprecher": "Katze",
             "text": "Mehr Knollen bedeuten mehr Kefir! Doch stopfe mir nicht das ganze Reich mit Gläsern voll. Irgendwann braucht auch eine Katze wieder Platz für ihren Schlaf."
-        }
+        },
+        "wissen": [
+            "kefirknollen",
+            "kefirknollen-pflege-vermehrung",
+            "milch-fuer-kefir"
+        ]
     },
     {
         "titel": "Kefir-Frischkäse",
@@ -55,7 +60,12 @@
         "ratgeber": {
             "sprecher": "Connie",
             "text": "Je länger der Kefir im Tuche ruhet, desto fester wird sein Leib. Doch bedenke: Die Molke ist kein Abfall, sondern ein kostbarer Trank für weitere Küchenabenteuer!"
-        }
+        },
+        "wissen": [
+            "kefir-zweite-fermentation",
+            "kefir-molke",
+            "kefir-hygiene-lagerung"
+        ]
     },
     {
         "titel": "Kefir-Butter",
@@ -86,6 +96,11 @@
         "ratgeber": {
             "sprecher": "Katze",
             "text": "Schlage die Sahne, als wolltest du einen Drachen bezwingen! Doch vergiss das Kühlen nicht, sonst wird aus der goldenen Butter ein trauriger Brei. Und die Buttermilch? Die gehört selbstverständlich mir ... sofern Connie nicht schneller ist."
-        }
+        },
+        "wissen": [
+            "milchkefir-grundlagen",
+            "kefir-molke",
+            "kefir-hygiene-lagerung"
+        ]
     }
 ]

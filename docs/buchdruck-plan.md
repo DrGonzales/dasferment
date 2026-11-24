@@ -4,7 +4,7 @@
 **Erstellt:** 2026-09-29
 **Recherche-Stand:** 2026-09-30 (Paged.js weiterhin ohne Release, siehe Versionsangaben unten)
 **Entscheidungen:** 2026-09-30 getroffen, siehe Abschnitt 7
-**Ergebnis des letzten Laufs:** 150 Seiten, Kapitelblatt vor jedem Kapitel, Rezepttext links und Bild rechts, A5 mit 3 mm Beschnitt
+**Ergebnis des letzten Laufs:** 174 Seiten, Kapitelblatt vor jedem Kapitel, Rezepttext links und Bild rechts, A5 mit 3 mm Beschnitt
 **Stand:** 2026-10-31, PDF `dist-book/das-ferment.pdf`, 27,8 MB, alle Prüfungen grün (siehe Abschnitt 6)
 
 Dieser Plan ist keine Projektregel. Er beschreibt die zweite Ausgabe des Rezeptbuchs als
@@ -332,7 +332,7 @@ Plan sah zwei Dateien vor, weil Paged.js die Seitenzählung nicht zurücksetzen 
 (Issue #31) und weil die Doku für unterschiedliche Seitenformate zwei Dateien verlangt.
 Beides trifft hier nicht zu: Es gibt nur ein Format, und die Titelseite soll mitgezählt
 werden, weil das Inhaltsverzeichnis sonst um eine Zahl danebenliegt. Der Nachteil — das
-Inhaltsverzeichnis nennt keine römischen Vorlaufzahlen — ist bei 150 Seiten belanglos.
+Inhaltsverzeichnis nennt keine römischen Vorlaufzahlen — ist bei 174 Seiten belanglos.
 Zwei Dokumente bleiben der Rückfallpfad, falls doch ein Vorlauf ohne Seitenzahlen
 entstehen soll; `pdf-lib` kann sie später in einer Datei zusammenführen.
 
@@ -439,17 +439,17 @@ Reihenfolge nach `PagedPolyfill.preview()`, alles ohne zweiten Umbruch:
 
 | | |
 | --- | --- |
-| Umfang | 150 Seiten: Titel (1), Inhalt (2 bis 4), Vorwort (5), Gestalten (6), Kapitel 1 mit Kapitelblatt (7) und Leerseite (8), 41 Rezepten (Bild 9 bis 89, Text 10 bis 92 mit einer Fortsetzung und Leerseite 32) und Wissen (93 bis 107, Leerseite 108), Kapitel 2 mit Kapitelblatt (109) und Leerseite (110), 10 Rezepten (Bild 111 bis 129, Text 112 bis 130) und Wissen (131 bis 142), Register (143 bis 150). Vier Leerseiten insgesamt (8, 32, 108, 110) |
-| Gestalten | „Connie und Katze“ auf Seite 6, Text aus `src/lib/figuren.ts`, dieselbe Quelle wie `/ueber-dische-seite/`. Beide Portraits 24 mm breit links neben dem Text, 384 px, JPEG |
-| Register | „Register der Rezepte“, 47 Zutatengruppen alphabetisch, ohne Anzahlangabe. Die Rezepte stehen zweispaltig darunter mit `codex_titel`, Punct-Leader und Seitenzahl |
+| Umfang | 174 Seiten: Titel (1), Inhalt (2 bis 4), Vorwort (5), Gestalten (6), drei Kapitelblätter (7, 109, 147), Rezeptteil mit Bild 9 bis 153 und Text bis 154, Register (165 bis 174). Drei Leerseiten insgesamt (32, 108, 124) |
+| Gestalten | „Connie und Katze“ auf Seite 6, Text aus `src/lib/figuren.ts`, dieselbe Quelle wie `/ueber-diese-seite/`. Beide Portraits 24 mm breit links neben dem Text, 384 px, JPEG |
+| Register | „Register der Rezepte“, Zutatengruppen alphabetisch, ohne Anzahlangabe. Die 55 Rezepte stehen zweispaltig darunter mit `codex_titel`, Punct-Leader und Seitenzahl |
 | Seitengröße | MediaBox 154,18 × 215,9 mm, TrimBox 148 × 210 mm bei 3 mm Versatz |
-| Rezeptseiten | 51 von 51 als Blatt. Kapitel 1: Bild 9, 11, … 89, Text 10, 12, … 90; ein Rezepttext läuft auf Seite 92 weiter, die Leerseite 32 hält das folgende Bild auf Recto. Kapitel 2: Bild 111, 113, … 129, Text 112, 114, … 130. Jede Bildseite steht auf Recto, der Text beginnt auf der Rückseite |
-| Lesezeichen | 108, darunter Kapitel, Rezepte, Wissensgruppen und Einträge. Das Inhaltsverzeichnis nennt 106 Sprungmarken |
-| Dateigröße | 27,8 MB bei 1024 px Bildbreite und JPEG 80 |
+| Rezeptseiten | 55 Bildseiten und 57 Textseiten. Jede Bildseite steht auf Recto, der Text beginnt auf der Rückseite; längere Rezepte laufen auf einer Folgeseite weiter, die Leerseiten 32, 108 und 124 richten das nächste Bild wieder nach rechts aus |
+| Lesezeichen | 131, darunter Kapitel, Rezepte, Wissensgruppen und Einträge. Das Inhaltsverzeichnis nennt 129 Sprungmarken |
+| Dateigröße | 31,0 MB bei 1024 px Bildbreite und JPEG 80 |
 | Rezeptbild | füllt die ganze Seite: 154 × 216 mm inklusive 3 mm Beschnitt, `object-fit: cover` schneidet von der 2:3-Quelle oben und unten je rund 7,5 mm ab |
 | Rezeptüberschrift | nur `codex_titel`, Kategorien als Kicker darüber, kein sachlicher `titel` im Buch |
-| Transparenz | 19 `smask`-Einträge in `pdfimages -list`, ausschließlich auf den Wissensseiten. Die Rezeptbilder sind deckend und haben keinen |
-| Kolumnentitel | 61 von 150 Seiten: alle Text- und Wissensseiten, keine Bildseite, Titelseite ohne Randinhalt |
+| Transparenz | 21 `smask`-Einträge in `pdfimages -list`, ausschließlich auf den Wissensseiten. Die Rezeptbilder sind deckend und haben keinen |
+| Kolumnentitel | 71 von 174 Seiten: alle Text- und Wissensseiten, keine Bildseite, Titelseite ohne Randinhalt |
 | Offen | Erster CI-Lauf. Wissen beginnt je Kapitel nach den Rezepten; jede Gruppe startet auf einer neuen Seite |
 
 ### Prüfstand des letzten Laufs
@@ -458,14 +458,14 @@ Alles mit den Bordmitteln des Projekts nachprüfbar, `poppler-utils` vorausgeset
 
 | Prüfung | Kommando | Ergebnis |
 | --- | --- | --- |
-| Umbruch | `npm run make:pdf` | 150 Seiten im Umbruch, 150 gemeldet |
-| Inhaltsverzeichnis | Ausgabe von `make-pdf.mjs` | 106 Sprungmarken, 108 Lesezeichen, keine fehlende Seite |
-| Lesezeichen | `pdf-lib` über das fertige PDF | 108 Einträge, keine weichen Trennzeichen in den Titeln |
+| Umbruch | `npm run make:pdf` | 174 Seiten im Umbruch, 174 gemeldet |
+| Inhaltsverzeichnis | Ausgabe von `make-pdf.mjs` | 129 Sprungmarken, 131 Lesezeichen, keine fehlende Seite |
+| Lesezeichen | `pdf-lib` über das fertige PDF | 131 Einträge, keine weichen Trennzeichen in den Titeln |
 | Seitengröße | `pdf-lib` | MediaBox 154,18 × 215,9 mm, TrimBox 148 × 210 mm bei 3 mm Versatz |
-| Rezeptpaare | `npm run check:book` | 51 Bildseiten 9 bis 129 auf Recto, je mit Text auf der Rückseite, eine Fortsetzungsseite, keine mit Kolumnentitel, Bild 113 mm breit und mittig |
+| Rezeptpaare | `npm run check:book` | 55 Bildseiten 9 bis 153 auf Recto, je mit Text auf der Rückseite, keine mit Kolumnentitel, Bild 113 mm breit und mittig |
 | Blattsatz | `npm run check:book` | kein Element steht im Blocksatz: `text-align: left` im Body und kein Überschriften-, Kicker- oder Claim-Element erbt `text-align-last: justify` |
 | Anker | `dist-book/index.html` | keine doppelte `id`, keine tote Sprungmarke |
-| Website | `npm run build` | 137 Seiten, unverändert |
+| Website | `npm run build` | 193 Seiten, Buchausgabe verändert die Website nicht |
 
 `scripts/buch-pruefen.mjs` macht diese Prüfungen. Sie misst den fertigen Paged.js-Umbruch
 im Browser und das fertige PDF mit `pdfinfo`, `pdftotext` und `pdfimages`. Aufruf über
@@ -563,7 +563,7 @@ Unverändert offen, unabhängig von Stufe 1:
 | `vw` und Media Queries | Layout kollabiert | Buch-Stylesheet ohne `vw` und ohne Media Queries, dafür `--pagedjs-pagebox-width` |
 | `overflow: hidden` auf `.site-shell` | Seitenboxen abgeschnitten | Buchinhalt außerhalb der Site-Shell |
 | 1024 px Quellbilder | matschiger Offset-Druck | kleines Format wählen oder Bildmaterial neu anliefern |
-| 150 Seiten in einem Chromium | Speicher / Zeit | Läuft mit 18,2 MB stabil durch, Kategorie-PDFs bleiben der Rückfallpfad |
+| Ein großes Dokument in einem Chromium | Speicher / Zeit | Bei 150 Seiten mit 18,2 MB gemessen, aktuell 174 Seiten stabil; Kategorie-PDFs bleiben der Rückfallpfad |
 | `astro: ^7.4.13` und `@page`-Semantik | Minor-Update bricht Buchbau | Build des Buchs separat, Site-Build bleibt unberührt |
 | `publicDir: false` in Astro 7 | Book-Build scheitert an einer Typprüfung | Ordner weglassen statt auf `false` setzen |
 | `string-set` in Paged.js 0.4.3 | Kolumnentitel bleiben leer | Variable in `make-pdf.mjs` selbst setzen, Vor Upgrade prüfen |
