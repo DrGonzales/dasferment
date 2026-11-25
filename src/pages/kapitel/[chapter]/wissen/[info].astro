@@ -9,7 +9,6 @@ import {
 	chapterKnowledgePath,
 	chapterPath,
 	chapters,
-	recipePath,
 	type Chapter,
 } from '../../../../lib/chapters';
 import {
@@ -18,9 +17,13 @@ import {
 	infoKategorieLabel,
 	type Info,
 } from '../../../../lib/infos';
-import { relatedRecipesForInfo, slugify } from '../../../../lib/recipes';
+import { slugify } from '../../../../lib/recipes';
 import { personObject, shorten } from '../../../../lib/seo';
-import { assignPortraits, SMALL_ACTOR_SIZE } from '../../../../lib/smallActors';
+import {
+	assignPortraits,
+	smallActorImage,
+	SMALL_ACTOR_SIZE,
+} from '../../../../lib/smallActors';
 import '../../../../styles/global.css';
 
 export function getStaticPaths() {
@@ -45,9 +48,9 @@ const canonicalUrl = Astro.site
 	? new URL(withBase(canonicalPath), Astro.site).toString()
 	: withBase(canonicalPath);
 const description = shorten(`${info.titel} – ${codexText(info.codex_intro, info.intro)}`);
-const passendeRezepte = relatedRecipesForInfo(info, chapter.recipes);
 const portraits = assignPortraits(chapter.infos, chapter.slug);
 const portrait = portraits[chapter.infos.findIndex((entry) => entry.id === info.id)];
+const navIcon = smallActorImage('9', chapter.slug);
 const homeUrl = Astro.site ? new URL(withBase('/'), Astro.site).toString() : withBase('/');
 const aboutUrl = Astro.site
 	? new URL(withBase('/ueber-diese-seite/'), Astro.site).toString()
@@ -90,7 +93,7 @@ const articleJsonLd = [
 		<div class="site-shell">
 			<Header />
 
-			<main id="main" class="repertoire knowledge-page">
+			<main id="main" class="repertoire knowledge-page knowledge-page--detail">
 				<ChapterNav chapter={chapter} />
 
 				<nav class="breadcrumbs" aria-label="Brotkrümelnavigation">
@@ -184,34 +187,21 @@ const articleJsonLd = [
 						</figure>
 					) : null}
 
-					{passendeRezepte.length > 0 && (
-						<section
-							class="recipe-related recipe-related--knowledge"
-							aria-labelledby="passende-rezepte-title"
-						>
-							<header class="recipe-section__header">
-								<p class="section-heading__kicker">Zurück in die Rezepte</p>
-								<h2 id="passende-rezepte-title">Passende Rezepte</h2>
-							</header>
-							<ul class="recipe-related__list">
-								{passendeRezepte.map((recipe) => (
-									<li>
-										<a href={withBase(recipePath(recipe))}>
-											<span class="recipe-related__codex">
-												{recipe.titel}
-											</span>
-											<span class="recipe-related__plain">
-												{recipe.codex_titel}
-											</span>
-										</a>
-									</li>
-								))}
-							</ul>
-						</section>
-					)}
-
 					<p class="info-detail__nav">
 						<a class="prose-link" href={withBase(chapterKnowledgePath(chapter))}>
+							{navIcon && (
+								<Image
+									class="info-detail__nav-icon"
+									src={navIcon}
+									alt=""
+									aria-hidden="true"
+									width={48}
+									height={48}
+									quality={80}
+									loading="lazy"
+									decoding="async"
+								/>
+							)}
 							Alle Wissenseinträge dieses Kapitels<span
 								class="prose-link__arrow"
 								aria-hidden="true">↗</span

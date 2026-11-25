@@ -1329,6 +1329,8 @@ img {
 .recipe-related__visual {
 	position: relative;
 	width: 100%;
+	max-width: 22.5rem;
+	margin-inline: auto;
 	aspect-ratio: 2 / 3;
 	overflow: hidden;
 	background: var(--paper-deep);
@@ -1903,6 +1905,12 @@ img {
 	min-width: 0;
 }
 
+/* Die Detailseite hat keine Sprungmarken-Spalte und darf nicht in Grid-Spalte 2 rutschen. */
+.knowledge-page--detail {
+	display: block;
+	max-width: 68rem;
+}
+
 .knowledge-index {
 	position: sticky;
 	top: 2rem;
@@ -2106,6 +2114,16 @@ img {
 .info-detail__nav {
 	max-width: 44rem;
 	margin: 1.8rem 0 0;
+}
+
+.info-detail__nav a {
+	align-items: center;
+}
+
+.info-detail__nav-icon {
+	flex: none;
+	width: clamp(1.75rem, 3vw, 2.25rem);
+	height: auto;
 }
 
 .knowledge-entry__detail {

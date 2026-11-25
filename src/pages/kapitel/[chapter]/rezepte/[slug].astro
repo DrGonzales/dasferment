@@ -1,5 +1,5 @@
 ---
-import SkipLink from '../../../../components/SkipLink.astro';
+import SkipLink from "../../../../components/SkipLink.astro";
 import type { ImageMetadata } from "astro";
 import { getImage, Image } from "astro:assets";
 import ChapterNav from "../../../../components/ChapterNav.astro";
@@ -62,7 +62,9 @@ const description = recipeDescription(recipe);
 const related = relatedRecipes(recipe, chapter.recipes);
 const wissen = relatedInfos(recipe, chapter.infos);
 const saisonLandings = [
-	...new Set((recipe.saison ?? []).flatMap((saison) => landingsForSaison(saison))),
+	...new Set(
+		(recipe.saison ?? []).flatMap((saison) => landingsForSaison(saison)),
+	),
 ];
 // Ab etwa 60 Zeichen schneidet die Suche den Titel ab. Dann entfällt der
 // Markenzusatz, der Name steht ohnehin in den WebSite-Daten und im Kopf jeder Seite.
@@ -168,87 +170,84 @@ const breadcrumbTrail = [
 								<span>Blatt aus dem Rezeptbuch</span>
 							</div>
 
-							<h1>
-								{recipe.titel}
-							</h1>
+							<h1>{recipe.titel}</h1>
 							<p class="recipe-intro__codex-title">
 								{recipe.codex_titel}
 							</p>
-							{
-								recipe.codex_einleitung && (
-									<p class="recipe-intro__lead">
-										{recipe.codex_einleitung}
-									</p>
-								)
-							}
+							{recipe.codex_einleitung && (
+								<p class="recipe-intro__lead">
+									{recipe.codex_einleitung}
+								</p>
+							)}
 							<nav
 								class="recipe-intro__tags"
 								aria-label="Rezeptkategorien"
 							>
-								{
-									recipe.tags.map((tag) => {
-										const slug = categorySlug(tag);
-										const zahl =
-											categoryRecipeCounts.get(slug) ?? 0;
-										return zahl >= MIN_CATEGORY_RECIPES ? (
-											<a
-												href={withBase(
-													`/kategorien/${slug}/`,
-												)}
-											>
-												{tag}
-											</a>
-										) : (
-											<span>{tag}</span>
-										);
-									})
-								}
+								{recipe.tags.map((tag) => {
+									const slug = categorySlug(tag);
+									const zahl =
+										categoryRecipeCounts.get(slug) ?? 0;
+									return zahl >= MIN_CATEGORY_RECIPES ? (
+										<a
+											href={withBase(
+												`/kategorien/${slug}/`,
+											)}
+										>
+											{tag}
+										</a>
+									) : (
+										<span>{tag}</span>
+									);
+								})}
 							</nav>
-							{
-								saisonLandings.length > 0 && (
-									<p class="recipe-intro__saison">
-										{saisonLandings.map((page) => (
-											<a class="prose-link" href={withBase(page.route)}>
-												{page.h1}
-												<span class="prose-link__arrow" aria-hidden="true">↗</span>
-											</a>
-										))}
-									</p>
-								)
-							}
+							{saisonLandings.length > 0 && (
+								<p class="recipe-intro__saison">
+									{saisonLandings.map((page) => (
+										<a
+											class="prose-link"
+											href={withBase(page.route)}
+										>
+											{page.h1}
+											<span
+												class="prose-link__arrow"
+												aria-hidden="true"
+											>
+												↗
+											</span>
+										</a>
+									))}
+								</p>
+							)}
 						</div>
 
 						<div class="recipe-intro__image">
-							{
-								image ? (
-									<figure>
-										<Image
-											src={image}
-											alt={recipeImageAlt(recipe)}
-											widths={[320, 480, 640, 780, 1024]}
-											sizes="(max-width: 488px) calc(100vw - 40px), 28rem"
-											quality={78}
-											loading="eager"
-											fetchpriority="high"
-											decoding="async"
-										/>
-										<figcaption>
-											Eine Buchmalerei zu diesem Blatt
-										</figcaption>
-									</figure>
-								) : (
-									<div
-										class="recipe-image-placeholder"
-										aria-hidden="true"
-									>
-										<span>Kodex</span>
-										<i />
-									</div>
-								)
-							}
+							{image ? (
+								<figure>
+									<Image
+										src={image}
+										alt={recipeImageAlt(recipe)}
+										widths={[320, 480, 640, 780, 1024]}
+										sizes="(max-width: 488px) calc(100vw - 40px), 28rem"
+										quality={78}
+										loading="eager"
+										fetchpriority="high"
+										decoding="async"
+									/>
+									<figcaption>
+										Eine Buchmalerei zu diesem Blatt
+									</figcaption>
+								</figure>
+							) : (
+								<div
+									class="recipe-image-placeholder"
+									aria-hidden="true"
+								>
+									<span>Kodex</span>
+									<i />
+								</div>
+							)}
 						</div>
 					</header>
-
 					<div class="recipe-sections">
 						<section
 							class="recipe-section recipe-section--ingredients"
@@ -261,11 +260,9 @@ const breadcrumbTrail = [
 								<h2 id="zutaten-title">Zutaten</h2>
 							</header>
 							<ul class="ingredient-list">
-								{
-									recipe.zutaten.map((ingredient) => (
-										<li>{ingredient}</li>
-									))
-								}
+								{recipe.zutaten.map((ingredient) => (
+									<li>{ingredient}</li>
+								))}
 							</ul>
 						</section>
 
@@ -280,155 +277,142 @@ const breadcrumbTrail = [
 								<h2 id="zubereitung-title">Zubereitung</h2>
 							</header>
 							<ol class="instruction-list">
-								{
-									recipe.zubereitung.map((step) => (
-										<li>{step}</li>
-									))
-								}
+								{recipe.zubereitung.map((step) => (
+									<li>{step}</li>
+								))}
 							</ol>
 						</section>
 					</div>
-
-					{
-						recipe.ratgeber && (
-							<aside
-								class="recipe-advisor"
-								aria-label={`Ratschlag von ${recipe.ratgeber.sprecher}`}
-							>
-								<div class="recipe-advisor__content">
-									{advisorImage && (
-										<figure class="recipe-advisor__portrait">
-											<Image
-												src={advisorImage}
-												alt={`${recipe.ratgeber.sprecher} in der Schreibkammer`}
-												widths={[160, 320, 480]}
-												sizes="(max-width: 780px) 5.5rem, 8rem"
-												quality={80}
-												loading="lazy"
-												decoding="async"
-											/>
-										</figure>
-									)}
-									<div class="recipe-advisor__text">
-										<div class="recipe-advisor__heading">
-											<span
-												class="recipe-advisor__ornament"
-												aria-hidden="true"
-											>
-												✦
-											</span>
-											<h2>
-												{recipe.ratgeber.sprecher}s
-												Ratschlag
-											</h2>
-											<span
-												class="recipe-advisor__ornament"
-												aria-hidden="true"
-											>
-												✦
-											</span>
-										</div>
-										<blockquote>
-											„{recipe.ratgeber.text}“
-										</blockquote>
+					{recipe.ratgeber && (
+						<aside
+							class="recipe-advisor"
+							aria-label={`Ratschlag von ${recipe.ratgeber.sprecher}`}
+						>
+							<div class="recipe-advisor__content">
+								{advisorImage && (
+									<figure class="recipe-advisor__portrait">
+										<Image
+											src={advisorImage}
+											alt={`${recipe.ratgeber.sprecher} in der Schreibkammer`}
+											widths={[160, 320, 480]}
+											sizes="(max-width: 780px) 5.5rem, 8rem"
+											quality={80}
+											loading="lazy"
+											decoding="async"
+										/>
+									</figure>
+								)}
+								<div class="recipe-advisor__text">
+									<div class="recipe-advisor__heading">
+										<span
+											class="recipe-advisor__ornament"
+											aria-hidden="true"
+										>
+											✦
+										</span>
+										<h2>
+											{recipe.ratgeber.sprecher}s
+											Ratschlag
+										</h2>
+										<span
+											class="recipe-advisor__ornament"
+											aria-hidden="true"
+										>
+											✦
+										</span>
 									</div>
+									<blockquote>
+										„{recipe.ratgeber.text}“
+									</blockquote>
 								</div>
-							</aside>
-						)
-					}
-					{
-						related.length > 0 && (
-							<section
-								class="recipe-related"
-								aria-labelledby="verwandte-title"
-							>
-								<header class="recipe-section__header">
-									<p class="section-heading__kicker">
-										Weiter im Kapitel
-									</p>
-									<h2 id="verwandte-title">
-										Verwandte Rezepte
-									</h2>
-								</header>
-								<ul class="recipe-related__list">
-									{related.map((entry) => {
-										const relatedImage =
-											imageForRecipe(entry);
-										return (
-											<li>
-												<a
-													href={withBase(
-														recipePath(entry),
-													)}
-												>
-													<div class="recipe-related__visual">
-														{relatedImage ? (
-															<Image
-																src={
-																	relatedImage
-																}
-																alt={recipeImageAlt(
-																	entry,
-																)}
-																widths={[
-																	220, 280,
-																	360, 480,
-																]}
-																sizes="(max-width: 520px) calc(100vw - 80px), (max-width: 880px) 44vw, 280px"
-																quality={74}
-																loading="lazy"
-																decoding="async"
-															/>
-														) : (
-															<div
-																class="recipe-related__placeholder"
-																aria-hidden="true"
-															/>
-														)}
-													</div>
-													<span class="recipe-related__codex">
-														{entry.codex_titel}
-													</span>
-													<span class="recipe-related__plain">
-														{entry.titel}
-													</span>
-												</a>
-											</li>
-										);
-									})}
-								</ul>
-							</section>
-						)
-					}
-					{
-						wissen.length > 0 && (
-							<section
-								class="recipe-related recipe-related--knowledge"
-								aria-labelledby="mehr-dazu-title"
-							>
-								<header class="recipe-section__header">
-									<p class="section-heading__kicker">
-										Aus dem Wissensteil
-									</p>
-									<h2 id="mehr-dazu-title">Mehr dazu</h2>
-								</header>
-								<ul class="recipe-related__list">
-									{wissen.map((info) => (
+							</div>
+						</aside>
+					)}
+					{wissen.length > 0 && (
+						<section
+							class="recipe-related recipe-related--knowledge"
+							aria-labelledby="mehr-dazu-title"
+						>
+							<header class="recipe-section__header">
+								<p class="section-heading__kicker">
+									Aus dem Wissensteil
+								</p>
+								<h2 id="mehr-dazu-title">Mehr dazu</h2>
+							</header>
+							<ul class="recipe-related__list">
+								{wissen.map((info) => (
+									<li>
+										<a href={withBase(infoPath(info))}>
+											<span class="recipe-related__codex">
+												{info.titel}
+											</span>
+											<span class="recipe-related__plain">
+												{infoKategorieLabel(
+													info.kategorie,
+												)}
+											</span>
+										</a>
+									</li>
+								))}
+							</ul>
+						</section>
+					)}
+					{related.length > 0 && (
+						<section
+							class="recipe-related"
+							aria-labelledby="verwandte-title"
+						>
+							<header class="recipe-section__header">
+								<p class="section-heading__kicker">
+									Weiter im Kapitel
+								</p>
+								<h2 id="verwandte-title">Verwandte Rezepte</h2>
+							</header>
+							<ul class="recipe-related__list">
+								{related.map((entry) => {
+									const relatedImage = imageForRecipe(entry);
+									return (
 										<li>
-											<a href={withBase(infoPath(info))}>
+											<a
+												href={withBase(
+													recipePath(entry),
+												)}
+											>
+												<div class="recipe-related__visual">
+													{relatedImage ? (
+														<Image
+															src={relatedImage}
+															alt={recipeImageAlt(
+																entry,
+															)}
+															width={360}
+															height={540}
+															widths={[220, 280, 360]}
+															sizes="(max-width: 520px) calc(100vw - 80px), (max-width: 600px) 22.5rem, (max-width: 880px) 44vw, 22.5rem"
+															quality={74}
+															loading="lazy"
+															decoding="async"
+														/>
+													) : (
+														<div
+															class="recipe-related__placeholder"
+															aria-hidden="true"
+														/>
+													)}
+												</div>
 												<span class="recipe-related__codex">
-													{info.titel}
+													{entry.codex_titel}
 												</span>
 												<span class="recipe-related__plain">
-													{infoKategorieLabel(info.kategorie)}
+													{entry.titel}
 												</span>
 											</a>
 										</li>
-									))}
-								</ul>
-							</section>
-						)
-					}
+									);
+								})}
+							</ul>
+						</section>
+					)}
 				</article>
 			</main>
 
