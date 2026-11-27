@@ -4,6 +4,44 @@ Statische Rezeptwebsite mit Astro. Inhalte kommen vollständig aus den JSON-Date
 
 Diese Datei ist die einzige Quelle für Projektregeln. Detailwissen, das hier nicht steht, gehört hierher und nicht in eine Agent-Datei.
 
+## Spezifikationen und Änderungen mit OpenSpec
+
+OpenSpec ist die verbindliche Grundlage für **Planung und Umsetzung**. Jede Änderung an beobachtbarem Verhalten — auch kleine Features und Bugfixes mit Verhaltenswirkung — beginnt mit einem Change. Ohne Change wird kein Code geändert; ausgenommen sind Änderungen ohne Verhaltenswirkung wie Formatierung, Kommentare, Tippfehler und reine Dokumentationspflege.
+
+| Schritt | Befehl / Skill | Ergebnis |
+| --- | --- | --- |
+| Klären (nur bei unklarer Aufgabe) | `/openspec-explore "<Frage>"` | Analyse ohne Artefakte |
+| Planen | `/openspec-propose "<Idee>"` | `openspec/changes/<name>/` mit `proposal.md`, Delta-Specs, `design.md`, `tasks.md` |
+| Validieren | `npx @fission-ai/openspec@latest validate --all --strict --no-color` | gültige Artefakte vor der Umsetzung |
+| Umsetzen | `/openspec-apply-change` | Code-Änderungen, abgehakte Tasks |
+| Verifizieren | `npm run build` und `npm run check` | grüne Builds und Prüfungen |
+| Abschließen | `/openspec-archive-change` | Delta in `openspec/specs/` übernehmen, Change archivieren |
+
+Regeln:
+
+* `openspec/config.yaml` steuert Schema, Kontext und Regeln; es wird nur bewusst geändert.
+* `openspec/specs/<capability>/spec.md` beschreibt das gültige Verhalten und wird **nicht direkt** bearbeitet. Änderungen fließen aus einem Change über `/openspec-sync-specs` oder das Archivieren ein.
+* Anforderungen verwenden `SHALL`/`MUST` und mindestens ein Szenario mit `WHEN`/`THEN`. Beschrieben wird nur beobachtbares Verhalten, keine Datei-, Klassen- oder Funktionsnamen.
+* Delta-Specs gehören in den Change (`ADDED`, `MODIFIED`, `REMOVED`, `RENAMED Requirements`); neue Capabilities als kebab-case-Pfad, bestehende Pfade werden nicht umbenannt.
+* Tasks als Checkboxen `- [ ] X.Y ...`; bei Code-Änderungen sind `npm run build` und `npm run check` als Verifikation eingeplant.
+* Die Skills liegen in `.agents/skills/`. Die CLI ist nicht global installiert, daher immer `npx @fission-ai/openspec@latest ...` (benötigt Node >= 22.20.0, nur für OpenSpec).
+* Planung und Änderungsdokumentation erfolgen ausschließlich in `openspec/changes/`. Die Pläne in `docs/` bleiben als Detailwissen erhalten.
+* Nach Abschluss wird die Commit-Nachricht über den Subagenten `conventional-commit` ermittelt.
+
+## Commit-Nachrichten
+
+Commit-Nachrichten folgen dem **Conventional-Commits-Schema** mit deutschem Text:
+
+```
+type(scope): kurzer deutscher Text
+
+Optionaler Body mit fachlicher Beschreibung.
+```
+
+Übliche Types: `feat`, `fix`, `refactor`, `docs`, `test`, `style`, `perf`, `build`, `ci`, `chore`. Der `scope` ist optional und benennt das betroffene Modul (z. B. `daten`, `rezepte`, `wissen`, `kategorien`, `bilder`, `seo`, `buch`, `epub`, `sitemap`, `analyse`).
+
+Die Formulierung der Commit-Message erfolgt über den spezialisierten Subagenten **`conventional-commit`** (`.opencode/agents/conventional-commit.md`). Er ermittelt Type, Scope und Text aus dem Änderungsumfang und gibt ausschließlich den fertigen Message-Text zurück — er führt selbst keinen `git commit` aus, das Committen bleibt dem aufrufenden Kontext vorbehalten.
+
 ## Development
 
 When starting the dev server, use background mode:
@@ -581,6 +619,8 @@ Wiederkehrende Abläufe liegen als Skills und Commands im Projekt, nicht nur hie
 | `.opencode/commands/buch-pruefen.md` | `/buch-pruefen` Buch neu bauen und Umbruch prüfen |
 | `.opencode/commands/abschluss.md` | `/abschluss` Checkliste „Vor dem Abschluss prüfen“ durchgehen |
 | `.opencode/commands/rezept.md` | `/rezept` Rezept oder Wissenseite in den Daten ändern |
+| `.opencode/agents/conventional-commit.md` | Commit-Message nach Conventional Commits formulieren, ohne selbst zu committen |
+| `.agents/skills/openspec*/SKILL.md` | OpenSpec-Changes planen, umsetzen, prüfen und archivieren |
 
 Neue Erkenntnisse aus dem Buchdruck gehören in `buch-umbruch`, Erkenntnisse über
 Datenform und Codex in `rezepte-daten`. Diese Datei bleibt die Übersicht, die

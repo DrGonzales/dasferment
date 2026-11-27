@@ -1,0 +1,39 @@
+schema: spec-driven
+
+context: |
+  Language: Deutsch
+  All artifacts must be written in Deutsch.
+  Keep OpenSpec structural headings and SHALL/MUST keywords in English.
+  Das Ferment ist eine statische Rezeptwebsite mit Astro. Inhalte liegen ausschließlich
+  in JSON-Dateien unter `src/data/`; Website, Buch und EPUB lesen dieselben Daten,
+  haben aber getrennte Builds, Layouts und Stylesheets. Kein clientseitiges JavaScript,
+  einzige Ausnahme ist das externe Umami-Skript. Jede Seite entsteht als vollständiges
+  HTML im Build; die Site liegt unter `base: /dasferment` auf GitHub Pages.
+  Gestaltung: mittelalterliches Kochbuch auf Pergament, Lesbarkeit vor Dekoration.
+  Projektregeln und Konventionen stehen in `AGENTS.md`, Detailwissen in `docs/`.
+
+rules:
+  specs:
+    - Nur beobachtbares Verhalten beschreiben, keine Datei-, Klassen- oder Funktionsnamen.
+    - Jede Anforderung braucht mindestens ein Szenario mit WHEN und THEN; SHALL oder MUST verwenden.
+    - JSON-Daten sind die einzige Inhaltsquelle; keine erfundenen Rezept- oder Kontaktangaben.
+    - Auswirkungen auf Website, Buch, EPUB und Sitemap mitdenken.
+  design:
+    - Prüfen, ob eine Änderung die drei Ausgaben oder den Basis-Pfad betrifft.
+    - Kein clientseitiges JavaScript einführen, solange Astro, HTML oder CSS reichen.
+    - Getroffene Entscheidungen knapp begründen.
+  tasks:
+    - Als nachvollziehbare Checkboxen `- [ ] X.Y ...` schreiben.
+    - Bei Code-Änderungen `npm run build` und `npm run check` als Verifikation einplanen.
+
+operations:
+  apply:
+    guidance:
+      - Nach Änderungen `npm run build` und `npm run check` ausführen.
+      - Bei Datenänderungen die Buch- und EPUB-Prüfungen mit einplanen.
+      - Bestehende Helfer zuerst verwenden, keine unnötige Abstraktion einführen.
+  archive:
+    guidance:
+      - Spezifikationen gegen `AGENTS.md` und die Pläne in `docs/` abgleichen.
+      - Bei nutzerrelevanten Änderungen README und Projektregeln mit aktualisieren.
+      - Commit-Nachricht über den Subagenten `conventional-commit` ermitteln.

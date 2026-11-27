@@ -12,7 +12,20 @@ Eine statische, mittelalterlich inspirierte Rezept-Website für Fermente, Kimchi
 - Recipe-JSON-LD, Canonicals, aufgeteilte Sitemap und `robots.txt`
 - Keine clientseitige JavaScript-Anwendung; die einzige Ausnahme ist das externe Umami-Skript
 
-Die ausführlichen Projektregeln stehen in [`AGENTS.md`](AGENTS.md). Sie sind die single Source für Konventionen, Befehle und Architekturentscheidungen.
+Die ausführlichen Projektregeln stehen in [`AGENTS.md`](AGENTS.md). Sie sind die einzige Quelle für Konventionen, Befehle und Architekturentscheidungen.
+
+## Spezifikationen mit OpenSpec
+
+Das Verhalten der Website und der beiden Buchausgaben ist in `openspec/specs/` als OpenSpec-Spezifikationen (`schema: spec-driven`) beschrieben. Die Baseline wurde aus den Projektregeln in `AGENTS.md` und den Plänen in `docs/` verdichtet; die Detaildokumente bleiben erhalten.
+
+Die OpenSpec-Skills liegen in `.agents/skills/` und sind in OpenCode verfügbar:
+
+| Befehl | Zweck |
+| --- | --- |
+| `/openspec-propose "<Idee>"` | Change Proposal mit Spezifikation, Design und Tasks anlegen |
+| `/openspec-apply-change` | Tasks eines Changes umsetzen |
+| `/openspec-archive-change` | Change archivieren und die Specs aktualisieren |
+| `npx @fission-ai/openspec@latest validate --all` | alle Changes und Specs prüfen |
 
 ## Technologien
 
